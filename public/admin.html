@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gavroche — Espace de travail</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+:root{
+  --noir:#080808;--blanc:#f8f8f6;--gris-moyen:#383838;--gris-clair:#999;
+  --gris-tres-clair:#e4e4e2;--gris-surface:#f0f0ee;--gris-fixe:#e8e8e6;
+  --vert:#2d6a4f;--rouge:#8b1a1a;--bleu-info:#1a3a6b;--bleu-info-clair:#eef2fa;
+  --font-titre:'Helvetica Neue','Arial',sans-serif;
+  --font-serif:'Cormorant Garamond','Georgia',serif;
+  --font-corps:'Segoe UI','Helvetica Neue',Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-corps);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh;}
+.topbar{background:var(--noir);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:60px;position:fixed;top:0;left:0;right:0;z-index:200;}
+.topbar-logo{font-family:var(--font-titre);font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.8);cursor:pointer;background:none;border:none;}
+.topbar-right{display:flex;align-items:center;gap:32px;}
+.topbar-user{font-family:var(--font-titre);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+.topbar-btn{font-family:var(--font-titre);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.25);cursor:pointer;background:none;border:none;transition:color 0.2s;}
+.topbar-btn:hover{color:rgba(255,255,255,0.6);}
+.page{display:none;padding-top:60px;min-height:100vh;flex-direction:column;}
+.page.actif{display:flex;}
+.stepper{background:var(--blanc);border-bottom:1px solid var(--gris-tres-clair);padding:0 48px;display:flex;align-items:stretch;height:56px;}
+.stepper-item{display:flex;align-items:center;gap:10px;padding:0 24px;cursor:pointer;transition:background 0.2s;border-right:1px solid var(--gris-tres-clair);position:relative;background:none;border-top:none;border-left:none;border-bottom:none;}
+.stepper-item:first-child{padding-left:0;}
+.stepper-item:hover{background:var(--gris-surface);}
+.stepper-item.actif::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--noir);}
+.stepper-item.complete .stepper-num{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+.stepper-item.inactif{cursor:default;opacity:0.4;pointer-events:none;}
+.stepper-num{width:22px;height:22px;border:1px solid var(--gris-tres-clair);display:flex;align-items:center;justify-content:center;font-family:var(--font-titre);font-size:9px;font-weight:700;color:var(--gris-clair);flex-shrink:0;}
+.stepper-label{font-family:var(--font-titre);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gris-moyen);white-space:nowrap;}
+.stepper-item.actif .stepper-label{color:var(--noir);font-weight:700;}
+.breadcrumb{background:var(--blanc);border-bottom:1px solid var(--gris-tres-clair);padding:16px 48px;display:flex;align-items:center;gap:10px;}
+.bc{font-family:var(--font-titre);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gris-clair);cursor:pointer;background:none;border:none;transition:color 0.2s;}
+.bc:hover{color:var(--noir);}
+.bc-sep{font-size:10px;color:var(--gris-tres-clair);}
+.bc.actif{color:var(--noir);cursor:default;}
+.admin-header{background:var(--blanc);border-bottom:1px solid var(--gris-tres-clair);padding:40px 48px;}
+.admin-titre{font-family:var(--font-serif);font-size:clamp(26px,3vw,38px);font-weight:300;color:var(--noir);line-height:1.1;}
+.admin-titre em{font-style:italic;}
+.admin-sous-titre{font-size:14px;color:var(--gris-clair);margin-top:8px;max-width:560px;}
+.stats{display:flex;gap:1px;background:var(--gris-tres-clair);border:1px solid var(--gris-tres-clair);margin-top:32px;}
+.stat{background:var(--blanc);padding:20px 32px;display:flex;flex-direction:column;gap:4px;flex:1;}
+.stat-v{font-family:var(--font-serif);font-size:32px;font-weight:300;color:var(--noir);line-height:1;}
+.stat-l{font-family:var(--font-titre);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gris-clair);}
+.mods-wrap{padding:48px;flex:1;}
+.mods-label{font-family:var(--font-titre);font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gris-clair);margin-bottom:24px;}
+.mods-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--gris-tres-clair);border:1px solid var(--gris-tres-clair);}
+.mod{background:var(--blanc);padding:44px 40px;cursor:pointer;transition:background 0.2s;display:flex;flex-direction:column;}
+.mod:hover,.mod.dark{background:var(--noir);}
+.mod:hover .mod-n,.mod:hover .mod-t,.mod:hover .mod-d,.mod:hover .mod-a,.mod.dark .mod-n,.mod.dark .mod-t,.mod.dark .mod-d,.mod.dark .mod-a{color:rgba(255,255,255,0.7);}
+.mod:hover .mod-s,.mod.dark .mod-s{border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.3);}
+.mod:hover .mod-s.on,.mod.dark .mod-s.on{border-color:rgba(255,255,255,0.5);color:rgba(255,255,255,0.8);}
+.mod.dark:hover{background:var(--gris-moyen);}
+.mod-n{font-family:var(--font-titre);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris-tres-clair);margin-bottom:32px;}
+.mod-t{font-family:var(--font-titre);font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--noir);margin-bottom:14px;line-height:1.4;}
+.mod-d{font-size:13px;color:var(--gris-clair);line-height:1.75;flex:1;}
+.mod-f{display:flex;align-items:center;justify-content:space-between;margin-top:32px;}
+.mod-s{font-family:var(--font-titre);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;border:1px solid var(--gris-tres-clair);padding:4px 10px;color:var(--gris-clair);}
+.mod-s.on{border-color:var(--noir);color:var(--noir);}
+.mod-a{font-size:16px;color:var(--gris-tres-clair);}
+.page-c{padding:48px;flex:1;}
+.page-cl{font-family:var(--font-titre);font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gris-clair);margin-bottom:24px;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--gris-tres-clair);border:1px solid var(--gris-tres-clair);max-width:900px;}
+.opt{background:var(--blanc);padding:52px 48px;cursor:pointer;transition:background 0.2s;display:flex;flex-direction:column;}
+.opt:hover{background:var(--noir);}
+.opt:hover .opt-n,.opt:hover .opt-t,.opt:hover .opt-d,.opt:hover .opt-dt,.opt:hover .opt-a{color:rgba(255,255,255,0.7);}
+.opt-n{font-family:var(--font-titre);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris-tres-clair);margin-bottom:28px;}
+.opt-t{font-family:var(--font-titre);font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--noir);margin-bottom:16px;}
+.opt-d{font-size:14px;color:var(--gris-moyen);line-height:1.8;flex:1;}
+.opt-dt{margin-top:28px;padding-top:20px;border-top:1px solid var(--gris-tres-clair);font-size:12px;color:var(--gris-clair);line-height:1.7;}
+.opt-f{display:flex;align-items:center;justify-content:flex-end;margin-top:24px;}
+.opt-a{font-size:16px;color:var(--gris-tres-clair);}
+.fw{padding:48px;flex:1;max-width:860px;}
+.fs{margin-bottom:48px;}
+.fs-t{font-family:var(--font-titre);font-size:9px;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:var(--noir);margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid var(--gris-tres-clair);display:flex;align-items:center;gap:10px;}
+.fs-n{font-size:9px;color:var(--gris-clair);font-weight:400;}
+.fg{margin-bottom:24px;}
+.fl{font-family:var(--font-titre);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris-moyen);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.req{color:var(--noir);font-size:12px;}
+.fi{width:100%;background:var(--blanc);border:1px solid var(--gris-tres-clair);color:var(--noir);font-family:var(--font-corps);font-size:14px;padding:12px 16px;outline:none;transition:border-color 0.2s;}
+.fi:focus{border-color:var(--noir);}
+.fi::placeholder{color:var(--gris-clair);font-size:13px;}
+.fta{width:100%;background:var(--blanc);border:1px solid var(--gris-tres-clair);color:var(--noir);font-family:var(--font-corps);font-size:14px;padding:12px 16px;outline:none;transition:border-color 0.2s;resize:vertical;min-height:100px;}
+.fta:focus{border-color:var(--noir);}
+.fta::placeholder{color:var(--gris-clair);font-size:13px;}
+.err{font-size:11px;color:var(--rouge);margin-top:6px;display:none;}
+.err.v{display:block;}
+.tg{display:flex;gap:2px;background:var(--gris-tres-clair);border:1px solid var(--gris-tres-clair);}
+.to{flex:1;padding:14px 20px;cursor:pointer;background:var(--blanc);border:none;font-family:var(--font-titre);font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gris-clair);transition:all 0.2s;text-align:center;}
+.to:hover{background:var(--gris-surface);color:var(--noir);}
+.to.on{background:var(--noir);color:var(--blanc);}
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--gris-tres-clair);border:1px solid var(--gris-tres-clair);}
+.pi{background:var(--blanc);padding:20px 24px;display:flex;align-items:flex-start;gap:14px;cursor:pointer;transition:background 0.2s;}
+.pi:hover{background:var(--gris-surface);}
+.pi input[type="checkbox"]{margin-top:2px;width:14px;height:14px;accent-color:var(--noir);flex-shrink:0;cursor:pointer;}
+.pil{font-size:13px;color:var(--gris-moyen);line-height:1.5;cursor:pointer;}
+.pil strong{display:block;font-family:var(--font-titre);font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--noir);margin-bottom:3px;}
+.sw{position:relative;}
+.sp{position:absolute;right:16px;top:50%;transform:translateY(-50%);width:16px;height:16px;border:2px solid var(--gris-tres-clair);border-top-color:var(--noir);border-radius:50%;animation:spin 0.6s linear infinite;display:none;}
+.sp.v{display:block;}
+@keyframes spin{to{transform:translateY(-50%) rotate(360deg);}}
+.sl{position:absolute;top:100%;left:0;right:0;z-index:150;background:var(--blanc);border:1px solid var(--gris-tres-clair);border-top:none;max-height:320px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,0.08);display:none;}
+.sl.v{display:block;}
+.si{padding:14px 20px;cursor:pointer;transition:background 0.15s;border-bottom:1px solid var(--gris-tres-clair);}
+.si:last-child{border-bottom:none;}
+.si:hover,.si.sel{background:var(--gris-surface);}
+.si-n{font-size:13px;font-weight:500;color:var(--noir);margin-bottom:3px;}
+.si-m{font-family:var(--font-titre);font-size:9px;letter-spacing:0.1em;color:var(--gris-clair);text-transform:uppercase;display:flex;gap:12px;}
+.si-0{padding:16px 20px;font-size:13px;color:var(--gris-clair);font-style:italic;}
+.fe{margin-top:16px;border:1px solid var(--gris-tres-clair);display:none;width:100%;}
+.fe.v{display:block;}
+.fe-h{background:var(--noir);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;}
+.fe-n{font-family:var(--font-titre);font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--blanc);}
+.fe-s{font-family:var(--font-titre);font-size:8px;letter-spacing:0.18em;text-transform:uppercase;padding:4px 10px;border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.6);}
+.fe-s.ok{border-color:var(--vert);color:#6fcf97;}
+.fe-g{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gris-tres-clair);}
+.fe-c{background:var(--blanc);padding:14px 24px;}
+.fe-cl{font-family:var(--font-titre);font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gris-clair);margin-bottom:4px;}
+.fe-cv{font-size:13px;color:var(--noir);font-weight:500;line-height:1.4;}
+.fe-d{background:var(--blanc);padding:14px 24px;grid-column:1/-1;border-top:1px solid var(--gris-tres-clair);}
+.fe-di{font-size:13px;color:var(--noir);padding:4px 0;border-bottom:1px solid var(--gris-tres-clair);display:flex;justify-content:space-between;}
+.fe-di:last-child{border-bottom:none;}
+.fe-dr{font-family:var(--font-titre);font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gris-clair);}
+.fe-l{background:var(--blanc);padding:14px 24px;grid-column:1/-1;border-top:1px solid var(--gris-tres-clair);}
+.fe-ll{font-family:var(--font-titre);font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gris-clair);margin-bottom:10px;}
+.llist{display:flex;flex-direction:column;gap:6px;}
+.lrow{display:flex;align-items:center;gap:8px;}
+.lbadge{font-family:var(--font-titre);font-size:7px;letter-spacing:0.16em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--gris-tres-clair);color:var(--gris-clair);flex-shrink:0;min-width:64px;text-align:center;}
+.lbadge.ok{border-color:var(--vert);color:var(--vert);}
+.lbadge.sg{border-color:rgba(184,160,96,0.5);color:#8a7040;}
+.linput{flex:1;background:var(--gris-surface);border:1px solid var(--gris-tres-clair);font-family:var(--font-corps);font-size:12px;padding:6px 10px;outline:none;color:var(--noir);}
+.linput:focus{border-color:var(--noir);}
+.lopen{background:none;border:none;cursor:pointer;font-size:12px;color:var(--gris-clair);padding:0 4px;}
+.lopen:hover{color:var(--noir);}
+.lx{background:none;border:none;cursor:pointer;font-size:14px;color:var(--gris-tres-clair);}
+.lx:hover{color:var(--rouge);}
+.ladd{background:none;border:none;cursor:pointer;font-family:var(--font-titre);font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gris-clair);padding:0;margin-top:6px;}
+.ladd:hover{color:var(--noir);}
+.fe-comp{background:var(--gris-surface);padding:14px 24px;grid-column:1/-1;}
+.fe-compl{font-family:var(--font-titre);font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gris-clair);margin-bottom:8px;}
+.fe-comp textarea{width:100%;background:var(--blanc);border:1px solid var(--gris-tres-clair);font-family:var(--font-corps);font-size:13px;padding:10px 14px;outline:none;resize:vertical;min-height:72px;color:var(--noir);}
+.fe-comp textarea:focus{border-color:var(--noir);}
+.ib{background:var(--bleu-info-clair);border:1px solid rgba(26,58,107,0.15);padding:12px 20px;font-size:12px;color:var(--bleu-info);line-height:1.6;margin-bottom:16px;}
+.exl{display:flex;flex-direction:column;gap:2px;background:var(--gris-tres-clair);border:1px solid var(--gris-tres-clair);}
+.exr{background:var(--blanc);padding:16px 24px;display:grid;grid-template-columns:80px 1fr 1fr 32px;align-items:center;gap:16px;}
+.exh{background:var(--gris-surface);padding:10px 24px;display:grid;grid-template-columns:80px 1fr 1fr 32px;gap:16px;}
+.exhl{font-family:var(--font-titre);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris-clair);}
+.exa{font-family:var(--font-titre);font-size:11px;font-weight:700;letter-spacing:0.12em;color:var(--noir);}
+.fis{width:100%;background:var(--blanc);border:1px solid var(--gris-tres-clair);color:var(--noir);font-family:var(--font-corps);font-size:13px;padding:8px 12px;outline:none;}
+.fis:focus{border-color:var(--noir);}
+.bsx{background:none;border:none;cursor:pointer;font-size:16px;color:var(--gris-tres-clair);padding:0;}
+.bsx:hover{color:var(--rouge);}
+.plg{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--gris-tres-clair);border:1px solid var(--gris-tres-clair);}
+.pli{background:var(--blanc);padding:28px 24px;}
+.pln{font-family:var(--font-titre);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris-clair);margin-bottom:8px;}
+.plt{font-family:var(--font-titre);font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--noir);margin-bottom:8px;}
+.pld{font-size:12px;color:var(--gris-clair);line-height:1.6;margin-bottom:16px;}
+.pnote{font-size:11px;color:var(--gris-clair);font-style:italic;margin-top:6px;}
+.hp{background:var(--blanc);border:1px solid var(--gris-tres-clair);padding:28px;margin-bottom:2px;}
+.hpl{font-family:var(--font-titre);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris-moyen);margin-bottom:12px;}
+.mpfx{display:flex;align-items:center;background:var(--gris-surface);border:1px solid var(--gris-tres-clair);border-right:none;padding:0 16px;font-family:var(--font-titre);font-size:12px;color:var(--gris-clair);}
+.tirl{display:flex;flex-direction:column;gap:2px;margin-bottom:12px;}
+.tirb{background:var(--blanc);border:1px solid var(--gris-tres-clair);padding:24px 28px;}
+.tirbh{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.tirbt{font-family:var(--font-titre);font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris-moyen);}
+.tirx{background:none;border:none;cursor:pointer;font-family:var(--font-titre);font-size:9px;letter-spacing:0.14em;color:var(--gris-clair);}
+.tirx:hover{color:var(--rouge);}
+.badd{background:none;border:1px dashed var(--gris-tres-clair);width:100%;padding:14px;font-family:var(--font-titre);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris-clair);cursor:pointer;transition:all 0.2s;margin-top:2px;}
+.badd:hover{border-color:var(--noir);color:var(--noir);}
+.entl{display:flex;flex-direction:column;gap:2px;margin-bottom:16px;}
+.entb{background:var(--blanc);border:1px solid var(--gris-tres-clair);padding:24px 28px;}
+.entbh{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.entbt{font-family:var(--font-titre);font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris-moyen);}
+.entx{background:none;border:none;cursor:pointer;font-size:11px;color:var(--gris-clair);font-family:var(--font-titre);letter-spacing:0.1em;}
+.entx:hover{color:var(--rouge);}
+.upz{border:1px dashed var(--gris-tres-clair);background:var(--blanc);padding:36px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;}
+.upz:hover,.upz.dg{border-color:var(--noir);background:var(--gris-surface);}
+.upz input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.upt{font-family:var(--font-titre);font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gris-moyen);margin-bottom:6px;}
+.ups{font-size:12px;color:var(--gris-clair);}
+.flist{margin-top:12px;display:flex;flex-direction:column;gap:4px;}
+.fitem{background:var(--blanc);border:1px solid var(--gris-tres-clair);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;}
+.fa{display:flex;align-items:center;justify-content:space-between;padding-top:32px;border-top:1px solid var(--gris-tres-clair);margin-top:16px;}
+.bret{background:none;border:1px solid var(--gris-tres-clair);padding:14px 24px;font-family:var(--font-titre);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gris-moyen);cursor:pointer;}
+.bret:hover{border-color:var(--noir);color:var(--noir);}
+.bsuiv{background:var(--noir);color:var(--blanc);border:none;padding:14px 32px;font-family:var(--font-titre);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;}
+.bsuiv:hover{background:var(--gris-moyen);}
+.af{background:var(--blanc);border-top:1px solid var(--gris-tres-clair);padding:20px 48px;display:flex;align-items:center;justify-content:space-between;margin-top:auto;}
+.aft{font-family:var(--font-titre);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gris-clair);}
+/* ETAPE 3 */
+.pl{display:grid;grid-template-columns:220px 1fr 320px;height:calc(100vh - 60px - 56px - 1px);overflow:hidden;}
+.ssb{background:var(--blanc);border-right:1px solid var(--gris-tres-clair);display:flex;flex-direction:column;overflow:hidden;}
+.ssbt{font-family:var(--font-titre);font-size:8px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gris-clair);padding:14px 16px 8px;flex-shrink:0;border-bottom:1px solid var(--gris-tres-clair);}
+#snav{flex:1;overflow-y:auto;}
+.rub{width:100%;border:none;border-bottom:1px solid var(--gris-tres-clair);text-align:left;cursor:pointer;padding:0;background:none;}
+.rub-h{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;}
+.rub.fixe .rub-h{background:var(--gris-fixe);}
+.rub:not(.fixe) .rub-h{background:var(--blanc);}
+.rub:not(.fixe) .rub-h:hover{background:var(--gris-surface);}
+.rub.fixe .rub-h:hover{background:#ddddd8;}
+.rub-l{font-family:var(--font-titre);font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gris-moyen);}
+.rub.fixe .rub-l{color:var(--gris-clair);}
+.rub-b{font-family:var(--font-titre);font-size:7px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gris-clair);border:1px solid var(--gris-tres-clair);padding:2px 6px;}
+.rub-c{font-size:10px;color:var(--gris-tres-clair);transition:transform 0.2s;}
+.rub.open .rub-c{transform:rotate(180deg);}
+.subs{display:none;background:var(--blanc);border-top:1px solid var(--gris-tres-clair);}
+.rub.open .subs{display:block;}
+.sni{width:100%;background:none;border:none;border-bottom:1px solid var(--gris-tres-clair);padding:9px 16px 9px 28px;display:flex;align-items:center;gap:8px;cursor:pointer;text-align:left;transition:background 0.15s;}
+.sni:last-child{border-bottom:none;}
+.sni:hover{background:var(--gris-surface);}
+.sni.on{background:var(--noir);}
+.sni.on .sni-n,.sni.on .sni-l{color:var(--blanc);}
+.sni-n{font-family:var(--font-titre);font-size:8px;font-weight:700;color:var(--gris-clair);flex-shrink:0;width:18px;}
+.sni-l{font-family:var(--font-titre);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gris-moyen);line-height:1.3;}
+.ssba{padding:12px;border-top:1px solid var(--gris-tres-clair);flex-shrink:0;}
+.bexp{width:100%;background:var(--noir);color:var(--blanc);border:none;padding:10px;font-family:var(--font-titre);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;}
+.bexp:hover{background:var(--gris-moyen);}
+.sm{background:#2a2a2a;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:24px;gap:16px;}
+.sv{width:100%;max-width:820px;aspect-ratio:297/210;position:relative;overflow:hidden;background:var(--blanc);box-shadow:0 8px 40px rgba(0,0,0,0.4);}
+.sf{display:none;width:100%;height:100%;flex-direction:column;}
+.sf.on{display:flex;}
+.sctrl{display:flex;gap:8px;}
+.cbtn{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.15);padding:8px 20px;font-family:var(--font-titre);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;}
+.cbtn:hover{background:rgba(255,255,255,0.2);color:var(--blanc);}
+.geno{position:absolute;inset:0;background:rgba(8,8,8,0.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:10;}
+.gent{font-family:var(--font-titre);font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--blanc);}
+.genl{font-size:12px;color:rgba(255,255,255,0.5);text-align:center;max-width:320px;line-height:1.6;}
+.gens{width:32px;height:32px;border:2px solid rgba(255,255,255,0.15);border-top-color:var(--blanc);border-radius:50%;animation:sp2 0.8s linear infinite;}
+@keyframes sp2{to{transform:rotate(360deg);}}
+/* SLIDE STYLES */
+.sc{width:100%;height:100%;box-sizing:border-box;position:relative;overflow:hidden;}
+.cov{background:var(--noir);display:flex;flex-direction:column;justify-content:space-between;padding:8% 10%;}
+.covey{font-family:var(--font-titre);font-size:0.65em;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1%;}
+.covt{font-family:var(--font-serif);font-size:3em;font-weight:300;color:var(--blanc);line-height:1.05;outline:none;}
+.covc{font-family:var(--font-serif);font-size:1.4em;font-style:italic;font-weight:300;color:rgba(255,255,255,0.55);margin-top:2%;outline:none;}
+.covb{display:flex;justify-content:space-between;align-items:flex-end;}
+.covd{font-family:var(--font-titre);font-size:0.6em;letter-spacing:0.14em;color:rgba(255,255,255,0.25);outline:none;}
+.covcf{font-family:var(--font-titre);font-size:0.55em;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.12);}
+.covlog{font-family:var(--font-titre);font-size:0.65em;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.7);}
+.intr{background:var(--blanc);display:flex;flex-direction:column;padding:6% 8%;gap:4%;}
+.intrtx{font-size:0.72em;color:var(--gris-moyen);line-height:1.8;outline:none;cursor:text;flex:0 0 auto;}
+.somm{display:flex;flex-direction:column;gap:0;flex:1;}
+.sommi{display:flex;align-items:center;gap:4%;padding:1.8% 0;border-bottom:1px solid var(--gris-tres-clair);}
+.sommi:last-child{border-bottom:none;}
+.sommn{font-family:var(--font-serif);font-size:1.8em;font-weight:300;color:var(--gris-tres-clair);min-width:5%;}
+.sommt{font-family:var(--font-titre);font-size:0.65em;letter-spacing:0.12em;text-transform:uppercase;color:var(--gris-moyen);outline:none;cursor:text;}
+.sep{background:#1a1a1a;display:flex;flex-direction:column;justify-content:space-between;padding:8% 10%;}
+.sep-n{font-family:var(--font-titre);font-size:0.6em;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.25);}
+.sep-t{font-family:var(--font-serif);font-size:3em;font-weight:300;color:var(--blanc);line-height:1.05;outline:none;cursor:text;}
+.std{background:var(--blanc);display:flex;flex-direction:column;padding:5.5% 7%;gap:3%;}
+.std-h{display:flex;flex-direction:column;gap:0.8%;flex-shrink:0;}
+.std-b{font-family:var(--font-titre);font-size:0.5em;letter-spacing:0.22em;text-transform:uppercase;color:var(--gris-clair);}
+.std-t{font-family:var(--font-titre);font-size:0.85em;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--noir);outline:none;cursor:text;}
+.std-body{flex:1;overflow:hidden;display:flex;flex-direction:column;gap:3%;}
+.org{display:flex;flex-direction:column;align-items:center;gap:0;flex:1;justify-content:center;}
+.orniv{display:flex;justify-content:center;gap:3%;}
+.orb{border:1px solid var(--gris-tres-clair);padding:2.5% 3.5%;text-align:center;min-width:18%;background:var(--blanc);}
+.orb.p{border-color:var(--noir);border-width:2px;}
+.orb.h{opacity:0.4;border-style:dashed;}
+.orbn{font-family:var(--font-titre);font-size:0.55em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--noir);outline:none;cursor:text;}
+.orbpct{font-family:var(--font-serif);font-size:1em;font-weight:300;color:var(--gris-clair);outline:none;cursor:text;}
+.orbl{font-family:var(--font-titre);font-size:0.42em;letter-spacing:0.1em;text-transform:uppercase;color:var(--gris-clair);margin-top:2px;}
+.orb.p .orbl{color:var(--noir);}
+.orleg{display:flex;gap:5%;margin-top:2%;justify-content:center;}
+.orlegi{display:flex;align-items:center;gap:4px;font-family:var(--font-titre);font-size:0.42em;letter-spacing:0.1em;color:var(--gris-clair);}
+.orlegb{width:10px;height:7px;border:1px solid var(--gris-tres-clair);}
+.orlegb.p{border-color:var(--noir);border-width:2px;}
+.orlegb.h{border-style:dashed;}
+.orcon{width:1px;height:18px;background:var(--gris-tres-clair);margin:0 auto;}
+.bgrid{display:grid;grid-template-columns:1fr 1fr;gap:3%;flex:1;}
+.bbloc{display:flex;flex-direction:column;gap:1.5%;}
+.bbloct{font-family:var(--font-titre);font-size:0.48em;letter-spacing:0.18em;text-transform:uppercase;color:var(--gris-clair);}
+.bblocv{font-size:0.68em;color:var(--noir);line-height:1.6;outline:none;cursor:text;}
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:2%;flex:1;}
+.mitem{border:1px solid var(--gris-tres-clair);padding:4% 5%;display:flex;flex-direction:column;gap:2%;}
+.mlabel{font-family:var(--font-titre);font-size:0.42em;letter-spacing:0.16em;text-transform:uppercase;color:var(--gris-clair);}
+.mval{font-family:var(--font-serif);font-size:1.8em;font-weight:300;color:var(--noir);outline:none;cursor:text;}
+.mnote{font-size:0.45em;color:var(--gris-clair);font-style:italic;outline:none;cursor:text;}
+.mrgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3%;flex:1;}
+.mritem{border-left:2px solid var(--gris-tres-clair);padding-left:4%;}
+.mrval{font-family:var(--font-serif);font-size:1.6em;font-weight:300;color:var(--noir);line-height:1;outline:none;cursor:text;}
+.mrlbl{font-family:var(--font-titre);font-size:0.48em;letter-spacing:0.12em;text-transform:uppercase;color:var(--gris-clair);margin-top:2%;}
+.mrsrc{font-size:0.42em;color:var(--gris-tres-clair);margin-top:1%;font-style:italic;}
+.prlist{display:flex;flex-direction:column;gap:2.5%;flex:1;}
+.pritem{border-bottom:1px solid var(--gris-tres-clair);padding-bottom:2.5%;display:flex;flex-direction:column;gap:0.8%;}
+.prdate{font-family:var(--font-titre);font-size:0.45em;letter-spacing:0.12em;text-transform:uppercase;color:var(--gris-clair);}
+.prtit{font-size:0.7em;font-weight:500;color:var(--noir);line-height:1.4;outline:none;cursor:text;}
+.prsrc{font-family:var(--font-titre);font-size:0.45em;color:var(--gris-clair);}
+.ftpg{background:var(--blanc);display:flex;flex-direction:column;justify-content:flex-end;padding:8% 10%;}
+.ftcab{font-family:var(--font-titre);font-size:0.65em;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris-tres-clair);text-align:right;}
+.pphases{display:flex;align-items:stretch;gap:0;flex:1;}
+.pph{flex:1;border:1px solid var(--gris-tres-clair);padding:4% 5%;display:flex;flex-direction:column;gap:3%;}
+.pph.ex{border-left:none;border-right:none;background:var(--gris-surface);}
+.pphn{font-family:var(--font-titre);font-size:0.45em;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris-clair);}
+.ppht{font-family:var(--font-titre);font-size:0.65em;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--noir);outline:none;cursor:text;}
+.pphd{font-size:0.6em;color:var(--gris-moyen);outline:none;cursor:text;}
+.pphdur{font-family:var(--font-titre);font-size:0.5em;color:var(--gris-clair);outline:none;cursor:text;}
+.honbloc{background:var(--noir);padding:5% 7%;display:flex;align-items:baseline;justify-content:space-between;margin-bottom:3%;}
+.honlib{font-family:var(--font-titre);font-size:0.65em;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.65);outline:none;cursor:text;}
+.honmt{font-family:var(--font-serif);font-size:2.5em;font-weight:300;color:var(--blanc);outline:none;cursor:text;}
+.honht{font-family:var(--font-titre);font-size:0.5em;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.25);}
+.honnote{font-size:0.65em;color:var(--gris-moyen);line-height:1.75;outline:none;cursor:text;}
+.rl{display:flex;flex-direction:column;gap:0;flex:1;}
+.ri{display:flex;gap:3%;padding:2% 0;border-bottom:1px solid var(--gris-tres-clair);align-items:center;}
+.ra{font-family:var(--font-serif);font-size:1.4em;font-weight:300;color:var(--gris-tres-clair);min-width:7%;outline:none;cursor:text;}
+.rco{display:flex;flex-direction:column;gap:1%;}
+.rs{font-family:var(--font-titre);font-size:0.6em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--noir);outline:none;cursor:text;}
+.rty{font-size:0.58em;color:var(--gris-clair);outline:none;cursor:text;}
+[contenteditable="true"]:hover{background:rgba(0,0,0,0.02);outline:1px dashed var(--gris-tres-clair);}
+[contenteditable="true"]:focus{background:rgba(0,0,0,0.03);outline:2px solid var(--noir);}
+.cp{background:var(--blanc);border-left:1px solid var(--gris-tres-clair);display:flex;flex-direction:column;overflow:hidden;}
+.cp-h{padding:16px 20px;border-bottom:1px solid var(--gris-tres-clair);flex-shrink:0;}
+.cp-t{font-family:var(--font-titre);font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--noir);}
+.cp-s{font-size:11px;color:var(--gris-clair);margin-top:2px;}
+.cp-m{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;}
+.cpb{padding:10px 14px;font-size:13px;line-height:1.6;max-width:100%;}
+.cpb-u{background:var(--noir);color:var(--blanc);}
+.cpb-a{background:var(--gris-surface);color:var(--gris-moyen);border:1px solid var(--gris-tres-clair);}
+.cpld{padding:10px 14px;display:flex;gap:4px;align-items:center;}
+.cpld div{width:6px;height:6px;background:var(--gris-clair);border-radius:50%;animation:cd 1.2s ease-in-out infinite;}
+.cpld div:nth-child(2){animation-delay:0.2s;}
+.cpld div:nth-child(3){animation-delay:0.4s;}
+@keyframes cd{0%,80%,100%{opacity:0.2;transform:scale(0.8)}40%{opacity:1;transform:scale(1)}}
+.cp-iw{padding:12px;border-top:1px solid var(--gris-tres-clair);display:flex;flex-direction:column;gap:8px;flex-shrink:0;}
+.cp-i{width:100%;background:var(--gris-surface);border:1px solid var(--gris-tres-clair);font-family:var(--font-corps);font-size:13px;padding:10px 14px;outline:none;resize:none;color:var(--noir);}
+.cp-i:focus{border-color:var(--noir);}
+.cp-send{background:var(--noir);color:var(--blanc);border:none;padding:10px;font-family:var(--font-titre);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;}
+.cp-send:hover{background:var(--gris-moyen);}
+.fade-in{animation:fadeIn 0.25s ease both;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+</style>
+</head>
+<body>
+<div class="topbar">
+  <button class="topbar-logo" onclick="ap('dashboard')">Gavroche</button>
+  <div class="topbar-right">
+    <span class="topbar-user">François Thiéry</span>
+    <button class="topbar-btn" onclick="window.location.href='gavroche-vitrine.html'">Déconnexion →</button>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="page actif" id="page-dashboard">
+  <div class="admin-header"><div class="admin-titre">Espace de <em>travail</em></div><div class="stats"><div class="stat"><div class="stat-v">0</div><div class="stat-l">Missions en cours</div></div><div class="stat"><div class="stat-v">0</div><div class="stat-l">Leads à traiter</div></div><div class="stat"><div class="stat-v">0</div><div class="stat-l">Propositions envoyées</div></div><div class="stat"><div class="stat-v">0</div><div class="stat-l">Missions finalisées</div></div></div></div>
+  <div class="mods-wrap"><div class="mods-label">Modules disponibles</div><div class="mods-grid">
+    <div class="mod" onclick="ap('crm')"><div class="mod-n">01</div><div class="mod-t">CRM</div><p class="mod-d">Gestion des leads, suivi des opportunités.</p><div class="mod-f"><span class="mod-s">En construction</span><span class="mod-a">→</span></div></div>
+    <div class="mod" onclick="ap('proposition')"><div class="mod-n">02</div><div class="mod-t">Proposition commerciale</div><p class="mod-d">Génération de devis et de lettres de mission.</p><div class="mod-f"><span class="mod-s on">Disponible</span><span class="mod-a">→</span></div></div>
+    <div class="mod" onclick="ap('contrat')"><div class="mod-n">03</div><div class="mod-t">Contractualisation</div><p class="mod-d">Préparation et suivi des contrats de mission.</p><div class="mod-f"><span class="mod-s">En construction</span><span class="mod-a">→</span></div></div>
+    <div class="mod dark" onclick="ap('execution')"><div class="mod-n">04</div><div class="mod-t">Exécution de la mission</div><p class="mod-d">Import FEC, Databook, rapport PowerPoint.</p><div class="mod-f"><span class="mod-s">En construction</span><span class="mod-a">→</span></div></div>
+    <div class="mod" onclick="ap('restitution')"><div class="mod-n">05</div><div class="mod-t">Restitution</div><p class="mod-d">Présentation interactive des conclusions.</p><div class="mod-f"><span class="mod-s">En construction</span><span class="mod-a">→</span></div></div>
+    <div class="mod" onclick="ap('ddgenerator')"><div class="mod-n">06</div><div class="mod-t">DD Generator</div><p class="mod-d">Suivi des missions initiées via le site public.</p><div class="mod-f"><span class="mod-s">En construction</span><span class="mod-a">→</span></div></div>
+  </div></div>
+  <div class="af"><div class="aft">Gavroche — Espace confidentiel</div><div class="aft">v0.6</div></div>
+</div>
+
+<!-- PROPOSITION -->
+<div class="page" id="page-proposition">
+  <div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">Proposition commerciale</span></div>
+  <div class="admin-header"><div class="admin-titre">Proposition <em>commerciale</em></div><div class="admin-sous-titre">Sélectionnez l'origine du lead.</div></div>
+  <div class="page-c"><div class="page-cl">Origine du lead</div><div class="opts">
+    <div class="opt" onclick="alert('Lead digital — en construction.')"><div class="opt-n">Option A</div><div class="opt-t">Lead digital</div><p class="opt-d">Prospect venu via le DD Generator.</p><div class="opt-dt">Champs pré-remplis depuis le système.</div><div class="opt-f"><span class="opt-a">→</span></div></div>
+    <div class="opt" onclick="ap('lead-sapiens-1')"><div class="opt-n">Option B</div><div class="opt-t">Lead sapiens</div><p class="opt-d">Prospect identifié par voie directe.</p><div class="opt-dt">Moteur de recherche + enrichissement automatique + génération IA.</div><div class="opt-f"><span class="opt-a">→</span></div></div>
+  </div></div>
+  <div class="af"><div class="aft">Gavroche</div></div>
+</div>
+
+<!-- ÉTAPE 1 -->
+<div class="page" id="page-lead-sapiens-1">
+  <div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><button class="bc" onclick="ap('proposition')">Proposition</button><span class="bc-sep">›</span><span class="bc actif">Lead sapiens</span></div>
+  <div class="stepper"><button class="stepper-item actif"><div class="stepper-num">1</div><div class="stepper-label">Identification de l'entité</div></button><button class="stepper-item inactif"><div class="stepper-num">2</div><div class="stepper-label">Éléments de la propale</div></button><button class="stepper-item inactif"><div class="stepper-num">3</div><div class="stepper-label">Présentation & édition</div></button></div>
+  <div class="admin-header"><div class="admin-titre">Identification de <em>l'entité</em></div><div class="admin-sous-titre">Les champs marqués * sont obligatoires.</div></div>
+  <div class="fw">
+    <div class="fs"><div class="fs-t"><span class="fs-n">01</span>Type de structure *</div><div class="tg"><button class="to on" id="btn-mono" onclick="setTS('mono')">Mono-entité</button><button class="to" id="btn-multi" onclick="setTS('multi')">Multi-entité</button></div></div>
+    <div class="fs" id="bloc-mono">
+      <div class="fs-t"><span class="fs-n">02</span>Recherche de l'entité *</div>
+      <div class="ib">Tapez le nom ou le Siren — les suggestions apparaissent en temps réel.</div>
+      <div class="fg"><div class="fl">Rechercher <span class="req">*</span></div>
+        <div class="sw"><input class="fi" type="text" id="search-mono" placeholder="Nom de l'entreprise ou Siren…" autocomplete="off" oninput="rech(this,'mono')" onkeydown="nav(event,'mono')"><div class="sp" id="sp-mono"></div><div class="sl" id="sl-mono"></div></div>
+        <div class="err" id="err-mono">Veuillez sélectionner une entité dans les suggestions.</div>
+      </div>
+      <div class="fe" id="fe-mono">
+        <div class="fe-h"><div class="fe-n" id="fe-n-mono">—</div><div class="fe-s" id="fe-s-mono">—</div></div>
+        <div class="fe-g">
+          <div class="fe-c"><div class="fe-cl">Siren</div><div class="fe-cv" id="fecv-siren">—</div></div>
+          <div class="fe-c"><div class="fe-cl">Forme juridique</div><div class="fe-cv" id="fecv-forme">—</div></div>
+          <div class="fe-c"><div class="fe-cl">Siège social</div><div class="fe-cv" id="fecv-siege">—</div></div>
+          <div class="fe-c"><div class="fe-cl">Activité (NAF)</div><div class="fe-cv" id="fecv-activite">—</div></div>
+          <div class="fe-c"><div class="fe-cl">Date de création</div><div class="fe-cv" id="fecv-creation">—</div></div>
+          <div class="fe-c"><div class="fe-cl">Effectifs</div><div class="fe-cv" id="fecv-effectifs">—</div></div>
+          <div class="fe-d"><div class="fe-cl" style="margin-bottom:10px;">Dirigeants</div><div id="dirs-mono"></div></div>
+          <div class="fe-l"><div class="fe-ll">Liens</div><div class="llist" id="liens-mono"></div><button class="ladd" onclick="addLien('liens-mono','','Autre')">+ Ajouter un lien</button></div>
+          <div class="fe-comp"><div class="fe-compl">Compléments manuels — nature de l'opération, actionnariat, filiales, organigramme</div><textarea id="comp-mono" placeholder="Ex : Acquisition totale par le fonds X. Holding détenue à 60% par M. Dupont…"></textarea></div>
+        </div>
+      </div>
+    </div>
+    <div class="fs" id="bloc-multi" style="display:none;"><div class="fs-t"><span class="fs-n">02</span>Entités *</div><div class="ib">Ajoutez chaque entité du périmètre.</div><div class="entl" id="entl"></div><button class="badd" onclick="addEnt()">+ Ajouter une entité</button></div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">03</span>Documents <span style="font-weight:400;color:var(--gris-clair);font-size:8px;letter-spacing:0.14em;border:1px solid var(--gris-tres-clair);padding:2px 6px;">Facultatif</span></div>
+      <div class="upz" ondragover="dgo(event)" ondragleave="dgl()" ondrop="ddr(event)"><input type="file" id="inp-files" multiple onchange="addFiles(this.files)"><div class="upt">Déposer les fichiers ici</div><div class="ups">ou cliquer pour parcourir — tous formats acceptés</div></div>
+      <div class="flist" id="flist"></div>
+    </div>
+    <div class="fa"><button class="bret" onclick="ap('proposition')">← Retour</button><button class="bsuiv" onclick="val1()">Étape suivante →</button></div>
+  </div>
+  <div class="af"><div class="aft">Gavroche</div></div>
+</div>
+
+<!-- ÉTAPE 2 -->
+<div class="page" id="page-lead-sapiens-2">
+  <div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><button class="bc" onclick="ap('proposition')">Proposition</button><span class="bc-sep">›</span><span class="bc actif">Lead sapiens</span></div>
+  <div class="stepper"><button class="stepper-item complete" onclick="ap('lead-sapiens-1')"><div class="stepper-num">✓</div><div class="stepper-label">Identification de l'entité</div></button><button class="stepper-item actif"><div class="stepper-num">2</div><div class="stepper-label">Éléments de la propale</div></button><button class="stepper-item inactif"><div class="stepper-num">3</div><div class="stepper-label">Présentation & édition</div></button></div>
+  <div class="admin-header"><div class="admin-titre">Éléments de la <em>propale</em></div><div class="admin-sous-titre">Les champs marqués * sont obligatoires.</div></div>
+  <div class="fw">
+    <div class="fs"><div class="fs-t"><span class="fs-n">01</span>Type de mission *</div><div class="tg"><button class="to on" id="btn-bsdd" onclick="stg('btn-bsdd','btn-vdd')">BSDD — Buy-Side</button><button class="to" id="btn-vdd" onclick="stg('btn-vdd','btn-bsdd')">VDD — Sell-Side</button></div></div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">02</span>Type de DD *</div><div class="tg"><button class="to on" id="btn-std" onclick="stg('btn-std','btn-fla')">Standard DD</button><button class="to" id="btn-fla" onclick="stg('btn-fla','btn-std')">Flash DD</button></div></div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">03</span>Parties à inclure *</div><div class="pg">
+      <label class="pi"><input type="checkbox" id="p1" checked><div class="pil"><strong>1 — Contexte de l'opération</strong>Périmètre, organigramme, business, métriques, marché, presse</div></label>
+      <label class="pi"><input type="checkbox" id="p2" checked><div class="pil"><strong>2 — Notre approche</strong>Rétroplanning, accès à l'information</div></label>
+      <label class="pi"><input type="checkbox" id="p3" checked><div class="pil"><strong>3 — Périmètre des travaux</strong>Objectifs et procédures d'audit</div></label>
+      <label class="pi"><input type="checkbox" id="p4" checked><div class="pil"><strong>4 — Conditions d'intervention</strong>Planning et honoraires</div></label>
+      <label class="pi"><input type="checkbox" id="p5" checked><div class="pil"><strong>5 — Références</strong>Missions passées pertinentes</div></label>
+    </div></div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">04</span>Historique analysé *</div><div class="exl" id="exl"><div class="exh"><div class="exhl">Exercice</div><div class="exhl">Date de clôture</div><div class="exhl">Libellé</div><div></div></div></div><button class="badd" onclick="addEx()">+ Ajouter un exercice</button></div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">05</span>Planning d'intervention *</div>
+      <div class="ib">Les dates de début des phases 2 et 3 se calculent automatiquement en jours ouvrés.</div>
+      <div class="plg">
+        <div class="pli"><div class="pln">Phase 1</div><div class="plt">Préparation</div><div class="pld">Envoi IRL, kick-off, accès à l'information.</div><div class="fl" style="margin-bottom:6px;">Date de début <span class="req">*</span></div><input class="fi" type="date" id="dp1" style="margin-bottom:12px;" oninput="majP()"><div class="fl" style="margin-bottom:6px;">Durée (jours ouvrés)</div><input class="fi" type="number" id="dur1" min="1" max="60" placeholder="ex : 5" oninput="majP()"></div>
+        <div class="pli"><div class="pln">Phase 2</div><div class="plt">Exécution</div><div class="pld">Travaux d'analyse, sessions Q&R.</div><div class="fl" style="margin-bottom:6px;">Date de début</div><input class="fi" type="date" id="dp2" style="margin-bottom:12px;background:var(--gris-surface);" readonly><div class="fl" style="margin-bottom:6px;">Durée (jours ouvrés)</div><input class="fi" type="number" id="dur2" min="1" max="60" placeholder="ex : 15" oninput="majP()"><div class="pnote" id="note2"></div></div>
+        <div class="pli"><div class="pln">Phase 3</div><div class="plt">Finalisation</div><div class="pld">Remise rapport, relecture, validation.</div><div class="fl" style="margin-bottom:6px;">Date de début</div><input class="fi" type="date" id="dp3" style="margin-bottom:12px;background:var(--gris-surface);" readonly><div class="fl" style="margin-bottom:6px;">Durée (jours ouvrés)</div><input class="fi" type="number" id="dur3" min="1" max="60" placeholder="ex : 5" oninput="majP()"><div class="pnote" id="note3"></div></div>
+      </div>
+    </div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">06</span>Honoraires *</div>
+      <div class="hp"><div class="hpl">Prestation principale *</div><div class="fg" style="margin-bottom:0;"><div class="fl">Libellé</div><input class="fi" type="text" id="hon-lib" placeholder="ex : Due Diligence Financière" style="margin-bottom:12px;"><div class="fl">Montant HT</div><div style="display:flex;"><div class="mpfx">€</div><input class="fi" type="number" id="hon-mt" placeholder="ex : 42 000" style="border-left:none;"></div></div></div>
+      <div class="tirl" id="tirl"></div><button class="badd" onclick="addTir()">+ Ajouter un tiroir facultatif</button>
+    </div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">07</span>Commentaires <span style="font-weight:400;color:var(--gris-clair);font-size:8px;letter-spacing:0.14em;border:1px solid var(--gris-tres-clair);padding:2px 6px;">Facultatif</span></div><textarea class="fta" id="comm" placeholder="Contexte particulier, secteur si non identifié, fourchette de CA…"></textarea></div>
+    <div class="fa"><button class="bret" onclick="ap('lead-sapiens-1')">← Étape précédente</button><button class="bsuiv" onclick="val2()">Générer la propale →</button></div>
+  </div>
+  <div class="af"><div class="aft">Gavroche</div></div>
+</div>
+
+<!-- ÉTAPE 3 -->
+<div class="page" id="page-lead-sapiens-3">
+  <div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><button class="bc" onclick="ap('proposition')">Proposition</button><span class="bc-sep">›</span><span class="bc actif">Lead sapiens</span></div>
+  <div class="stepper"><button class="stepper-item complete" onclick="ap('lead-sapiens-1')"><div class="stepper-num">✓</div><div class="stepper-label">Identification de l'entité</div></button><button class="stepper-item complete" onclick="ap('lead-sapiens-2')"><div class="stepper-num">✓</div><div class="stepper-label">Éléments de la propale</div></button><button class="stepper-item actif"><div class="stepper-num">3</div><div class="stepper-label">Présentation & édition</div></button></div>
+  <div class="pl">
+    <div class="ssb"><div class="ssbt">Structure</div><div id="snav"></div><div class="ssba"><button class="bexp" onclick="alert('Export PPTX — en construction.')">↓ Exporter en PPTX</button></div></div>
+    <div class="sm"><div class="sv" id="sv" style="position:relative;"><div class="geno" id="geno"><div class="gens"></div><div class="gent">Génération en cours</div><div class="genl" id="genl">Initialisation…</div></div></div><div class="sctrl"><button class="cbtn" onclick="gS(Math.max(0,(window.sA||0)-1))">← Précédent</button><button class="cbtn" id="slide-ctr">— / —</button><button class="cbtn" onclick="gS(Math.min((window.sD||[]).length-1,(window.sA||0)+1))">Suivant →</button></div></div>
+    <div class="cp"><div class="cp-h"><div class="cp-t">Assistant</div><div class="cp-s">Demandez une modification…</div></div><div class="cp-m" id="cp-m"><div class="cpb cpb-a">La propale est en cours de génération.</div></div><div class="cpld" id="cpld" style="display:none;"><div></div><div></div><div></div></div><div class="cp-iw"><textarea class="cp-i" id="cp-i" rows="3" placeholder="Ex : Reformule le contexte…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send();}"></textarea><button class="cp-send" onclick="send()">Envoyer</button></div></div>
+  </div>
+</div>
+
+<!-- STUBS -->
+<div class="page" id="page-crm"><div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">CRM</span></div><div class="admin-header"><div class="admin-titre">CRM</div><div class="admin-sous-titre">En construction.</div></div><div class="af"><div class="aft">Gavroche</div></div></div>
+<div class="page" id="page-contrat"><div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">Contractualisation</span></div><div class="admin-header"><div class="admin-titre">Contractualisation</div><div class="admin-sous-titre">En construction.</div></div><div class="af"><div class="aft">Gavroche</div></div></div>
+<div class="page" id="page-execution"><div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">Exécution</span></div><div class="admin-header"><div class="admin-titre">Exécution de <em>la mission</em></div><div class="admin-sous-titre">En construction.</div></div><div class="af"><div class="aft">Gavroche</div></div></div>
+<div class="page" id="page-restitution"><div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">Restitution</span></div><div class="admin-header"><div class="admin-titre">Restitution</div><div class="admin-sous-titre">En construction.</div></div><div class="af"><div class="aft">Gavroche</div></div></div>
+<div class="page" id="page-ddgenerator"><div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">DD Generator</span></div><div class="admin-header"><div class="admin-titre">DD Generator</div><div class="admin-sous-titre">En construction.</div></div><div class="af"><div class="aft">Gavroche</div></div></div>
+
+<script>
+// ── Navigation ──
+function ap(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('actif'));const c=document.getElementById('page-'+id);if(c){c.classList.add('actif');window.scrollTo(0,0);}}
+function stg(a,b){document.getElementById(a).classList.add('on');document.getElementById(b).classList.remove('on');}
+
+// ── Mono/Multi ──
+let ts='mono';
+function setTS(t){ts=t;document.getElementById('btn-mono').classList.toggle('on',t==='mono');document.getElementById('btn-multi').classList.toggle('on',t==='multi');document.getElementById('bloc-mono').style.display=t==='mono'?'block':'none';document.getElementById('bloc-multi').style.display=t==='multi'?'block':'none';if(t==='multi'&&!document.getElementById('entl').children.length){addEnt();addEnt();}}
+
+// ── Planning jours ouvrés ──
+function addJO(dateStr,j){const d=new Date(dateStr);let n=0;while(n<j){d.setDate(d.getDate()+1);const w=d.getDay();if(w!==0&&w!==6)n++;}return d;}
+function fmtISO(d){return d.toISOString().split('T')[0];}
+function fmtFR(d){return d.toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});}
+function majP(){
+  const d1=document.getElementById('dp1').value;
+  const dur1=parseInt(document.getElementById('dur1').value)||0;
+  const dur2=parseInt(document.getElementById('dur2').value)||0;
+  if(d1&&dur1){
+    const d2=addJO(d1,dur1);
+    document.getElementById('dp2').value=fmtISO(d2);
+    document.getElementById('note2').textContent='Début calculé : '+fmtFR(d2);
+    if(dur2){
+      const d3=addJO(fmtISO(d2),dur2);
+      document.getElementById('dp3').value=fmtISO(d3);
+      document.getElementById('note3').textContent='Début calculé : '+fmtFR(d3);
+    }
+  }
+}
+
+// ── Autocomplete ──
+let timers={},entSel=null,sRes={};
+async function rech(inp,mode){
+  const q=inp.value.trim();const sb=document.getElementById('sl-'+mode);const sp=document.getElementById('sp-'+mode);
+  if(q.length<2){sb.classList.remove('v');return;}
+  if(timers[mode])clearTimeout(timers[mode]);entSel=null;
+  timers[mode]=setTimeout(async()=>{sp.classList.add('v');
+    try{
+      const r=await fetch('https://recherche-entreprises.api.gouv.fr/search?q='+encodeURIComponent(q)+'&per_page=8');
+      const d=await r.json();const res=d.results||[];sRes[mode]=res;
+      if(!res.length){sb.innerHTML='<div class="si-0">Aucune entreprise trouvée</div>';}
+      else{sb.innerHTML=res.map((r,i)=>{const s=r.siege||{};return '<div class="si" data-i="'+i+'" data-m="'+mode+'"><div class="si-n">'+(r.nom_complet||r.nom_raison_sociale||'—')+'</div><div class="si-m"><span>'+(r.siren||'—')+'</span>'+(s.libelle_commune?'<span>'+(s.code_postal||'')+' '+s.libelle_commune+'</span>':'')+'<span>'+(r.libelle_activite_principale||'')+'</span></div></div>';}).join('');
+        sb.querySelectorAll('.si').forEach(el=>el.addEventListener('click',()=>selEnt(sRes[el.dataset.m][parseInt(el.dataset.i)],el.dataset.m)));
+      }sb.classList.add('v');
+    }catch(e){sb.innerHTML='<div class="si-0">Erreur de connexion</div>';sb.classList.add('v');}
+    sp.classList.remove('v');},300);
+}
+function nav(e,mode){
+  const items=[...document.querySelectorAll('#sl-'+mode+' .si')];if(!items.length)return;
+  let i=items.findIndex(el=>el.classList.contains('sel'));
+  if(e.key==='ArrowDown'){e.preventDefault();i=Math.min(i+1,items.length-1);}
+  else if(e.key==='ArrowUp'){e.preventDefault();i=Math.max(i-1,0);}
+  else if(e.key==='Enter'&&i>=0){items[i].click();return;}
+  else if(e.key==='Escape'){document.getElementById('sl-'+mode).classList.remove('v');return;}
+  items.forEach((el,j)=>el.classList.toggle('sel',j===i));
+}
+document.addEventListener('click',e=>{document.querySelectorAll('.sl').forEach(el=>{if(!el.parentElement.contains(e.target))el.classList.remove('v');});});
+
+async function selEnt(r,mode){
+  entSel=r;const siege=r.siege||{};
+  document.getElementById('search-'+mode).value=r.nom_complet||r.nom_raison_sociale||'';
+  document.getElementById('sl-'+mode).classList.remove('v');
+  const errEl=document.getElementById('err-'+mode);if(errEl)errEl.classList.remove('v');
+  const nom=r.nom_complet||r.nom_raison_sociale||'—';
+  const statut=r.etat_administratif==='A'?'Active':(r.etat_administratif==='F'?'Fermée':'—');
+  const siren=r.siren||'—';
+  document.getElementById('fe-n-mono').textContent=nom;
+  const sEl=document.getElementById('fe-s-mono');sEl.textContent=statut;sEl.className='fe-s'+(statut==='Active'?' ok':'');
+  document.getElementById('fecv-siren').textContent=siren;
+  document.getElementById('fecv-forme').textContent=r.nature_juridique_libelle||'—';
+  document.getElementById('fecv-siege').textContent=[siege.adresse,siege.code_postal,siege.libelle_commune].filter(Boolean).join(' ')||'—';
+  document.getElementById('fecv-activite').textContent=[r.libelle_activite_principale,r.activite_principale].filter(Boolean)[0]||'—';
+  document.getElementById('fecv-creation').textContent=r.date_creation?new Date(r.date_creation).toLocaleDateString('fr-FR'):'—';
+  document.getElementById('fecv-effectifs').textContent=r.tranche_effectif_salarie_libelle||siege.tranche_effectif_salarie_libelle||'—';
+  const dirs=r.dirigeants||[];
+  document.getElementById('dirs-mono').innerHTML=dirs.length?dirs.slice(0,6).map(d=>'<div class="fe-di"><span>'+(([d.prenom,d.nom].filter(Boolean).join(' '))||d.denomination||'—')+'</span><span class="fe-dr">'+(d.qualite||'—')+'</span></div>').join(''):'<div style="font-size:13px;color:var(--gris-clair);font-style:italic;">Non disponible</div>';
+  const le=document.getElementById('liens-mono');le.innerHTML='';
+  const slug=nom.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  addLienD(le,'https://www.pappers.fr/entreprise/'+slug+'-'+siren,'Pappers','ok');
+  addLienD(le,'https://www.linkedin.com/company/'+slug,'LinkedIn','sg');
+  chSite(nom,le);
+  document.getElementById('fe-mono').classList.add('v');
+}
+function addLienD(c,url,label,t){const d=document.createElement('div');d.className='lrow';const inp=document.createElement('input');inp.className='linput';inp.type='url';inp.value=url;inp.placeholder='URL non trouvée';const badge=document.createElement('span');badge.className='lbadge '+t;badge.textContent=label;const btnOpen=document.createElement('button');btnOpen.className='lopen';btnOpen.textContent='↗';btnOpen.title='Ouvrir';btnOpen.onclick=function(){if(inp.value)window.open(inp.value,'_blank');};const btnDel=document.createElement('button');btnDel.className='lx';btnDel.textContent='×';btnDel.onclick=function(){d.remove();};d.appendChild(badge);d.appendChild(inp);d.appendChild(btnOpen);d.appendChild(btnDel);c.appendChild(d);}
+async function chSite(nom,c){
+  try{
+    const r=await fetch("/api/site-web",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({nomEntite:nom})});
+    const d=await r.json();
+    addLienD(c,d.url||"","Site web","sg");
+  }catch(e){addLienD(c,"","Site web","sg");}
+}
+function addLien(cid,url,label){addLienD(document.getElementById(cid),url,label,'sg');}
+
+// ── Multi entité ──
+let bRes={};
+function addEnt(){
+  const l=document.getElementById('entl');const n=l.children.length+1;const id='ent-'+Date.now();
+  const d=document.createElement('div');d.className='entb fade-in';d.id=id;
+  
+  const header=document.createElement('div');header.className='entbh';
+  const titre=document.createElement('div');titre.className='entbt';titre.textContent='Entite '+n;
+  const btnX=document.createElement('button');btnX.className='entx';btnX.textContent='Supprimer';
+  btnX.onclick=function(){document.getElementById(id).remove();renumE();};
+  header.appendChild(titre);header.appendChild(btnX);
+  
+  const fg=document.createElement('div');fg.className='fg';
+  const lbl=document.createElement('div');lbl.className='fl';lbl.innerHTML='Rechercher <span class="req">*</span>';
+  const sw=document.createElement('div');sw.className='sw';
+  const inp=document.createElement('input');inp.className='fi';inp.type='text';inp.placeholder='Nom ou Siren...';inp.autocomplete='off';
+  inp.oninput=function(){rechB(this,id);};
+  const sp=document.createElement('div');sp.className='sp';sp.id='sp-'+id;
+  const sl=document.createElement('div');sl.className='sl';sl.id='sl-'+id;
+  sw.appendChild(inp);sw.appendChild(sp);sw.appendChild(sl);
+  fg.appendChild(lbl);fg.appendChild(sw);
+  
+  const fe=document.createElement('div');fe.className='fe';fe.id='fe-'+id;
+  fe.innerHTML='<div class="fe-h"><div class="fe-n" id="fn-'+id+'">-</div><div class="fe-s" id="fs-'+id+'">-</div></div><div class="fe-g"><div class="fe-c"><div class="fe-cl">Siren</div><div class="fe-cv" id="si-'+id+'">-</div></div><div class="fe-c"><div class="fe-cl">Siege</div><div class="fe-cv" id="sg-'+id+'">-</div></div></div>';
+  
+  d.appendChild(header);d.appendChild(fg);d.appendChild(fe);l.appendChild(d);
+}
+
+function renumE(){document.querySelectorAll('.entbt').forEach((el,i)=>el.textContent='Entité '+(i+1));}
+async function rechB(inp,id){
+  const q=inp.value.trim();const sb=document.getElementById('sl-'+id);const sp=document.getElementById('sp-'+id);
+  if(q.length<2){sb.classList.remove('v');return;}
+  if(timers[id])clearTimeout(timers[id]);
+  timers[id]=setTimeout(async()=>{sp.classList.add('v');
+    try{const r=await fetch('https://recherche-entreprises.api.gouv.fr/search?q='+encodeURIComponent(q)+'&per_page=6');const d=await r.json();const res=d.results||[];bRes[id]=res;
+      sb.innerHTML=res.length?res.map((r,i)=>'<div class="si" data-i="'+i+'" data-b="'+id+'"><div class="si-n">'+(r.nom_complet||r.nom_raison_sociale||'—')+'</div><div class="si-m"><span>'+(r.siren||'—')+'</span></div></div>').join(''):'<div class="si-0">Aucun résultat</div>';
+      sb.querySelectorAll('.si').forEach(el=>el.addEventListener('click',()=>{const r=bRes[el.dataset.b][parseInt(el.dataset.i)];const s=r.siege||{};inp.value=r.nom_complet||r.nom_raison_sociale||'';sb.classList.remove('v');document.getElementById('fn-'+id).textContent=r.nom_complet||r.nom_raison_sociale||'—';document.getElementById('si-'+id).textContent=r.siren||'—';document.getElementById('sg-'+id).textContent=[s.adresse,s.code_postal,s.libelle_commune].filter(Boolean).join(' ')||'—';const st=document.getElementById('fs-'+id);const sv=r.etat_administratif==='A'?'Active':'—';st.textContent=sv;st.className='fe-s'+(sv==='Active'?' ok':'');document.getElementById('fe-'+id).classList.add('v');}));
+      sb.classList.add('v');}catch(e){sb.innerHTML='<div class="si-0">Erreur</div>';sb.classList.add('v');}sp.classList.remove('v');},300);
+}
+
+// ── Upload ──
+let fls=[];
+function addFiles(fs){[...fs].forEach(f=>{if(!fls.find(x=>x.name===f.name&&x.size===f.size))fls.push(f);});rfls();}
+function rmFile(i){fls.splice(i,1);rfls();}
+function rfls(){document.getElementById('flist').innerHTML=fls.map((f,i)=>'<div class="fitem"><span style="font-size:13px;color:var(--gris-moyen);">'+f.name+'</span><span style="display:flex;align-items:center;gap:12px;"><span style="font-size:11px;color:var(--gris-clair);">'+fmb(f.size)+'</span><button style="background:none;border:none;cursor:pointer;font-size:16px;color:var(--gris-tres-clair);" onclick="rmFile('+i+')">×</button></span></div>').join('');}
+function fmb(b){if(b<1024)return b+'o';if(b<1048576)return Math.round(b/1024)+'Ko';return (b/1048576).toFixed(1)+'Mo';}
+function dgo(e){e.preventDefault();document.querySelector('.upz').classList.add('dg');}
+function dgl(){document.querySelector('.upz').classList.remove('dg');}
+function ddr(e){e.preventDefault();dgl();addFiles(e.dataTransfer.files);}
+
+// ── Validation étape 1 ──
+function val1(){if(ts==='mono'&&!entSel){document.getElementById('err-mono').classList.add('v');return;}ap('lead-sapiens-2');}
+
+// ── Exercices ──
+let exc=0;
+function addEx(){
+  exc++;const l=document.getElementById('exl');const y=new Date().getFullYear()-exc+1;const id='ex-'+Date.now();
+  const d=document.createElement('div');d.className='exr fade-in';d.id=id;
+  const ann=document.createElement('div');ann.className='exa';ann.textContent=exc===1?'N':'N-'+(exc-1);
+  const d1=document.createElement('input');d1.className='fis';d1.type='date';d1.value=y+'-12-31';
+  const d2=document.createElement('input');d2.className='fis';d2.type='text';d2.value='FY'+String(y).slice(2)+'A';
+  const bx=document.createElement('button');bx.className='bsx';bx.textContent='x';
+  bx.onclick=function(){document.getElementById(id).remove();renumEx();};
+  d.appendChild(ann);d.appendChild(d1);d.appendChild(d2);d.appendChild(bx);l.appendChild(d);
+}
+
+function renumEx(){document.querySelectorAll('#exl .exr').forEach((r,i)=>{const l=r.querySelector('.exa');if(l)l.textContent=i===0?'N':'N-'+i;});exc=document.querySelectorAll('#exl .exr').length;}
+
+// ── Tiroirs ──
+let tc=0;
+function addTir(){
+  tc++;const l=document.getElementById('tirl');const id='t-'+Date.now();
+  const d=document.createElement('div');d.className='tirb fade-in';d.id=id;
+  const h=document.createElement('div');h.className='tirbh';
+  const t=document.createElement('div');t.className='tirbt';t.textContent='Tiroir facultatif '+tc;
+  const bx=document.createElement('button');bx.className='tirx';bx.textContent='Supprimer';
+  bx.onclick=function(){document.getElementById(id).remove();};
+  h.appendChild(t);h.appendChild(bx);
+  const fg=document.createElement('div');fg.className='fg';
+  fg.innerHTML='<div class="fl">Libelle</div><input class="fi" type="text" placeholder="ex : Business Plan" style="margin-bottom:12px;"><div class="fl">Montant HT</div><div style="display:flex;"><div class="mpfx">euro</div><input class="fi" type="number" placeholder="ex : 8 000" style="border-left:none;"></div>';
+  d.appendChild(h);d.appendChild(fg);l.appendChild(d);
+}
+
+function colData(){
+  const e=entSel||{};const sg=e.siege||{};
+  const liens=[];document.querySelectorAll('#liens-mono .lrow').forEach(r=>{const b=r.querySelector('.lbadge');const inp=r.querySelector('.linput');if(b&&inp&&inp.value)liens.push({label:b.textContent,url:inp.value});});
+  return{
+    entite:{nom:e.nom_complet||e.nom_raison_sociale||'—',siren:e.siren||'—',forme:e.nature_juridique_libelle||'—',
+      siege:[sg.adresse,sg.code_postal,sg.libelle_commune].filter(Boolean).join(' ')||'—',
+      activite:[e.libelle_activite_principale,e.activite_principale].filter(Boolean)[0]||'—',
+      creation:e.date_creation?new Date(e.date_creation).toLocaleDateString('fr-FR'):'—',
+      effectifs:e.tranche_effectif_salarie_libelle||sg.tranche_effectif_salarie_libelle||'—',
+      dirigeants:(e.dirigeants||[]).slice(0,6).map(d=>({nom:([d.prenom,d.nom].filter(Boolean).join(' '))||d.denomination||'—',role:d.qualite||'—'})),
+      complement:document.getElementById('comp-mono')?document.getElementById('comp-mono').value:'',liens},
+    typeMission:document.getElementById('btn-bsdd').classList.contains('on')?'BSDD':'VDD',
+    typeDD:document.getElementById('btn-std').classList.contains('on')?'Standard DD':'Flash DD',
+    parties:{p1:document.getElementById('p1').checked,p2:document.getElementById('p2').checked,p3:document.getElementById('p3').checked,p4:document.getElementById('p4').checked,p5:document.getElementById('p5').checked},
+    honLib:document.getElementById('hon-lib').value||'Due Diligence Financière',
+    honMt:document.getElementById('hon-mt').value||'',
+    comm:document.getElementById('comm').value||'',
+    phases:[
+      {label:'Préparation',date:document.getElementById('dp1').value,dur:document.getElementById('dur1').value},
+      {label:'Exécution',date:document.getElementById('dp2').value,dur:document.getElementById('dur2').value},
+      {label:'Finalisation',date:document.getElementById('dp3').value,dur:document.getElementById('dur3').value}
+    ],
+    exercices:[...document.querySelectorAll('#exl .exr')].map((r,i)=>({annee:i===0?'N':'N-'+i,date:r.querySelectorAll('input')[0].value,lib:r.querySelectorAll('input')[1].value}))
+  };
+}
+
+// ── Validation étape 2 ──
+async function val2(){
+  if(!document.querySelector('#exl .exr')){alert('Veuillez ajouter au moins un exercice.');return;}
+  if(!document.getElementById('hon-mt').value){alert('Veuillez saisir le montant des honoraires.');return;}
+  ap('lead-sapiens-3');
+  await genPropale();
+}
+
+// ── Génération ──
+let dF={};window.sD=[];window.sA=0;window.cH=[];
+function logG(m){const el=document.getElementById('genl');if(el)el.textContent=m;}
+
+function mkSep(num,titre){return '<div class="sc sep"><div class="sep-n">Partie '+num+'</div><div class="sep-t" contenteditable="true">'+titre+'</div><div class="covlog" style="color:rgba(255,255,255,0.2);">Gavroche</div></div>';}
+
+async function genPropale(){
+  dF=colData();const d=dF;
+  document.getElementById('geno').style.display='flex';
+  logG("Recherche sur "+d.entite.nom+" ...");
+  let cx={};
+  try{
+    const siteUrl=(d.entite.liens.find(function(l){return l.label==="Site web";})||{}).url||"";
+    const promptParts=[
+      "Tu es expert en due diligence financiere pour Gavroche, cabinet parisien de Transaction Services.",
+      "Mission : "+d.typeMission+" ("+d.typeDD+") sur "+d.entite.nom,
+      "Siren : "+d.entite.siren+" | Activite : "+d.entite.activite+" | Siege : "+d.entite.siege,
+      "Creation : "+d.entite.creation+" | Effectifs : "+d.entite.effectifs,
+      siteUrl?"Site : "+siteUrl:"",
+      d.entite.complement?"Complements : "+d.entite.complement:"",
+      d.comm?"Notes : "+d.comm:"",
+      "Effectue des recherches web et genere UNIQUEMENT ce JSON sans markdown :",
+      '{"contexte_operation":"2-3 phrases sobres","activite_resume":"3-4 phrases","chaine_valeur":"","clients_types":"","fournisseurs_types":"","axes_analyse":["","",""],"metriques":[{"label":"CA","valeur":"","source":""},{"label":"EBITDA","valeur":"","source":""},{"label":"Effectifs","valeur":"'+d.entite.effectifs+'","source":"API gouvernementale"},{"label":"Creation","valeur":"'+d.entite.creation+'","source":"API gouvernementale"}],"marche":[{"label":"","valeur":"","source":""}],"presse":[{"date":"","titre":"","source":""}],"has_presse":false,"organigramme":{"holding":{"nom":"","pct_detention":""},"cible":{"nom":"'+d.entite.nom+'","perimetre":true},"filiales":[],"hors_perimetre":[]}}'
+    ];
+    const prompt=promptParts.filter(Boolean).join("\n");
+    logG("Analyse en cours...");
+    const resp=await fetch("/api/generate",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        entite:d.entite,
+        typeMission:d.typeMission,
+        typeDD:d.typeDD,
+        commentaires:d.comm,
+        complement:d.entite.complement
+      })
+    });
+    const result=await resp.json();
+    if(!result.success) throw new Error(result.error);
+    cx=result.data;
+  }catch(err){
+    cx={
+      contexte_operation:"Dans le cadre d'un investissement envisage dans "+d.entite.nom+", Gavroche a ete sollicitee pour realiser une "+d.typeMission+".",
+      activite_resume:d.entite.nom+" est une societe "+d.entite.forme+" implantee a "+d.entite.siege+". Son activite principale est "+d.entite.activite+".",
+      chaine_valeur:"A preciser",
+      clients_types:"A preciser",
+      fournisseurs_types:"A preciser",
+      axes_analyse:["Par nature de produit/service","Par client","Par geographie"],
+      metriques:[
+        {label:"Chiffre d'affaires",valeur:"",source:""},
+        {label:"EBITDA",valeur:"",source:""},
+        {label:"Effectifs",valeur:d.entite.effectifs,source:"API gouvernementale"},
+        {label:"Creation",valeur:d.entite.creation,source:"API gouvernementale"}
+      ],
+      marche:[],presse:[],has_presse:false,
+      organigramme:{holding:{nom:"",pct_detention:""},cible:{nom:d.entite.nom,perimetre:true},filiales:[],hors_perimetre:[]}
+    };
+  }
+
+  logG("Construction des slides...");
+  const today=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"});
+  const slides=[];
+  const struct=[
+    {id:"header",label:"Header",fixe:true,slides:[]},
+    {id:"contexte",label:"Contexte",fixe:false,slides:[]},
+    {id:"approche",label:"Notre approche",fixe:false,slides:[]},
+    {id:"perimetre",label:"Perimetre des travaux",fixe:false,slides:[]},
+    {id:"conditions",label:"Conditions",fixe:false,slides:[]},
+    {id:"references",label:"References",fixe:false,slides:[]},
+    {id:"footer",label:"Footer",fixe:true,slides:[]}
+  ];
+  function addS(rubIdx,id,label,html){const s={id:id,label:label,html:html};slides.push(s);struct[rubIdx].slides.push(s);}
+
+  addS(0,"cover","Couverture",'<div class="sc cov"><div><div class="covlog">Gavroche</div><div style="font-family:var(--font-titre);font-size:0.55em;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:1%;">Due Diligence Financiere - Transaction Services</div></div><div><div class="covey" contenteditable="true">'+d.typeMission+' - '+d.typeDD+'</div><div class="covt" contenteditable="true">Proposition d\'accompagnement</div><div class="covc" contenteditable="true">'+d.entite.nom+'</div></div><div class="covb"><div class="covd" contenteditable="true">'+today+'</div><div class="covcf">Document confidentiel</div></div></div>');
+
+  const pA=[
+    d.parties.p1&&"Contexte de l'operation",
+    d.parties.p2&&"Notre approche",
+    d.parties.p3&&"Perimetre des travaux",
+    d.parties.p4&&"Conditions d'intervention",
+    d.parties.p5&&"References"
+  ].filter(Boolean);
+
+  addS(0,"intro","Introduction",'<div class="sc intr"><div class="std-b">Gavroche</div><div class="intrtx" contenteditable="true">L\'equipe Gavroche vous remercie de l\'avoir sollicitee. Nous recevons favorablement cette sollicitation et serions ravis de vous accompagner dans la realisation de cette '+d.typeMission+' portant sur '+d.entite.nom+'.</div><div class="somm">'+pA.map(function(p,i){return '<div class="sommi"><span class="sommn">'+(i+1)+'</span><span class="sommt" contenteditable="true">'+p+'</span></div>';}).join("")+'</div></div>');
+
+  if(d.parties.p1){
+    const org=cx.organigramme||{};
+    const fils=(org.filiales||[]).filter(function(f){return f.nom;});
+    const horsP=(org.hors_perimetre||[]).filter(function(f){return f.nom;});
+    let orgH="";
+    if(org.holding&&org.holding.nom){
+      orgH+='<div class="orniv"><div class="orb"><div class="orbn" contenteditable="true">'+org.holding.nom+'</div><div class="orbpct" contenteditable="true">'+(org.holding.pct_detention||"")+'</div><div class="orbl">Actionnaire</div></div></div><div class="orcon"></div>';
+    }
+    orgH+='<div class="orniv"><div class="orb p"><div class="orbn" contenteditable="true">'+d.entite.nom+'</div><div class="orbpct" contenteditable="true">'+d.entite.siren+'</div><div class="orbl">Cible - perimetre</div></div></div>';
+    if(fils.length||horsP.length){
+      orgH+='<div class="orcon"></div><div class="orniv" style="gap:2%;flex-wrap:wrap;">';
+      fils.forEach(function(f){orgH+='<div class="orb p"><div class="orbn" contenteditable="true">'+f.nom+'</div><div class="orbpct" contenteditable="true">'+(f.pct_detention||"")+'</div><div class="orbl">Dans le perimetre</div></div>';});
+      horsP.forEach(function(f){orgH+='<div class="orb h"><div class="orbn" contenteditable="true">'+f.nom+'</div><div class="orbpct" contenteditable="true">'+(f.pct_detention||"")+'</div><div class="orbl">Hors perimetre</div></div>';});
+      orgH+='</div>';
+    }
+
+    addS(1,"ctx-per","Perimetre",'<div class="sc std"><div class="std-h"><div class="std-b">Contexte</div><div class="std-t" contenteditable="true">Perimetre de l\'operation</div></div><div class="std-body"><div style="font-size:0.68em;color:var(--gris-moyen);line-height:1.75;" contenteditable="true">'+cx.contexte_operation+'</div><div class="org">'+orgH+'<div class="orleg"><div class="orlegi"><div class="orlegb p"></div>Perimetre</div><div class="orlegi"><div class="orlegb h"></div>Hors perimetre</div></div></div></div></div>');
+    addS(1,"ctx-biz","Business overview",'<div class="sc std"><div class="std-h"><div class="std-b">Contexte</div><div class="std-t" contenteditable="true">Presentation de l\'activite</div></div><div class="std-body"><div style="font-size:0.68em;color:var(--gris-moyen);line-height:1.75;margin-bottom:2%;" contenteditable="true">'+cx.activite_resume+'</div><div class="bgrid"><div class="bbloc"><div class="bbloct">Chaine de valeur</div><div class="bblocv" contenteditable="true">'+(cx.chaine_valeur||"A preciser")+'</div></div><div class="bbloc"><div class="bbloct">Principaux clients</div><div class="bblocv" contenteditable="true">'+(cx.clients_types||"A preciser")+'</div></div><div class="bbloc"><div class="bbloct">Principaux fournisseurs</div><div class="bblocv" contenteditable="true">'+(cx.fournisseurs_types||"A preciser")+'</div></div><div class="bbloc"><div class="bbloct">Axes d\'analyse</div><div class="bblocv" contenteditable="true">'+((cx.axes_analyse||[]).join(" - ")||"A preciser")+'</div></div></div></div></div>');
+
+    const mets=cx.metriques||[];
+    addS(1,"ctx-met","Metriques cles",'<div class="sc std"><div class="std-h"><div class="std-b">Contexte</div><div class="std-t" contenteditable="true">Ordres de grandeur</div></div><div class="std-body"><div class="mgrid">'+mets.map(function(m){return '<div class="mitem"><div class="mlabel">'+m.label+'</div><div class="mval" contenteditable="true">'+(m.valeur||"--")+'</div><div class="mnote" contenteditable="true">'+(m.source||"")+'</div></div>';}).join("")+'</div></div></div>');
+
+    const mrv=(cx.marche||[]).filter(function(m){return m.valeur&&m.label;});
+    if(mrv.length){addS(1,"ctx-mar","Marche",'<div class="sc std"><div class="std-h"><div class="std-b">Contexte</div><div class="std-t" contenteditable="true">Donnees de marche</div></div><div class="std-body"><div class="mrgrid">'+mrv.map(function(m){return '<div class="mritem"><div class="mrval" contenteditable="true">'+m.valeur+'</div><div class="mrlbl" contenteditable="true">'+m.label+'</div><div class="mrsrc" contenteditable="true">'+(m.source||"")+'</div></div>';}).join("")+'</div></div></div>');}
+
+    const pr=(cx.presse||[]).filter(function(p){return p.titre&&p.date;});
+    if(cx.has_presse&&pr.length){addS(1,"ctx-pr","Revue de presse",'<div class="sc std"><div class="std-h"><div class="std-b">Contexte</div><div class="std-t" contenteditable="true">Revue de presse recente</div></div><div class="std-body"><div class="prlist">'+pr.slice(0,4).map(function(p){return '<div class="pritem"><div class="prdate" contenteditable="true">'+p.date+'</div><div class="prtit" contenteditable="true">'+p.titre+'</div><div class="prsrc" contenteditable="true">'+(p.source||"")+'</div></div>';}).join("")+'</div></div></div>');}
+  }
+
+  if(d.parties.p2){
+    const fmtD=function(dt){return dt?new Date(dt).toLocaleDateString("fr-FR",{day:"numeric",month:"long"}):"--";};
+    const totJ=(parseInt(d.phases[0].dur)||0)+(parseInt(d.phases[1].dur)||0)+(parseInt(d.phases[2].dur)||0);
+    addS(2,"app-plan","Retroplanning",'<div class="sc std"><div class="std-h"><div class="std-b">Notre approche</div><div class="std-t" contenteditable="true">Retroplanning d\'intervention</div></div><div class="std-body"><div style="font-size:0.65em;color:var(--gris-moyen);margin-bottom:3%;" contenteditable="true">Intervention de '+totJ+' jours ouvres, articulee en trois phases.</div><div class="pphases">'+d.phases.map(function(p,i){return '<div class="pph '+(i===1?"ex":"")+'"><div class="pphn">Phase '+(i+1)+'</div><div class="ppht" contenteditable="true">'+p.label+'</div><div class="pphd" contenteditable="true">'+fmtD(p.date)+'</div><div class="pphdur" contenteditable="true">'+(p.dur?p.dur+" j. ouvres":"--")+'</div></div>';}).join('<div style="display:flex;align-items:center;color:var(--gris-tres-clair);font-size:14px;padding:0 6px;">-&gt;</div>')+'</div></div></div>');
+  }
+
+  if(d.parties.p3){
+    const exL=d.exercices.map(function(e){return e.lib;}).join(", ")||"N, N-1, N-2";
+    addS(3,"per-ana","Analyses",'<div class="sc std"><div class="std-h"><div class="std-b">Perimetre des travaux</div><div class="std-t" contenteditable="true">Analyses financieres prevues</div></div><div class="std-body"><div style="display:flex;flex-direction:column;gap:0;">'+[{n:"01",t:"Qualite de l\'information financiere",desc:"Construction des etats financiers sur "+exL+". Analyse des regles comptables."},{n:"02",t:"Normalisation de l\'EBITDA",desc:"Identification des elements non recurrents. Determination de la capacite beneficiaire recurrente."},{n:"03",t:"Besoin en fonds de roulement",desc:"Analyse du cycle d\'exploitation, determination du BFR normatif."},{n:"04",t:"Analyse des flux de tresorerie",desc:"Taux de conversion EBITDA en cash. Investissements et structure de financement."}].map(function(a){return '<div style="display:flex;gap:3%;padding:2.5% 0;border-bottom:1px solid var(--gris-tres-clair);align-items:flex-start;"><div style="font-family:var(--font-serif);font-size:1.4em;font-weight:300;color:var(--gris-tres-clair);min-width:7%;line-height:1;">'+a.n+'</div><div><div style="font-family:var(--font-titre);font-size:0.6em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--noir);margin-bottom:1%;" contenteditable="true">'+a.t+'</div><div style="font-size:0.62em;color:var(--gris-moyen);line-height:1.5;" contenteditable="true">'+a.desc+'</div></div></div>';}).join("")+'</div></div></div>');
+  }
+
+  if(d.parties.p4){
+    const totJ2=(parseInt(d.phases[0].dur)||0)+(parseInt(d.phases[1].dur)||0)+(parseInt(d.phases[2].dur)||0);
+    const mt=parseInt(d.honMt)||0;
+    addS(4,"cond-hon","Honoraires",'<div class="sc std"><div class="std-h"><div class="std-b">Conditions</div><div class="std-t" contenteditable="true">Proposition d\'honoraires</div></div><div class="std-body"><div class="honbloc"><div class="honlib" contenteditable="true">'+d.honLib+'</div><div style="display:flex;align-items:baseline;gap:8px;"><div class="honmt" contenteditable="true">EUR '+mt.toLocaleString("fr-FR")+'</div><div class="honht">HT</div></div></div><div class="honnote" contenteditable="true">Notre estimation est etablie sur la base d\'une mission de '+totJ2+' jours ouvres au total. Elle s\'entend hors taxes et debours divers.</div></div></div>');
+  }
+
+  if(d.parties.p5){
+    addS(5,"ref-mis","Missions recentes",'<div class="sc std"><div class="std-h"><div class="std-b">References</div><div class="std-t" contenteditable="true">Quelques missions recentes</div></div><div class="std-body"><div class="rl">'+["2024","2024","2023","2023","2022"].map(function(a){return '<div class="ri"><div class="ra" contenteditable="true">'+a+'</div><div class="rco"><div class="rs" contenteditable="true">A completer - secteur et type de mission</div><div class="rty" contenteditable="true">Due diligence financiere</div></div></div>';}).join("")+'</div></div></div>');
+  }
+
+  addS(6,"footer-pg","Page finale",'<div class="sc ftpg"><div class="ftcab" contenteditable="true">Gavroche</div></div>');
+
+  window.sD=slides;window.sA=0;window.cH=[];
+
+  const sv=document.getElementById("sv");
+  sv.innerHTML=slides.map(function(s,i){return '<div class="sf '+(i===0?"on":"")+'" id="sf-'+i+'">'+s.html+'</div>';}).join("");
+
+  document.getElementById("snav").innerHTML=struct.map(function(rub){
+    const hasSub=rub.slides.length>0;
+    return '<div class="rub'+(rub.fixe?" fixe":"")+(hasSub?" open":"")+'" id="rub-'+rub.id+'"><div class="rub-h" onclick="togRub(\'rub-'+rub.id+'\')"><span class="rub-l">'+rub.label+'</span><span style="display:flex;align-items:center;gap:6px;">'+(rub.fixe?'<span class="rub-b">Fixe</span>':'')+(hasSub?'<span class="rub-c">&#9662;</span>':'')+'</span></div>'+(hasSub?'<div class="subs">'+rub.slides.map(function(s){const idx=slides.indexOf(s);return '<button class="sni '+(idx===0?"on":"")+'" onclick="gS('+idx+')" id="sni-'+idx+'"><span class="sni-n">'+(idx+1)+'</span><span class="sni-l">'+s.label+'</span></button>';}).join("")+'</div>':'')+'</div>';
+  }).join("");
+
+  updCtr();
+  document.getElementById("geno").style.display="none";
+  addMsg("a","Propale generee - "+slides.length+" slides pour "+d.entite.nom+". Cliquez sur n'importe quel texte pour le modifier.");
+}
+
+function togRub(id){const el=document.getElementById(id);if(el)el.classList.toggle('open');}
+
+function gS(i){
+  const slides=window.sD||[];if(i<0||i>=slides.length)return;
+  document.querySelectorAll('.sf').forEach((el,j)=>el.classList.toggle('on',j===i));
+  document.querySelectorAll('.sni').forEach((el,j)=>el.classList.toggle('on',j===i));
+  window.sA=i;updCtr();
+}
+function updCtr(){const el=document.getElementById('slide-ctr');if(el)el.textContent=((window.sA||0)+1)+' / '+((window.sD||[]).length);}
+
+// ── Chat ──
+async function send(){
+  const inp=document.getElementById('cp-i');const msg=inp.value.trim();if(!msg)return;
+  inp.value='';addMsg('u',msg);
+  document.getElementById('cpld').style.display='flex';
+  const slideActuelle=(window.sD||[])[window.sA||0];
+  const missionNom=(dF.typeMission||'DD');
+  const cibleNom=(dF.entite&&dF.entite.nom)||'la cible';
+  const slideNom=(slideActuelle&&slideActuelle.label)||'--';
+  const sys="Tu es assistant de Gavroche, cabinet de due diligence. Tu aides a finaliser une propale de "+missionNom+" pour "+cibleNom+". Slide : "+slideNom+". Ton sobre et professionnel.";
+  try{
+    const r=await fetch("/api/chat",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        message:msg,
+        historique:window.cH,
+        contexte:{typeMission:dF.typeMission,cible:dF.entite&&dF.entite.nom,slide:slideNom}
+      })
+    });
+    const data=await r.json();
+    const rep=data.reply||"Erreur.";
+    window.cH.push({role:"user",content:msg});window.cH.push({role:"assistant",content:rep});
+    addMsg("a",rep);
+  }catch(e){addMsg("a","Erreur de connexion.");}
+  document.getElementById("cpld").style.display="none";
+}
+
+function addMsg(role,txt){
+  const box=document.getElementById('cp-m');const d=document.createElement('div');
+  d.className='cpb '+(role==='u'?'cpb-u':'cpb-a');d.textContent=txt;
+  box.appendChild(d);box.scrollTop=box.scrollHeight;
+}
+
+// Init
+addEx();addEx();addEx();
+
+</script>
+</body>
+</html>

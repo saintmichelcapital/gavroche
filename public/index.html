@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gavroche — Due Diligence Financière</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
+  :root {
+    --noir: #080808;
+    --blanc: #f8f8f6;
+    --gris-moyen: #383838;
+    --gris-clair: #999;
+    --gris-tres-clair: #e4e4e2;
+    --gris-surface: #f0f0ee;
+    --font-titre: 'Helvetica Neue', 'Arial', sans-serif;
+    --font-serif: 'Cormorant Garamond', 'Georgia', serif;
+    --font-corps: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--blanc);
+    color: var(--noir);
+    font-family: var(--font-corps);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(248,248,246,0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gris-tres-clair);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 64px; height: 68px;
+  }
+  .nav-logo {
+    font-family: var(--font-titre);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--noir); text-decoration: none;
+  }
+  .nav-logo span { font-weight: 400; color: var(--gris-clair); margin-left: 10px; letter-spacing: 0.12em; }
+  .nav-links { display: flex; align-items: center; gap: 40px; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-titre);
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gris-moyen); text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--noir); }
+  .nav-cta { background: var(--noir) !important; color: var(--blanc) !important; padding: 10px 20px; transition: background 0.2s !important; }
+  .nav-cta:hover { background: var(--gris-moyen) !important; }
+
+  /* HERO */
+  #hero { min-height: 100vh; padding-top: 68px; display: grid; grid-template-columns: 55% 45%; overflow: hidden; }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 100px 72px 100px 64px; background: var(--blanc);
+    animation: fadeUp 0.9s ease both;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-titre);
+    font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gris-clair); margin-bottom: 40px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gris-tres-clair); }
+  .hero-titre {
+    font-family: var(--font-serif);
+    font-size: clamp(48px, 5vw, 76px);
+    font-weight: 300; line-height: 1.06; color: var(--noir);
+    margin-bottom: 36px;
+  }
+  .hero-titre em { font-style: italic; }
+  .hero-sous-titre {
+    font-size: 15px; color: var(--gris-moyen);
+    line-height: 1.8; max-width: 460px; margin-bottom: 52px;
+  }
+  .hero-actions { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+  .btn-primaire {
+    display: inline-flex; align-items: center;
+    background: var(--noir); color: var(--blanc); padding: 14px 28px;
+    font-family: var(--font-titre); font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase; text-decoration: none; transition: background 0.2s;
+  }
+  .btn-primaire:hover { background: var(--gris-moyen); }
+  .btn-secondaire {
+    font-family: var(--font-titre); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--gris-clair); text-decoration: none;
+    border-bottom: 1px solid var(--gris-tres-clair); padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-secondaire:hover { color: var(--noir); border-color: var(--gris-clair); }
+
+  .hero-right { position: relative; overflow: hidden; }
+  .hero-photo {
+    position: absolute; inset: 0;
+    background-image: url('photo-paves.jpg');
+    background-size: cover; background-position: center top;
+    filter: grayscale(100%) contrast(1.1) brightness(0.85);
+  }
+  .hero-photo-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(248,248,246,0.25) 0%, transparent 30%);
+  }
+
+  /* BANDE */
+  .bande { background: var(--noir); display: grid; grid-template-columns: repeat(4, 1fr); }
+  .bande-item { padding: 32px 40px; border-right: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; gap: 6px; }
+  .bande-item:last-child { border-right: none; }
+  .bande-val { font-family: var(--font-titre); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blanc); }
+  .bande-label { font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.03em; line-height: 1.5; }
+
+  .sep { width: 100%; height: 1px; background: var(--gris-tres-clair); }
+
+  /* SECTIONS */
+  .section-wrap { max-width: 1160px; margin: 0 auto; padding: 110px 64px; }
+
+  .section-label {
+    font-family: var(--font-titre); font-size: 9px; letter-spacing: 0.32em;
+    text-transform: uppercase; color: var(--gris-clair); margin-bottom: 48px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--gris-tres-clair); max-width: 60px; }
+  .section-titre { font-family: var(--font-titre); font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--noir); margin-bottom: 52px; }
+
+  /* LECTURE */
+  .lecture-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--gris-tres-clair); border: 1px solid var(--gris-tres-clair); }
+  .lecture-item { background: var(--blanc); padding: 52px 48px; transition: background 0.25s; }
+  .lecture-item:hover { background: var(--gris-surface); }
+  .lecture-num { font-family: var(--font-titre); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris-clair); margin-bottom: 24px; }
+  .lecture-titre { font-family: var(--font-serif); font-size: 28px; font-weight: 400; color: var(--noir); margin-bottom: 18px; line-height: 1.2; }
+  .lecture-desc { font-size: 14px; color: var(--gris-moyen); line-height: 1.8; }
+  .lecture-tag { display: inline-block; margin-top: 24px; font-family: var(--font-titre); font-size: 8px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gris-clair); border: 1px solid var(--gris-tres-clair); padding: 5px 10px; }
+
+  /* PHOTOS */
+  .photo-strip { display: grid; height: 380px; gap: 2px; background: var(--gris-tres-clair); overflow: hidden; }
+  .photo-strip.trois { grid-template-columns: 1.8fr 1fr 1fr; }
+  .photo-strip.deux { grid-template-columns: 1fr 1fr; }
+  .photo-cell { overflow: hidden; position: relative; }
+  .photo-cell img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.06) brightness(0.86); transition: transform 0.7s ease; }
+  .photo-cell:hover img { transform: scale(1.05); }
+  .photo-caption { position: absolute; bottom: 14px; left: 16px; font-family: var(--font-titre); font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+
+  /* MÉTHODE */
+  #methode-wrap { background: var(--gris-surface); }
+  .methode-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 72px; }
+  .methode-texte-principal { font-family: var(--font-serif); font-size: clamp(22px, 2.5vw, 32px); font-weight: 300; line-height: 1.4; color: var(--noir); }
+  .methode-texte-principal em { font-style: italic; }
+  .methode-texte-second { font-size: 14px; color: var(--gris-moyen); line-height: 1.85; padding-top: 8px; }
+
+  .methode-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--gris-tres-clair); border: 1px solid var(--gris-tres-clair); }
+  .methode-item { background: var(--blanc); padding: 40px 36px; transition: background 0.2s; }
+  .methode-item:hover { background: var(--gris-surface); }
+  .methode-num { font-family: var(--font-titre); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris-clair); margin-bottom: 16px; }
+  .methode-titre { font-family: var(--font-titre); font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--noir); margin-bottom: 14px; }
+  .methode-desc { font-size: 13px; color: var(--gris-moyen); line-height: 1.8; }
+
+  .formules { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+  .formule-card { border: 1px solid var(--gris-tres-clair); padding: 40px 36px; background: var(--blanc); }
+  .formule-card.premium { border-color: var(--noir); background: var(--noir); color: var(--blanc); }
+  .formule-badge { font-family: var(--font-titre); font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gris-clair); margin-bottom: 20px; }
+  .formule-card.premium .formule-badge { color: rgba(255,255,255,0.3); }
+  .formule-titre { font-family: var(--font-serif); font-size: 26px; font-weight: 300; margin-bottom: 16px; line-height: 1.2; }
+  .formule-desc { font-size: 13px; color: var(--gris-clair); line-height: 1.8; }
+  .formule-card.premium .formule-desc { color: rgba(255,255,255,0.45); }
+
+  /* CTA */
+  #contact { background: var(--noir); padding: 120px 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .contact-eyebrow { font-family: var(--font-titre); font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 28px; }
+  .contact-titre { font-family: var(--font-serif); font-size: clamp(36px, 4vw, 58px); font-weight: 300; line-height: 1.1; color: var(--blanc); }
+  .contact-titre em { font-style: italic; }
+  .contact-texte { font-size: 15px; color: rgba(255,255,255,0.45); line-height: 1.85; margin-bottom: 40px; }
+  .btn-blanc { display: inline-flex; align-items: center; gap: 12px; background: var(--blanc); color: var(--noir); padding: 16px 32px; font-family: var(--font-titre); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: background 0.2s; }
+  .btn-blanc:hover { background: var(--gris-tres-clair); }
+
+  /* FOOTER */
+  footer { background: #040404; padding: 28px 64px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.04); }
+  .footer-nom { font-family: var(--font-titre); font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+  .footer-infos { font-family: var(--font-titre); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.15); text-align: center; line-height: 1.8; }
+  .footer-admin a { font-family: var(--font-titre); font-size: 9px; letter-spacing: 0.14em; color: rgba(255,255,255,0.2); text-decoration: none; transition: color 0.3s; text-transform: uppercase; }
+  .footer-admin a:hover { color: rgba(255,255,255,0.5); }
+
+  /* LOGIN */
+  #page-login { display: none; position: fixed; inset: 0; z-index: 200; background: var(--noir); align-items: center; justify-content: center; }
+  #page-login.actif { display: flex; }
+  .login-box { width: 360px; border: 1px solid rgba(255,255,255,0.07); padding: 52px 44px; }
+  .login-logo { font-family: var(--font-titre); font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+  .login-sub { font-family: var(--font-titre); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.18); margin-bottom: 44px; }
+  .login-label { font-family: var(--font-titre); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 8px; }
+  .login-input { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); color: var(--blanc); font-family: var(--font-corps); font-size: 14px; padding: 12px 16px; margin-bottom: 20px; outline: none; transition: border-color 0.2s; }
+  .login-input:focus { border-color: rgba(255,255,255,0.28); }
+  .login-btn { width: 100%; background: var(--blanc); color: var(--noir); border: none; padding: 14px; font-family: var(--font-titre); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; margin-top: 8px; transition: background 0.2s; }
+  .login-btn:hover { background: var(--gris-tres-clair); }
+  .login-erreur { font-size: 11px; color: rgba(255,100,100,0.75); margin-top: 14px; display: none; }
+  .login-retour { margin-top: 28px; font-family: var(--font-titre); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.18); background: none; border: none; width: 100%; cursor: pointer; transition: color 0.2s; text-align: center; }
+  .login-retour:hover { color: rgba(255,255,255,0.45); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 960px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    #hero { grid-template-columns: 1fr; }
+    .hero-right { height: 300px; }
+    .hero-left { padding: 60px 24px; }
+    .section-wrap { padding: 72px 24px; }
+    .lecture-grid, .methode-grille, .formules { grid-template-columns: 1fr; }
+    .methode-intro { grid-template-columns: 1fr; gap: 32px; }
+    .photo-strip { grid-template-columns: 1fr !important; height: auto; }
+    .photo-cell { height: 240px; }
+    .photo-cell:nth-child(n+2) { display: none; }
+    .bande { grid-template-columns: 1fr 1fr; }
+    #contact { grid-template-columns: 1fr; gap: 40px; padding: 72px 24px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 28px 24px; }
+    .login-box { width: 90%; padding: 40px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="page-login">
+  <div class="login-box">
+    <div class="login-logo">Gavroche</div>
+    <div class="login-sub">Accès membre</div>
+    <div class="login-label">Identifiant</div>
+    <input class="login-input" type="text" id="login-id" autocomplete="off">
+    <div class="login-label">Mot de passe</div>
+    <input class="login-input" type="password" id="login-pwd">
+    <button class="login-btn" onclick="verifierLogin()">Accéder</button>
+    <div class="login-erreur" id="login-erreur">Identifiant ou mot de passe incorrect.</div>
+    <button class="login-retour" onclick="fermerLogin()">← Retour au site</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Gavroche <span>Due Diligence Financière</span></a>
+  <ul class="nav-links">
+    <li><a href="#lecture">Notre lecture</a></li>
+    <li><a href="#methode-wrap">Notre méthode</a></li>
+    <li><a href="#contact" class="nav-cta">Initier une mission</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Transaction Services · Small &amp; Mid Cap · Paris</div>
+    <h1 class="hero-titre">100% IA<br>+ 100% <em>sapiens.</em></h1>
+    <p class="hero-sous-titre">Gavroche est un cabinet indépendant spécialisé en due diligence financière sur les opérations small &amp; mid cap. Nous traitons la donnée comptable par automatisation. Nous concentrons notre analyse sur ce qu'elle ne révèle pas.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primaire">Initier une mission</a>
+      <a href="#lecture" class="btn-secondaire">Notre lecture →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo"></div>
+    <div class="hero-photo-overlay"></div>
+  </div>
+</section>
+
+<!-- BANDE -->
+<div class="bande">
+  <div class="bande-item">
+    <div class="bande-val">BSDD</div>
+    <div class="bande-label">Buy-Side Due Diligence — pour l'acquéreur</div>
+  </div>
+  <div class="bande-item">
+    <div class="bande-val">VDD</div>
+    <div class="bande-label">Vendor Due Diligence — pour le cédant</div>
+  </div>
+  <div class="bande-item">
+    <div class="bande-val">PME · ETI</div>
+    <div class="bande-label">Small &amp; mid cap · Toutes typologies</div>
+  </div>
+  <div class="bande-item">
+    <div class="bande-val">France</div>
+    <div class="bande-label">Basé à Paris · Intervention nationale</div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- NOTRE LECTURE -->
+<div id="lecture">
+  <div class="section-wrap">
+    <div class="section-label">01</div>
+    <div class="section-titre">Notre lecture</div>
+    <div class="lecture-grid">
+      <div class="lecture-item">
+        <div class="lecture-num">Buy-Side — BSDD</div>
+        <div class="lecture-titre">Ce que vous achetez,<br>vraiment.</div>
+        <p class="lecture-desc">Notre due diligence buy-side ne se limite pas à la vérification des comptes. Nous analysons la performance économique réelle de la cible, normalisons les agrégats de valorisation et les situons par rapport aux comparables sectoriels et aux transactions récentes. Pour que le multiple que vous payez soit un multiple que vous comprenez.</p>
+        <span class="lecture-tag">Pour l'acquéreur</span>
+      </div>
+      <div class="lecture-item">
+        <div class="lecture-num">Sell-Side — VDD</div>
+        <div class="lecture-titre">Ce que vous cédez,<br>documenté.</div>
+        <p class="lecture-desc">Conduite en amont du processus, notre vendor due diligence établit un référentiel financier indépendant et robuste. Elle anticipe les questions des acquéreurs, sécurise les négociations et renforce la crédibilité du dossier. Un levier souvent décisif sur les conditions finales de la transaction.</p>
+        <span class="lecture-tag">Pour le cédant</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STRIP PHOTOS 1 : pavés + bibliothèque -->
+<div class="photo-strip deux">
+  <div class="photo-cell">
+    <img src="photo-paves.jpg" alt="Pavés parisiens">
+    <div class="photo-caption">Paris</div>
+  </div>
+  <div class="photo-cell">
+    <img src="photo-biblio.jpg" alt="Bibliothèque">
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- NOTRE MÉTHODE -->
+<div id="methode-wrap">
+  <div class="section-wrap">
+    <div class="section-label">02</div>
+    <div class="section-titre">Notre méthode</div>
+    <div class="methode-intro">
+      <div class="methode-texte-principal">
+        Notre approche est <em>économique</em> avant d'être comptable. L'automatisation traite la donnée. Nous traitons ce qu'elle ne dit pas.
+      </div>
+      <div class="methode-texte-second">
+        Le traitement du FEC, la construction du Databook, les retraitements usuels — tout cela est automatisé. Ce gain de temps est intégralement réinvesti dans l'analyse : comprendre la dynamique du business, identifier ce que les chiffres ne révèlent pas d'emblée, et formuler un jugement indépendant sur les conditions dans lesquelles l'opération est envisagée.<br><br>
+        Nous utilisons également l'intelligence artificielle pour situer la performance de la cible par rapport à ses comparables — sociétés cotées, transactions récentes — et challenger les hypothèses de valorisation retenues.
+      </div>
+    </div>
+    <div class="methode-grille">
+      <div class="methode-item">
+        <div class="methode-num">Étape 01</div>
+        <div class="methode-titre">Cadrage</div>
+        <p class="methode-desc">Définition du périmètre, des axes d'analyse prioritaires et du calendrier. Remise d'une liste de demandes documentaires et d'une lettre de mission.</p>
+      </div>
+      <div class="methode-item">
+        <div class="methode-num">Étape 02</div>
+        <div class="methode-titre">Traitement de la donnée</div>
+        <p class="methode-desc">Import et traitement automatisé du FEC. Construction du Databook analytique. Retraitements comptables et financiers usuels.</p>
+      </div>
+      <div class="methode-item">
+        <div class="methode-num">Étape 03</div>
+        <div class="methode-titre">Analyse &amp; jugement</div>
+        <p class="methode-desc">Lecture économique de la performance. Analyse comparative sectorielle. Identification des risques et formulation d'un avis indépendant sur les termes de l'opération.</p>
+      </div>
+    </div>
+    <div class="formules">
+      <div class="formule-card">
+        <div class="formule-badge">Formule A</div>
+        <div class="formule-titre">Due Diligence<br>Digitale</div>
+        <p class="formule-desc">Processus entièrement dématérialisé. Dépôt des documents, traitement automatisé, livraison du rapport. Pour les opérations standards avec des délais contraints.</p>
+      </div>
+      <div class="formule-card premium">
+        <div class="formule-badge">Formule B</div>
+        <div class="formule-titre">Due Diligence<br>avec Accompagnement</div>
+        <p class="formule-desc">La rigueur du process digital, enrichie par l'intervention d'un associé senior à chaque étape d'analyse. Échanges avec le management, analyse sur-mesure, restitution orale.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STRIP PHOTOS 2 : fresque + livre + sculpture -->
+<div class="photo-strip trois">
+  <div class="photo-cell">
+    <img src="photo-fresque.jpg" alt="Fresque baroque">
+  </div>
+  <div class="photo-cell">
+    <img src="photo-livre.jpg" alt="Livre ouvert">
+  </div>
+  <div class="photo-cell">
+    <img src="photo-sculpture.jpg" alt="Sculpture baroque">
+  </div>
+</div>
+
+<!-- CTA -->
+<div id="contact">
+  <div>
+    <div class="contact-eyebrow">Initier une mission</div>
+    <h2 class="contact-titre">Vous envisagez<br>une <em>transaction ?</em></h2>
+  </div>
+  <div>
+    <p class="contact-texte">Contactez-nous pour discuter de votre projet. Nous vous répondons sous 24 heures ouvrées et vous proposons un premier échange sans engagement pour qualifier votre besoin et définir le périmètre d'intervention.</p>
+    <a href="/cdn-cgi/l/email-protection#ccb8a4a5a9beb5e2aabeada2afa3a5bf8ca3b9b8a0a3a3a7e2aabe" class="btn-blanc">Nous contacter →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-nom">Gavroche SAS</div>
+  <div class="footer-infos">Paris — France entière<br>Due diligence financière · Transaction Services</div>
+  <div class="footer-admin"><a href="#" onclick="ouvrirLogin(event)">Espace membre</a></div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  function ouvrirLogin(e) {
+    e.preventDefault();
+    document.getElementById('page-login').classList.add('actif');
+    setTimeout(() => document.getElementById('login-id').focus(), 100);
+  }
+  function fermerLogin() {
+    document.getElementById('page-login').classList.remove('actif');
+    document.getElementById('login-erreur').style.display = 'none';
+    document.getElementById('login-id').value = '';
+    document.getElementById('login-pwd').value = '';
+  }
+  function verifierLogin() {
+    const id  = document.getElementById('login-id').value.trim();
+    const pwd = document.getElementById('login-pwd').value;
+    const err = document.getElementById('login-erreur');
+    if (id === 'F_Thiery' && pwd === 'Paris75006!') {
+      err.style.display = 'none';
+      fermerLogin();
+      alert('Connexion réussie — espace administrateur en cours de construction.');
+    } else {
+      err.style.display = 'block';
+    }
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') fer
