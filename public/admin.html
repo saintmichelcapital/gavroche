@@ -464,11 +464,30 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 <!-- PROPOSITION -->
 <div class="page" id="page-proposition">
   <div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">Proposition commerciale</span></div>
-  <div class="admin-header"><div class="admin-titre">Proposition <em>commerciale</em></div><div class="admin-sous-titre">Selectionnez l'origine du lead.</div></div>
-  <div class="page-c"><div class="page-cl">Origine du lead</div><div class="opts">
-    <div class="opt" onclick="alert('Lead digital — en construction.')"><div class="opt-n">Option A</div><div class="opt-t">Lead digital</div><p class="opt-d">Prospect venu via le DD Generator.</p><div class="opt-dt">Champs pre-remplis depuis le systeme.</div><div class="opt-f"><span class="opt-a">→</span></div></div>
-    <div class="opt" onclick="ap('lead-sapiens-1')"><div class="opt-n">Option B</div><div class="opt-t">Lead sapiens</div><p class="opt-d">Prospect identifie par voie directe.</p><div class="opt-dt">Moteur de recherche + enrichissement automatique + generation IA.</div><div class="opt-f"><span class="opt-a">→</span></div></div>
-  </div></div>
+  <div class="admin-header"><div class="admin-titre">Proposition <em>commerciale</em></div><div class="admin-sous-titre">Creez une nouvelle propale ou consultez les propales existantes.</div></div>
+  <div class="page-c">
+    <div class="page-cl">Nouvelle propale — origine du lead</div>
+    <div class="opts" style="max-width:900px;margin-bottom:48px;">
+      <div class="opt" onclick="alert('Lead digital — en construction.')"><div class="opt-n">Option A</div><div class="opt-t">Lead digital</div><p class="opt-d">Prospect venu via le DD Generator.</p><div class="opt-dt">Champs pre-remplis depuis le systeme.</div><div class="opt-f"><span class="opt-a">→</span></div></div>
+      <div class="opt" onclick="ap('lead-sapiens-1')"><div class="opt-n">Option B</div><div class="opt-t">Lead sapiens</div><p class="opt-d">Prospect identifie par voie directe.</p><div class="opt-dt">Moteur de recherche + enrichissement automatique + generation IA.</div><div class="opt-f"><span class="opt-a">→</span></div></div>
+    </div>
+    <div class="page-cl">Propales en cours</div>
+    <table class="mission-table" id="propales-table">
+      <thead>
+        <tr>
+          <th>Societe cible</th>
+          <th>Type</th>
+          <th>Date</th>
+          <th>Honoraires</th>
+          <th>Statut</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="propales-tbody">
+        <tr><td colspan="6" style="padding:24px;text-align:center;font-size:13px;color:var(--gris-clair);font-style:italic;">Aucune propale generee pour l'instant.</td></tr>
+      </tbody>
+    </table>
+  </div>
   <div class="af"><div class="aft">Gavroche</div></div>
 </div>
 
@@ -547,8 +566,17 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 
 <!-- ETAPE 3 -->
 <div class="page" id="page-lead-sapiens-3">
-  <div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><button class="bc" onclick="ap('proposition')">Proposition</button><span class="bc-sep">›</span><span class="bc actif">Lead sapiens</span></div>
-  <div class="stepper"><button class="stepper-item complete" onclick="ap('lead-sapiens-1')"><div class="stepper-num">✓</div><div class="stepper-label">Identification de l'entite</div></button><button class="stepper-item complete" onclick="ap('lead-sapiens-2')"><div class="stepper-num">✓</div><div class="stepper-label">Elements de la propale</div></button><button class="stepper-item actif"><div class="stepper-num">3</div><div class="stepper-label">Presentation & edition</div></button></div>
+  <div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><button class="bc" onclick="ap('proposition')">Proposition</button><span class="bc-sep">›</span><span class="bc actif" id="bc-propale-nom">Lead sapiens</span></div>
+  <div class="stepper">
+    <button class="stepper-item complete" onclick="ap('lead-sapiens-1')"><div class="stepper-num">✓</div><div class="stepper-label">Identification de l'entite</div></button>
+    <button class="stepper-item complete" onclick="ap('lead-sapiens-2')"><div class="stepper-num">✓</div><div class="stepper-label">Elements de la propale</div></button>
+    <button class="stepper-item actif"><div class="stepper-num">3</div><div class="stepper-label">Presentation & edition</div></button>
+    <div style="flex:1;"></div>
+    <div style="display:flex;align-items:center;gap:8px;padding:0 24px;">
+      <button class="cbtn" style="background:rgba(139,26,26,0.12);border-color:rgba(139,26,26,0.3);color:#8b1a1a;padding:8px 16px;" onclick="marquerStatut('perdue')">Marquer comme perdue</button>
+      <button class="cbtn" style="background:rgba(45,106,79,0.12);border-color:rgba(45,106,79,0.4);color:#2d6a4f;padding:8px 16px;" onclick="marquerStatut('gagnee')">Propale gagnee →</button>
+    </div>
+  </div>
   <div class="pl">
     <div class="ssb"><div class="ssbt">Structure</div><div id="snav"></div><div class="ssba"><button class="bexp" onclick="alert('Export PPTX — en construction.')">↓ Exporter en PPTX</button></div></div>
     <div class="sm"><div class="sv" id="sv" style="position:relative;"><div class="geno" id="geno"><div class="gens"></div><div class="gent">Generation en cours</div><div class="genl" id="genl">Initialisation…</div></div></div><div class="sctrl"><button class="cbtn" onclick="gS(Math.max(0,(window.sA||0)-1))">← Precedent</button><button class="cbtn" id="slide-ctr">— / —</button><button class="cbtn" onclick="gS(Math.min((window.sD||[]).length-1,(window.sA||0)+1))">Suivant →</button></div></div>
@@ -584,7 +612,7 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
           <th></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="missions-tbody">
         <tr class="mission-row" onclick="ap('mission-fiche')">
           <td>
             <div class="mission-nom">Edmond Telecom</div>
@@ -594,17 +622,6 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
           <td>09 dec. 2025</td>
           <td>Collecte de l'information</td>
           <td><span class="badge collecte">En cours</span></td>
-          <td style="text-align:right;color:var(--gris-tres-clair);font-size:14px;">→</td>
-        </tr>
-        <tr class="mission-row" onclick="alert('Mission archivee — propale perdue.')">
-          <td>
-            <div class="mission-nom">Voltaria SAS</div>
-            <div class="mission-type">BSDD — Flash DD</div>
-          </td>
-          <td>Buy-Side</td>
-          <td>15 nov. 2025</td>
-          <td>—</td>
-          <td><span class="badge">Perdue</span></td>
           <td style="text-align:right;color:var(--gris-tres-clair);font-size:14px;">→</td>
         </tr>
       </tbody>
@@ -1006,7 +1023,112 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 
 <!-- STUBS -->
 <div class="page" id="page-crm"><div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">CRM</span></div><div class="admin-header"><div class="admin-titre">CRM</div><div class="admin-sous-titre">En construction.</div></div><div class="af"><div class="aft">Gavroche</div></div></div>
-<div class="page" id="page-contrat"><div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">Contractualisation</span></div><div class="admin-header"><div class="admin-titre">Contractualisation</div><div class="admin-sous-titre">En construction.</div></div><div class="af"><div class="aft">Gavroche</div></div></div>
+
+<!-- CONTRACTUALISATION -->
+<div class="page" id="page-contrat">
+  <div class="breadcrumb">
+    <button class="bc" onclick="ap('dashboard')">Accueil</button>
+    <span class="bc-sep">›</span>
+    <span class="bc actif">Contractualisation</span>
+  </div>
+  <div class="admin-header">
+    <div class="admin-titre">Contractu<em>alisation</em></div>
+    <div class="admin-sous-titre">Dossiers de contractualisation des missions gagnees.</div>
+  </div>
+  <div class="page-c">
+    <div class="page-cl">Dossiers en cours</div>
+    <table class="mission-table">
+      <thead>
+        <tr>
+          <th>Societe cible</th>
+          <th>Type</th>
+          <th>Date propale</th>
+          <th>Honoraires</th>
+          <th>Statut lettre de mission</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="contrats-tbody">
+        <tr><td colspan="6" style="padding:24px;text-align:center;font-size:13px;color:var(--gris-clair);font-style:italic;">Aucune mission gagnee pour l'instant.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="af"><div class="aft">Gavroche</div></div>
+</div>
+
+<!-- CONTRACTUALISATION — Fiche dossier -->
+<div class="page" id="page-contrat-fiche">
+  <div class="breadcrumb">
+    <button class="bc" onclick="ap('dashboard')">Accueil</button>
+    <span class="bc-sep">›</span>
+    <button class="bc" onclick="ap('contrat')">Contractualisation</button>
+    <span class="bc-sep">›</span>
+    <span class="bc actif" id="bc-contrat-nom">Dossier</span>
+  </div>
+  <div class="mission-header">
+    <div class="admin-titre" id="contrat-titre">Dossier</div>
+    <div class="mission-meta" id="contrat-meta"></div>
+  </div>
+  <div class="workflow-wrap">
+    <div class="section-head">
+      <div class="section-head-titre">Lettre de mission</div>
+      <div class="section-head-desc">Verifiez et ajustez les termes avant de generer la lettre.</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--gris-tres-clair);border:1px solid var(--gris-tres-clair);margin-bottom:32px;">
+      <div style="background:var(--blanc);padding:24px 28px;display:flex;flex-direction:column;gap:8px;">
+        <div class="fe-cl">Nom de la societe cible</div>
+        <input class="fi" id="lm-cible" type="text" placeholder="Nom de la societe cible">
+      </div>
+      <div style="background:var(--blanc);padding:24px 28px;display:flex;flex-direction:column;gap:8px;">
+        <div class="fe-cl">Nom du client (signataire)</div>
+        <input class="fi" id="lm-client" type="text" placeholder="Ex : Voltaria / M. Ambroise Nugues">
+      </div>
+      <div style="background:var(--blanc);padding:24px 28px;display:flex;flex-direction:column;gap:8px;">
+        <div class="fe-cl">Adresse du client</div>
+        <input class="fi" id="lm-adresse" type="text" placeholder="Ex : 16 avenue de Messine, 75008 Paris">
+      </div>
+      <div style="background:var(--blanc);padding:24px 28px;display:flex;flex-direction:column;gap:8px;">
+        <div class="fe-cl">Nom de code du projet</div>
+        <input class="fi" id="lm-projet" type="text" placeholder="Ex : Projet ICR">
+      </div>
+      <div style="background:var(--blanc);padding:24px 28px;display:flex;flex-direction:column;gap:8px;">
+        <div class="fe-cl">Honoraires HT (EUR)</div>
+        <input class="fi" id="lm-honoraires" type="number" placeholder="Ex : 12500">
+      </div>
+      <div style="background:var(--blanc);padding:24px 28px;display:flex;flex-direction:column;gap:8px;">
+        <div class="fe-cl">Date de la lettre</div>
+        <input class="fi" id="lm-date" type="date">
+      </div>
+      <div style="background:var(--blanc);padding:24px 28px;display:flex;flex-direction:column;gap:8px;grid-column:1/-1;">
+        <div class="fe-cl">Interlocuteur principal chez le client</div>
+        <input class="fi" id="lm-interlocuteur" type="text" placeholder="Ex : M. Ambroise Nugues">
+      </div>
+      <div style="background:var(--blanc);padding:24px 28px;display:flex;flex-direction:column;gap:8px;grid-column:1/-1;">
+        <div class="fe-cl">Exercices analyses</div>
+        <input class="fi" id="lm-exercices" type="text" placeholder="Ex : FY20A-FY24A et 9m25A">
+      </div>
+      <div style="background:var(--blanc);padding:24px 28px;display:flex;flex-direction:column;gap:8px;grid-column:1/-1;">
+        <div class="fe-cl">Calendrier — description libre</div>
+        <textarea class="fta" id="lm-calendrier" style="min-height:80px;" placeholder="Ex : Decembre 2025 acces a l'information — Janvier 2026 restitution"></textarea>
+      </div>
+    </div>
+
+    <div class="actions-bar">
+      <button class="btn-action primary" onclick="alert('Generation lettre de mission Word + PDF — en construction.')">Generer la lettre de mission</button>
+      <button class="btn-action" onclick="alert('Envoyer pour signature electronique — en construction.')">Envoyer pour signature</button>
+    </div>
+
+    <div class="section-head" style="margin-top:32px;">
+      <div class="section-head-titre">Propale d'origine</div>
+    </div>
+    <div class="actions-bar">
+      <button class="btn-action" onclick="rouvrirPropale()">Consulter / modifier la propale</button>
+    </div>
+  </div>
+  <div class="af"><div class="aft">Gavroche</div></div>
+</div>
+
 <div class="page" id="page-restitution"><div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">Restitution</span></div><div class="admin-header"><div class="admin-titre">Restitution</div><div class="admin-sous-titre">En construction.</div></div><div class="af"><div class="aft">Gavroche</div></div></div>
 <div class="page" id="page-ddgenerator"><div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">DD Generator</span></div><div class="admin-header"><div class="admin-titre">DD Generator</div><div class="admin-sous-titre">En construction.</div></div><div class="af"><div class="aft">Gavroche</div></div></div>
 
@@ -1222,7 +1344,7 @@ function colData(){
   };
 }
 
-async function val2(){
+async function _val2_orig(){
   if(!document.querySelector('#exl .exr')){alert('Veuillez ajouter au moins un exercice.');return;}
   if(!document.getElementById('hon-mt').value){alert('Veuillez saisir le montant des honoraires.');return;}
   ap('lead-sapiens-3');
@@ -1366,6 +1488,248 @@ function addMsg(role,txt){
 
 // Init
 addEx();addEx();addEx();
+
+// ═══════════════════════════════════════════
+// GESTION DES PROPALES
+// ═══════════════════════════════════════════
+
+// Stock en memoire (sera remplace par BDD plus tard)
+window.propales = [];
+window.propaleActive = null; // index de la propale en cours d'edition
+
+function sauvegarderPropale() {
+  if (!dF || !dF.entite) return;
+  const nom = dF.entite.nom || 'Sans nom';
+  const date = new Date().toLocaleDateString('fr-FR', {day:'numeric',month:'short',year:'numeric'});
+  const mt = parseInt(dF.honMt) || 0;
+  const type = dF.typeMission || 'DD';
+
+  // Verifie si propale deja en liste (meme session)
+  if (window.propaleActive !== null) {
+    window.propales[window.propaleActive] = {nom, date, type, mt, statut:'en-cours', data: {...dF}};
+  } else {
+    window.propales.push({nom, date, type, mt, statut:'en-cours', data: {...dF}});
+    window.propaleActive = window.propales.length - 1;
+  }
+
+  // Met a jour breadcrumb
+  const bc = document.getElementById('bc-propale-nom');
+  if (bc) bc.textContent = nom;
+
+  refreshPropalesTable();
+  refreshDashboard();
+}
+
+function refreshPropalesTable() {
+  const tbody = document.getElementById('propales-tbody');
+  if (!tbody) return;
+  if (!window.propales.length) {
+    tbody.innerHTML = '<tr><td colspan="6" style="padding:24px;text-align:center;font-size:13px;color:var(--gris-clair);font-style:italic;">Aucune propale generee pour l\'instant.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = window.propales.map((p, i) => {
+    const badgeClass = p.statut === 'gagnee' ? 'en-cours' : p.statut === 'perdue' ? '' : 'collecte';
+    const badgeLabel = p.statut === 'gagnee' ? 'Gagnee' : p.statut === 'perdue' ? 'Perdue' : 'En cours';
+    const mt = p.mt ? p.mt.toLocaleString('fr-FR') + ' EUR HT' : '—';
+    return `<tr class="mission-row" onclick="ouvrirPropale(${i})">
+      <td><div class="mission-nom">${p.nom}</div><div class="mission-type">${p.type}</div></td>
+      <td>${p.type}</td>
+      <td>${p.date}</td>
+      <td>${mt}</td>
+      <td><span class="badge ${badgeClass}">${badgeLabel}</span></td>
+      <td style="text-align:right;color:var(--gris-tres-clair);font-size:14px;">→</td>
+    </tr>`;
+  }).join('');
+}
+
+function ouvrirPropale(i) {
+  window.propaleActive = i;
+  const p = window.propales[i];
+  dF = {...p.data};
+  window.sD = window.propalesSlides ? window.propalesSlides[i] : window.sD;
+  const bc = document.getElementById('bc-propale-nom');
+  if (bc) bc.textContent = p.nom;
+  ap('lead-sapiens-3');
+  // Re-affiche les slides si deja generees
+  if (window.propalesSlideData && window.propalesSlideData[i]) {
+    const saved = window.propalesSlideData[i];
+    window.sD = saved.slides;
+    window.sA = 0;
+    const sv = document.getElementById('sv');
+    if (sv) sv.innerHTML = saved.slides.map((s,j) => '<div class="sf '+(j===0?'on':'')+'" id="sf-'+j+'">'+s.html+'</div>').join('');
+    document.getElementById('snav').innerHTML = saved.navHtml;
+    document.getElementById('geno').style.display = 'none';
+    updCtr();
+    addMsg('a', 'Propale de '+p.nom+' rechargee. Statut actuel : '+p.statut+'.');
+  } else {
+    genPropale();
+  }
+}
+
+function rouvrirPropale() {
+  ap('lead-sapiens-3');
+}
+
+function marquerStatut(statut) {
+  if (window.propaleActive === null || !window.propales[window.propaleActive]) {
+    // Sauvegarde d'abord si pas encore sauvegardee
+    sauvegarderPropale();
+  }
+  const p = window.propales[window.propaleActive];
+  if (!p) return;
+  p.statut = statut;
+
+  if (statut === 'gagnee') {
+    // Cree entree dans missions (execution)
+    ajouterMission(p);
+    // Cree entree dans contractualisation
+    ajouterContrat(p);
+    refreshDashboard();
+    ap('contrat-fiche');
+    chargerFicheContrat(window.propaleActive);
+    addMsg('a', 'Propale marquee comme gagnee. Dossier de contractualisation cree.');
+  } else {
+    refreshPropalesTable();
+    refreshDashboard();
+    ap('proposition');
+  }
+}
+
+// Missions dynamiques
+window.missions = [];
+
+function ajouterMission(p) {
+  const existe = window.missions.find(m => m.nom === p.nom);
+  if (!existe) {
+    window.missions.push({
+      nom: p.nom,
+      type: p.type,
+      date: p.date,
+      mt: p.mt,
+      phase: 'Collecte de l\'information',
+      propaleIdx: window.propaleActive
+    });
+    refreshMissionsTable();
+  }
+}
+
+function refreshMissionsTable() {
+  const tbody = document.getElementById('missions-tbody');
+  if (!tbody) return;
+  const toutes = [
+    {nom:'Edmond Telecom', type:'BSDD — Standard DD', date:'09 dec. 2025', phase:"Collecte de l'information", statut:'collecte'},
+    ...window.missions.map(m => ({nom:m.nom, type:m.type, date:m.date, phase:m.phase, statut:'collecte', propaleIdx:m.propaleIdx}))
+  ];
+  tbody.innerHTML = toutes.map((m,i) => `
+    <tr class="mission-row" onclick="${i===0?"ap('mission-fiche')":`ouvrirMission(${i-1})`}">
+      <td><div class="mission-nom">${m.nom}</div><div class="mission-type">${m.type}</div></td>
+      <td>${m.type.split(' — ')[0]}</td>
+      <td>${m.date}</td>
+      <td>${m.phase}</td>
+      <td><span class="badge collecte">En cours</span></td>
+      <td style="text-align:right;color:var(--gris-tres-clair);font-size:14px;">→</td>
+    </tr>`).join('');
+}
+
+function ouvrirMission(i) {
+  ap('mission-fiche');
+}
+
+// Contractualisation dynamique
+window.contrats = [];
+
+function ajouterContrat(p) {
+  const existe = window.contrats.find(c => c.nom === p.nom);
+  if (!existe) {
+    window.contrats.push({
+      nom: p.nom,
+      type: p.type,
+      date: p.date,
+      mt: p.mt,
+      propaleIdx: window.propaleActive,
+      statut: 'A rediger'
+    });
+    refreshContratsTable();
+  }
+}
+
+function refreshContratsTable() {
+  const tbody = document.getElementById('contrats-tbody');
+  if (!tbody) return;
+  if (!window.contrats.length) {
+    tbody.innerHTML = '<tr><td colspan="6" style="padding:24px;text-align:center;font-size:13px;color:var(--gris-clair);font-style:italic;">Aucune mission gagnee pour l\'instant.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = window.contrats.map((c,i) => {
+    const mt = c.mt ? c.mt.toLocaleString('fr-FR') + ' EUR HT' : '—';
+    return `<tr class="mission-row" onclick="ouvrirContrat(${i})">
+      <td><div class="mission-nom">${c.nom}</div><div class="mission-type">${c.type}</div></td>
+      <td>${c.type.split(' — ')[0]}</td>
+      <td>${c.date}</td>
+      <td>${mt}</td>
+      <td><span class="badge collecte">${c.statut}</span></td>
+      <td style="text-align:right;color:var(--gris-tres-clair);font-size:14px;">→</td>
+    </tr>`;
+  }).join('');
+}
+
+function ouvrirContrat(i) {
+  chargerFicheContrat(window.contrats[i].propaleIdx);
+  ap('contrat-fiche');
+}
+
+function chargerFicheContrat(propaleIdx) {
+  const p = window.propales[propaleIdx];
+  if (!p) return;
+  const d = p.data || {};
+  const entite = d.entite || {};
+  document.getElementById('bc-contrat-nom').textContent = p.nom;
+  document.getElementById('contrat-titre').innerHTML = p.nom.split(' ').slice(0,-1).join(' ') + ' <em>' + (p.nom.split(' ').slice(-1)[0] || '') + '</em>';
+  document.getElementById('contrat-meta').innerHTML = `
+    <div class="mission-meta-item"><div class="mission-meta-label">Type</div><div class="mission-meta-val">${p.type}</div></div>
+    <div class="mission-meta-item"><div class="mission-meta-label">Date propale</div><div class="mission-meta-val">${p.date}</div></div>
+    <div class="mission-meta-item"><div class="mission-meta-label">Honoraires</div><div class="mission-meta-val">${p.mt ? p.mt.toLocaleString('fr-FR') + ' EUR HT' : '—'}</div></div>
+  `;
+  // Pre-remplir les champs
+  document.getElementById('lm-cible').value = p.nom;
+  document.getElementById('lm-honoraires').value = p.mt || '';
+  document.getElementById('lm-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('lm-exercices').value = (d.exercices||[]).map(e=>e.lib).join(', ') || '';
+}
+
+// Dashboard stats
+function refreshDashboard() {
+  const enCours = window.propales.filter(p => p.statut === 'en-cours').length;
+  const gagnees = window.missions.length;
+  const envoyees = window.propales.length;
+  const stats = document.querySelectorAll('.stat-v');
+  if (stats[0]) stats[0].textContent = 1 + gagnees; // Edmond + nouvelles
+  if (stats[1]) stats[1].textContent = enCours;
+  if (stats[2]) stats[2].textContent = envoyees;
+}
+
+// Sauvegarde automatique des slides apres generation
+function saveSlidesData() {
+  if (window.propaleActive !== null && window.sD && window.sD.length) {
+    if (!window.propalesSlideData) window.propalesSlideData = {};
+    const navEl = document.getElementById('snav');
+    window.propalesSlideData[window.propaleActive] = {
+      slides: window.sD,
+      navHtml: navEl ? navEl.innerHTML : ''
+    };
+  }
+}
+
+// Hook sur val2 pour sauvegarder apres generation
+async function val2() {
+  if (!document.querySelector('#exl .exr')) { alert('Veuillez ajouter au moins un exercice.'); return; }
+  if (!document.getElementById('hon-mt').value) { alert('Veuillez saisir le montant des honoraires.'); return; }
+  ap('lead-sapiens-3');
+  await genPropale();
+  sauvegarderPropale();
+  saveSlidesData();
+}
+
 </script>
 </body>
 </html>
