@@ -351,6 +351,9 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .badge.en-cours{border-color:rgba(45,106,79,0.4);color:var(--vert);background:rgba(45,106,79,0.05);}
 .badge.collecte{border-color:rgba(26,58,107,0.3);color:var(--bleu-info);background:var(--bleu-info-clair);}
 .badge.traitement{border-color:rgba(139,26,26,0.3);color:var(--rouge);background:rgba(139,26,26,0.04);}
+.badge.gagnee{border-color:rgba(45,106,79,0.4);color:var(--vert);background:rgba(45,106,79,0.05);}
+.badge.perdue{border-color:rgba(139,26,26,0.3);color:var(--rouge);background:rgba(139,26,26,0.04);}
+.badge.archivee{border-color:var(--gris-tres-clair);color:var(--gris-clair);}
 
 /* Fiche mission */
 .mission-header{background:var(--blanc);border-bottom:1px solid var(--gris-tres-clair);padding:40px 48px;}
@@ -469,9 +472,14 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
     <div class="page-cl">Nouvelle propale — origine du lead</div>
     <div class="opts" style="max-width:900px;margin-bottom:48px;">
       <div class="opt" onclick="alert('Lead digital — en construction.')"><div class="opt-n">Option A</div><div class="opt-t">Lead digital</div><p class="opt-d">Prospect venu via le DD Generator.</p><div class="opt-dt">Champs pre-remplis depuis le systeme.</div><div class="opt-f"><span class="opt-a">→</span></div></div>
-      <div class="opt" onclick="ap('lead-sapiens-1')"><div class="opt-n">Option B</div><div class="opt-t">Lead sapiens</div><p class="opt-d">Prospect identifie par voie directe.</p><div class="opt-dt">Moteur de recherche + enrichissement automatique + generation IA.</div><div class="opt-f"><span class="opt-a">→</span></div></div>
+      <div class="opt" onclick="resetLeadSapiens()"><div class="opt-n">Option B</div><div class="opt-t">Lead sapiens</div><p class="opt-d">Prospect identifie par voie directe.</p><div class="opt-dt">Moteur de recherche + enrichissement automatique + generation IA.</div><div class="opt-f"><span class="opt-a">→</span></div></div>
     </div>
-    <div class="page-cl">Propales en cours</div>
+    <!-- Onglets statut -->
+    <div style="display:flex;gap:0;border-bottom:1px solid var(--gris-tres-clair);margin-bottom:24px;">
+      <button id="tab-en-cours" onclick="filtrerPropales('en-cours')" style="background:none;border:none;border-bottom:2px solid var(--noir);padding:10px 20px;font-family:var(--font-titre);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;color:var(--noir);margin-bottom:-1px;">En cours</button>
+      <button id="tab-gagnees" onclick="filtrerPropales('gagnee')" style="background:none;border:none;border-bottom:2px solid transparent;padding:10px 20px;font-family:var(--font-titre);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;color:var(--gris-clair);margin-bottom:-1px;">Gagnees</button>
+      <button id="tab-perdues" onclick="filtrerPropales('perdue')" style="background:none;border:none;border-bottom:2px solid transparent;padding:10px 20px;font-family:var(--font-titre);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;color:var(--gris-clair);margin-bottom:-1px;">Perdues</button>
+    </div>
     <table class="mission-table" id="propales-table">
       <thead>
         <tr>
@@ -1357,7 +1365,9 @@ function logG(m){const el=document.getElementById('genl');if(el)el.textContent=m
 function mkSep(num,titre){return '<div class="sc sep"><div class="sep-n">Partie '+num+'</div><div class="sep-t" contenteditable="true">'+titre+'</div><div class="covlog" style="color:rgba(255,255,255,0.2);">Gavroche</div></div>';}
 
 async function genPropale(){
-  dF=colData();const d=dF;
+  // Si dF est deja rempli (appel depuis val2), on ne relit pas le formulaire
+  if (!dF || !dF.entite) dF=colData();
+  const d=dF;
   document.getElementById('geno').style.display='flex';
   logG("Recherche sur "+d.entite.nom+" ...");
   let cx={};
@@ -1444,13 +1454,20 @@ async function genPropale(){
   window.sD=slides;window.sA=0;window.cH=[];
   const sv=document.getElementById("sv");
   sv.innerHTML=slides.map(function(s,i){return '<div class="sf '+(i===0?"on":"")+'" id="sf-'+i+'">'+s.html+'</div>';}).join("");
-  document.getElementById("snav").innerHTML=struct.map(function(rub){
+  const snavHtml=struct.map(function(rub){
     const hasSub=rub.slides.length>0;
     return '<div class="rub'+(rub.fixe?" fixe":"")+(hasSub?" open":"")+'" id="rub-'+rub.id+'"><div class="rub-h" onclick="togRub(\'rub-'+rub.id+'\')"><span class="rub-l">'+rub.label+'</span><span style="display:flex;align-items:center;gap:6px;">'+(rub.fixe?'<span class="rub-b">Fixe</span>':'')+(hasSub?'<span class="rub-c">&#9662;</span>':'')+'</span></div>'+(hasSub?'<div class="subs">'+rub.slides.map(function(s){const idx=slides.indexOf(s);return '<button class="sni '+(idx===0?"on":"")+'" onclick="gS('+idx+')" id="sni-'+idx+'"><span class="sni-n">'+(idx+1)+'</span><span class="sni-l">'+s.label+'</span></button>';}).join("")+'</div>':'')+'</div>';
   }).join("");
+  document.getElementById("snav").innerHTML=snavHtml;
   updCtr();
   document.getElementById("geno").style.display="none";
   addMsg("a","Propale generee - "+slides.length+" slides pour "+d.entite.nom+". Cliquez sur n'importe quel texte pour le modifier.");
+
+  // Bug 3 — Stocker les slides dans propalesSlideData au bon index
+  if (!window.propalesSlideData) window.propalesSlideData = {};
+  if (window.propaleActive !== null) {
+    window.propalesSlideData[window.propaleActive] = {slides: window.sD.slice(), navHtml: snavHtml};
+  }
 }
 
 function togRub(id){const el=document.getElementById(id);if(el)el.classList.toggle('open');}
@@ -1490,6 +1507,81 @@ function addMsg(role,txt){
 addEx();addEx();addEx();
 
 // ═══════════════════════════════════════════
+// BUG 1 — RESET FORMULAIRE LEAD SAPIENS
+// ═══════════════════════════════════════════
+function resetLeadSapiens() {
+  // Reset entite
+  entSel = null;
+  const searchMono = document.getElementById('search-mono');
+  if (searchMono) searchMono.value = '';
+  const slMono = document.getElementById('sl-mono');
+  if (slMono) slMono.innerHTML = '';
+  const spMono = document.getElementById('sp-mono');
+  if (spMono) spMono.classList.remove('v');
+  const feN = document.getElementById('fe-n-mono');
+  if (feN) feN.textContent = '—';
+  const feS = document.getElementById('fe-s-mono');
+  if (feS) { feS.textContent = '—'; feS.className = 'fe-s'; }
+  const errMono = document.getElementById('err-mono');
+  if (errMono) errMono.classList.remove('v');
+  const compMono = document.getElementById('comp-mono');
+  if (compMono) compMono.value = '';
+
+  // Reset honoraires
+  const honLib = document.getElementById('hon-lib');
+  if (honLib) honLib.value = '';
+  const honMt = document.getElementById('hon-mt');
+  if (honMt) honMt.value = '';
+
+  // Reset commentaires
+  const comm = document.getElementById('comm');
+  if (comm) comm.value = '';
+
+  // Reset planning
+  ['dp1','dp2','dp3','dur1','dur2','dur3'].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+
+  // Reset exercices (vider et remettre 3 par defaut)
+  const exl = document.getElementById('exl');
+  if (exl) { exl.querySelectorAll('.exr').forEach(function(r){r.remove();}); }
+  exc = 0;
+  addEx(); addEx(); addEx();
+
+  // Reset tiroirs
+  const tirl = document.getElementById('tirl');
+  if (tirl) tirl.innerHTML = '';
+  tc = 0;
+
+  // Reset type de structure sur mono par defaut
+  setTS('mono');
+
+  // Reset propaleActive pour que ce soit une nouvelle propale
+  window.propaleActive = null;
+  dF = {};
+
+  ap('lead-sapiens-1');
+}
+
+// ═══════════════════════════════════════════
+// BUG 2 — FILTRE ONGLETS PROPALES
+// ═══════════════════════════════════════════
+let filtreStatutActif = 'en-cours';
+function filtrerPropales(statut) {
+  filtreStatutActif = statut;
+  const map = {'en-cours':'tab-en-cours','gagnee':'tab-gagnees','perdue':'tab-perdues'};
+  Object.values(map).forEach(function(tabId) {
+    const btn = document.getElementById(tabId);
+    if (btn) { btn.style.borderBottomColor='transparent'; btn.style.color='var(--gris-clair)'; }
+  });
+  const activeId = map[statut];
+  const activeBtn = document.getElementById(activeId);
+  if (activeBtn) { activeBtn.style.borderBottomColor='var(--noir)'; activeBtn.style.color='var(--noir)'; }
+  refreshPropalesTable();
+}
+
+// ═══════════════════════════════════════════
 // GESTION DES PROPALES
 // ═══════════════════════════════════════════
 
@@ -1516,6 +1608,14 @@ function sauvegarderPropale() {
   const bc = document.getElementById('bc-propale-nom');
   if (bc) bc.textContent = nom;
 
+  // Bug 3 — Sauvegarder les slides propres a cette propale
+  if (!window.propalesSlideData) window.propalesSlideData = {};
+  const snavEl = document.getElementById('snav');
+  window.propalesSlideData[window.propaleActive] = {
+    slides: window.sD.slice(),
+    navHtml: snavEl ? snavEl.innerHTML : ''
+  };
+
   refreshPropalesTable();
   refreshDashboard();
 }
@@ -1523,12 +1623,16 @@ function sauvegarderPropale() {
 function refreshPropalesTable() {
   const tbody = document.getElementById('propales-tbody');
   if (!tbody) return;
-  if (!window.propales.length) {
-    tbody.innerHTML = '<tr><td colspan="6" style="padding:24px;text-align:center;font-size:13px;color:var(--gris-clair);font-style:italic;">Aucune propale generee pour l\'instant.</td></tr>';
+  const filtered = window.propales
+    .map((p, i) => ({p, i}))
+    .filter(({p}) => p.statut === filtreStatutActif);
+  if (!filtered.length) {
+    const labels = {'en-cours':'en cours','gagnee':'gagnee','perdue':'perdue'};
+    tbody.innerHTML = '<tr><td colspan="6" style="padding:24px;text-align:center;font-size:13px;color:var(--gris-clair);font-style:italic;">Aucune propale '+(labels[filtreStatutActif]||'')+' pour l\'instant.</td></tr>';
     return;
   }
-  tbody.innerHTML = window.propales.map((p, i) => {
-    const badgeClass = p.statut === 'gagnee' ? 'en-cours' : p.statut === 'perdue' ? '' : 'collecte';
+  tbody.innerHTML = filtered.map(({p, i}) => {
+    const badgeClass = p.statut === 'gagnee' ? 'gagnee' : p.statut === 'perdue' ? 'perdue' : 'collecte';
     const badgeLabel = p.statut === 'gagnee' ? 'Gagnee' : p.statut === 'perdue' ? 'Perdue' : 'En cours';
     const mt = p.mt ? p.mt.toLocaleString('fr-FR') + ' EUR HT' : '—';
     return `<tr class="mission-row" onclick="ouvrirPropale(${i})">
@@ -1714,7 +1818,7 @@ function saveSlidesData() {
     if (!window.propalesSlideData) window.propalesSlideData = {};
     const navEl = document.getElementById('snav');
     window.propalesSlideData[window.propaleActive] = {
-      slides: window.sD,
+      slides: window.sD.slice(), // Bug 3 — copie isolee, pas une reference partagee
       navHtml: navEl ? navEl.innerHTML : ''
     };
   }
@@ -1724,10 +1828,16 @@ function saveSlidesData() {
 async function val2() {
   if (!document.querySelector('#exl .exr')) { alert('Veuillez ajouter au moins un exercice.'); return; }
   if (!document.getElementById('hon-mt').value) { alert('Veuillez saisir le montant des honoraires.'); return; }
+  // Lire les donnees du formulaire maintenant (avant navigation)
+  dF = colData();
+  // Enregistrer la propale en-cours immediatement pour qu'elle apparaisse dans la liste
+  sauvegarderPropale();
   ap('lead-sapiens-3');
   await genPropale();
-  sauvegarderPropale();
+  // Mettre a jour les slides sauvegardees apres generation
   saveSlidesData();
+  refreshPropalesTable();
+  refreshDashboard();
 }
 
 </script>
