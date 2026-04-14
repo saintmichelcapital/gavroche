@@ -400,31 +400,6 @@
   <div class="footer-admin"><button onclick="ouvrirLogin()" style="background:none;border:none;cursor:pointer;font-family:var(--font-titre);font-size:9px;letter-spacing:0.14em;color:rgba(255,255,255,0.2);text-transform:uppercase;padding:0;transition:color 0.3s;">Espace membre</button></div>
 </footer>
 
-<script>
-  function ouvrirLogin() {
-    document.getElementById('page-login').classList.add('actif');
-    setTimeout(function() { document.getElementById('login-id').focus(); }, 100);
-  }
-  function fermerLogin() {
-    document.getElementById('page-login').classList.remove('actif');
-    document.getElementById('login-erreur').style.display = 'none';
-    document.getElementById('login-id').value = '';
-    document.getElementById('login-pwd').value = '';
-  }
-  async function verifierLogin() {
-    var id  = document.getElementById('login-id').value.trim();
-    var pwd = document.getElementById('login-pwd').value;
-    var err = document.getElementById('login-erreur');
-    try {
-      const r = await fetch('/api/login', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({username: id, password: pwd})
-      });
-      const data = await r.json();
-      if (data.success && data.token) {
-        sessionStorage.setItem('gavroche_token', data.token);
-        err.style.display = 'none';
-        window.location.href = '/admin.html';
-      } else {
-        err.style.display = 'block'
+<script src="/login.js"></script>
+</body>
+</html>
