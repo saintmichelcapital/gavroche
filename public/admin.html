@@ -1364,9 +1364,9 @@ let dF={};window.sD=[];window.sA=0;window.cH=[];
 function logG(m){const el=document.getElementById('genl');if(el)el.textContent=m;}
 function mkSep(num,titre){return '<div class="sc sep"><div class="sep-n">Partie '+num+'</div><div class="sep-t" contenteditable="true">'+titre+'</div><div class="covlog" style="color:rgba(255,255,255,0.2);">Gavroche</div></div>';}
 
-async function genPropale(){
-  // Si dF est deja rempli (appel depuis val2), on ne relit pas le formulaire
-  if (!dF || !dF.entite) dF=colData();
+async function genPropale(reouvrir){
+  // Si on rouvre une propale existante, dF est deja charge - sinon on relit le formulaire
+  if (!reouvrir) dF=colData();
   const d=dF;
   document.getElementById('geno').style.display='flex';
   logG("Recherche sur "+d.entite.nom+" ...");
@@ -1666,7 +1666,7 @@ function ouvrirPropale(i) {
     updCtr();
     addMsg('a', 'Propale de '+p.nom+' rechargee. Statut actuel : '+p.statut+'.');
   } else {
-    genPropale();
+    genPropale(true);
   }
 }
 
@@ -1833,7 +1833,7 @@ async function val2() {
   // Enregistrer la propale en-cours immediatement pour qu'elle apparaisse dans la liste
   sauvegarderPropale();
   ap('lead-sapiens-3');
-  await genPropale();
+  await genPropale(true);
   // Mettre a jour les slides sauvegardees apres generation
   saveSlidesData();
   refreshPropalesTable();
