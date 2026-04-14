@@ -192,7 +192,7 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .bsuiv:hover{background:var(--gris-moyen);}
 .af{background:var(--blanc);border-top:1px solid var(--gris-tres-clair);padding:20px 48px;display:flex;align-items:center;justify-content:space-between;margin-top:auto;}
 .aft{font-family:var(--font-titre);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gris-clair);}
-/* ETAPE 3 */
+/* ETAPE 3 propale */
 .pl{display:grid;grid-template-columns:220px 1fr 320px;height:calc(100vh - 60px - 56px - 1px);overflow:hidden;}
 .ssb{background:var(--blanc);border-right:1px solid var(--gris-tres-clair);display:flex;flex-direction:column;overflow:hidden;}
 .ssbt{font-family:var(--font-titre);font-size:8px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gris-clair);padding:14px 16px 8px;flex-shrink:0;border-bottom:1px solid var(--gris-tres-clair);}
@@ -334,143 +334,692 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .fade-in{animation:fadeIn 0.25s ease both;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
+/* ═══════════════════════════════════════════
+   EXECUTION — styles specifiques
+═══════════════════════════════════════════ */
+
+/* Tableau des missions */
+.mission-table{width:100%;border-collapse:collapse;background:var(--blanc);border:1px solid var(--gris-tres-clair);}
+.mission-table th{background:var(--gris-surface);padding:12px 20px;text-align:left;font-family:var(--font-titre);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris-clair);border-bottom:1px solid var(--gris-tres-clair);font-weight:400;}
+.mission-table td{padding:18px 20px;border-bottom:1px solid var(--gris-tres-clair);font-size:13px;color:var(--gris-moyen);}
+.mission-table tr:last-child td{border-bottom:none;}
+.mission-table tr.mission-row{cursor:pointer;transition:background 0.15s;}
+.mission-table tr.mission-row:hover td{background:var(--gris-surface);}
+.mission-nom{font-size:14px;font-weight:500;color:var(--noir);}
+.mission-type{font-family:var(--font-titre);font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gris-clair);}
+.badge{display:inline-block;font-family:var(--font-titre);font-size:8px;letter-spacing:0.14em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--gris-tres-clair);color:var(--gris-clair);}
+.badge.en-cours{border-color:rgba(45,106,79,0.4);color:var(--vert);background:rgba(45,106,79,0.05);}
+.badge.collecte{border-color:rgba(26,58,107,0.3);color:var(--bleu-info);background:var(--bleu-info-clair);}
+.badge.traitement{border-color:rgba(139,26,26,0.3);color:var(--rouge);background:rgba(139,26,26,0.04);}
+
+/* Fiche mission */
+.mission-header{background:var(--blanc);border-bottom:1px solid var(--gris-tres-clair);padding:40px 48px;}
+.mission-meta{display:flex;gap:32px;margin-top:16px;flex-wrap:wrap;}
+.mission-meta-item{display:flex;flex-direction:column;gap:3px;}
+.mission-meta-label{font-family:var(--font-titre);font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gris-clair);}
+.mission-meta-val{font-size:13px;color:var(--noir);font-weight:500;}
+
+/* Workflow phases */
+.workflow-wrap{padding:48px;flex:1;}
+.workflow-phases{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--gris-tres-clair);border:1px solid var(--gris-tres-clair);margin-bottom:40px;}
+.wph{background:var(--blanc);padding:28px 24px;cursor:pointer;transition:background 0.2s;display:flex;flex-direction:column;gap:10px;position:relative;}
+.wph:hover{background:var(--gris-surface);}
+.wph.active{background:var(--noir);}
+.wph.active .wph-n,.wph.active .wph-t,.wph.active .wph-s{color:rgba(255,255,255,0.7);}
+.wph.active .wph-badge{border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.5);}
+.wph.active .wph-badge.done{border-color:rgba(111,207,151,0.6);color:#6fcf97;}
+.wph.locked{opacity:0.4;cursor:default;pointer-events:none;}
+.wph-n{font-family:var(--font-titre);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris-clair);}
+.wph-t{font-family:var(--font-titre);font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--noir);margin-bottom:4px;}
+.wph-s{font-size:12px;color:var(--gris-clair);line-height:1.5;}
+.wph-badge{display:inline-block;margin-top:auto;font-family:var(--font-titre);font-size:8px;letter-spacing:0.14em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--gris-tres-clair);color:var(--gris-clair);}
+.wph-badge.done{border-color:rgba(45,106,79,0.5);color:var(--vert);}
+.wph-badge.in-progress{border-color:rgba(26,58,107,0.4);color:var(--bleu-info);}
+
+/* Collecte */
+.collecte-grid{display:flex;flex-direction:column;gap:2px;background:var(--gris-tres-clair);border:1px solid var(--gris-tres-clair);}
+.cat-bloc{background:var(--blanc);}
+.cat-header{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:16px;padding:16px 24px;border-bottom:1px solid var(--gris-tres-clair);}
+.cat-titre{font-family:var(--font-titre);font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--noir);}
+.cat-count{font-family:var(--font-titre);font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gris-clair);}
+.cat-upload{background:var(--noir);color:var(--blanc);border:none;padding:8px 16px;font-family:var(--font-titre);font-size:8px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;white-space:nowrap;}
+.cat-upload:hover{background:var(--gris-moyen);}
+.cat-files{padding:0 24px 16px;}
+.cat-file{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--gris-tres-clair);}
+.cat-file:last-child{border-bottom:none;}
+.cat-file-name{font-size:13px;color:var(--noir);}
+.cat-file-meta{font-family:var(--font-titre);font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gris-clair);}
+.cat-empty{padding:12px 0;font-size:12px;color:var(--gris-clair);font-style:italic;}
+
+/* Databook placeholder */
+.databook-wrap{padding:48px;flex:1;}
+.databook-modules{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--gris-tres-clair);border:1px solid var(--gris-tres-clair);margin-bottom:32px;}
+.db-mod{background:var(--blanc);padding:36px 32px;display:flex;flex-direction:column;gap:10px;}
+.db-mod.clickable{cursor:pointer;transition:background 0.2s;}
+.db-mod.clickable:hover{background:var(--gris-surface);}
+.db-mod-n{font-family:var(--font-titre);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris-clair);}
+.db-mod-t{font-family:var(--font-titre);font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--noir);}
+.db-mod-d{font-size:13px;color:var(--gris-clair);line-height:1.6;}
+.db-mod-badge{display:inline-block;font-family:var(--font-titre);font-size:8px;letter-spacing:0.14em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--gris-tres-clair);color:var(--gris-clair);margin-top:4px;}
+.db-mod-badge.ready{border-color:rgba(45,106,79,0.5);color:var(--vert);}
+
+/* Rapport placeholder */
+.rapport-sections{display:flex;flex-direction:column;gap:2px;background:var(--gris-tres-clair);border:1px solid var(--gris-tres-clair);}
+.rap-section{background:var(--blanc);padding:24px 28px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:background 0.2s;}
+.rap-section:hover{background:var(--gris-surface);}
+.rap-section-left{display:flex;flex-direction:column;gap:4px;}
+.rap-section-n{font-family:var(--font-titre);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris-clair);}
+.rap-section-t{font-family:var(--font-titre);font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--noir);}
+.rap-section-d{font-size:12px;color:var(--gris-clair);margin-top:2px;}
+.rap-arrow{font-size:14px;color:var(--gris-tres-clair);}
+
+/* Actions bar */
+.actions-bar{display:flex;align-items:center;gap:12px;margin-bottom:32px;}
+.btn-action{background:var(--blanc);border:1px solid var(--gris-tres-clair);padding:10px 20px;font-family:var(--font-titre);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gris-moyen);cursor:pointer;transition:all 0.2s;}
+.btn-action:hover{border-color:var(--noir);color:var(--noir);}
+.btn-action.primary{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+.btn-action.primary:hover{background:var(--gris-moyen);}
+
+/* Section titre dans workflow */
+.section-head{margin-bottom:28px;}
+.section-head-titre{font-family:var(--font-titre);font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--noir);margin-bottom:6px;}
+.section-head-desc{font-size:13px;color:var(--gris-clair);line-height:1.6;}
+
 </style>
 </head>
 <body>
 <div class="topbar">
   <button class="topbar-logo" onclick="ap('dashboard')">Gavroche</button>
   <div class="topbar-right">
-    <span class="topbar-user">François Thiéry</span>
-    <button class="topbar-btn" onclick="window.location.href='gavroche-vitrine.html'">Déconnexion →</button>
+    <span class="topbar-user">Francois Thiery</span>
+    <button class="topbar-btn" onclick="window.location.href='index.html'">Deconnexion →</button>
   </div>
 </div>
 
 <!-- DASHBOARD -->
 <div class="page actif" id="page-dashboard">
-  <div class="admin-header"><div class="admin-titre">Espace de <em>travail</em></div><div class="stats"><div class="stat"><div class="stat-v">0</div><div class="stat-l">Missions en cours</div></div><div class="stat"><div class="stat-v">0</div><div class="stat-l">Leads à traiter</div></div><div class="stat"><div class="stat-v">0</div><div class="stat-l">Propositions envoyées</div></div><div class="stat"><div class="stat-v">0</div><div class="stat-l">Missions finalisées</div></div></div></div>
-  <div class="mods-wrap"><div class="mods-label">Modules disponibles</div><div class="mods-grid">
-    <div class="mod" onclick="ap('crm')"><div class="mod-n">01</div><div class="mod-t">CRM</div><p class="mod-d">Gestion des leads, suivi des opportunités.</p><div class="mod-f"><span class="mod-s">En construction</span><span class="mod-a">→</span></div></div>
-    <div class="mod" onclick="ap('proposition')"><div class="mod-n">02</div><div class="mod-t">Proposition commerciale</div><p class="mod-d">Génération de devis et de lettres de mission.</p><div class="mod-f"><span class="mod-s on">Disponible</span><span class="mod-a">→</span></div></div>
-    <div class="mod" onclick="ap('contrat')"><div class="mod-n">03</div><div class="mod-t">Contractualisation</div><p class="mod-d">Préparation et suivi des contrats de mission.</p><div class="mod-f"><span class="mod-s">En construction</span><span class="mod-a">→</span></div></div>
-    <div class="mod dark" onclick="ap('execution')"><div class="mod-n">04</div><div class="mod-t">Exécution de la mission</div><p class="mod-d">Import FEC, Databook, rapport PowerPoint.</p><div class="mod-f"><span class="mod-s">En construction</span><span class="mod-a">→</span></div></div>
-    <div class="mod" onclick="ap('restitution')"><div class="mod-n">05</div><div class="mod-t">Restitution</div><p class="mod-d">Présentation interactive des conclusions.</p><div class="mod-f"><span class="mod-s">En construction</span><span class="mod-a">→</span></div></div>
-    <div class="mod" onclick="ap('ddgenerator')"><div class="mod-n">06</div><div class="mod-t">DD Generator</div><p class="mod-d">Suivi des missions initiées via le site public.</p><div class="mod-f"><span class="mod-s">En construction</span><span class="mod-a">→</span></div></div>
-  </div></div>
-  <div class="af"><div class="aft">Gavroche — Espace confidentiel</div><div class="aft">v0.6</div></div>
+  <div class="admin-header">
+    <div class="admin-titre">Espace de <em>travail</em></div>
+    <div class="stats">
+      <div class="stat"><div class="stat-v">1</div><div class="stat-l">Missions en cours</div></div>
+      <div class="stat"><div class="stat-v">0</div><div class="stat-l">Leads a traiter</div></div>
+      <div class="stat"><div class="stat-v">2</div><div class="stat-l">Propositions envoyees</div></div>
+      <div class="stat"><div class="stat-v">0</div><div class="stat-l">Missions finalisees</div></div>
+    </div>
+  </div>
+  <div class="mods-wrap">
+    <div class="mods-label">Modules disponibles</div>
+    <div class="mods-grid">
+      <div class="mod" onclick="ap('crm')"><div class="mod-n">01</div><div class="mod-t">CRM</div><p class="mod-d">Gestion des leads, suivi des opportunites.</p><div class="mod-f"><span class="mod-s">En construction</span><span class="mod-a">→</span></div></div>
+      <div class="mod" onclick="ap('proposition')"><div class="mod-n">02</div><div class="mod-t">Proposition commerciale</div><p class="mod-d">Generation de devis et de lettres de mission.</p><div class="mod-f"><span class="mod-s on">Disponible</span><span class="mod-a">→</span></div></div>
+      <div class="mod" onclick="ap('contrat')"><div class="mod-n">03</div><div class="mod-t">Contractualisation</div><p class="mod-d">Preparation et suivi des contrats de mission.</p><div class="mod-f"><span class="mod-s">En construction</span><span class="mod-a">→</span></div></div>
+      <div class="mod dark" onclick="ap('execution')"><div class="mod-n">04</div><div class="mod-t">Execution de la mission</div><p class="mod-d">Import FEC, Databook, rapport PowerPoint.</p><div class="mod-f"><span class="mod-s on">Disponible</span><span class="mod-a">→</span></div></div>
+      <div class="mod" onclick="ap('restitution')"><div class="mod-n">05</div><div class="mod-t">Restitution</div><p class="mod-d">Presentation interactive des conclusions.</p><div class="mod-f"><span class="mod-s">En construction</span><span class="mod-a">→</span></div></div>
+      <div class="mod" onclick="ap('ddgenerator')"><div class="mod-n">06</div><div class="mod-t">DD Generator</div><p class="mod-d">Suivi des missions initiees via le site public.</p><div class="mod-f"><span class="mod-s">En construction</span><span class="mod-a">→</span></div></div>
+    </div>
+  </div>
+  <div class="af"><div class="aft">Gavroche — Espace confidentiel</div><div class="aft">v0.7</div></div>
 </div>
 
 <!-- PROPOSITION -->
 <div class="page" id="page-proposition">
   <div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">Proposition commerciale</span></div>
-  <div class="admin-header"><div class="admin-titre">Proposition <em>commerciale</em></div><div class="admin-sous-titre">Sélectionnez l'origine du lead.</div></div>
+  <div class="admin-header"><div class="admin-titre">Proposition <em>commerciale</em></div><div class="admin-sous-titre">Selectionnez l'origine du lead.</div></div>
   <div class="page-c"><div class="page-cl">Origine du lead</div><div class="opts">
-    <div class="opt" onclick="alert('Lead digital — en construction.')"><div class="opt-n">Option A</div><div class="opt-t">Lead digital</div><p class="opt-d">Prospect venu via le DD Generator.</p><div class="opt-dt">Champs pré-remplis depuis le système.</div><div class="opt-f"><span class="opt-a">→</span></div></div>
-    <div class="opt" onclick="ap('lead-sapiens-1')"><div class="opt-n">Option B</div><div class="opt-t">Lead sapiens</div><p class="opt-d">Prospect identifié par voie directe.</p><div class="opt-dt">Moteur de recherche + enrichissement automatique + génération IA.</div><div class="opt-f"><span class="opt-a">→</span></div></div>
+    <div class="opt" onclick="alert('Lead digital — en construction.')"><div class="opt-n">Option A</div><div class="opt-t">Lead digital</div><p class="opt-d">Prospect venu via le DD Generator.</p><div class="opt-dt">Champs pre-remplis depuis le systeme.</div><div class="opt-f"><span class="opt-a">→</span></div></div>
+    <div class="opt" onclick="ap('lead-sapiens-1')"><div class="opt-n">Option B</div><div class="opt-t">Lead sapiens</div><p class="opt-d">Prospect identifie par voie directe.</p><div class="opt-dt">Moteur de recherche + enrichissement automatique + generation IA.</div><div class="opt-f"><span class="opt-a">→</span></div></div>
   </div></div>
   <div class="af"><div class="aft">Gavroche</div></div>
 </div>
 
-<!-- ÉTAPE 1 -->
+<!-- ETAPE 1 -->
 <div class="page" id="page-lead-sapiens-1">
   <div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><button class="bc" onclick="ap('proposition')">Proposition</button><span class="bc-sep">›</span><span class="bc actif">Lead sapiens</span></div>
-  <div class="stepper"><button class="stepper-item actif"><div class="stepper-num">1</div><div class="stepper-label">Identification de l'entité</div></button><button class="stepper-item inactif"><div class="stepper-num">2</div><div class="stepper-label">Éléments de la propale</div></button><button class="stepper-item inactif"><div class="stepper-num">3</div><div class="stepper-label">Présentation & édition</div></button></div>
-  <div class="admin-header"><div class="admin-titre">Identification de <em>l'entité</em></div><div class="admin-sous-titre">Les champs marqués * sont obligatoires.</div></div>
+  <div class="stepper"><button class="stepper-item actif"><div class="stepper-num">1</div><div class="stepper-label">Identification de l'entite</div></button><button class="stepper-item inactif"><div class="stepper-num">2</div><div class="stepper-label">Elements de la propale</div></button><button class="stepper-item inactif"><div class="stepper-num">3</div><div class="stepper-label">Presentation & edition</div></button></div>
+  <div class="admin-header"><div class="admin-titre">Identification de <em>l'entite</em></div><div class="admin-sous-titre">Les champs marques * sont obligatoires.</div></div>
   <div class="fw">
-    <div class="fs"><div class="fs-t"><span class="fs-n">01</span>Type de structure *</div><div class="tg"><button class="to on" id="btn-mono" onclick="setTS('mono')">Mono-entité</button><button class="to" id="btn-multi" onclick="setTS('multi')">Multi-entité</button></div></div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">01</span>Type de structure *</div><div class="tg"><button class="to on" id="btn-mono" onclick="setTS('mono')">Mono-entite</button><button class="to" id="btn-multi" onclick="setTS('multi')">Multi-entite</button></div></div>
     <div class="fs" id="bloc-mono">
-      <div class="fs-t"><span class="fs-n">02</span>Recherche de l'entité *</div>
-      <div class="ib">Tapez le nom ou le Siren — les suggestions apparaissent en temps réel.</div>
+      <div class="fs-t"><span class="fs-n">02</span>Recherche de l'entite *</div>
+      <div class="ib">Tapez le nom ou le Siren — les suggestions apparaissent en temps reel.</div>
       <div class="fg"><div class="fl">Rechercher <span class="req">*</span></div>
         <div class="sw"><input class="fi" type="text" id="search-mono" placeholder="Nom de l'entreprise ou Siren…" autocomplete="off" oninput="rech(this,'mono')" onkeydown="nav(event,'mono')"><div class="sp" id="sp-mono"></div><div class="sl" id="sl-mono"></div></div>
-        <div class="err" id="err-mono">Veuillez sélectionner une entité dans les suggestions.</div>
+        <div class="err" id="err-mono">Veuillez selectionner une entite dans les suggestions.</div>
       </div>
       <div class="fe" id="fe-mono">
         <div class="fe-h"><div class="fe-n" id="fe-n-mono">—</div><div class="fe-s" id="fe-s-mono">—</div></div>
         <div class="fe-g">
           <div class="fe-c"><div class="fe-cl">Siren</div><div class="fe-cv" id="fecv-siren">—</div></div>
           <div class="fe-c"><div class="fe-cl">Forme juridique</div><div class="fe-cv" id="fecv-forme">—</div></div>
-          <div class="fe-c"><div class="fe-cl">Siège social</div><div class="fe-cv" id="fecv-siege">—</div></div>
-          <div class="fe-c"><div class="fe-cl">Activité (NAF)</div><div class="fe-cv" id="fecv-activite">—</div></div>
-          <div class="fe-c"><div class="fe-cl">Date de création</div><div class="fe-cv" id="fecv-creation">—</div></div>
+          <div class="fe-c"><div class="fe-cl">Siege social</div><div class="fe-cv" id="fecv-siege">—</div></div>
+          <div class="fe-c"><div class="fe-cl">Activite (NAF)</div><div class="fe-cv" id="fecv-activite">—</div></div>
+          <div class="fe-c"><div class="fe-cl">Date de creation</div><div class="fe-cv" id="fecv-creation">—</div></div>
           <div class="fe-c"><div class="fe-cl">Effectifs</div><div class="fe-cv" id="fecv-effectifs">—</div></div>
           <div class="fe-d"><div class="fe-cl" style="margin-bottom:10px;">Dirigeants</div><div id="dirs-mono"></div></div>
           <div class="fe-l"><div class="fe-ll">Liens</div><div class="llist" id="liens-mono"></div><button class="ladd" onclick="addLien('liens-mono','','Autre')">+ Ajouter un lien</button></div>
-          <div class="fe-comp"><div class="fe-compl">Compléments manuels — nature de l'opération, actionnariat, filiales, organigramme</div><textarea id="comp-mono" placeholder="Ex : Acquisition totale par le fonds X. Holding détenue à 60% par M. Dupont…"></textarea></div>
+          <div class="fe-comp"><div class="fe-compl">Complements manuels — nature de l'operation, actionnariat, filiales, organigramme</div><textarea id="comp-mono" placeholder="Ex : Acquisition totale par le fonds X. Holding detenue a 60% par M. Dupont…"></textarea></div>
         </div>
       </div>
     </div>
-    <div class="fs" id="bloc-multi" style="display:none;"><div class="fs-t"><span class="fs-n">02</span>Entités *</div><div class="ib">Ajoutez chaque entité du périmètre.</div><div class="entl" id="entl"></div><button class="badd" onclick="addEnt()">+ Ajouter une entité</button></div>
+    <div class="fs" id="bloc-multi" style="display:none;"><div class="fs-t"><span class="fs-n">02</span>Entites *</div><div class="ib">Ajoutez chaque entite du perimetre.</div><div class="entl" id="entl"></div><button class="badd" onclick="addEnt()">+ Ajouter une entite</button></div>
     <div class="fs"><div class="fs-t"><span class="fs-n">03</span>Documents <span style="font-weight:400;color:var(--gris-clair);font-size:8px;letter-spacing:0.14em;border:1px solid var(--gris-tres-clair);padding:2px 6px;">Facultatif</span></div>
-      <div class="upz" ondragover="dgo(event)" ondragleave="dgl()" ondrop="ddr(event)"><input type="file" id="inp-files" multiple onchange="addFiles(this.files)"><div class="upt">Déposer les fichiers ici</div><div class="ups">ou cliquer pour parcourir — tous formats acceptés</div></div>
+      <div class="upz" ondragover="dgo(event)" ondragleave="dgl()" ondrop="ddr(event)"><input type="file" id="inp-files" multiple onchange="addFiles(this.files)"><div class="upt">Deposer les fichiers ici</div><div class="ups">ou cliquer pour parcourir — tous formats acceptes</div></div>
       <div class="flist" id="flist"></div>
     </div>
-    <div class="fa"><button class="bret" onclick="ap('proposition')">← Retour</button><button class="bsuiv" onclick="val1()">Étape suivante →</button></div>
+    <div class="fa"><button class="bret" onclick="ap('proposition')">← Retour</button><button class="bsuiv" onclick="val1()">Etape suivante →</button></div>
   </div>
   <div class="af"><div class="aft">Gavroche</div></div>
 </div>
 
-<!-- ÉTAPE 2 -->
+<!-- ETAPE 2 -->
 <div class="page" id="page-lead-sapiens-2">
   <div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><button class="bc" onclick="ap('proposition')">Proposition</button><span class="bc-sep">›</span><span class="bc actif">Lead sapiens</span></div>
-  <div class="stepper"><button class="stepper-item complete" onclick="ap('lead-sapiens-1')"><div class="stepper-num">✓</div><div class="stepper-label">Identification de l'entité</div></button><button class="stepper-item actif"><div class="stepper-num">2</div><div class="stepper-label">Éléments de la propale</div></button><button class="stepper-item inactif"><div class="stepper-num">3</div><div class="stepper-label">Présentation & édition</div></button></div>
-  <div class="admin-header"><div class="admin-titre">Éléments de la <em>propale</em></div><div class="admin-sous-titre">Les champs marqués * sont obligatoires.</div></div>
+  <div class="stepper"><button class="stepper-item complete" onclick="ap('lead-sapiens-1')"><div class="stepper-num">✓</div><div class="stepper-label">Identification de l'entite</div></button><button class="stepper-item actif"><div class="stepper-num">2</div><div class="stepper-label">Elements de la propale</div></button><button class="stepper-item inactif"><div class="stepper-num">3</div><div class="stepper-label">Presentation & edition</div></button></div>
+  <div class="admin-header"><div class="admin-titre">Elements de la <em>propale</em></div><div class="admin-sous-titre">Les champs marques * sont obligatoires.</div></div>
   <div class="fw">
     <div class="fs"><div class="fs-t"><span class="fs-n">01</span>Type de mission *</div><div class="tg"><button class="to on" id="btn-bsdd" onclick="stg('btn-bsdd','btn-vdd')">BSDD — Buy-Side</button><button class="to" id="btn-vdd" onclick="stg('btn-vdd','btn-bsdd')">VDD — Sell-Side</button></div></div>
     <div class="fs"><div class="fs-t"><span class="fs-n">02</span>Type de DD *</div><div class="tg"><button class="to on" id="btn-std" onclick="stg('btn-std','btn-fla')">Standard DD</button><button class="to" id="btn-fla" onclick="stg('btn-fla','btn-std')">Flash DD</button></div></div>
-    <div class="fs"><div class="fs-t"><span class="fs-n">03</span>Parties à inclure *</div><div class="pg">
-      <label class="pi"><input type="checkbox" id="p1" checked><div class="pil"><strong>1 — Contexte de l'opération</strong>Périmètre, organigramme, business, métriques, marché, presse</div></label>
-      <label class="pi"><input type="checkbox" id="p2" checked><div class="pil"><strong>2 — Notre approche</strong>Rétroplanning, accès à l'information</div></label>
-      <label class="pi"><input type="checkbox" id="p3" checked><div class="pil"><strong>3 — Périmètre des travaux</strong>Objectifs et procédures d'audit</div></label>
+    <div class="fs"><div class="fs-t"><span class="fs-n">03</span>Parties a inclure *</div><div class="pg">
+      <label class="pi"><input type="checkbox" id="p1" checked><div class="pil"><strong>1 — Contexte de l'operation</strong>Perimetre, organigramme, business, metriques, marche, presse</div></label>
+      <label class="pi"><input type="checkbox" id="p2" checked><div class="pil"><strong>2 — Notre approche</strong>Retroplanning, acces a l'information</div></label>
+      <label class="pi"><input type="checkbox" id="p3" checked><div class="pil"><strong>3 — Perimetre des travaux</strong>Objectifs et procedures d'audit</div></label>
       <label class="pi"><input type="checkbox" id="p4" checked><div class="pil"><strong>4 — Conditions d'intervention</strong>Planning et honoraires</div></label>
-      <label class="pi"><input type="checkbox" id="p5" checked><div class="pil"><strong>5 — Références</strong>Missions passées pertinentes</div></label>
+      <label class="pi"><input type="checkbox" id="p5" checked><div class="pil"><strong>5 — References</strong>Missions passees pertinentes</div></label>
     </div></div>
-    <div class="fs"><div class="fs-t"><span class="fs-n">04</span>Historique analysé *</div><div class="exl" id="exl"><div class="exh"><div class="exhl">Exercice</div><div class="exhl">Date de clôture</div><div class="exhl">Libellé</div><div></div></div></div><button class="badd" onclick="addEx()">+ Ajouter un exercice</button></div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">04</span>Historique analyse *</div><div class="exl" id="exl"><div class="exh"><div class="exhl">Exercice</div><div class="exhl">Date de cloture</div><div class="exhl">Libelle</div><div></div></div></div><button class="badd" onclick="addEx()">+ Ajouter un exercice</button></div>
     <div class="fs"><div class="fs-t"><span class="fs-n">05</span>Planning d'intervention *</div>
-      <div class="ib">Les dates de début des phases 2 et 3 se calculent automatiquement en jours ouvrés.</div>
+      <div class="ib">Les dates de debut des phases 2 et 3 se calculent automatiquement en jours ouvres.</div>
       <div class="plg">
-        <div class="pli"><div class="pln">Phase 1</div><div class="plt">Préparation</div><div class="pld">Envoi IRL, kick-off, accès à l'information.</div><div class="fl" style="margin-bottom:6px;">Date de début <span class="req">*</span></div><input class="fi" type="date" id="dp1" style="margin-bottom:12px;" oninput="majP()"><div class="fl" style="margin-bottom:6px;">Durée (jours ouvrés)</div><input class="fi" type="number" id="dur1" min="1" max="60" placeholder="ex : 5" oninput="majP()"></div>
-        <div class="pli"><div class="pln">Phase 2</div><div class="plt">Exécution</div><div class="pld">Travaux d'analyse, sessions Q&R.</div><div class="fl" style="margin-bottom:6px;">Date de début</div><input class="fi" type="date" id="dp2" style="margin-bottom:12px;background:var(--gris-surface);" readonly><div class="fl" style="margin-bottom:6px;">Durée (jours ouvrés)</div><input class="fi" type="number" id="dur2" min="1" max="60" placeholder="ex : 15" oninput="majP()"><div class="pnote" id="note2"></div></div>
-        <div class="pli"><div class="pln">Phase 3</div><div class="plt">Finalisation</div><div class="pld">Remise rapport, relecture, validation.</div><div class="fl" style="margin-bottom:6px;">Date de début</div><input class="fi" type="date" id="dp3" style="margin-bottom:12px;background:var(--gris-surface);" readonly><div class="fl" style="margin-bottom:6px;">Durée (jours ouvrés)</div><input class="fi" type="number" id="dur3" min="1" max="60" placeholder="ex : 5" oninput="majP()"><div class="pnote" id="note3"></div></div>
+        <div class="pli"><div class="pln">Phase 1</div><div class="plt">Preparation</div><div class="pld">Envoi IRL, kick-off, acces a l'information.</div><div class="fl" style="margin-bottom:6px;">Date de debut <span class="req">*</span></div><input class="fi" type="date" id="dp1" style="margin-bottom:12px;" oninput="majP()"><div class="fl" style="margin-bottom:6px;">Duree (jours ouvres)</div><input class="fi" type="number" id="dur1" min="1" max="60" placeholder="ex : 5" oninput="majP()"></div>
+        <div class="pli"><div class="pln">Phase 2</div><div class="plt">Execution</div><div class="pld">Travaux d'analyse, sessions Q&R.</div><div class="fl" style="margin-bottom:6px;">Date de debut</div><input class="fi" type="date" id="dp2" style="margin-bottom:12px;background:var(--gris-surface);" readonly><div class="fl" style="margin-bottom:6px;">Duree (jours ouvres)</div><input class="fi" type="number" id="dur2" min="1" max="60" placeholder="ex : 15" oninput="majP()"><div class="pnote" id="note2"></div></div>
+        <div class="pli"><div class="pln">Phase 3</div><div class="plt">Finalisation</div><div class="pld">Remise rapport, relecture, validation.</div><div class="fl" style="margin-bottom:6px;">Date de debut</div><input class="fi" type="date" id="dp3" style="margin-bottom:12px;background:var(--gris-surface);" readonly><div class="fl" style="margin-bottom:6px;">Duree (jours ouvres)</div><input class="fi" type="number" id="dur3" min="1" max="60" placeholder="ex : 5" oninput="majP()"><div class="pnote" id="note3"></div></div>
       </div>
     </div>
     <div class="fs"><div class="fs-t"><span class="fs-n">06</span>Honoraires *</div>
-      <div class="hp"><div class="hpl">Prestation principale *</div><div class="fg" style="margin-bottom:0;"><div class="fl">Libellé</div><input class="fi" type="text" id="hon-lib" placeholder="ex : Due Diligence Financière" style="margin-bottom:12px;"><div class="fl">Montant HT</div><div style="display:flex;"><div class="mpfx">€</div><input class="fi" type="number" id="hon-mt" placeholder="ex : 42 000" style="border-left:none;"></div></div></div>
+      <div class="hp"><div class="hpl">Prestation principale *</div><div class="fg" style="margin-bottom:0;"><div class="fl">Libelle</div><input class="fi" type="text" id="hon-lib" placeholder="ex : Due Diligence Financiere" style="margin-bottom:12px;"><div class="fl">Montant HT</div><div style="display:flex;"><div class="mpfx">€</div><input class="fi" type="number" id="hon-mt" placeholder="ex : 42 000" style="border-left:none;"></div></div></div>
       <div class="tirl" id="tirl"></div><button class="badd" onclick="addTir()">+ Ajouter un tiroir facultatif</button>
     </div>
-    <div class="fs"><div class="fs-t"><span class="fs-n">07</span>Commentaires <span style="font-weight:400;color:var(--gris-clair);font-size:8px;letter-spacing:0.14em;border:1px solid var(--gris-tres-clair);padding:2px 6px;">Facultatif</span></div><textarea class="fta" id="comm" placeholder="Contexte particulier, secteur si non identifié, fourchette de CA…"></textarea></div>
-    <div class="fa"><button class="bret" onclick="ap('lead-sapiens-1')">← Étape précédente</button><button class="bsuiv" onclick="val2()">Générer la propale →</button></div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">07</span>Commentaires <span style="font-weight:400;color:var(--gris-clair);font-size:8px;letter-spacing:0.14em;border:1px solid var(--gris-tres-clair);padding:2px 6px;">Facultatif</span></div><textarea class="fta" id="comm" placeholder="Contexte particulier, secteur si non identifie, fourchette de CA…"></textarea></div>
+    <div class="fa"><button class="bret" onclick="ap('lead-sapiens-1')">← Etape precedente</button><button class="bsuiv" onclick="val2()">Generer la propale →</button></div>
   </div>
   <div class="af"><div class="aft">Gavroche</div></div>
 </div>
 
-<!-- ÉTAPE 3 -->
+<!-- ETAPE 3 -->
 <div class="page" id="page-lead-sapiens-3">
   <div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><button class="bc" onclick="ap('proposition')">Proposition</button><span class="bc-sep">›</span><span class="bc actif">Lead sapiens</span></div>
-  <div class="stepper"><button class="stepper-item complete" onclick="ap('lead-sapiens-1')"><div class="stepper-num">✓</div><div class="stepper-label">Identification de l'entité</div></button><button class="stepper-item complete" onclick="ap('lead-sapiens-2')"><div class="stepper-num">✓</div><div class="stepper-label">Éléments de la propale</div></button><button class="stepper-item actif"><div class="stepper-num">3</div><div class="stepper-label">Présentation & édition</div></button></div>
+  <div class="stepper"><button class="stepper-item complete" onclick="ap('lead-sapiens-1')"><div class="stepper-num">✓</div><div class="stepper-label">Identification de l'entite</div></button><button class="stepper-item complete" onclick="ap('lead-sapiens-2')"><div class="stepper-num">✓</div><div class="stepper-label">Elements de la propale</div></button><button class="stepper-item actif"><div class="stepper-num">3</div><div class="stepper-label">Presentation & edition</div></button></div>
   <div class="pl">
     <div class="ssb"><div class="ssbt">Structure</div><div id="snav"></div><div class="ssba"><button class="bexp" onclick="alert('Export PPTX — en construction.')">↓ Exporter en PPTX</button></div></div>
-    <div class="sm"><div class="sv" id="sv" style="position:relative;"><div class="geno" id="geno"><div class="gens"></div><div class="gent">Génération en cours</div><div class="genl" id="genl">Initialisation…</div></div></div><div class="sctrl"><button class="cbtn" onclick="gS(Math.max(0,(window.sA||0)-1))">← Précédent</button><button class="cbtn" id="slide-ctr">— / —</button><button class="cbtn" onclick="gS(Math.min((window.sD||[]).length-1,(window.sA||0)+1))">Suivant →</button></div></div>
-    <div class="cp"><div class="cp-h"><div class="cp-t">Assistant</div><div class="cp-s">Demandez une modification…</div></div><div class="cp-m" id="cp-m"><div class="cpb cpb-a">La propale est en cours de génération.</div></div><div class="cpld" id="cpld" style="display:none;"><div></div><div></div><div></div></div><div class="cp-iw"><textarea class="cp-i" id="cp-i" rows="3" placeholder="Ex : Reformule le contexte…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send();}"></textarea><button class="cp-send" onclick="send()">Envoyer</button></div></div>
+    <div class="sm"><div class="sv" id="sv" style="position:relative;"><div class="geno" id="geno"><div class="gens"></div><div class="gent">Generation en cours</div><div class="genl" id="genl">Initialisation…</div></div></div><div class="sctrl"><button class="cbtn" onclick="gS(Math.max(0,(window.sA||0)-1))">← Precedent</button><button class="cbtn" id="slide-ctr">— / —</button><button class="cbtn" onclick="gS(Math.min((window.sD||[]).length-1,(window.sA||0)+1))">Suivant →</button></div></div>
+    <div class="cp"><div class="cp-h"><div class="cp-t">Assistant</div><div class="cp-s">Demandez une modification…</div></div><div class="cp-m" id="cp-m"><div class="cpb cpb-a">La propale est en cours de generation.</div></div><div class="cpld" id="cpld" style="display:none;"><div></div><div></div><div></div></div><div class="cp-iw"><textarea class="cp-i" id="cp-i" rows="3" placeholder="Ex : Reformule le contexte…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send();}"></textarea><button class="cp-send" onclick="send()">Envoyer</button></div></div>
   </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     EXECUTION — Liste des missions
+═══════════════════════════════════════════ -->
+<div class="page" id="page-execution">
+  <div class="breadcrumb">
+    <button class="bc" onclick="ap('dashboard')">Accueil</button>
+    <span class="bc-sep">›</span>
+    <span class="bc actif">Execution de la mission</span>
+  </div>
+  <div class="admin-header">
+    <div class="admin-titre">Execution de <em>la mission</em></div>
+    <div class="admin-sous-titre">Selectionnez une mission pour acceder a son workflow.</div>
+  </div>
+  <div class="page-c">
+    <div class="actions-bar">
+      <div class="page-cl" style="margin-bottom:0;">Missions actives</div>
+    </div>
+    <table class="mission-table">
+      <thead>
+        <tr>
+          <th>Societe cible</th>
+          <th>Type</th>
+          <th>Ouverture</th>
+          <th>Phase en cours</th>
+          <th>Statut</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="mission-row" onclick="ap('mission-fiche')">
+          <td>
+            <div class="mission-nom">Edmond Telecom</div>
+            <div class="mission-type">BSDD — Standard DD</div>
+          </td>
+          <td>Buy-Side</td>
+          <td>09 dec. 2025</td>
+          <td>Collecte de l'information</td>
+          <td><span class="badge collecte">En cours</span></td>
+          <td style="text-align:right;color:var(--gris-tres-clair);font-size:14px;">→</td>
+        </tr>
+        <tr class="mission-row" onclick="alert('Mission archivee — propale perdue.')">
+          <td>
+            <div class="mission-nom">Voltaria SAS</div>
+            <div class="mission-type">BSDD — Flash DD</div>
+          </td>
+          <td>Buy-Side</td>
+          <td>15 nov. 2025</td>
+          <td>—</td>
+          <td><span class="badge">Perdue</span></td>
+          <td style="text-align:right;color:var(--gris-tres-clair);font-size:14px;">→</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="af"><div class="aft">Gavroche</div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     EXECUTION — Fiche mission (workflow)
+═══════════════════════════════════════════ -->
+<div class="page" id="page-mission-fiche">
+  <div class="breadcrumb">
+    <button class="bc" onclick="ap('dashboard')">Accueil</button>
+    <span class="bc-sep">›</span>
+    <button class="bc" onclick="ap('execution')">Execution</button>
+    <span class="bc-sep">›</span>
+    <span class="bc actif">Edmond Telecom</span>
+  </div>
+  <div class="mission-header">
+    <div class="admin-titre">Edmond <em>Telecom</em></div>
+    <div class="mission-meta">
+      <div class="mission-meta-item"><div class="mission-meta-label">Type de mission</div><div class="mission-meta-val">BSDD — Standard DD</div></div>
+      <div class="mission-meta-item"><div class="mission-meta-label">Client</div><div class="mission-meta-val">Mercedes / Baron Danglars</div></div>
+      <div class="mission-meta-item"><div class="mission-meta-label">Ouverture</div><div class="mission-meta-val">09 decembre 2025</div></div>
+      <div class="mission-meta-item"><div class="mission-meta-label">Honoraires</div><div class="mission-meta-val">12 500 EUR HT</div></div>
+      <div class="mission-meta-item"><div class="mission-meta-label">Responsable</div><div class="mission-meta-val">F. Thiery</div></div>
+    </div>
+  </div>
+  <div class="workflow-wrap">
+    <div class="section-head">
+      <div class="section-head-titre">Workflow de la mission</div>
+      <div class="section-head-desc">Cliquez sur une phase pour y acceder. Les phases se debloquent sequentiellement.</div>
+    </div>
+    <div class="workflow-phases">
+      <div class="wph" onclick="ap('mission-collecte')">
+        <div class="wph-n">Phase 01</div>
+        <div class="wph-t">Collecte de l'information</div>
+        <div class="wph-s">Upload des documents par categorie. Data room structuree.</div>
+        <span class="wph-badge in-progress">En cours</span>
+      </div>
+      <div class="wph locked">
+        <div class="wph-n">Phase 02</div>
+        <div class="wph-t">Traitement — Databook</div>
+        <div class="wph-s">Exploitation des FEC. Construction PL1, BS1, CF1.</div>
+        <span class="wph-badge">En attente</span>
+      </div>
+      <div class="wph locked">
+        <div class="wph-n">Phase 03</div>
+        <div class="wph-t">Analyses complementaires</div>
+        <div class="wph-s">Normalisation EBITDA, BFR, tresorerie nette ajustee.</div>
+        <span class="wph-badge">En attente</span>
+      </div>
+      <div class="wph locked">
+        <div class="wph-n">Phase 04</div>
+        <div class="wph-t">Rapport</div>
+        <div class="wph-s">Formalisation des observations. Generation du rapport.</div>
+        <span class="wph-badge">En attente</span>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin-top:8px;">
+      <div class="section-head-titre">Documents de la mission</div>
+    </div>
+    <div class="actions-bar">
+      <button class="btn-action" onclick="ap('mission-collecte')">Acceder a la data room →</button>
+      <button class="btn-action" onclick="alert('Lettre de mission — en construction.')">Lettre de mission</button>
+      <button class="btn-action" onclick="alert('Propale d\'origine — en consultation.')">Propale d'origine</button>
+    </div>
+  </div>
+  <div class="af"><div class="aft">Gavroche</div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     EXECUTION — Collecte de l'information
+═══════════════════════════════════════════ -->
+<div class="page" id="page-mission-collecte">
+  <div class="breadcrumb">
+    <button class="bc" onclick="ap('dashboard')">Accueil</button>
+    <span class="bc-sep">›</span>
+    <button class="bc" onclick="ap('execution')">Execution</button>
+    <span class="bc-sep">›</span>
+    <button class="bc" onclick="ap('mission-fiche')">Edmond Telecom</button>
+    <span class="bc-sep">›</span>
+    <span class="bc actif">Collecte</span>
+  </div>
+  <div class="admin-header">
+    <div class="admin-titre">Collecte de <em>l'information</em></div>
+    <div class="admin-sous-titre">Deposez les documents recus dans les categories correspondantes.</div>
+  </div>
+  <div class="page-c">
+    <div class="actions-bar" style="justify-content:space-between;">
+      <div style="display:flex;gap:12px;">
+        <button class="btn-action" onclick="ap('mission-fiche')">← Retour a la mission</button>
+      </div>
+      <button class="btn-action primary" onclick="ap('mission-databook')">Passer au traitement →</button>
+    </div>
+
+    <div class="collecte-grid">
+
+      <!-- FEC -->
+      <div class="cat-bloc">
+        <div class="cat-header">
+          <div class="cat-titre">FEC — Fichier des Ecritures Comptables</div>
+          <div class="cat-count" id="count-fec">0 fichier</div>
+          <button class="cat-upload" onclick="trigUpload('fec')">+ Ajouter</button>
+        </div>
+        <div class="cat-files" id="files-fec">
+          <div class="cat-empty">Aucun fichier depose — attendu : FEC_SIRET_AAAAMM.txt</div>
+        </div>
+        <input type="file" id="inp-fec" style="display:none;" multiple onchange="handleCatUpload(this,'fec')">
+      </div>
+
+      <!-- Plaquettes -->
+      <div class="cat-bloc">
+        <div class="cat-header">
+          <div class="cat-titre">Plaquettes et comptes audites</div>
+          <div class="cat-count" id="count-plaquettes">1 fichier</div>
+          <button class="cat-upload" onclick="trigUpload('plaquettes')">+ Ajouter</button>
+        </div>
+        <div class="cat-files" id="files-plaquettes">
+          <div class="cat-file">
+            <span class="cat-file-name">Comptes_Edmond_FY2024.pdf</span>
+            <span class="cat-file-meta">PDF — 2,4 Mo</span>
+          </div>
+        </div>
+        <input type="file" id="inp-plaquettes" style="display:none;" multiple onchange="handleCatUpload(this,'plaquettes')">
+      </div>
+
+      <!-- Balances agees -->
+      <div class="cat-bloc">
+        <div class="cat-header">
+          <div class="cat-titre">Balances agees clients et fournisseurs</div>
+          <div class="cat-count" id="count-balances">0 fichier</div>
+          <button class="cat-upload" onclick="trigUpload('balances')">+ Ajouter</button>
+        </div>
+        <div class="cat-files" id="files-balances">
+          <div class="cat-empty">Aucun fichier depose</div>
+        </div>
+        <input type="file" id="inp-balances" style="display:none;" multiple onchange="handleCatUpload(this,'balances')">
+      </div>
+
+      <!-- Contrats de bail -->
+      <div class="cat-bloc">
+        <div class="cat-header">
+          <div class="cat-titre">Contrats de bail</div>
+          <div class="cat-count" id="count-bail">0 fichier</div>
+          <button class="cat-upload" onclick="trigUpload('bail')">+ Ajouter</button>
+        </div>
+        <div class="cat-files" id="files-bail">
+          <div class="cat-empty">Aucun fichier depose</div>
+        </div>
+        <input type="file" id="inp-bail" style="display:none;" multiple onchange="handleCatUpload(this,'bail')">
+      </div>
+
+      <!-- Credit-bail -->
+      <div class="cat-bloc">
+        <div class="cat-header">
+          <div class="cat-titre">Conventions de credit-bail</div>
+          <div class="cat-count" id="count-cb">0 fichier</div>
+          <button class="cat-upload" onclick="trigUpload('cb')">+ Ajouter</button>
+        </div>
+        <div class="cat-files" id="files-cb">
+          <div class="cat-empty">Aucun fichier depose</div>
+        </div>
+        <input type="file" id="inp-cb" style="display:none;" multiple onchange="handleCatUpload(this,'cb')">
+      </div>
+
+      <!-- Emprunts -->
+      <div class="cat-bloc">
+        <div class="cat-header">
+          <div class="cat-titre">Contrats d'emprunts bancaires</div>
+          <div class="cat-count" id="count-emprunts">0 fichier</div>
+          <button class="cat-upload" onclick="trigUpload('emprunts')">+ Ajouter</button>
+        </div>
+        <div class="cat-files" id="files-emprunts">
+          <div class="cat-empty">Aucun fichier depose</div>
+        </div>
+        <input type="file" id="inp-emprunts" style="display:none;" multiple onchange="handleCatUpload(this,'emprunts')">
+      </div>
+
+      <!-- Donnees de paie -->
+      <div class="cat-bloc">
+        <div class="cat-header">
+          <div class="cat-titre">Donnees de paie et masse salariale</div>
+          <div class="cat-count" id="count-paie">0 fichier</div>
+          <button class="cat-upload" onclick="trigUpload('paie')">+ Ajouter</button>
+        </div>
+        <div class="cat-files" id="files-paie">
+          <div class="cat-empty">Aucun fichier depose</div>
+        </div>
+        <input type="file" id="inp-paie" style="display:none;" multiple onchange="handleCatUpload(this,'paie')">
+      </div>
+
+      <!-- Autres -->
+      <div class="cat-bloc">
+        <div class="cat-header">
+          <div class="cat-titre">Autres documents</div>
+          <div class="cat-count" id="count-autres">0 fichier</div>
+          <button class="cat-upload" onclick="trigUpload('autres')">+ Ajouter</button>
+        </div>
+        <div class="cat-files" id="files-autres">
+          <div class="cat-empty">Documents ne rentrant dans aucune autre categorie</div>
+        </div>
+        <input type="file" id="inp-autres" style="display:none;" multiple onchange="handleCatUpload(this,'autres')">
+      </div>
+
+    </div>
+  </div>
+  <div class="af"><div class="aft">Gavroche</div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     EXECUTION — Traitement Databook
+═══════════════════════════════════════════ -->
+<div class="page" id="page-mission-databook">
+  <div class="breadcrumb">
+    <button class="bc" onclick="ap('dashboard')">Accueil</button>
+    <span class="bc-sep">›</span>
+    <button class="bc" onclick="ap('execution')">Execution</button>
+    <span class="bc-sep">›</span>
+    <button class="bc" onclick="ap('mission-fiche')">Edmond Telecom</button>
+    <span class="bc-sep">›</span>
+    <span class="bc actif">Databook</span>
+  </div>
+  <div class="admin-header">
+    <div class="admin-titre">Traitement — <em>Databook</em></div>
+    <div class="admin-sous-titre">Construction des onglets d'analyse a partir des FEC deposes.</div>
+  </div>
+  <div class="page-c">
+    <div class="actions-bar" style="justify-content:space-between;">
+      <button class="btn-action" onclick="ap('mission-collecte')">← Retour collecte</button>
+      <button class="btn-action primary" onclick="ap('mission-rapport')">Passer au rapport →</button>
+    </div>
+
+    <div class="ib" style="margin-bottom:28px;">
+      <strong>FEC detectes :</strong> 0 fichier depose. Deposez vos FEC dans la section Collecte avant de lancer le traitement.
+    </div>
+
+    <div class="section-head">
+      <div class="section-head-titre">Onglets de base</div>
+      <div class="section-head-desc">Ces trois onglets sont construits automatiquement a partir des FEC. Ils constituent la base de toutes les analyses subsequentes.</div>
+    </div>
+
+    <div class="databook-modules">
+      <div class="db-mod">
+        <div class="db-mod-n">Onglet 01</div>
+        <div class="db-mod-t">ScratchPad — Balance mensuelle</div>
+        <div class="db-mod-d">Balance generale mensuelle reconstituee depuis le FEC, compte par compte. Inclut les cumuls annuels. Base de calcul pour PL1, BS1 et CF1 via SUMIFS.</div>
+        <span class="db-mod-badge">En attente des FEC</span>
+      </div>
+      <div class="db-mod">
+        <div class="db-mod-n">Onglet 02</div>
+        <div class="db-mod-t">PL1 — Compte de resultat economique</div>
+        <div class="db-mod-d">Compte de resultat annuel en format economique. Revenus, marge brute, MSCD, EBITDA, EBIT, resultat net. Alimente par SUMIFS sur le ScratchPad.</div>
+        <span class="db-mod-badge">En attente des FEC</span>
+      </div>
+      <div class="db-mod">
+        <div class="db-mod-n">Onglet 03</div>
+        <div class="db-mod-t">BS1 — Bilan economique</div>
+        <div class="db-mod-d">Bilan annuel reconstruit depuis les soldes de comptes du ScratchPad. Actif, passif, fonds propres.</div>
+        <span class="db-mod-badge">En attente des FEC</span>
+      </div>
+      <div class="db-mod">
+        <div class="db-mod-n">Onglet 04</div>
+        <div class="db-mod-t">CF1 — Cash-flows</div>
+        <div class="db-mod-d">Tableau des flux de tresorerie annuel. Flux operationnels, d'investissement et de financement. Taux de conversion EBITDA calcule automatiquement.</div>
+        <span class="db-mod-badge">En attente des FEC</span>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin-top:8px;">
+      <div class="section-head-titre">Analyses complementaires</div>
+      <div class="section-head-desc">A definir ensemble — ces onglets seront construits apres validation des onglets de base.</div>
+    </div>
+
+    <div class="databook-modules">
+      <div class="db-mod">
+        <div class="db-mod-n">A venir</div>
+        <div class="db-mod-t">Normalisation de l'EBITDA</div>
+        <div class="db-mod-d">Identification et retraitement des elements non recurrents. Construction du bridge EBITDA reporte / EBITDA ajuste.</div>
+        <span class="db-mod-badge">A definir</span>
+      </div>
+      <div class="db-mod">
+        <div class="db-mod-n">A venir</div>
+        <div class="db-mod-t">Analyse du BFR</div>
+        <div class="db-mod-d">Evolution du besoin en fonds de roulement. DSO, DPO, rotation des stocks. Determination du BFR normatif.</div>
+        <span class="db-mod-badge">A definir</span>
+      </div>
+      <div class="db-mod">
+        <div class="db-mod-n">A venir</div>
+        <div class="db-mod-t">Tresorerie nette ajustee</div>
+        <div class="db-mod-d">Passage de la tresorerie reportee a la tresorerie nette ajustee. Identification des elements assimiles a de la dette ou de la tresorerie.</div>
+        <span class="db-mod-badge">A definir</span>
+      </div>
+      <div class="db-mod">
+        <div class="db-mod-n">A venir</div>
+        <div class="db-mod-t">Analyses sectorielles</div>
+        <div class="db-mod-d">Comparaison de la performance de la cible avec ses pairs. Benchmarks de marche, multiples de valorisation.</div>
+        <span class="db-mod-badge">A definir</span>
+      </div>
+    </div>
+
+    <div class="actions-bar" style="margin-top:8px;">
+      <button class="btn-action primary" onclick="alert('Generation du Databook — disponible des que les FEC sont deposes.')">Lancer la generation du Databook</button>
+      <button class="btn-action" onclick="alert('Telecharger le Databook — en construction.')">Telecharger le Databook</button>
+    </div>
+  </div>
+  <div class="af"><div class="aft">Gavroche</div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     EXECUTION — Rapport
+═══════════════════════════════════════════ -->
+<div class="page" id="page-mission-rapport">
+  <div class="breadcrumb">
+    <button class="bc" onclick="ap('dashboard')">Accueil</button>
+    <span class="bc-sep">›</span>
+    <button class="bc" onclick="ap('execution')">Execution</button>
+    <span class="bc-sep">›</span>
+    <button class="bc" onclick="ap('mission-fiche')">Edmond Telecom</button>
+    <span class="bc-sep">›</span>
+    <span class="bc actif">Rapport</span>
+  </div>
+  <div class="admin-header">
+    <div class="admin-titre">Rapport de <em>due diligence</em></div>
+    <div class="admin-sous-titre">Formalisation des observations et generation du rapport final.</div>
+  </div>
+  <div class="page-c">
+    <div class="actions-bar" style="justify-content:space-between;">
+      <button class="btn-action" onclick="ap('mission-databook')">← Retour Databook</button>
+      <button class="btn-action primary" onclick="alert('Generation du rapport — en construction.')">Generer le rapport</button>
+    </div>
+
+    <div class="section-head">
+      <div class="section-head-titre">Structure du rapport</div>
+      <div class="section-head-desc">Chaque section correspond a une partie du rapport final. Cliquez pour rediger les observations.</div>
+    </div>
+
+    <div class="rapport-sections">
+      <div class="rap-section" onclick="alert('Lettre d\'introduction — en construction.')">
+        <div class="rap-section-left">
+          <div class="rap-section-n">Section 00</div>
+          <div class="rap-section-t">Lettre d'introduction</div>
+          <div class="rap-section-d">Lettre au client, perimetre et restrictions d'usage du rapport.</div>
+        </div>
+        <span class="rap-arrow">→</span>
+      </div>
+      <div class="rap-section" onclick="alert('Executive Summary — en construction.')">
+        <div class="rap-section-left">
+          <div class="rap-section-n">Section 01</div>
+          <div class="rap-section-t">Executive Summary</div>
+          <div class="rap-section-d">Synthese des principaux constats. Agregats de valorisation. Points d'attention.</div>
+        </div>
+        <span class="rap-arrow">→</span>
+      </div>
+      <div class="rap-section" onclick="alert('Analyse de rentabilite — en construction.')">
+        <div class="rap-section-left">
+          <div class="rap-section-n">Section 02</div>
+          <div class="rap-section-t">Analyse de rentabilite</div>
+          <div class="rap-section-d">Compte de resultat economique. Decomposition des revenus et des marges. Saisonnalite.</div>
+        </div>
+        <span class="rap-arrow">→</span>
+      </div>
+      <div class="rap-section" onclick="alert('Normalisation EBITDA — en construction.')">
+        <div class="rap-section-left">
+          <div class="rap-section-n">Section 03</div>
+          <div class="rap-section-t">Normalisation de l'EBITDA</div>
+          <div class="rap-section-d">Identification des elements non recurrents. Bridge EBITDA reporte / ajuste.</div>
+        </div>
+        <span class="rap-arrow">→</span>
+      </div>
+      <div class="rap-section" onclick="alert('BFR — en construction.')">
+        <div class="rap-section-left">
+          <div class="rap-section-n">Section 04</div>
+          <div class="rap-section-t">Financement du cycle d'exploitation</div>
+          <div class="rap-section-d">BFR et cash-flows. Taux de conversion EBITDA. Investissements.</div>
+        </div>
+        <span class="rap-arrow">→</span>
+      </div>
+      <div class="rap-section" onclick="alert('Tresorerie nette — en construction.')">
+        <div class="rap-section-left">
+          <div class="rap-section-n">Section 05</div>
+          <div class="rap-section-t">Tresorerie nette ajustee</div>
+          <div class="rap-section-d">Passage de la tresorerie reportee a la tresorerie nette ajustee. Elements assimiles.</div>
+        </div>
+        <span class="rap-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="actions-bar" style="margin-top:24px;">
+      <button class="btn-action primary" onclick="alert('Generation du rapport PPTX — en construction.')">Generer le rapport PPTX</button>
+      <button class="btn-action" onclick="alert('Apercu du rapport — en construction.')">Apercu</button>
+      <button class="btn-action" onclick="alert('Exporter en PDF — en construction.')">Exporter en PDF</button>
+    </div>
+  </div>
+  <div class="af"><div class="aft">Gavroche</div></div>
 </div>
 
 <!-- STUBS -->
 <div class="page" id="page-crm"><div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">CRM</span></div><div class="admin-header"><div class="admin-titre">CRM</div><div class="admin-sous-titre">En construction.</div></div><div class="af"><div class="aft">Gavroche</div></div></div>
 <div class="page" id="page-contrat"><div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">Contractualisation</span></div><div class="admin-header"><div class="admin-titre">Contractualisation</div><div class="admin-sous-titre">En construction.</div></div><div class="af"><div class="aft">Gavroche</div></div></div>
-<div class="page" id="page-execution"><div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">Exécution</span></div><div class="admin-header"><div class="admin-titre">Exécution de <em>la mission</em></div><div class="admin-sous-titre">En construction.</div></div><div class="af"><div class="aft">Gavroche</div></div></div>
 <div class="page" id="page-restitution"><div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">Restitution</span></div><div class="admin-header"><div class="admin-titre">Restitution</div><div class="admin-sous-titre">En construction.</div></div><div class="af"><div class="aft">Gavroche</div></div></div>
 <div class="page" id="page-ddgenerator"><div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">DD Generator</span></div><div class="admin-header"><div class="admin-titre">DD Generator</div><div class="admin-sous-titre">En construction.</div></div><div class="af"><div class="aft">Gavroche</div></div></div>
 
 <script>
-// ── Navigation ──
+// Navigation
 function ap(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('actif'));const c=document.getElementById('page-'+id);if(c){c.classList.add('actif');window.scrollTo(0,0);}}
 function stg(a,b){document.getElementById(a).classList.add('on');document.getElementById(b).classList.remove('on');}
 
-// ── Mono/Multi ──
+// Mono/Multi
 let ts='mono';
 function setTS(t){ts=t;document.getElementById('btn-mono').classList.toggle('on',t==='mono');document.getElementById('btn-multi').classList.toggle('on',t==='multi');document.getElementById('bloc-mono').style.display=t==='mono'?'block':'none';document.getElementById('bloc-multi').style.display=t==='multi'?'block':'none';if(t==='multi'&&!document.getElementById('entl').children.length){addEnt();addEnt();}}
 
-// ── Planning jours ouvrés ──
+// Planning jours ouvres
 function addJO(dateStr,j){const d=new Date(dateStr);let n=0;while(n<j){d.setDate(d.getDate()+1);const w=d.getDay();if(w!==0&&w!==6)n++;}return d;}
 function fmtISO(d){return d.toISOString().split('T')[0];}
 function fmtFR(d){return d.toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});}
@@ -481,16 +1030,16 @@ function majP(){
   if(d1&&dur1){
     const d2=addJO(d1,dur1);
     document.getElementById('dp2').value=fmtISO(d2);
-    document.getElementById('note2').textContent='Début calculé : '+fmtFR(d2);
+    document.getElementById('note2').textContent='Debut calcule : '+fmtFR(d2);
     if(dur2){
       const d3=addJO(fmtISO(d2),dur2);
       document.getElementById('dp3').value=fmtISO(d3);
-      document.getElementById('note3').textContent='Début calculé : '+fmtFR(d3);
+      document.getElementById('note3').textContent='Debut calcule : '+fmtFR(d3);
     }
   }
 }
 
-// ── Autocomplete ──
+// Autocomplete
 let timers={},entSel=null,sRes={};
 async function rech(inp,mode){
   const q=inp.value.trim();const sb=document.getElementById('sl-'+mode);const sp=document.getElementById('sp-'+mode);
@@ -500,7 +1049,7 @@ async function rech(inp,mode){
     try{
       const r=await fetch('https://recherche-entreprises.api.gouv.fr/search?q='+encodeURIComponent(q)+'&per_page=8');
       const d=await r.json();const res=d.results||[];sRes[mode]=res;
-      if(!res.length){sb.innerHTML='<div class="si-0">Aucune entreprise trouvée</div>';}
+      if(!res.length){sb.innerHTML='<div class="si-0">Aucune entreprise trouvee</div>';}
       else{sb.innerHTML=res.map((r,i)=>{const s=r.siege||{};return '<div class="si" data-i="'+i+'" data-m="'+mode+'"><div class="si-n">'+(r.nom_complet||r.nom_raison_sociale||'—')+'</div><div class="si-m"><span>'+(r.siren||'—')+'</span>'+(s.libelle_commune?'<span>'+(s.code_postal||'')+' '+s.libelle_commune+'</span>':'')+'<span>'+(r.libelle_activite_principale||'')+'</span></div></div>';}).join('');
         sb.querySelectorAll('.si').forEach(el=>el.addEventListener('click',()=>selEnt(sRes[el.dataset.m][parseInt(el.dataset.i)],el.dataset.m)));
       }sb.classList.add('v');
@@ -524,7 +1073,7 @@ async function selEnt(r,mode){
   document.getElementById('sl-'+mode).classList.remove('v');
   const errEl=document.getElementById('err-'+mode);if(errEl)errEl.classList.remove('v');
   const nom=r.nom_complet||r.nom_raison_sociale||'—';
-  const statut=r.etat_administratif==='A'?'Active':(r.etat_administratif==='F'?'Fermée':'—');
+  const statut=r.etat_administratif==='A'?'Active':(r.etat_administratif==='F'?'Fermee':'—');
   const siren=r.siren||'—';
   document.getElementById('fe-n-mono').textContent=nom;
   const sEl=document.getElementById('fe-s-mono');sEl.textContent=statut;sEl.className='fe-s'+(statut==='Active'?' ok':'');
@@ -543,7 +1092,7 @@ async function selEnt(r,mode){
   chSite(nom,le);
   document.getElementById('fe-mono').classList.add('v');
 }
-function addLienD(c,url,label,t){const d=document.createElement('div');d.className='lrow';const inp=document.createElement('input');inp.className='linput';inp.type='url';inp.value=url;inp.placeholder='URL non trouvée';const badge=document.createElement('span');badge.className='lbadge '+t;badge.textContent=label;const btnOpen=document.createElement('button');btnOpen.className='lopen';btnOpen.textContent='↗';btnOpen.title='Ouvrir';btnOpen.onclick=function(){if(inp.value)window.open(inp.value,'_blank');};const btnDel=document.createElement('button');btnDel.className='lx';btnDel.textContent='×';btnDel.onclick=function(){d.remove();};d.appendChild(badge);d.appendChild(inp);d.appendChild(btnOpen);d.appendChild(btnDel);c.appendChild(d);}
+function addLienD(c,url,label,t){const d=document.createElement('div');d.className='lrow';const inp=document.createElement('input');inp.className='linput';inp.type='url';inp.value=url;inp.placeholder='URL non trouvee';const badge=document.createElement('span');badge.className='lbadge '+t;badge.textContent=label;const btnOpen=document.createElement('button');btnOpen.className='lopen';btnOpen.textContent='↗';btnOpen.title='Ouvrir';btnOpen.onclick=function(){if(inp.value)window.open(inp.value,'_blank');};const btnDel=document.createElement('button');btnDel.className='lx';btnDel.textContent='x';btnDel.onclick=function(){d.remove();};d.appendChild(badge);d.appendChild(inp);d.appendChild(btnOpen);d.appendChild(btnDel);c.appendChild(d);}
 async function chSite(nom,c){
   try{
     const r=await fetch("/api/site-web",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({nomEntite:nom})});
@@ -553,18 +1102,16 @@ async function chSite(nom,c){
 }
 function addLien(cid,url,label){addLienD(document.getElementById(cid),url,label,'sg');}
 
-// ── Multi entité ──
+// Multi entite
 let bRes={};
 function addEnt(){
   const l=document.getElementById('entl');const n=l.children.length+1;const id='ent-'+Date.now();
   const d=document.createElement('div');d.className='entb fade-in';d.id=id;
-  
   const header=document.createElement('div');header.className='entbh';
   const titre=document.createElement('div');titre.className='entbt';titre.textContent='Entite '+n;
   const btnX=document.createElement('button');btnX.className='entx';btnX.textContent='Supprimer';
   btnX.onclick=function(){document.getElementById(id).remove();renumE();};
   header.appendChild(titre);header.appendChild(btnX);
-  
   const fg=document.createElement('div');fg.className='fg';
   const lbl=document.createElement('div');lbl.className='fl';lbl.innerHTML='Rechercher <span class="req">*</span>';
   const sw=document.createElement('div');sw.className='sw';
@@ -574,39 +1121,36 @@ function addEnt(){
   const sl=document.createElement('div');sl.className='sl';sl.id='sl-'+id;
   sw.appendChild(inp);sw.appendChild(sp);sw.appendChild(sl);
   fg.appendChild(lbl);fg.appendChild(sw);
-  
   const fe=document.createElement('div');fe.className='fe';fe.id='fe-'+id;
   fe.innerHTML='<div class="fe-h"><div class="fe-n" id="fn-'+id+'">-</div><div class="fe-s" id="fs-'+id+'">-</div></div><div class="fe-g"><div class="fe-c"><div class="fe-cl">Siren</div><div class="fe-cv" id="si-'+id+'">-</div></div><div class="fe-c"><div class="fe-cl">Siege</div><div class="fe-cv" id="sg-'+id+'">-</div></div></div>';
-  
   d.appendChild(header);d.appendChild(fg);d.appendChild(fe);l.appendChild(d);
 }
-
-function renumE(){document.querySelectorAll('.entbt').forEach((el,i)=>el.textContent='Entité '+(i+1));}
+function renumE(){document.querySelectorAll('.entbt').forEach((el,i)=>el.textContent='Entite '+(i+1));}
 async function rechB(inp,id){
   const q=inp.value.trim();const sb=document.getElementById('sl-'+id);const sp=document.getElementById('sp-'+id);
   if(q.length<2){sb.classList.remove('v');return;}
   if(timers[id])clearTimeout(timers[id]);
   timers[id]=setTimeout(async()=>{sp.classList.add('v');
     try{const r=await fetch('https://recherche-entreprises.api.gouv.fr/search?q='+encodeURIComponent(q)+'&per_page=6');const d=await r.json();const res=d.results||[];bRes[id]=res;
-      sb.innerHTML=res.length?res.map((r,i)=>'<div class="si" data-i="'+i+'" data-b="'+id+'"><div class="si-n">'+(r.nom_complet||r.nom_raison_sociale||'—')+'</div><div class="si-m"><span>'+(r.siren||'—')+'</span></div></div>').join(''):'<div class="si-0">Aucun résultat</div>';
-      sb.querySelectorAll('.si').forEach(el=>el.addEventListener('click',()=>{const r=bRes[el.dataset.b][parseInt(el.dataset.i)];const s=r.siege||{};inp.value=r.nom_complet||r.nom_raison_sociale||'';sb.classList.remove('v');document.getElementById('fn-'+id).textContent=r.nom_complet||r.nom_raison_sociale||'—';document.getElementById('si-'+id).textContent=r.siren||'—';document.getElementById('sg-'+id).textContent=[s.adresse,s.code_postal,s.libelle_commune].filter(Boolean).join(' ')||'—';const st=document.getElementById('fs-'+id);const sv=r.etat_administratif==='A'?'Active':'—';st.textContent=sv;st.className='fe-s'+(sv==='Active'?' ok':'');document.getElementById('fe-'+id).classList.add('v');}));
+      sb.innerHTML=res.length?res.map((r,i)=>'<div class="si" data-i="'+i+'" data-b="'+id+'"><div class="si-n">'+(r.nom_complet||r.nom_raison_sociale||'—')+'</div><div class="si-m"><span>'+(r.siren||'—')+'</span></div></div>').join(''):'<div class="si-0">Aucun resultat</div>';
+      sb.querySelectorAll('.si').forEach(el=>el.addEventListener('click',()=>{const r=bRes[el.dataset.b][parseInt(el.dataset.i)];const s=r.siege||{};inp.value=r.nom_complet||r.nom_raison_sociale||'';sb.classList.remove('v');document.getElementById('fn-'+id).textContent=r.nom_complet||r.nom_raison_sociale||'—';document.getElementById('si-'+id).textContent=r.siren||'—';document.getElementById('sg-'+id).textContent=[s.adresse,s.code_postal,s.libelle_commune].filter(Boolean).join(' ')||'—';const st=document.getElementById('fs-'+id);const sv=r.etat_administratif==='A'?'Active':'—';st.textContent=sv;st.className='fe-s'+(sv==='Active'?' ok':'');}));
       sb.classList.add('v');}catch(e){sb.innerHTML='<div class="si-0">Erreur</div>';sb.classList.add('v');}sp.classList.remove('v');},300);
 }
 
-// ── Upload ──
+// Upload
 let fls=[];
 function addFiles(fs){[...fs].forEach(f=>{if(!fls.find(x=>x.name===f.name&&x.size===f.size))fls.push(f);});rfls();}
 function rmFile(i){fls.splice(i,1);rfls();}
-function rfls(){document.getElementById('flist').innerHTML=fls.map((f,i)=>'<div class="fitem"><span style="font-size:13px;color:var(--gris-moyen);">'+f.name+'</span><span style="display:flex;align-items:center;gap:12px;"><span style="font-size:11px;color:var(--gris-clair);">'+fmb(f.size)+'</span><button style="background:none;border:none;cursor:pointer;font-size:16px;color:var(--gris-tres-clair);" onclick="rmFile('+i+')">×</button></span></div>').join('');}
+function rfls(){document.getElementById('flist').innerHTML=fls.map((f,i)=>'<div class="fitem"><span style="font-size:13px;color:var(--gris-moyen);">'+f.name+'</span><span style="display:flex;align-items:center;gap:12px;"><span style="font-size:11px;color:var(--gris-clair);">'+fmb(f.size)+'</span><button style="background:none;border:none;cursor:pointer;font-size:16px;color:var(--gris-tres-clair);" onclick="rmFile('+i+')">x</button></span></div>').join('');}
 function fmb(b){if(b<1024)return b+'o';if(b<1048576)return Math.round(b/1024)+'Ko';return (b/1048576).toFixed(1)+'Mo';}
 function dgo(e){e.preventDefault();document.querySelector('.upz').classList.add('dg');}
 function dgl(){document.querySelector('.upz').classList.remove('dg');}
 function ddr(e){e.preventDefault();dgl();addFiles(e.dataTransfer.files);}
 
-// ── Validation étape 1 ──
+// Validation etape 1
 function val1(){if(ts==='mono'&&!entSel){document.getElementById('err-mono').classList.add('v');return;}ap('lead-sapiens-2');}
 
-// ── Exercices ──
+// Exercices
 let exc=0;
 function addEx(){
   exc++;const l=document.getElementById('exl');const y=new Date().getFullYear()-exc+1;const id='ex-'+Date.now();
@@ -618,10 +1162,9 @@ function addEx(){
   bx.onclick=function(){document.getElementById(id).remove();renumEx();};
   d.appendChild(ann);d.appendChild(d1);d.appendChild(d2);d.appendChild(bx);l.appendChild(d);
 }
-
 function renumEx(){document.querySelectorAll('#exl .exr').forEach((r,i)=>{const l=r.querySelector('.exa');if(l)l.textContent=i===0?'N':'N-'+i;});exc=document.querySelectorAll('#exl .exr').length;}
 
-// ── Tiroirs ──
+// Tiroirs
 let tc=0;
 function addTir(){
   tc++;const l=document.getElementById('tirl');const id='t-'+Date.now();
@@ -634,6 +1177,23 @@ function addTir(){
   const fg=document.createElement('div');fg.className='fg';
   fg.innerHTML='<div class="fl">Libelle</div><input class="fi" type="text" placeholder="ex : Business Plan" style="margin-bottom:12px;"><div class="fl">Montant HT</div><div style="display:flex;"><div class="mpfx">euro</div><input class="fi" type="number" placeholder="ex : 8 000" style="border-left:none;"></div>';
   d.appendChild(h);d.appendChild(fg);l.appendChild(d);
+}
+
+// Collecte — upload par categorie
+function trigUpload(cat){document.getElementById('inp-'+cat).click();}
+function handleCatUpload(inp,cat){
+  const files=[...inp.files];if(!files.length)return;
+  const container=document.getElementById('files-'+cat);
+  const countEl=document.getElementById('count-'+cat);
+  const empty=container.querySelector('.cat-empty');if(empty)empty.remove();
+  files.forEach(f=>{
+    const row=document.createElement('div');row.className='cat-file';
+    row.innerHTML='<span class="cat-file-name">'+f.name+'</span><span class="cat-file-meta">'+fmb(f.size)+'</span>';
+    container.appendChild(row);
+  });
+  const total=container.querySelectorAll('.cat-file').length;
+  countEl.textContent=total+' fichier'+(total>1?'s':'');
+  inp.value='';
 }
 
 function colData(){
@@ -650,19 +1210,18 @@ function colData(){
     typeMission:document.getElementById('btn-bsdd').classList.contains('on')?'BSDD':'VDD',
     typeDD:document.getElementById('btn-std').classList.contains('on')?'Standard DD':'Flash DD',
     parties:{p1:document.getElementById('p1').checked,p2:document.getElementById('p2').checked,p3:document.getElementById('p3').checked,p4:document.getElementById('p4').checked,p5:document.getElementById('p5').checked},
-    honLib:document.getElementById('hon-lib').value||'Due Diligence Financière',
+    honLib:document.getElementById('hon-lib').value||'Due Diligence Financiere',
     honMt:document.getElementById('hon-mt').value||'',
     comm:document.getElementById('comm').value||'',
     phases:[
-      {label:'Préparation',date:document.getElementById('dp1').value,dur:document.getElementById('dur1').value},
-      {label:'Exécution',date:document.getElementById('dp2').value,dur:document.getElementById('dur2').value},
+      {label:'Preparation',date:document.getElementById('dp1').value,dur:document.getElementById('dur1').value},
+      {label:'Execution',date:document.getElementById('dp2').value,dur:document.getElementById('dur2').value},
       {label:'Finalisation',date:document.getElementById('dp3').value,dur:document.getElementById('dur3').value}
     ],
     exercices:[...document.querySelectorAll('#exl .exr')].map((r,i)=>({annee:i===0?'N':'N-'+i,date:r.querySelectorAll('input')[0].value,lib:r.querySelectorAll('input')[1].value}))
   };
 }
 
-// ── Validation étape 2 ──
 async function val2(){
   if(!document.querySelector('#exl .exr')){alert('Veuillez ajouter au moins un exercice.');return;}
   if(!document.getElementById('hon-mt').value){alert('Veuillez saisir le montant des honoraires.');return;}
@@ -670,10 +1229,9 @@ async function val2(){
   await genPropale();
 }
 
-// ── Génération ──
+// Generation propale
 let dF={};window.sD=[];window.sA=0;window.cH=[];
 function logG(m){const el=document.getElementById('genl');if(el)el.textContent=m;}
-
 function mkSep(num,titre){return '<div class="sc sep"><div class="sep-n">Partie '+num+'</div><div class="sep-t" contenteditable="true">'+titre+'</div><div class="covlog" style="color:rgba(255,255,255,0.2);">Gavroche</div></div>';}
 
 async function genPropale(){
@@ -682,30 +1240,9 @@ async function genPropale(){
   logG("Recherche sur "+d.entite.nom+" ...");
   let cx={};
   try{
-    const siteUrl=(d.entite.liens.find(function(l){return l.label==="Site web";})||{}).url||"";
-    const promptParts=[
-      "Tu es expert en due diligence financiere pour Gavroche, cabinet parisien de Transaction Services.",
-      "Mission : "+d.typeMission+" ("+d.typeDD+") sur "+d.entite.nom,
-      "Siren : "+d.entite.siren+" | Activite : "+d.entite.activite+" | Siege : "+d.entite.siege,
-      "Creation : "+d.entite.creation+" | Effectifs : "+d.entite.effectifs,
-      siteUrl?"Site : "+siteUrl:"",
-      d.entite.complement?"Complements : "+d.entite.complement:"",
-      d.comm?"Notes : "+d.comm:"",
-      "Effectue des recherches web et genere UNIQUEMENT ce JSON sans markdown :",
-      '{"contexte_operation":"2-3 phrases sobres","activite_resume":"3-4 phrases","chaine_valeur":"","clients_types":"","fournisseurs_types":"","axes_analyse":["","",""],"metriques":[{"label":"CA","valeur":"","source":""},{"label":"EBITDA","valeur":"","source":""},{"label":"Effectifs","valeur":"'+d.entite.effectifs+'","source":"API gouvernementale"},{"label":"Creation","valeur":"'+d.entite.creation+'","source":"API gouvernementale"}],"marche":[{"label":"","valeur":"","source":""}],"presse":[{"date":"","titre":"","source":""}],"has_presse":false,"organigramme":{"holding":{"nom":"","pct_detention":""},"cible":{"nom":"'+d.entite.nom+'","perimetre":true},"filiales":[],"hors_perimetre":[]}}'
-    ];
-    const prompt=promptParts.filter(Boolean).join("\n");
-    logG("Analyse en cours...");
     const resp=await fetch("/api/generate",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        entite:d.entite,
-        typeMission:d.typeMission,
-        typeDD:d.typeDD,
-        commentaires:d.comm,
-        complement:d.entite.complement
-      })
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({entite:d.entite,typeMission:d.typeMission,typeDD:d.typeDD,commentaires:d.comm,complement:d.entite.complement})
     });
     const result=await resp.json();
     if(!result.success) throw new Error(result.error);
@@ -714,16 +1251,9 @@ async function genPropale(){
     cx={
       contexte_operation:"Dans le cadre d'un investissement envisage dans "+d.entite.nom+", Gavroche a ete sollicitee pour realiser une "+d.typeMission+".",
       activite_resume:d.entite.nom+" est une societe "+d.entite.forme+" implantee a "+d.entite.siege+". Son activite principale est "+d.entite.activite+".",
-      chaine_valeur:"A preciser",
-      clients_types:"A preciser",
-      fournisseurs_types:"A preciser",
+      chaine_valeur:"A preciser",clients_types:"A preciser",fournisseurs_types:"A preciser",
       axes_analyse:["Par nature de produit/service","Par client","Par geographie"],
-      metriques:[
-        {label:"Chiffre d'affaires",valeur:"",source:""},
-        {label:"EBITDA",valeur:"",source:""},
-        {label:"Effectifs",valeur:d.entite.effectifs,source:"API gouvernementale"},
-        {label:"Creation",valeur:d.entite.creation,source:"API gouvernementale"}
-      ],
+      metriques:[{label:"Chiffre d'affaires",valeur:"",source:""},{label:"EBITDA",valeur:"",source:""},{label:"Effectifs",valeur:d.entite.effectifs,source:"API gouvernementale"},{label:"Creation",valeur:d.entite.creation,source:"API gouvernementale"}],
       marche:[],presse:[],has_presse:false,
       organigramme:{holding:{nom:"",pct_detention:""},cible:{nom:d.entite.nom,perimetre:true},filiales:[],hors_perimetre:[]}
     };
@@ -745,14 +1275,7 @@ async function genPropale(){
 
   addS(0,"cover","Couverture",'<div class="sc cov"><div><div class="covlog">Gavroche</div><div style="font-family:var(--font-titre);font-size:0.55em;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:1%;">Due Diligence Financiere - Transaction Services</div></div><div><div class="covey" contenteditable="true">'+d.typeMission+' - '+d.typeDD+'</div><div class="covt" contenteditable="true">Proposition d\'accompagnement</div><div class="covc" contenteditable="true">'+d.entite.nom+'</div></div><div class="covb"><div class="covd" contenteditable="true">'+today+'</div><div class="covcf">Document confidentiel</div></div></div>');
 
-  const pA=[
-    d.parties.p1&&"Contexte de l'operation",
-    d.parties.p2&&"Notre approche",
-    d.parties.p3&&"Perimetre des travaux",
-    d.parties.p4&&"Conditions d'intervention",
-    d.parties.p5&&"References"
-  ].filter(Boolean);
-
+  const pA=[d.parties.p1&&"Contexte de l'operation",d.parties.p2&&"Notre approche",d.parties.p3&&"Perimetre des travaux",d.parties.p4&&"Conditions d'intervention",d.parties.p5&&"References"].filter(Boolean);
   addS(0,"intro","Introduction",'<div class="sc intr"><div class="std-b">Gavroche</div><div class="intrtx" contenteditable="true">L\'equipe Gavroche vous remercie de l\'avoir sollicitee. Nous recevons favorablement cette sollicitation et serions ravis de vous accompagner dans la realisation de cette '+d.typeMission+' portant sur '+d.entite.nom+'.</div><div class="somm">'+pA.map(function(p,i){return '<div class="sommi"><span class="sommn">'+(i+1)+'</span><span class="sommt" contenteditable="true">'+p+'</span></div>';}).join("")+'</div></div>');
 
   if(d.parties.p1){
@@ -760,26 +1283,15 @@ async function genPropale(){
     const fils=(org.filiales||[]).filter(function(f){return f.nom;});
     const horsP=(org.hors_perimetre||[]).filter(function(f){return f.nom;});
     let orgH="";
-    if(org.holding&&org.holding.nom){
-      orgH+='<div class="orniv"><div class="orb"><div class="orbn" contenteditable="true">'+org.holding.nom+'</div><div class="orbpct" contenteditable="true">'+(org.holding.pct_detention||"")+'</div><div class="orbl">Actionnaire</div></div></div><div class="orcon"></div>';
-    }
+    if(org.holding&&org.holding.nom){orgH+='<div class="orniv"><div class="orb"><div class="orbn" contenteditable="true">'+org.holding.nom+'</div><div class="orbpct" contenteditable="true">'+(org.holding.pct_detention||"")+'</div><div class="orbl">Actionnaire</div></div></div><div class="orcon"></div>';}
     orgH+='<div class="orniv"><div class="orb p"><div class="orbn" contenteditable="true">'+d.entite.nom+'</div><div class="orbpct" contenteditable="true">'+d.entite.siren+'</div><div class="orbl">Cible - perimetre</div></div></div>';
-    if(fils.length||horsP.length){
-      orgH+='<div class="orcon"></div><div class="orniv" style="gap:2%;flex-wrap:wrap;">';
-      fils.forEach(function(f){orgH+='<div class="orb p"><div class="orbn" contenteditable="true">'+f.nom+'</div><div class="orbpct" contenteditable="true">'+(f.pct_detention||"")+'</div><div class="orbl">Dans le perimetre</div></div>';});
-      horsP.forEach(function(f){orgH+='<div class="orb h"><div class="orbn" contenteditable="true">'+f.nom+'</div><div class="orbpct" contenteditable="true">'+(f.pct_detention||"")+'</div><div class="orbl">Hors perimetre</div></div>';});
-      orgH+='</div>';
-    }
-
+    if(fils.length||horsP.length){orgH+='<div class="orcon"></div><div class="orniv" style="gap:2%;flex-wrap:wrap;">';fils.forEach(function(f){orgH+='<div class="orb p"><div class="orbn" contenteditable="true">'+f.nom+'</div><div class="orbpct" contenteditable="true">'+(f.pct_detention||"")+'</div><div class="orbl">Dans le perimetre</div></div>';});horsP.forEach(function(f){orgH+='<div class="orb h"><div class="orbn" contenteditable="true">'+f.nom+'</div><div class="orbpct" contenteditable="true">'+(f.pct_detention||"")+'</div><div class="orbl">Hors perimetre</div></div>';});orgH+='</div>';}
     addS(1,"ctx-per","Perimetre",'<div class="sc std"><div class="std-h"><div class="std-b">Contexte</div><div class="std-t" contenteditable="true">Perimetre de l\'operation</div></div><div class="std-body"><div style="font-size:0.68em;color:var(--gris-moyen);line-height:1.75;" contenteditable="true">'+cx.contexte_operation+'</div><div class="org">'+orgH+'<div class="orleg"><div class="orlegi"><div class="orlegb p"></div>Perimetre</div><div class="orlegi"><div class="orlegb h"></div>Hors perimetre</div></div></div></div></div>');
     addS(1,"ctx-biz","Business overview",'<div class="sc std"><div class="std-h"><div class="std-b">Contexte</div><div class="std-t" contenteditable="true">Presentation de l\'activite</div></div><div class="std-body"><div style="font-size:0.68em;color:var(--gris-moyen);line-height:1.75;margin-bottom:2%;" contenteditable="true">'+cx.activite_resume+'</div><div class="bgrid"><div class="bbloc"><div class="bbloct">Chaine de valeur</div><div class="bblocv" contenteditable="true">'+(cx.chaine_valeur||"A preciser")+'</div></div><div class="bbloc"><div class="bbloct">Principaux clients</div><div class="bblocv" contenteditable="true">'+(cx.clients_types||"A preciser")+'</div></div><div class="bbloc"><div class="bbloct">Principaux fournisseurs</div><div class="bblocv" contenteditable="true">'+(cx.fournisseurs_types||"A preciser")+'</div></div><div class="bbloc"><div class="bbloct">Axes d\'analyse</div><div class="bblocv" contenteditable="true">'+((cx.axes_analyse||[]).join(" - ")||"A preciser")+'</div></div></div></div></div>');
-
     const mets=cx.metriques||[];
     addS(1,"ctx-met","Metriques cles",'<div class="sc std"><div class="std-h"><div class="std-b">Contexte</div><div class="std-t" contenteditable="true">Ordres de grandeur</div></div><div class="std-body"><div class="mgrid">'+mets.map(function(m){return '<div class="mitem"><div class="mlabel">'+m.label+'</div><div class="mval" contenteditable="true">'+(m.valeur||"--")+'</div><div class="mnote" contenteditable="true">'+(m.source||"")+'</div></div>';}).join("")+'</div></div></div>');
-
     const mrv=(cx.marche||[]).filter(function(m){return m.valeur&&m.label;});
     if(mrv.length){addS(1,"ctx-mar","Marche",'<div class="sc std"><div class="std-h"><div class="std-b">Contexte</div><div class="std-t" contenteditable="true">Donnees de marche</div></div><div class="std-body"><div class="mrgrid">'+mrv.map(function(m){return '<div class="mritem"><div class="mrval" contenteditable="true">'+m.valeur+'</div><div class="mrlbl" contenteditable="true">'+m.label+'</div><div class="mrsrc" contenteditable="true">'+(m.source||"")+'</div></div>';}).join("")+'</div></div></div>');}
-
     const pr=(cx.presse||[]).filter(function(p){return p.titre&&p.date;});
     if(cx.has_presse&&pr.length){addS(1,"ctx-pr","Revue de presse",'<div class="sc std"><div class="std-h"><div class="std-b">Contexte</div><div class="std-t" contenteditable="true">Revue de presse recente</div></div><div class="std-body"><div class="prlist">'+pr.slice(0,4).map(function(p){return '<div class="pritem"><div class="prdate" contenteditable="true">'+p.date+'</div><div class="prtit" contenteditable="true">'+p.titre+'</div><div class="prsrc" contenteditable="true">'+(p.source||"")+'</div></div>';}).join("")+'</div></div></div>');}
   }
@@ -808,22 +1320,18 @@ async function genPropale(){
   addS(6,"footer-pg","Page finale",'<div class="sc ftpg"><div class="ftcab" contenteditable="true">Gavroche</div></div>');
 
   window.sD=slides;window.sA=0;window.cH=[];
-
   const sv=document.getElementById("sv");
   sv.innerHTML=slides.map(function(s,i){return '<div class="sf '+(i===0?"on":"")+'" id="sf-'+i+'">'+s.html+'</div>';}).join("");
-
   document.getElementById("snav").innerHTML=struct.map(function(rub){
     const hasSub=rub.slides.length>0;
     return '<div class="rub'+(rub.fixe?" fixe":"")+(hasSub?" open":"")+'" id="rub-'+rub.id+'"><div class="rub-h" onclick="togRub(\'rub-'+rub.id+'\')"><span class="rub-l">'+rub.label+'</span><span style="display:flex;align-items:center;gap:6px;">'+(rub.fixe?'<span class="rub-b">Fixe</span>':'')+(hasSub?'<span class="rub-c">&#9662;</span>':'')+'</span></div>'+(hasSub?'<div class="subs">'+rub.slides.map(function(s){const idx=slides.indexOf(s);return '<button class="sni '+(idx===0?"on":"")+'" onclick="gS('+idx+')" id="sni-'+idx+'"><span class="sni-n">'+(idx+1)+'</span><span class="sni-l">'+s.label+'</span></button>';}).join("")+'</div>':'')+'</div>';
   }).join("");
-
   updCtr();
   document.getElementById("geno").style.display="none";
   addMsg("a","Propale generee - "+slides.length+" slides pour "+d.entite.nom+". Cliquez sur n'importe quel texte pour le modifier.");
 }
 
 function togRub(id){const el=document.getElementById(id);if(el)el.classList.toggle('open');}
-
 function gS(i){
   const slides=window.sD||[];if(i<0||i>=slides.length)return;
   document.querySelectorAll('.sf').forEach((el,j)=>el.classList.toggle('on',j===i));
@@ -832,7 +1340,7 @@ function gS(i){
 }
 function updCtr(){const el=document.getElementById('slide-ctr');if(el)el.textContent=((window.sA||0)+1)+' / '+((window.sD||[]).length);}
 
-// ── Chat ──
+// Chat
 async function send(){
   const inp=document.getElementById('cp-i');const msg=inp.value.trim();if(!msg)return;
   inp.value='';addMsg('u',msg);
@@ -841,17 +1349,8 @@ async function send(){
   const missionNom=(dF.typeMission||'DD');
   const cibleNom=(dF.entite&&dF.entite.nom)||'la cible';
   const slideNom=(slideActuelle&&slideActuelle.label)||'--';
-  const sys="Tu es assistant de Gavroche, cabinet de due diligence. Tu aides a finaliser une propale de "+missionNom+" pour "+cibleNom+". Slide : "+slideNom+". Ton sobre et professionnel.";
   try{
-    const r=await fetch("/api/chat",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        message:msg,
-        historique:window.cH,
-        contexte:{typeMission:dF.typeMission,cible:dF.entite&&dF.entite.nom,slide:slideNom}
-      })
-    });
+    const r=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:msg,historique:window.cH,contexte:{typeMission:dF.typeMission,cible:dF.entite&&dF.entite.nom,slide:slideNom}})});
     const data=await r.json();
     const rep=data.reply||"Erreur.";
     window.cH.push({role:"user",content:msg});window.cH.push({role:"assistant",content:rep});
@@ -859,7 +1358,6 @@ async function send(){
   }catch(e){addMsg("a","Erreur de connexion.");}
   document.getElementById("cpld").style.display="none";
 }
-
 function addMsg(role,txt){
   const box=document.getElementById('cp-m');const d=document.createElement('div');
   d.className='cpb '+(role==='u'?'cpb-u':'cpb-a');d.textContent=txt;
@@ -868,7 +1366,6 @@ function addMsg(role,txt){
 
 // Init
 addEx();addEx();addEx();
-
 </script>
 </body>
 </html>
