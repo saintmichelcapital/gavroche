@@ -1,16 +1,16 @@
 {
   "name": "gavroche",
   "version": "1.0.0",
-  "description": "Saint-Michel Capital - Espace de travail",
   "main": "server/index.js",
   "scripts": {
-    "start": "node server/index.js",
-    "dev": "node server/index.js"
+    "start": "node server/index.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.0",
-    "express": "^4.18.0"
+    "dotenv": "^16.4.5",
+    "express": "^4.18.3",
+    "express-rate-limit": "^7.4.0",
+    "jsonwebtoken": "^9.0.2"
   }
 }

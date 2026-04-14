@@ -1141,6 +1141,9 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 <div class="page" id="page-ddgenerator"><div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><span class="bc actif">DD Generator</span></div><div class="admin-header"><div class="admin-titre">DD Generator</div><div class="admin-sous-titre">En construction.</div></div><div class="af"><div class="aft">Gavroche</div></div></div>
 
 <script>
+// Securite — redirection si pas de token
+if (!sessionStorage.getItem('gavroche_token')) { window.location.href = '/index.html'; }
+
 // Navigation
 function ap(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('actif'));const c=document.getElementById('page-'+id);if(c){c.classList.add('actif');window.scrollTo(0,0);}}
 function stg(a,b){document.getElementById(a).classList.add('on');document.getElementById(b).classList.remove('on');}
@@ -1225,7 +1228,7 @@ async function selEnt(r,mode){
 function addLienD(c,url,label,t){const d=document.createElement('div');d.className='lrow';const inp=document.createElement('input');inp.className='linput';inp.type='url';inp.value=url;inp.placeholder='URL non trouvee';const badge=document.createElement('span');badge.className='lbadge '+t;badge.textContent=label;const btnOpen=document.createElement('button');btnOpen.className='lopen';btnOpen.textContent='↗';btnOpen.title='Ouvrir';btnOpen.onclick=function(){if(inp.value)window.open(inp.value,'_blank');};const btnDel=document.createElement('button');btnDel.className='lx';btnDel.textContent='x';btnDel.onclick=function(){d.remove();};d.appendChild(badge);d.appendChild(inp);d.appendChild(btnOpen);d.appendChild(btnDel);c.appendChild(d);}
 async function chSite(nom,c){
   try{
-    const r=await fetch("/api/site-web",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({nomEntite:nom})});
+    const r=await fetch("/api/site-web",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+(sessionStorage.getItem('gavroche_token')||'')},body:JSON.stringify({nomEntite:nom})});
     const d=await r.json();
     addLienD(c,d.url||"","Site web","sg");
   }catch(e){addLienD(c,"","Site web","sg");}
@@ -1373,7 +1376,7 @@ async function genPropale(reouvrir){
   let cx={};
   try{
     const resp=await fetch("/api/generate",{
-      method:"POST",headers:{"Content-Type":"application/json"},
+      method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+(sessionStorage.getItem('gavroche_token')||'')},
       body:JSON.stringify({entite:d.entite,typeMission:d.typeMission,typeDD:d.typeDD,commentaires:d.comm,complement:d.entite.complement})
     });
     const result=await resp.json();
@@ -1489,7 +1492,7 @@ async function send(){
   const cibleNom=(dF.entite&&dF.entite.nom)||'la cible';
   const slideNom=(slideActuelle&&slideActuelle.label)||'--';
   try{
-    const r=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:msg,historique:window.cH,contexte:{typeMission:dF.typeMission,cible:dF.entite&&dF.entite.nom,slide:slideNom}})});
+    const r=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+(sessionStorage.getItem('gavroche_token')||'')},body:JSON.stringify({message:msg,historique:window.cH,contexte:{typeMission:dF.typeMission,cible:dF.entite&&dF.entite.nom,slide:slideNom}})});
     const data=await r.json();
     const rep=data.reply||"Erreur.";
     window.cH.push({role:"user",content:msg});window.cH.push({role:"assistant",content:rep});

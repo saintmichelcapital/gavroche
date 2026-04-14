@@ -1,20 +1,80 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const jwt = require('jsonwebtoken');
+const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const JWT_SECRET = process.env.JWT_SECRET || 'gavroche_secret_2026';
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
+// ═══════════════════════════════════════════
+// RATE LIMITING
+// ═══════════════════════════════════════════
+
+// Limite generale : 100 requetes / 15 min par IP
+const limiterGeneral = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: { success: false, error: 'Trop de requetes. Reessayez dans 15 minutes.' }
+});
+
+// Limite stricte sur les appels IA : 10 / min par IP
+const limiterIA = rateLimit({
+  windowMs: 60 * 1000,
+  max: 10,
+  message: { success: false, error: 'Limite atteinte. Reessayez dans une minute.' }
+});
+
+app.use('/api/', limiterGeneral);
+app.use('/api/generate', limiterIA);
+app.use('/api/chat', limiterIA);
+
+// ═══════════════════════════════════════════
+// AUTHENTIFICATION JWT
+// ═══════════════════════════════════════════
+
+// Middleware de verification du token
+function requireAuth(req, res, next) {
+  const auth = req.headers['authorization'];
+  if (!auth || !auth.startsWith('Bearer ')) {
+    return res.status(401).json({ success: false, error: 'Non autorise.' });
+  }
+  const token = auth.split(' ')[1];
+  try {
+    req.user = jwt.verify(token, JWT_SECRET);
+    next();
+  } catch (e) {
+    return res.status(401).json({ success: false, error: 'Token invalide ou expire.' });
+  }
+}
+
+// Route de login — retourne un JWT
+app.post('/api/login', (req, res) => {
+  const { username, password } = req.body;
+  const ADMIN_USER = process.env.ADMIN_USER || 'F_Thiery';
+  const ADMIN_PASS = process.env.ADMIN_PASS || 'Paris75006!';
+  if (username === ADMIN_USER && password === ADMIN_PASS) {
+    const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '8h' });
+    return res.json({ success: true, token });
+  }
+  return res.status(401).json({ success: false, error: 'Identifiants incorrects.' });
+});
+
+// ═══════════════════════════════════════════
+// ROUTES
+// ═══════════════════════════════════════════
+
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-app.post('/api/generate', async (req, res) => {
+app.post('/api/generate', requireAuth, async (req, res) => {
   try {
     const { entite, typeMission, typeDD, commentaires, complement } = req.body;
     const Anthropic = require('@anthropic-ai/sdk');
@@ -46,13 +106,13 @@ app.post('/api/generate', async (req, res) => {
   }
 });
 
-app.post('/api/chat', async (req, res) => {
+app.post('/api/chat', requireAuth, async (req, res) => {
   try {
     const { message, historique, contexte } = req.body;
     const Anthropic = require('@anthropic-ai/sdk');
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
     const system = "Tu es assistant de Gavroche, cabinet de due diligence financiere parisien. " +
-      "Tu aides a finaliser une proposition commerciale de " + (contexte.typeMission || 'DD') + 
+      "Tu aides a finaliser une proposition commerciale de " + (contexte.typeMission || 'DD') +
       " pour " + (contexte.cible || 'la cible') + ". " +
       "Slide affichee : " + (contexte.slide || '--') + ". " +
       "Quand on te demande de modifier ou rediger un texte pour une slide, fournis DIRECTEMENT le nouveau texte exact entre guillemets, sans explication. " +
@@ -70,7 +130,7 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-app.post('/api/site-web', async (req, res) => {
+app.post('/api/site-web', requireAuth, async (req, res) => {
   try {
     const { nomEntite } = req.body;
     const Anthropic = require('@anthropic-ai/sdk');
