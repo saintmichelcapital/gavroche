@@ -397,12 +397,11 @@
 <footer>
   <div class="footer-nom">Gavroche SAS</div>
   <div class="footer-infos">Paris — France entiere<br>Due diligence financiere · Transaction Services</div>
-  <div class="footer-admin"><a href="javascript:void(0)" onclick="ouvrirLogin(event)">Espace membre</a></div>
+  <div class="footer-admin"><button onclick="ouvrirLogin()" style="background:none;border:none;cursor:pointer;font-family:var(--font-titre);font-size:9px;letter-spacing:0.14em;color:rgba(255,255,255,0.2);text-transform:uppercase;padding:0;transition:color 0.3s;">Espace membre</button></div>
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  function ouvrirLogin(e) {
-    e.preventDefault();
+  function ouvrirLogin() {
     document.getElementById('page-login').classList.add('actif');
     setTimeout(function() { document.getElementById('login-id').focus(); }, 100);
   }
