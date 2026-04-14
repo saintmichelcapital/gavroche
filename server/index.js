@@ -9,7 +9,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'gavroche_secret_2026';
 
-app.use(cors());
+app.use(cors({
+  origin: ['https://gavroche-production.up.railway.app'],
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
