@@ -335,6 +335,67 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
 /* ═══════════════════════════════════════════
+   PILOTE SAINT-MICHEL CAPITAL — SLIDE HONORAIRES
+   Charte : Segoe UI, noir/blanc/gris, A4 paysage
+═══════════════════════════════════════════ */
+.smc-slide{background:#ffffff;display:flex;flex-direction:column;padding:5.5% 7% 4% 7%;font-family:'Segoe UI','Segoe UI Semilight','Helvetica Neue',Arial,sans-serif;color:#1A1A1A;}
+.smc-head{flex-shrink:0;margin-bottom:3%;}
+.smc-bandeau{font-family:'Segoe UI',sans-serif;font-size:0.5em;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#888888;margin-bottom:1.2%;outline:none;cursor:text;}
+.smc-titre{font-family:'Segoe UI Semibold','Segoe UI',sans-serif;font-size:1em;font-weight:600;letter-spacing:0.02em;color:#1A1A1A;line-height:1.15;outline:none;cursor:text;}
+.smc-trait{width:64px;height:2px;background:#1A1A1A;margin-top:1.1%;}
+.smc-body{flex:1;display:flex;flex-direction:column;gap:2.6%;overflow:hidden;}
+.smc-intro{font-family:'Segoe UI',sans-serif;font-size:0.62em;color:#404040;line-height:1.7;outline:none;cursor:text;}
+.smc-hypos{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:1.1%;}
+.smc-hypos li{position:relative;padding-left:2.4%;font-family:'Segoe UI',sans-serif;font-size:0.58em;color:#404040;line-height:1.65;outline:none;cursor:text;}
+.smc-hypos li::before{content:'';position:absolute;left:0;top:0.65em;width:6px;height:1px;background:#1A1A1A;}
+.smc-table{width:100%;border-collapse:collapse;margin-top:0.5%;font-family:'Segoe UI',sans-serif;}
+.smc-table th{font-size:0.46em;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#888888;padding:1.2% 0 1% 0;border-bottom:1px solid #1A1A1A;text-align:left;}
+.smc-table th.right{text-align:right;}
+.smc-table td{font-size:0.62em;color:#1A1A1A;padding:1.3% 0;border-bottom:1px solid #E0E0DA;outline:none;cursor:text;}
+.smc-table td.right{text-align:right;font-family:'Bahnschrift Light','Segoe UI',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:0.01em;}
+.smc-table tr:last-child td{border-bottom:none;}
+.smc-table tr.smc-total td{font-weight:600;border-top:1px solid #1A1A1A;border-bottom:none;padding-top:1.5%;}
+.smc-footer-line{font-family:'Segoe UI',sans-serif;font-size:0.54em;color:#404040;line-height:1.65;font-style:italic;outline:none;cursor:text;padding-top:1.5%;border-top:1px solid #E0E0DA;margin-top:auto;}
+.smc-page-footer{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding-top:2.2%;margin-top:2%;border-top:1px solid #E0E0DA;font-family:'Segoe UI',sans-serif;font-size:0.42em;letter-spacing:0.16em;text-transform:uppercase;color:#888888;}
+.smc-ink{font-weight:700;color:#1A1A1A;letter-spacing:0.2em;}
+.smc-pagenum{color:#888888;}
+.smc-slide [contenteditable="true"]:hover{background:rgba(0,0,0,0.02);outline:1px dashed #E0E0DA;}
+.smc-slide [contenteditable="true"]:focus{background:rgba(0,0,0,0.03);outline:1px solid #1A1A1A;}
+
+/* Wrapper panneau droite : chat ↔ formulaire */
+.rpanel{display:flex;flex-direction:column;overflow:hidden;background:var(--blanc);border-left:1px solid var(--gris-tres-clair);}
+.rpanel > .cp,.rpanel > .smc-form{border-left:none;height:100%;min-height:0;flex:1;}
+.rpanel > .smc-form{display:none;}
+.rpanel.form-mode > .cp{display:none;}
+.rpanel.form-mode > .smc-form{display:flex;}
+
+/* Formulaire d'édition SMC */
+.smc-form{background:var(--blanc);flex-direction:column;overflow:hidden;font-family:var(--font-corps);}
+.smcf-h{padding:14px 18px;border-bottom:1px solid var(--gris-tres-clair);flex-shrink:0;background:var(--blanc);}
+.smcf-t{font-family:var(--font-titre);font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--noir);}
+.smcf-s{font-size:11px;color:var(--gris-clair);margin-top:3px;line-height:1.45;}
+.smcf-body{flex:1;overflow-y:auto;padding:16px 18px 24px;display:flex;flex-direction:column;gap:18px;}
+.smcf-g{display:flex;flex-direction:column;gap:6px;}
+.smcf-l{font-family:var(--font-titre);font-size:8px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris-moyen);display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.smcf-i{width:100%;background:var(--blanc);border:1px solid var(--gris-tres-clair);color:var(--noir);font-family:var(--font-corps);font-size:12px;padding:8px 10px;outline:none;transition:border-color 0.15s;}
+.smcf-i:focus{border-color:var(--noir);}
+.smcf-ta{width:100%;background:var(--blanc);border:1px solid var(--gris-tres-clair);color:var(--noir);font-family:var(--font-corps);font-size:12px;padding:8px 10px;outline:none;resize:vertical;min-height:56px;line-height:1.5;transition:border-color 0.15s;}
+.smcf-ta:focus{border-color:var(--noir);}
+.smcf-list{display:flex;flex-direction:column;gap:6px;}
+.smcf-item{display:flex;gap:6px;align-items:flex-start;}
+.smcf-item textarea,.smcf-item input{flex:1;}
+.smcf-item .smcf-ta{min-height:44px;font-size:12px;}
+.smcf-del{background:var(--blanc);border:1px solid var(--gris-tres-clair);color:var(--gris-clair);font-size:14px;width:28px;height:28px;line-height:1;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0;transition:all 0.15s;}
+.smcf-del:hover{border-color:var(--noir);color:var(--noir);}
+.smcf-add{background:none;border:1px solid var(--gris-tres-clair);color:var(--gris-moyen);font-family:var(--font-titre);font-size:8px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:3px 8px;cursor:pointer;transition:all 0.15s;}
+.smcf-add:hover{border-color:var(--noir);color:var(--noir);background:var(--gris-surface);}
+.smcf-row{display:grid;grid-template-columns:1fr 110px 28px;gap:6px;align-items:center;}
+.smcf-row input[type="text"],.smcf-row input[type="number"]{font-size:12px;}
+.smcf-pg{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.smcf-pg > div{display:flex;flex-direction:column;gap:6px;}
+.smcf-hint{font-size:10px;color:var(--gris-clair);line-height:1.5;font-style:italic;margin-top:-2px;}
+
+/* ═══════════════════════════════════════════
    EXECUTION — styles specifiques
 ═══════════════════════════════════════════ */
 
@@ -588,7 +649,52 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
   <div class="pl">
     <div class="ssb"><div class="ssbt">Structure</div><div id="snav"></div><div class="ssba"><button class="bexp" onclick="alert('Export PPTX — en construction.')">↓ Exporter en PPTX</button><button class="bexp" style="margin-top:6px;background:var(--gris-surface);color:var(--noir);border:1px solid var(--gris-tres-clair);" onclick="sauvegarderPropale();ap('proposition');">← Enregistrer et revenir</button></div></div>
     <div class="sm"><div class="sv" id="sv" style="position:relative;"><div class="geno" id="geno"><div class="gens"></div><div class="gent">Generation en cours</div><div class="genl" id="genl">Initialisation…</div></div></div><div class="sctrl"><button class="cbtn" onclick="gS(Math.max(0,(window.sA||0)-1))">← Precedent</button><button class="cbtn" id="slide-ctr">— / —</button><button class="cbtn" onclick="gS(Math.min((window.sD||[]).length-1,(window.sA||0)+1))">Suivant →</button></div></div>
-    <div class="cp"><div class="cp-h"><div class="cp-t">Assistant</div><div class="cp-s">Demandez une modification…</div></div><div class="cp-m" id="cp-m"><div class="cpb cpb-a">La propale est en cours de generation.</div></div><div class="cpld" id="cpld" style="display:none;"><div></div><div></div><div></div></div><div class="cp-iw"><textarea class="cp-i" id="cp-i" rows="3" placeholder="Ex : Reformule le contexte…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send();}"></textarea><button class="cp-send" onclick="send()">Envoyer</button></div></div>
+    <div class="rpanel" id="rpanel">
+      <div class="cp"><div class="cp-h"><div class="cp-t">Assistant</div><div class="cp-s">Demandez une modification…</div></div><div class="cp-m" id="cp-m"><div class="cpb cpb-a">La propale est en cours de generation.</div></div><div class="cpld" id="cpld" style="display:none;"><div></div><div></div><div></div></div><div class="cp-iw"><textarea class="cp-i" id="cp-i" rows="3" placeholder="Ex : Reformule le contexte…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send();}"></textarea><button class="cp-send" onclick="send()">Envoyer</button></div></div>
+      <div class="smc-form" id="smc-form">
+        <div class="smcf-h">
+          <div class="smcf-t">Honoraires — Édition</div>
+          <div class="smcf-s">Les champs sont reliés au visuel. Aucun bouton Enregistrer : la mise à jour est en direct.</div>
+        </div>
+        <div class="smcf-body">
+          <div class="smcf-g">
+            <label class="smcf-l">Bandeau de rubrique</label>
+            <input class="smcf-i" data-smc="bandeau" type="text">
+          </div>
+          <div class="smcf-g">
+            <label class="smcf-l">Titre de la slide</label>
+            <input class="smcf-i" data-smc="titre" type="text">
+          </div>
+          <div class="smcf-g">
+            <label class="smcf-l">Paragraphe d'introduction</label>
+            <textarea class="smcf-ta" data-smc="intro" rows="3"></textarea>
+          </div>
+          <div class="smcf-g">
+            <label class="smcf-l">Hypothèses (puces)<button class="smcf-add" type="button" onclick="smcAddHypo()">+ Ajouter</button></label>
+            <div class="smcf-list" id="smcf-hypos"></div>
+          </div>
+          <div class="smcf-g">
+            <label class="smcf-l">Prestations (tableau)<button class="smcf-add" type="button" onclick="smcAddPrestation()">+ Ligne</button></label>
+            <div class="smcf-list" id="smcf-prestations"></div>
+            <div class="smcf-hint">Laisser le montant à 0 masque la ligne dans le tableau. Saisir les montants en euros HT.</div>
+          </div>
+          <div class="smcf-g">
+            <label class="smcf-l">Phrase de bas (italique)</label>
+            <textarea class="smcf-ta" data-smc="phraseBas" rows="3"></textarea>
+          </div>
+          <div class="smcf-g smcf-pg">
+            <div>
+              <label class="smcf-l">Page courante</label>
+              <input class="smcf-i" data-smc="pageCur" type="number" min="1">
+            </div>
+            <div>
+              <label class="smcf-l">Page totale</label>
+              <input class="smcf-i" data-smc="pageTot" type="number" min="1">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1445,7 +1551,24 @@ async function genPropale(reouvrir){
   if(d.parties.p4){
     const totJ2=(parseInt(d.phases[0].dur)||0)+(parseInt(d.phases[1].dur)||0)+(parseInt(d.phases[2].dur)||0);
     const mt=parseInt(d.honMt)||0;
-    addS(4,"cond-hon","Honoraires",'<div class="sc std"><div class="std-h"><div class="std-b">Conditions</div><div class="std-t" contenteditable="true">Proposition d\'honoraires</div></div><div class="std-body"><div class="honbloc"><div class="honlib" contenteditable="true">'+d.honLib+'</div><div style="display:flex;align-items:baseline;gap:8px;"><div class="honmt" contenteditable="true">EUR '+mt.toLocaleString("fr-FR")+'</div><div class="honht">HT</div></div></div><div class="honnote" contenteditable="true">Notre estimation est etablie sur la base d\'une mission de '+totJ2+' jours ouvres au total. Elle s\'entend hors taxes et debours divers.</div></div></div>');
+    // PILOTE SMC — pré-remplit window.smcHon à partir des éléments saisis en étape 2
+    window.smcHon = window.smcHon || {};
+    window.smcHon.bandeau = "Conditions d'intervention";
+    window.smcHon.titre = "Honoraires";
+    window.smcHon.intro = "Notre estimation d'honoraires correspond au périmètre des travaux tel que précédemment envisagé, et se fonde sur une estimation de durée de due diligence de "+totJ2+" jours ouvrés.";
+    window.smcHon.hypotheses = [
+      "Nos honoraires sont basés sur le nombre d'heures anticipées afin de préparer le rapport portant sur le périmètre des travaux détaillé précédemment.",
+      "Ces honoraires s'entendent hors taxes et débours divers.",
+      "Accès libre et communication régulière avec la direction et l'équipe comptable.",
+      "Nos lettres de mission détailleront le périmètre de nos travaux ainsi que nos conditions générales.",
+      "Nous vous tiendrons régulièrement informés du temps réel passé. Si des coûts additionnels étaient anticipés, nous vous en informerions immédiatement.",
+      "Si vous souhaitiez que nous exécutions des travaux complémentaires, nos honoraires seraient facturés sur la base du temps passé."
+    ];
+    window.smcHon.prestations = [ { libelle: (d.honLib||"Due diligence financière"), montant: mt || 22000 } ];
+    window.smcHon.phraseBas = "Conduite de la mission sur une période estimée de "+totJ2+" jours ouvrés. Remise de nos rapports de due diligence financière comprenant : Executive Summary + Sections thématiques permettant de détailler les analyses complémentaires ou clés menées.";
+    window.smcHon.pageCur = 1; // sera recalculé après construction de la liste
+    window.smcHon.pageTot = 1;
+    addS(4,"cond-hon","Honoraires",smcRenderSlide());
   }
 
   if(d.parties.p5){
@@ -1455,6 +1578,13 @@ async function genPropale(reouvrir){
   addS(6,"footer-pg","Page finale",'<div class="sc ftpg"><div class="ftcab" contenteditable="true">Gavroche</div></div>');
 
   window.sD=slides;window.sA=0;window.cH=[];
+  // PILOTE SMC — recale les numéros de page de la slide Honoraires selon sa position réelle
+  const idxHon=slides.findIndex(function(s){return s.id==='cond-hon';});
+  if(idxHon>=0 && window.smcHon){
+    window.smcHon.pageCur=idxHon+1;
+    window.smcHon.pageTot=slides.length;
+    slides[idxHon].html=smcRenderSlide();
+  }
   const sv=document.getElementById("sv");
   sv.innerHTML=slides.map(function(s,i){return '<div class="sf '+(i===0?"on":"")+'" id="sf-'+i+'">'+s.html+'</div>';}).join("");
   const snavHtml=struct.map(function(rub){
@@ -1479,8 +1609,151 @@ function gS(i){
   document.querySelectorAll('.sf').forEach((el,j)=>el.classList.toggle('on',j===i));
   document.querySelectorAll('.sni').forEach((el,j)=>el.classList.toggle('on',j===i));
   window.sA=i;updCtr();
+  if(typeof smcOnSlideChange==='function') smcOnSlideChange(slides[i]);
 }
 function updCtr(){const el=document.getElementById('slide-ctr');if(el)el.textContent=((window.sA||0)+1)+' / '+((window.sD||[]).length);}
+
+// ═══════════════════════════════════════════
+// PILOTE SAINT-MICHEL CAPITAL — Slide Honoraires
+// Rendu centré charte SMC + formulaire droite, binding live
+// ═══════════════════════════════════════════
+window.smcHon = {
+  bandeau: "Conditions d'intervention",
+  titre: "Honoraires",
+  intro: "Notre estimation d'honoraires correspond au périmètre des travaux tel que précédemment envisagé, et se fonde sur une estimation de durée de due diligence de 3 semaines.",
+  hypotheses: [
+    "Nos honoraires sont basés sur le nombre d'heures anticipées afin de préparer le rapport portant sur le périmètre des travaux détaillé précédemment.",
+    "Ces honoraires s'entendent hors taxes et débours divers.",
+    "Accès libre et communication régulière avec la direction et l'équipe comptable.",
+    "Nos lettres de mission détailleront le périmètre de nos travaux ainsi que nos conditions générales.",
+    "Nous vous tiendrons régulièrement informés du temps réel passé. Si des coûts additionnels étaient anticipés, nous vous en informerions immédiatement.",
+    "Si vous souhaitiez que nous exécutions des travaux complémentaires, nos honoraires seraient facturés sur la base du temps passé."
+  ],
+  prestations: [
+    { libelle: "Due diligence financière", montant: 22000 },
+    { libelle: "Option — Revue du Business Plan", montant: 0 }
+  ],
+  phraseBas: "Conduite de la mission sur une période estimée de 3 semaines. Remise de nos rapports de due diligence financière comprenant : Executive Summary + Sections thématiques permettant de détailler les analyses complémentaires ou clés menées.",
+  pageCur: 11,
+  pageTot: 14
+};
+
+function smcEsc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function smcFmtEur(n){const v=parseInt(n)||0;return v.toLocaleString('fr-FR').replace(/\u202F/g,' ');}
+
+function smcRenderSlide(){
+  const d=window.smcHon;
+  const rows=d.prestations.filter(p=>(parseInt(p.montant)||0)>0).map(p=>'<tr><td>'+smcEsc(p.libelle)+'</td><td class="right">'+smcFmtEur(p.montant)+' €</td></tr>').join('');
+  const hypos=d.hypotheses.map(h=>'<li>'+smcEsc(h)+'</li>').join('');
+  return ''+
+    '<div class="sc smc-slide">'+
+      '<div class="smc-head">'+
+        '<div class="smc-bandeau" data-smc-view="bandeau">'+smcEsc(d.bandeau)+'</div>'+
+        '<div class="smc-titre" data-smc-view="titre">'+smcEsc(d.titre)+'</div>'+
+        '<div class="smc-trait"></div>'+
+      '</div>'+
+      '<div class="smc-body">'+
+        '<div class="smc-intro" data-smc-view="intro">'+smcEsc(d.intro)+'</div>'+
+        '<ul class="smc-hypos" data-smc-view="hypotheses">'+hypos+'</ul>'+
+        '<table class="smc-table"><thead><tr><th>Prestation</th><th class="right">Montant (HT)</th></tr></thead><tbody data-smc-view="prestations">'+rows+'</tbody></table>'+
+        '<div class="smc-footer-line" data-smc-view="phraseBas">'+smcEsc(d.phraseBas)+'</div>'+
+      '</div>'+
+      '<div class="smc-page-footer">'+
+        '<span class="smc-ink">S-M.C</span>'+
+        '<span class="smc-pagenum">Page <span data-smc-view="pageCur">'+smcEsc(d.pageCur)+'</span> sur <span data-smc-view="pageTot">'+smcEsc(d.pageTot)+'</span></span>'+
+      '</div>'+
+    '</div>';
+}
+
+// Re-rend une zone précise du visuel sans tout reconstruire
+function smcUpdateView(field){
+  const sv=document.getElementById('sv');if(!sv)return;
+  const target=sv.querySelector('.sf.on [data-smc-view="'+field+'"]');
+  const d=window.smcHon;
+  if(!target)return;
+  if(field==='hypotheses'){
+    target.innerHTML=d.hypotheses.map(h=>'<li>'+smcEsc(h)+'</li>').join('');
+  } else if(field==='prestations'){
+    target.innerHTML=d.prestations.filter(p=>(parseInt(p.montant)||0)>0).map(p=>'<tr><td>'+smcEsc(p.libelle)+'</td><td class="right">'+smcFmtEur(p.montant)+' €</td></tr>').join('');
+  } else {
+    target.textContent = d[field];
+  }
+}
+
+// Met à jour tout le visuel d'un coup (ex : slide active ré-ouverte)
+function smcRerender(){
+  const sv=document.getElementById('sv');if(!sv)return;
+  const active=sv.querySelector('.sf.on');
+  if(!active)return;
+  if(!active.querySelector('.smc-slide'))return; // pas une slide SMC
+  active.innerHTML=smcRenderSlide();
+}
+
+// Formulaire droite — rendu des listes dynamiques
+function smcRenderHypos(){
+  const c=document.getElementById('smcf-hypos');if(!c)return;
+  c.innerHTML=window.smcHon.hypotheses.map((h,i)=>
+    '<div class="smcf-item"><textarea class="smcf-ta" data-smc-hypo="'+i+'" rows="2">'+smcEsc(h)+'</textarea><button class="smcf-del" type="button" onclick="smcDelHypo('+i+')" title="Supprimer">×</button></div>'
+  ).join('');
+  c.querySelectorAll('textarea[data-smc-hypo]').forEach(el=>{
+    el.addEventListener('input',function(){
+      const i=parseInt(el.getAttribute('data-smc-hypo'));
+      window.smcHon.hypotheses[i]=el.value;
+      smcUpdateView('hypotheses');
+    });
+  });
+}
+function smcRenderPrestations(){
+  const c=document.getElementById('smcf-prestations');if(!c)return;
+  c.innerHTML=window.smcHon.prestations.map((p,i)=>
+    '<div class="smcf-row"><input type="text" class="smcf-i" data-smc-pres-lib="'+i+'" value="'+smcEsc(p.libelle)+'" placeholder="Libellé de prestation"><input type="number" class="smcf-i" data-smc-pres-mt="'+i+'" value="'+(p.montant||0)+'" placeholder="Montant HT €" min="0" step="500"><button class="smcf-del" type="button" onclick="smcDelPrestation('+i+')" title="Supprimer">×</button></div>'
+  ).join('');
+  c.querySelectorAll('input[data-smc-pres-lib]').forEach(el=>{
+    el.addEventListener('input',function(){const i=parseInt(el.getAttribute('data-smc-pres-lib'));window.smcHon.prestations[i].libelle=el.value;smcUpdateView('prestations');});
+  });
+  c.querySelectorAll('input[data-smc-pres-mt]').forEach(el=>{
+    el.addEventListener('input',function(){const i=parseInt(el.getAttribute('data-smc-pres-mt'));window.smcHon.prestations[i].montant=parseInt(el.value)||0;smcUpdateView('prestations');});
+  });
+}
+function smcAddHypo(){window.smcHon.hypotheses.push('Nouvelle hypothèse…');smcRenderHypos();smcUpdateView('hypotheses');}
+function smcDelHypo(i){window.smcHon.hypotheses.splice(i,1);smcRenderHypos();smcUpdateView('hypotheses');}
+function smcAddPrestation(){window.smcHon.prestations.push({libelle:'Nouvelle prestation',montant:0});smcRenderPrestations();smcUpdateView('prestations');}
+function smcDelPrestation(i){window.smcHon.prestations.splice(i,1);smcRenderPrestations();smcUpdateView('prestations');}
+
+function smcInitForm(){
+  // Remplit les champs simples + attache les listeners
+  const form=document.getElementById('smc-form');if(!form)return;
+  if(form.dataset.smcInit==='1'){smcSyncFormFromData();smcRenderHypos();smcRenderPrestations();return;}
+  smcSyncFormFromData();
+  form.querySelectorAll('[data-smc]').forEach(el=>{
+    el.addEventListener('input',function(){
+      const f=el.getAttribute('data-smc');
+      let v=el.value;
+      if(f==='pageCur'||f==='pageTot') v=parseInt(v)||1;
+      window.smcHon[f]=v;
+      smcUpdateView(f);
+    });
+  });
+  smcRenderHypos();
+  smcRenderPrestations();
+  form.dataset.smcInit='1';
+}
+function smcSyncFormFromData(){
+  const form=document.getElementById('smc-form');if(!form)return;
+  form.querySelectorAll('[data-smc]').forEach(el=>{el.value=window.smcHon[el.getAttribute('data-smc')];});
+}
+
+// Quand l'utilisateur navigue entre les slides, on bascule le panneau droit
+function smcOnSlideChange(slide){
+  const rp=document.getElementById('rpanel');if(!rp)return;
+  if(slide && slide.id==='cond-hon'){
+    rp.classList.add('form-mode');
+    smcInitForm();
+    smcRerender();
+  } else {
+    rp.classList.remove('form-mode');
+  }
+}
 
 // Chat
 async function send(){
