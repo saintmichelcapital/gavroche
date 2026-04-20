@@ -193,7 +193,7 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .af{background:var(--blanc);border-top:1px solid var(--gris-tres-clair);padding:20px 48px;display:flex;align-items:center;justify-content:space-between;margin-top:auto;}
 .aft{font-family:var(--font-titre);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gris-clair);}
 /* ETAPE 3 propale */
-.pl{display:grid;grid-template-columns:220px 1fr 320px;height:calc(100vh - 60px - 56px - 1px);overflow:hidden;}
+.pl{display:grid;grid-template-columns:220px 1fr 420px;height:calc(100vh - 60px - 56px - 1px);overflow:hidden;}
 .ssb{background:var(--blanc);border-right:1px solid var(--gris-tres-clair);display:flex;flex-direction:column;overflow:hidden;}
 .ssbt{font-family:var(--font-titre);font-size:8px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gris-clair);padding:14px 16px 8px;flex-shrink:0;border-bottom:1px solid var(--gris-tres-clair);}
 #snav{flex:1;overflow-y:auto;}
@@ -340,26 +340,26 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 ═══════════════════════════════════════════ */
 .smc-slide{background:#ffffff;display:flex;flex-direction:column;padding:4% 5.5% 3.5% 5.5%;font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;color:#1A1A1A;}
 
-/* En-tête : titre (gauche) + nav verticale (droite) */
-.smc-top{display:flex;gap:5%;align-items:flex-start;flex-shrink:0;}
-.smc-title-block{flex:1;}
-.smc-titre{font-family:'Segoe UI',sans-serif;font-size:0.75em;font-weight:400;color:#1A1A1A;line-height:1.3;letter-spacing:0;}
+/* En-tête : titre (gauche) + nav verticale (droite, décalée plus loin du banner) */
+.smc-top{display:flex;gap:8%;align-items:flex-start;flex-shrink:0;justify-content:space-between;}
+.smc-title-block{flex:1;max-width:68%;}
+.smc-titre{font-family:'Segoe UI',sans-serif;font-size:0.75em;font-weight:400;color:#1A1A1A;line-height:1.55;letter-spacing:0;}
 .smc-titre-bold{font-weight:700;}
-.smc-nav{width:22%;display:flex;flex-direction:column;gap:0.6em;padding-top:0.25em;}
-.smc-nav-item{font-family:'Segoe UI',sans-serif;font-size:0.42em;color:#888888;line-height:1.25;position:relative;padding-left:10px;}
+.smc-nav{width:17%;display:flex;flex-direction:column;gap:0.6em;padding-top:0.25em;margin-left:auto;}
+.smc-nav-item{font-family:'Segoe UI',sans-serif;font-size:0.42em;color:#888888;line-height:1.25;position:relative;padding-left:10px;text-align:left;}
 .smc-nav-item.active{color:#1A1A1A;}
-.smc-nav-item.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:#1A1A1A;}
+.smc-nav-item.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:#000000;}
 
-/* Trait noir court sous le titre, à gauche */
-.smc-trait{width:80px;height:3px;background:#1A1A1A;margin-top:3%;margin-bottom:3%;flex-shrink:0;}
+/* Trait noir court sous le titre, calé sur l'alignement du texte — noir absolu, épaissi */
+.smc-trait{width:80px;height:4px;background:#000000;margin:3% 0 3% 2px;flex-shrink:0;}
 
 /* Corps : deux colonnes */
 .smc-body{flex:1;display:grid;grid-template-columns:36% 1fr;gap:6%;overflow:hidden;align-content:start;}
 
 /* Colonne gauche : prestation + livrables */
 .smc-left{display:flex;flex-direction:column;gap:1.2em;}
-.smc-prest-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding-bottom:0.5em;border-bottom:1px solid #E0E0DA;}
-.smc-prest-head .smc-prest-label{font-family:'Segoe UI',sans-serif;font-size:0.52em;font-weight:700;color:#1A1A1A;line-height:1.35;}
+.smc-prest-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding-bottom:0.4em;border-bottom:1px solid #E0E0DA;margin-bottom:-0.6em;}
+.smc-prest-head .smc-prest-label{font-family:'Segoe UI',sans-serif;font-size:0.52em;font-weight:400;color:#1A1A1A;line-height:1.35;}
 .smc-prest-list{display:flex;flex-direction:column;gap:0.5em;}
 .smc-prest-row{display:flex;align-items:baseline;gap:4px;}
 .smc-prest-lib{font-family:'Segoe UI',sans-serif;font-size:0.55em;color:#1A1A1A;white-space:nowrap;}
@@ -413,11 +413,12 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .smcf-del:hover{border-color:var(--noir);color:var(--noir);}
 .smcf-add{background:none;border:1px solid var(--gris-tres-clair);color:var(--gris-moyen);font-family:var(--font-titre);font-size:8px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:3px 8px;cursor:pointer;transition:all 0.15s;}
 .smcf-add:hover{border-color:var(--noir);color:var(--noir);background:var(--gris-surface);}
-.smcf-row{display:grid;grid-template-columns:1fr 110px 28px;gap:6px;align-items:center;}
+.smcf-row{display:grid;grid-template-columns:1fr 95px 28px;gap:6px;align-items:center;}
 .smcf-row input[type="text"],.smcf-row input[type="number"]{font-size:12px;}
 .smcf-pg{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .smcf-pg > div{display:flex;flex-direction:column;gap:6px;}
 .smcf-hint{font-size:10px;color:var(--gris-clair);line-height:1.5;font-style:italic;margin-top:-2px;}
+.smcf-sep{font-family:var(--font-titre);font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gris-clair);padding:10px 12px 8px;margin:4px -18px -6px;border-top:1px solid var(--gris-tres-clair);border-bottom:1px solid var(--gris-tres-clair);background:var(--gris-surface);}
 
 /* ═══════════════════════════════════════════
    EXECUTION — styles specifiques
@@ -681,14 +682,16 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
           <div class="smcf-s">Les champs sont reliés au visuel. Mise à jour en direct, pas de bouton Enregistrer.</div>
         </div>
         <div class="smcf-body">
+          <div class="smcf-sep">En-tête de la slide</div>
           <div class="smcf-g">
-            <label class="smcf-l">Titre (mot en gras)</label>
+            <label class="smcf-l">Titre Banner (mot en gras)</label>
             <input class="smcf-i" data-smc="titreBold" type="text" placeholder="Ex : Honoraires">
           </div>
           <div class="smcf-g">
-            <label class="smcf-l">Titre — suite</label>
+            <label class="smcf-l">Banner - Suite</label>
             <textarea class="smcf-ta" data-smc="titreSuite" rows="2" placeholder="Ex : Notre équipe sera mobilisée..."></textarea>
           </div>
+          <div class="smcf-sep">Colonne de gauche</div>
           <div class="smcf-g">
             <label class="smcf-l">Prestation(s)<button class="smcf-add" type="button" onclick="smcAddPrestation()">+ Ligne</button></label>
             <div class="smcf-list" id="smcf-prestations"></div>
@@ -713,11 +716,13 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
             <label class="smcf-l">Livrables<button class="smcf-add" type="button" onclick="smcAddLivrable()">+ Ajouter</button></label>
             <div class="smcf-list" id="smcf-livrables"></div>
           </div>
+          <div class="smcf-sep">Colonne de droite</div>
           <div class="smcf-g">
-            <label class="smcf-l">Hypothèses (puces)<button class="smcf-add" type="button" onclick="smcAddHypo()">+ Hypothèse</button></label>
+            <label class="smcf-l">Wording (puces)<button class="smcf-add" type="button" onclick="smcAddHypo()">+ Wording</button></label>
             <div class="smcf-list" id="smcf-hypos"></div>
-            <div class="smcf-hint">Cliquer sur une hypothèse pour ajouter/retirer des sous-points.</div>
+            <div class="smcf-hint">Chaque bloc peut recevoir des sous-points.</div>
           </div>
+          <div class="smcf-sep">Pagination</div>
           <div class="smcf-g smcf-pg">
             <div>
               <label class="smcf-l">Page courante</label>
@@ -1726,7 +1731,7 @@ function smcRenderSlide(){
       '<div class="smc-trait"></div>'+
       '<div class="smc-body">'+
         '<div class="smc-left">'+
-          '<div class="smc-prest-head"><span class="smc-prest-label">Prestation</span><span class="smc-prest-label">Montant (HT)</span></div>'+
+          '<div class="smc-prest-head"><span class="smc-prest-label" data-smc-view="prestLabel">'+(d.prestations.filter(p=>(parseInt(p.montant)||0)>0).length>1?'Prestation(s)':'Prestation')+'</span><span class="smc-prest-label">Montant (HT)</span></div>'+
           '<div data-smc-view="prestations">'+smcRenderPrestBlock(d)+'</div>'+
           '<div class="smc-duree" data-smc-view="dureeTxt">'+smcEsc(d.dureeTxt)+'</div>'+
           '<div class="smc-livr-intro" data-smc-view="livrIntro">'+smcEsc(d.livrIntro)+'</div>'+
@@ -1745,21 +1750,35 @@ function smcRenderSlide(){
 function smcUpdateView(field){
   const sv=document.getElementById('sv');if(!sv)return;
   const d=window.smcHon;
-  const target=sv.querySelector('.sf.on [data-smc-view="'+field+'"]');
-  if(!target)return;
-  if(field==='hypotheses'){
-    target.innerHTML=d.hypotheses.map(h=>{
-      const subs=(h.sub||[]).filter(s=>s&&s.trim());
-      const subHtml=subs.length?'<ul class="sub">'+subs.map(s=>'<li>'+smcEsc(s)+'</li>').join('')+'</ul>':'';
-      return '<li>'+smcEsc(h.txt)+subHtml+'</li>';
-    }).join('');
-  } else if(field==='prestations' || field==='reduction'){
+  // Cas spéciaux : "reduction" et "reductionMt" mettent à jour le bloc prestations
+  if(field==='reduction' || field==='reductionMt'){
     const pTarget=sv.querySelector('.sf.on [data-smc-view="prestations"]');
     if(pTarget) pTarget.innerHTML=smcRenderPrestBlock(d);
-  } else if(field==='livrables'){
-    target.innerHTML=(d.livrables||[]).map(l=>'<li>'+smcEsc(l)+'</li>').join('');
   } else {
-    target.textContent = d[field];
+    const target=sv.querySelector('.sf.on [data-smc-view="'+field+'"]');
+    if(target){
+      if(field==='hypotheses'){
+        target.innerHTML=d.hypotheses.map(h=>{
+          const subs=(h.sub||[]).filter(s=>s&&s.trim());
+          const subHtml=subs.length?'<ul class="sub">'+subs.map(s=>'<li>'+smcEsc(s)+'</li>').join('')+'</ul>':'';
+          return '<li>'+smcEsc(h.txt)+subHtml+'</li>';
+        }).join('');
+      } else if(field==='prestations'){
+        target.innerHTML=smcRenderPrestBlock(d);
+      } else if(field==='livrables'){
+        target.innerHTML=(d.livrables||[]).map(l=>'<li>'+smcEsc(l)+'</li>').join('');
+      } else {
+        target.textContent = d[field];
+      }
+    }
+  }
+  // Met à jour dynamiquement le libellé "Prestation" / "Prestation(s)"
+  if(field==='prestations' || field==='reduction' || field==='reductionMt'){
+    const lblTarget=sv.querySelector('.sf.on [data-smc-view="prestLabel"]');
+    if(lblTarget){
+      const nb=d.prestations.filter(p=>(parseInt(p.montant)||0)>0).length;
+      lblTarget.textContent=nb>1?'Prestation(s)':'Prestation';
+    }
   }
   // Persistance + sync montant total vers la propale active
   smcSyncToPropale();
