@@ -335,32 +335,57 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
 /* ═══════════════════════════════════════════
-   PILOTE SAINT-MICHEL CAPITAL — SLIDE HONORAIRES
-   Charte : Segoe UI, noir/blanc/gris, A4 paysage
+   CHARTE SAINT-MICHEL CAPITAL (Retinax) — SLIDE HONORAIRES
+   Segoe UI, noir/blanc/gris, A4 paysage 297×210
 ═══════════════════════════════════════════ */
-.smc-slide{background:#ffffff;display:flex;flex-direction:column;padding:5.5% 7% 4% 7%;font-family:'Segoe UI','Segoe UI Semilight','Helvetica Neue',Arial,sans-serif;color:#1A1A1A;}
-.smc-head{flex-shrink:0;margin-bottom:3%;}
-.smc-bandeau{font-family:'Segoe UI',sans-serif;font-size:0.5em;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#888888;margin-bottom:1.2%;outline:none;cursor:text;}
-.smc-titre{font-family:'Segoe UI Semibold','Segoe UI',sans-serif;font-size:1em;font-weight:600;letter-spacing:0.02em;color:#1A1A1A;line-height:1.15;outline:none;cursor:text;}
-.smc-trait{width:64px;height:2px;background:#1A1A1A;margin-top:1.1%;}
-.smc-body{flex:1;display:flex;flex-direction:column;gap:2.6%;overflow:hidden;}
-.smc-intro{font-family:'Segoe UI',sans-serif;font-size:0.62em;color:#404040;line-height:1.7;outline:none;cursor:text;}
-.smc-hypos{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:1.1%;}
-.smc-hypos li{position:relative;padding-left:2.4%;font-family:'Segoe UI',sans-serif;font-size:0.58em;color:#404040;line-height:1.65;outline:none;cursor:text;}
-.smc-hypos li::before{content:'';position:absolute;left:0;top:0.65em;width:6px;height:1px;background:#1A1A1A;}
-.smc-table{width:100%;border-collapse:collapse;margin-top:0.5%;font-family:'Segoe UI',sans-serif;}
-.smc-table th{font-size:0.46em;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#888888;padding:1.2% 0 1% 0;border-bottom:1px solid #1A1A1A;text-align:left;}
-.smc-table th.right{text-align:right;}
-.smc-table td{font-size:0.62em;color:#1A1A1A;padding:1.3% 0;border-bottom:1px solid #E0E0DA;outline:none;cursor:text;}
-.smc-table td.right{text-align:right;font-family:'Bahnschrift Light','Segoe UI',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:0.01em;}
-.smc-table tr:last-child td{border-bottom:none;}
-.smc-table tr.smc-total td{font-weight:600;border-top:1px solid #1A1A1A;border-bottom:none;padding-top:1.5%;}
-.smc-footer-line{font-family:'Segoe UI',sans-serif;font-size:0.54em;color:#404040;line-height:1.65;font-style:italic;outline:none;cursor:text;padding-top:1.5%;border-top:1px solid #E0E0DA;margin-top:auto;}
-.smc-page-footer{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding-top:2.2%;margin-top:2%;border-top:1px solid #E0E0DA;font-family:'Segoe UI',sans-serif;font-size:0.42em;letter-spacing:0.16em;text-transform:uppercase;color:#888888;}
-.smc-ink{font-weight:700;color:#1A1A1A;letter-spacing:0.2em;}
-.smc-pagenum{color:#888888;}
-.smc-slide [contenteditable="true"]:hover{background:rgba(0,0,0,0.02);outline:1px dashed #E0E0DA;}
-.smc-slide [contenteditable="true"]:focus{background:rgba(0,0,0,0.03);outline:1px solid #1A1A1A;}
+.smc-slide{background:#ffffff;display:flex;flex-direction:column;padding:4% 5.5% 3.5% 5.5%;font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;color:#1A1A1A;}
+
+/* En-tête : titre (gauche) + nav verticale (droite) */
+.smc-top{display:flex;gap:5%;align-items:flex-start;flex-shrink:0;}
+.smc-title-block{flex:1;}
+.smc-titre{font-family:'Segoe UI',sans-serif;font-size:0.75em;font-weight:400;color:#1A1A1A;line-height:1.3;letter-spacing:0;}
+.smc-titre-bold{font-weight:700;}
+.smc-nav{width:22%;display:flex;flex-direction:column;gap:0.6em;padding-top:0.25em;}
+.smc-nav-item{font-family:'Segoe UI',sans-serif;font-size:0.42em;color:#888888;line-height:1.25;position:relative;padding-left:10px;}
+.smc-nav-item.active{color:#1A1A1A;}
+.smc-nav-item.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:#1A1A1A;}
+
+/* Trait noir court sous le titre, à gauche */
+.smc-trait{width:80px;height:3px;background:#1A1A1A;margin-top:3%;margin-bottom:3%;flex-shrink:0;}
+
+/* Corps : deux colonnes */
+.smc-body{flex:1;display:grid;grid-template-columns:36% 1fr;gap:6%;overflow:hidden;align-content:start;}
+
+/* Colonne gauche : prestation + livrables */
+.smc-left{display:flex;flex-direction:column;gap:1.2em;}
+.smc-prest-head{display:flex;flex-direction:column;gap:0.1em;padding-bottom:0.6em;}
+.smc-prest-head .smc-prest-label{font-family:'Segoe UI',sans-serif;font-size:0.52em;font-weight:700;color:#1A1A1A;line-height:1.35;}
+.smc-prest-list{display:flex;flex-direction:column;gap:0.9em;}
+.smc-prest-row{display:flex;flex-direction:column;gap:0.3em;}
+.smc-prest-lib-line{display:flex;align-items:baseline;gap:4px;}
+.smc-prest-lib{font-family:'Segoe UI',sans-serif;font-size:0.55em;color:#1A1A1A;white-space:nowrap;}
+.smc-prest-dots{flex:1;color:#888;font-family:'Segoe UI',sans-serif;font-size:0.55em;overflow:hidden;letter-spacing:2px;text-align:right;white-space:nowrap;}
+.smc-prest-mt{align-self:flex-start;background:#D9D9D9;color:#1A1A1A;padding:3px 12px;font-family:'Segoe UI',sans-serif;font-size:0.58em;font-variant-numeric:tabular-nums;}
+.smc-reduction{font-family:'Segoe UI',sans-serif;font-size:0.48em;color:#404040;line-height:1.5;font-style:italic;padding-top:0.4em;border-top:1px dashed #E0E0DA;margin-top:0.4em;}
+.smc-duree{font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#404040;line-height:1.55;}
+.smc-livr-intro{font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#404040;line-height:1.55;margin-top:-0.5em;}
+.smc-livr{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.4em;}
+.smc-livr li{position:relative;padding-left:1.3em;font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#404040;line-height:1.55;}
+.smc-livr li::before{content:'⊢';position:absolute;left:0;top:0;color:#888;font-weight:400;}
+
+/* Colonne droite : hypothèses à puces */
+.smc-bullets{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.7em;}
+.smc-bullets > li{position:relative;padding-left:1.4em;font-family:'Segoe UI',sans-serif;font-size:0.55em;color:#404040;line-height:1.55;text-align:justify;}
+.smc-bullets > li::before{content:'▪';position:absolute;left:0;top:-0.15em;color:#1A1A1A;font-size:0.9em;}
+.smc-bullets .sub{list-style:none;padding:0;margin:0.45em 0 0 0;display:flex;flex-direction:column;gap:0.5em;}
+.smc-bullets .sub li{position:relative;padding-left:1.4em;font-family:'Segoe UI',sans-serif;font-size:1em;color:#404040;line-height:1.55;}
+.smc-bullets .sub li::before{content:'⊢';position:absolute;left:0;top:0;color:#888;font-size:1em;}
+.smc-bullets u{text-decoration:underline;}
+
+/* Pied de slide : trait + S-M.C / Page X sur Y */
+.smc-page-footer{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding-top:1em;margin-top:1.5em;border-top:1px solid #E0E0DA;}
+.smc-ink{font-family:'Segoe UI',sans-serif;font-weight:700;color:#1A1A1A;font-size:0.58em;letter-spacing:0.02em;}
+.smc-pagenum{font-family:'Segoe UI',sans-serif;color:#888888;font-size:0.42em;letter-spacing:0.02em;}
 
 /* Wrapper panneau droite : chat ↔ formulaire */
 .rpanel{display:flex;flex-direction:column;overflow:hidden;background:var(--blanc);border-left:1px solid var(--gris-tres-clair);}
@@ -647,40 +672,52 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
     </div>
   </div>
   <div class="pl">
-    <div class="ssb"><div class="ssbt">Structure</div><div id="snav"></div><div class="ssba"><button class="bexp" onclick="alert('Export PPTX — en construction.')">↓ Exporter en PPTX</button><button class="bexp" style="margin-top:6px;background:var(--gris-surface);color:var(--noir);border:1px solid var(--gris-tres-clair);" onclick="sauvegarderPropale();ap('proposition');">← Enregistrer et revenir</button></div></div>
+    <div class="ssb"><div class="ssbt">Structure</div><div id="snav"></div><div class="ssba"><button class="bexp" onclick="smcExportPPTX()">↓ Exporter en PPTX</button><button class="bexp" style="margin-top:6px;background:var(--gris-surface);color:var(--noir);border:1px solid var(--gris-tres-clair);" onclick="sauvegarderPropale();ap('proposition');">← Enregistrer et revenir</button></div></div>
     <div class="sm"><div class="sv" id="sv" style="position:relative;"><div class="geno" id="geno"><div class="gens"></div><div class="gent">Generation en cours</div><div class="genl" id="genl">Initialisation…</div></div></div><div class="sctrl"><button class="cbtn" onclick="gS(Math.max(0,(window.sA||0)-1))">← Precedent</button><button class="cbtn" id="slide-ctr">— / —</button><button class="cbtn" onclick="gS(Math.min((window.sD||[]).length-1,(window.sA||0)+1))">Suivant →</button></div></div>
     <div class="rpanel" id="rpanel">
       <div class="cp"><div class="cp-h"><div class="cp-t">Assistant</div><div class="cp-s">Demandez une modification…</div></div><div class="cp-m" id="cp-m"><div class="cpb cpb-a">La propale est en cours de generation.</div></div><div class="cpld" id="cpld" style="display:none;"><div></div><div></div><div></div></div><div class="cp-iw"><textarea class="cp-i" id="cp-i" rows="3" placeholder="Ex : Reformule le contexte…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send();}"></textarea><button class="cp-send" onclick="send()">Envoyer</button></div></div>
       <div class="smc-form" id="smc-form">
         <div class="smcf-h">
           <div class="smcf-t">Honoraires — Édition</div>
-          <div class="smcf-s">Les champs sont reliés au visuel. Aucun bouton Enregistrer : la mise à jour est en direct.</div>
+          <div class="smcf-s">Les champs sont reliés au visuel. Mise à jour en direct, pas de bouton Enregistrer.</div>
         </div>
         <div class="smcf-body">
           <div class="smcf-g">
-            <label class="smcf-l">Bandeau de rubrique</label>
-            <input class="smcf-i" data-smc="bandeau" type="text">
+            <label class="smcf-l">Titre (mot en gras)</label>
+            <input class="smcf-i" data-smc="titreBold" type="text" placeholder="Ex : Honoraires">
           </div>
           <div class="smcf-g">
-            <label class="smcf-l">Titre de la slide</label>
-            <input class="smcf-i" data-smc="titre" type="text">
+            <label class="smcf-l">Titre — suite</label>
+            <textarea class="smcf-ta" data-smc="titreSuite" rows="2" placeholder="Ex : Notre équipe sera mobilisée..."></textarea>
           </div>
           <div class="smcf-g">
-            <label class="smcf-l">Paragraphe d'introduction</label>
-            <textarea class="smcf-ta" data-smc="intro" rows="3"></textarea>
-          </div>
-          <div class="smcf-g">
-            <label class="smcf-l">Hypothèses (puces)<button class="smcf-add" type="button" onclick="smcAddHypo()">+ Ajouter</button></label>
-            <div class="smcf-list" id="smcf-hypos"></div>
-          </div>
-          <div class="smcf-g">
-            <label class="smcf-l">Prestations (tableau)<button class="smcf-add" type="button" onclick="smcAddPrestation()">+ Ligne</button></label>
+            <label class="smcf-l">Prestation(s)<button class="smcf-add" type="button" onclick="smcAddPrestation()">+ Ligne</button></label>
             <div class="smcf-list" id="smcf-prestations"></div>
-            <div class="smcf-hint">Laisser le montant à 0 masque la ligne dans le tableau. Saisir les montants en euros HT.</div>
+            <div class="smcf-hint">Un montant à 0 masque la ligne. Le total se synchronise automatiquement avec le tableau des propales.</div>
           </div>
           <div class="smcf-g">
-            <label class="smcf-l">Phrase de bas (italique)</label>
-            <textarea class="smcf-ta" data-smc="phraseBas" rows="3"></textarea>
+            <label class="smcf-l" style="display:flex;align-items:center;gap:8px;">
+              <input type="checkbox" id="smcf-red-on" onchange="smcToggleReduction(this.checked)" style="accent-color:var(--noir);">
+              <span style="text-transform:none;letter-spacing:0;font-size:11px;font-weight:400;color:var(--gris-moyen);">Ajouter une clause de réduction en cas de non-réalisation</span>
+            </label>
+            <input class="smcf-i" data-smc="reductionMt" type="number" min="0" step="500" placeholder="Montant réduit HT (€)" style="display:none;" id="smcf-red-mt">
+          </div>
+          <div class="smcf-g">
+            <label class="smcf-l">Durée estimée</label>
+            <input class="smcf-i" data-smc="dureeTxt" type="text" placeholder="Ex : Conduite de la mission sur une période estimée de 3 semaines">
+          </div>
+          <div class="smcf-g">
+            <label class="smcf-l">Intro livrables</label>
+            <input class="smcf-i" data-smc="livrIntro" type="text" placeholder="Ex : Remise de nos rapports de due diligence financière comprenant :">
+          </div>
+          <div class="smcf-g">
+            <label class="smcf-l">Livrables<button class="smcf-add" type="button" onclick="smcAddLivrable()">+ Ajouter</button></label>
+            <div class="smcf-list" id="smcf-livrables"></div>
+          </div>
+          <div class="smcf-g">
+            <label class="smcf-l">Hypothèses (puces)<button class="smcf-add" type="button" onclick="smcAddHypo()">+ Hypothèse</button></label>
+            <div class="smcf-list" id="smcf-hypos"></div>
+            <div class="smcf-hint">Cliquer sur une hypothèse pour ajouter/retirer des sous-points.</div>
           </div>
           <div class="smcf-g smcf-pg">
             <div>
@@ -1552,21 +1589,29 @@ async function genPropale(reouvrir){
     const totJ2=(parseInt(d.phases[0].dur)||0)+(parseInt(d.phases[1].dur)||0)+(parseInt(d.phases[2].dur)||0);
     const mt=parseInt(d.honMt)||0;
     // PILOTE SMC — pré-remplit window.smcHon à partir des éléments saisis en étape 2
+    const nbSemaines = Math.max(1, Math.ceil(totJ2/5));
     window.smcHon = window.smcHon || {};
-    window.smcHon.bandeau = "Conditions d'intervention";
-    window.smcHon.titre = "Honoraires";
-    window.smcHon.intro = "Notre estimation d'honoraires correspond au périmètre des travaux tel que précédemment envisagé, et se fonde sur une estimation de durée de due diligence de "+totJ2+" jours ouvrés.";
-    window.smcHon.hypotheses = [
-      "Nos honoraires sont basés sur le nombre d'heures anticipées afin de préparer le rapport portant sur le périmètre des travaux détaillé précédemment.",
-      "Ces honoraires s'entendent hors taxes et débours divers.",
-      "Accès libre et communication régulière avec la direction et l'équipe comptable.",
-      "Nos lettres de mission détailleront le périmètre de nos travaux ainsi que nos conditions générales.",
-      "Nous vous tiendrons régulièrement informés du temps réel passé. Si des coûts additionnels étaient anticipés, nous vous en informerions immédiatement.",
-      "Si vous souhaitiez que nous exécutions des travaux complémentaires, nos honoraires seraient facturés sur la base du temps passé."
+    window.smcHon.titreBold = "Honoraires";
+    window.smcHon.titreSuite = "Notre équipe sera mobilisée sur toute la période d'exécution des travaux. Nous estimons que "+nbSemaines+" semaines seront nécessaires à la réalisation complète de nos due diligences.";
+    window.smcHon.prestations = [ { libelle: (d.honLib||"Due Diligence financière"), montant: mt || 22000 } ];
+    window.smcHon.dureeTxt = "Conduite de la mission sur une période estimée de "+nbSemaines+" semaines";
+    window.smcHon.livrIntro = "Remise de nos rapports de due diligence financière comprenant :";
+    window.smcHon.livrables = [
+      "Executive Summary",
+      "Sections thématiques permettant de détailler les analyses complémentaires ou clés menées."
     ];
-    window.smcHon.prestations = [ { libelle: (d.honLib||"Due diligence financière"), montant: mt || 22000 } ];
-    window.smcHon.phraseBas = "Conduite de la mission sur une période estimée de "+totJ2+" jours ouvrés. Remise de nos rapports de due diligence financière comprenant : Executive Summary + Sections thématiques permettant de détailler les analyses complémentaires ou clés menées.";
-    window.smcHon.pageCur = 1; // sera recalculé après construction de la liste
+    window.smcHon.hypotheses = [
+      { txt: "Notre estimation d'honoraires est basée sur le nombre d'heures que nous anticipons afin de préparer le rapport portant sur le périmètre des travaux détaillé précédemment.", sub: [] },
+      { txt: "Elle est construite selon les hypothèses suivantes :", sub: [
+        "Après la phase préparatoire de collecte de l'information, nous estimons la durée de préparation à "+nbSemaines+" semaines.",
+        "Ces honoraires s'entendent hors taxes et débours divers.",
+        "Accès libre et communication régulière avec la direction et l'équipe comptable."
+      ]},
+      { txt: "Nos lettres de mission détailleront le périmètre de nos travaux ainsi que nos conditions générales.", sub: [] },
+      { txt: "Nous vous tiendrons régulièrement informés du temps réel passé, et dans l'hypothèse où nous anticiperions des coûts additionnels au-delà de cette estimation, nous vous en informerions immédiatement.", sub: [] },
+      { txt: "Si vous souhaitiez que nous exécutions des travaux complémentaires, nos honoraires seraient facturés sur la base du temps passé.", sub: [] }
+    ];
+    window.smcHon.pageCur = 1; // recalculé plus bas
     window.smcHon.pageTot = 1;
     addS(4,"cond-hon","Honoraires",smcRenderSlide());
   }
@@ -1614,49 +1659,80 @@ function gS(i){
 function updCtr(){const el=document.getElementById('slide-ctr');if(el)el.textContent=((window.sA||0)+1)+' / '+((window.sD||[]).length);}
 
 // ═══════════════════════════════════════════
-// PILOTE SAINT-MICHEL CAPITAL — Slide Honoraires
-// Rendu centré charte SMC + formulaire droite, binding live
+// CHARTE SAINT-MICHEL CAPITAL (Retinax) — Slide Honoraires
+// Rendu centré fidèle au template + formulaire droite, binding live
 // ═══════════════════════════════════════════
 window.smcHon = {
-  bandeau: "Conditions d'intervention",
-  titre: "Honoraires",
-  intro: "Notre estimation d'honoraires correspond au périmètre des travaux tel que précédemment envisagé, et se fonde sur une estimation de durée de due diligence de 3 semaines.",
+  titreBold: "Honoraires",
+  titreSuite: "Notre équipe sera mobilisée sur toute la période d'exécution des travaux. Nous estimons que 3 semaines seront nécessaires à la réalisation complète de nos due diligences.",
+  prestations: [ { libelle: "Due Diligence financière", montant: 22000 } ],
+  dureeTxt: "Conduite de la mission sur une période estimée de 3 semaines",
+  livrIntro: "Remise de nos rapports de due diligence financière comprenant :",
+  livrables: [
+    "Executive Summary",
+    "Sections thématiques permettant de détailler les analyses complémentaires ou clés menées."
+  ],
+  reductionActive: false,
+  reductionMt: 5000,
   hypotheses: [
-    "Nos honoraires sont basés sur le nombre d'heures anticipées afin de préparer le rapport portant sur le périmètre des travaux détaillé précédemment.",
-    "Ces honoraires s'entendent hors taxes et débours divers.",
-    "Accès libre et communication régulière avec la direction et l'équipe comptable.",
-    "Nos lettres de mission détailleront le périmètre de nos travaux ainsi que nos conditions générales.",
-    "Nous vous tiendrons régulièrement informés du temps réel passé. Si des coûts additionnels étaient anticipés, nous vous en informerions immédiatement.",
-    "Si vous souhaitiez que nous exécutions des travaux complémentaires, nos honoraires seraient facturés sur la base du temps passé."
+    { txt: "Notre estimation d'honoraires est basée sur le nombre d'heures que nous anticipons afin de préparer le rapport portant sur le périmètre des travaux détaillé précédemment.", sub: [] },
+    { txt: "Elle est construite selon les hypothèses suivantes :", sub: [
+      "Après la phase préparatoire de collecte de l'information, nous estimons la durée de préparation à 3 semaines.",
+      "Ces honoraires s'entendent hors taxes et débours divers.",
+      "Accès libre et communication régulière avec la direction et l'équipe comptable."
+    ]},
+    { txt: "Nos lettres de mission détailleront le périmètre de nos travaux ainsi que nos conditions générales.", sub: [] },
+    { txt: "Nous vous tiendrons régulièrement informés du temps réel passé, et dans l'hypothèse où nous anticiperions des coûts additionnels au-delà de cette estimation, nous vous en informerions immédiatement.", sub: [] },
+    { txt: "Si vous souhaitiez que nous exécutions des travaux complémentaires, nos honoraires seraient facturés sur la base du temps passé.", sub: [] }
   ],
-  prestations: [
-    { libelle: "Due diligence financière", montant: 22000 },
-    { libelle: "Option — Revue du Business Plan", montant: 0 }
-  ],
-  phraseBas: "Conduite de la mission sur une période estimée de 3 semaines. Remise de nos rapports de due diligence financière comprenant : Executive Summary + Sections thématiques permettant de détailler les analyses complémentaires ou clés menées.",
-  pageCur: 11,
+  pageCur: 13,
   pageTot: 14
 };
 
 function smcEsc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function smcFmtEur(n){const v=parseInt(n)||0;return v.toLocaleString('fr-FR').replace(/\u202F/g,' ');}
 
+function smcRenderPrestBlock(d){
+  const rows=d.prestations.filter(p=>(parseInt(p.montant)||0)>0).map(p=>
+    '<div class="smc-prest-row">'+
+      '<div class="smc-prest-lib-line"><span class="smc-prest-lib">'+smcEsc(p.libelle)+'</span><span class="smc-prest-dots">'+'. '.repeat(30)+'</span></div>'+
+      '<div class="smc-prest-mt">€&nbsp;'+smcFmtEur(p.montant)+'</div>'+
+    '</div>'
+  ).join('');
+  const redHtml=d.reductionActive?'<div class="smc-reduction">En cas de non-réalisation de l\'opération envisagée, les honoraires seront réduits à €&nbsp;'+smcFmtEur(d.reductionMt)+' hors taxes.</div>':'';
+  return '<div class="smc-prest-list">'+rows+redHtml+'</div>';
+}
+
 function smcRenderSlide(){
   const d=window.smcHon;
-  const rows=d.prestations.filter(p=>(parseInt(p.montant)||0)>0).map(p=>'<tr><td>'+smcEsc(p.libelle)+'</td><td class="right">'+smcFmtEur(p.montant)+' €</td></tr>').join('');
-  const hypos=d.hypotheses.map(h=>'<li>'+smcEsc(h)+'</li>').join('');
+  const livrItems=(d.livrables||[]).map(l=>'<li>'+smcEsc(l)+'</li>').join('');
+  const hypoItems=(d.hypotheses||[]).map(h=>{
+    const subs=(h.sub||[]).filter(s=>s&&s.trim());
+    const subHtml=subs.length?'<ul class="sub">'+subs.map(s=>'<li>'+smcEsc(s)+'</li>').join('')+'</ul>':'';
+    return '<li>'+smcEsc(h.txt)+subHtml+'</li>';
+  }).join('');
   return ''+
     '<div class="sc smc-slide">'+
-      '<div class="smc-head">'+
-        '<div class="smc-bandeau" data-smc-view="bandeau">'+smcEsc(d.bandeau)+'</div>'+
-        '<div class="smc-titre" data-smc-view="titre">'+smcEsc(d.titre)+'</div>'+
-        '<div class="smc-trait"></div>'+
+      '<div class="smc-top">'+
+        '<div class="smc-title-block">'+
+          '<div class="smc-titre"><span class="smc-titre-bold" data-smc-view="titreBold">'+smcEsc(d.titreBold)+'</span> | <span data-smc-view="titreSuite">'+smcEsc(d.titreSuite)+'</span></div>'+
+        '</div>'+
+        '<div class="smc-nav">'+
+          '<div class="smc-nav-item">Contexte</div>'+
+          '<div class="smc-nav-item">Périmètre des travaux</div>'+
+          '<div class="smc-nav-item active">Conditions</div>'+
+        '</div>'+
       '</div>'+
+      '<div class="smc-trait"></div>'+
       '<div class="smc-body">'+
-        '<div class="smc-intro" data-smc-view="intro">'+smcEsc(d.intro)+'</div>'+
-        '<ul class="smc-hypos" data-smc-view="hypotheses">'+hypos+'</ul>'+
-        '<table class="smc-table"><thead><tr><th>Prestation</th><th class="right">Montant (HT)</th></tr></thead><tbody data-smc-view="prestations">'+rows+'</tbody></table>'+
-        '<div class="smc-footer-line" data-smc-view="phraseBas">'+smcEsc(d.phraseBas)+'</div>'+
+        '<div class="smc-left">'+
+          '<div class="smc-prest-head"><span class="smc-prest-label">Prestation</span><span class="smc-prest-label">Montant (HT)</span></div>'+
+          '<div data-smc-view="prestations">'+smcRenderPrestBlock(d)+'</div>'+
+          '<div class="smc-duree" data-smc-view="dureeTxt">'+smcEsc(d.dureeTxt)+'</div>'+
+          '<div class="smc-livr-intro" data-smc-view="livrIntro">'+smcEsc(d.livrIntro)+'</div>'+
+          '<ul class="smc-livr" data-smc-view="livrables">'+livrItems+'</ul>'+
+        '</div>'+
+        '<ul class="smc-bullets" data-smc-view="hypotheses">'+hypoItems+'</ul>'+
       '</div>'+
       '<div class="smc-page-footer">'+
         '<span class="smc-ink">S-M.C</span>'+
@@ -1665,93 +1741,166 @@ function smcRenderSlide(){
     '</div>';
 }
 
-// Re-rend une zone précise du visuel sans tout reconstruire
+// Met à jour une zone précise du visuel sans tout reconstruire
 function smcUpdateView(field){
   const sv=document.getElementById('sv');if(!sv)return;
-  const target=sv.querySelector('.sf.on [data-smc-view="'+field+'"]');
   const d=window.smcHon;
+  const target=sv.querySelector('.sf.on [data-smc-view="'+field+'"]');
   if(!target)return;
   if(field==='hypotheses'){
-    target.innerHTML=d.hypotheses.map(h=>'<li>'+smcEsc(h)+'</li>').join('');
-  } else if(field==='prestations'){
-    target.innerHTML=d.prestations.filter(p=>(parseInt(p.montant)||0)>0).map(p=>'<tr><td>'+smcEsc(p.libelle)+'</td><td class="right">'+smcFmtEur(p.montant)+' €</td></tr>').join('');
+    target.innerHTML=d.hypotheses.map(h=>{
+      const subs=(h.sub||[]).filter(s=>s&&s.trim());
+      const subHtml=subs.length?'<ul class="sub">'+subs.map(s=>'<li>'+smcEsc(s)+'</li>').join('')+'</ul>':'';
+      return '<li>'+smcEsc(h.txt)+subHtml+'</li>';
+    }).join('');
+  } else if(field==='prestations' || field==='reduction'){
+    const pTarget=sv.querySelector('.sf.on [data-smc-view="prestations"]');
+    if(pTarget) pTarget.innerHTML=smcRenderPrestBlock(d);
+  } else if(field==='livrables'){
+    target.innerHTML=(d.livrables||[]).map(l=>'<li>'+smcEsc(l)+'</li>').join('');
   } else {
     target.textContent = d[field];
   }
+  // Persistance + sync montant total vers la propale active
+  smcSyncToPropale();
+  smcPersist();
 }
 
-// Met à jour tout le visuel d'un coup (ex : slide active ré-ouverte)
+// Synchronise le total honoraires avec window.propales[active].mt (tableau dashboard)
+function smcSyncToPropale(){
+  if(typeof window.propaleActive !== 'number' || !window.propales || !window.propales[window.propaleActive]) return;
+  const tot=(window.smcHon.prestations||[]).reduce((s,p)=>s+(parseInt(p.montant)||0),0);
+  window.propales[window.propaleActive].mt=tot;
+  if(typeof refreshPropalesTable==='function') refreshPropalesTable();
+  if(typeof refreshDashboard==='function') refreshDashboard();
+}
+
+// Persiste window.smcHon dans propalesSlideData (survit à un changement de propale)
+function smcPersist(){
+  if(typeof window.propaleActive !== 'number') return;
+  if(!window.propalesSlideData) window.propalesSlideData={};
+  const slot=window.propalesSlideData[window.propaleActive]=window.propalesSlideData[window.propaleActive]||{};
+  slot.smcHon=JSON.parse(JSON.stringify(window.smcHon));
+}
+
+// Ré-injecte la slide entière (quand on la ré-ouvre)
 function smcRerender(){
   const sv=document.getElementById('sv');if(!sv)return;
   const active=sv.querySelector('.sf.on');
   if(!active)return;
-  if(!active.querySelector('.smc-slide'))return; // pas une slide SMC
+  if(!active.querySelector('.smc-slide'))return;
   active.innerHTML=smcRenderSlide();
 }
 
-// Formulaire droite — rendu des listes dynamiques
-function smcRenderHypos(){
-  const c=document.getElementById('smcf-hypos');if(!c)return;
-  c.innerHTML=window.smcHon.hypotheses.map((h,i)=>
-    '<div class="smcf-item"><textarea class="smcf-ta" data-smc-hypo="'+i+'" rows="2">'+smcEsc(h)+'</textarea><button class="smcf-del" type="button" onclick="smcDelHypo('+i+')" title="Supprimer">×</button></div>'
-  ).join('');
-  c.querySelectorAll('textarea[data-smc-hypo]').forEach(el=>{
-    el.addEventListener('input',function(){
-      const i=parseInt(el.getAttribute('data-smc-hypo'));
-      window.smcHon.hypotheses[i]=el.value;
-      smcUpdateView('hypotheses');
-    });
-  });
-}
+// — Rendu des listes dynamiques du formulaire —
 function smcRenderPrestations(){
   const c=document.getElementById('smcf-prestations');if(!c)return;
   c.innerHTML=window.smcHon.prestations.map((p,i)=>
-    '<div class="smcf-row"><input type="text" class="smcf-i" data-smc-pres-lib="'+i+'" value="'+smcEsc(p.libelle)+'" placeholder="Libellé de prestation"><input type="number" class="smcf-i" data-smc-pres-mt="'+i+'" value="'+(p.montant||0)+'" placeholder="Montant HT €" min="0" step="500"><button class="smcf-del" type="button" onclick="smcDelPrestation('+i+')" title="Supprimer">×</button></div>'
+    '<div class="smcf-row"><input type="text" class="smcf-i" data-smc-pres-lib="'+i+'" value="'+smcEsc(p.libelle)+'" placeholder="Libellé"><input type="number" class="smcf-i" data-smc-pres-mt="'+i+'" value="'+(p.montant||0)+'" placeholder="€ HT" min="0" step="500"><button class="smcf-del" type="button" onclick="smcDelPrestation('+i+')" title="Supprimer">×</button></div>'
   ).join('');
-  c.querySelectorAll('input[data-smc-pres-lib]').forEach(el=>{
-    el.addEventListener('input',function(){const i=parseInt(el.getAttribute('data-smc-pres-lib'));window.smcHon.prestations[i].libelle=el.value;smcUpdateView('prestations');});
-  });
-  c.querySelectorAll('input[data-smc-pres-mt]').forEach(el=>{
-    el.addEventListener('input',function(){const i=parseInt(el.getAttribute('data-smc-pres-mt'));window.smcHon.prestations[i].montant=parseInt(el.value)||0;smcUpdateView('prestations');});
-  });
+  c.querySelectorAll('input[data-smc-pres-lib]').forEach(el=>{el.addEventListener('input',function(){const i=parseInt(el.getAttribute('data-smc-pres-lib'));window.smcHon.prestations[i].libelle=el.value;smcUpdateView('prestations');});});
+  c.querySelectorAll('input[data-smc-pres-mt]').forEach(el=>{el.addEventListener('input',function(){const i=parseInt(el.getAttribute('data-smc-pres-mt'));window.smcHon.prestations[i].montant=parseInt(el.value)||0;smcUpdateView('prestations');});});
 }
-function smcAddHypo(){window.smcHon.hypotheses.push('Nouvelle hypothèse…');smcRenderHypos();smcUpdateView('hypotheses');}
-function smcDelHypo(i){window.smcHon.hypotheses.splice(i,1);smcRenderHypos();smcUpdateView('hypotheses');}
-function smcAddPrestation(){window.smcHon.prestations.push({libelle:'Nouvelle prestation',montant:0});smcRenderPrestations();smcUpdateView('prestations');}
+function smcAddPrestation(){window.smcHon.prestations.push({libelle:'Prestation',montant:0});smcRenderPrestations();smcUpdateView('prestations');}
 function smcDelPrestation(i){window.smcHon.prestations.splice(i,1);smcRenderPrestations();smcUpdateView('prestations');}
 
+function smcRenderLivrables(){
+  const c=document.getElementById('smcf-livrables');if(!c)return;
+  c.innerHTML=window.smcHon.livrables.map((l,i)=>
+    '<div class="smcf-item"><input type="text" class="smcf-i" data-smc-livr="'+i+'" value="'+smcEsc(l)+'" placeholder="Livrable"><button class="smcf-del" type="button" onclick="smcDelLivrable('+i+')" title="Supprimer">×</button></div>'
+  ).join('');
+  c.querySelectorAll('input[data-smc-livr]').forEach(el=>{el.addEventListener('input',function(){const i=parseInt(el.getAttribute('data-smc-livr'));window.smcHon.livrables[i]=el.value;smcUpdateView('livrables');});});
+}
+function smcAddLivrable(){window.smcHon.livrables.push('Livrable…');smcRenderLivrables();smcUpdateView('livrables');}
+function smcDelLivrable(i){window.smcHon.livrables.splice(i,1);smcRenderLivrables();smcUpdateView('livrables');}
+
+function smcRenderHypos(){
+  const c=document.getElementById('smcf-hypos');if(!c)return;
+  c.innerHTML=window.smcHon.hypotheses.map((h,i)=>{
+    const subRows=(h.sub||[]).map((s,j)=>
+      '<div class="smcf-item" style="margin-left:14px;"><input type="text" class="smcf-i" data-smc-sub="'+i+'-'+j+'" value="'+smcEsc(s)+'" placeholder="Sous-point"><button class="smcf-del" type="button" onclick="smcDelSub('+i+','+j+')" title="Supprimer">×</button></div>'
+    ).join('');
+    return '<div style="display:flex;flex-direction:column;gap:4px;padding:6px;border:1px solid var(--gris-tres-clair);background:var(--blanc);">'+
+      '<div class="smcf-item"><textarea class="smcf-ta" data-smc-hypo="'+i+'" rows="2">'+smcEsc(h.txt)+'</textarea><button class="smcf-del" type="button" onclick="smcDelHypo('+i+')" title="Supprimer">×</button></div>'+
+      subRows+
+      '<button class="smcf-add" type="button" onclick="smcAddSub('+i+')" style="align-self:flex-start;margin-top:2px;">+ Sous-point</button>'+
+    '</div>';
+  }).join('');
+  c.querySelectorAll('textarea[data-smc-hypo]').forEach(el=>{el.addEventListener('input',function(){const i=parseInt(el.getAttribute('data-smc-hypo'));window.smcHon.hypotheses[i].txt=el.value;smcUpdateView('hypotheses');});});
+  c.querySelectorAll('input[data-smc-sub]').forEach(el=>{el.addEventListener('input',function(){const [i,j]=el.getAttribute('data-smc-sub').split('-').map(Number);window.smcHon.hypotheses[i].sub[j]=el.value;smcUpdateView('hypotheses');});});
+}
+function smcAddHypo(){window.smcHon.hypotheses.push({txt:'Nouvelle hypothèse…',sub:[]});smcRenderHypos();smcUpdateView('hypotheses');}
+function smcDelHypo(i){window.smcHon.hypotheses.splice(i,1);smcRenderHypos();smcUpdateView('hypotheses');}
+function smcAddSub(i){window.smcHon.hypotheses[i].sub=window.smcHon.hypotheses[i].sub||[];window.smcHon.hypotheses[i].sub.push('Sous-point…');smcRenderHypos();smcUpdateView('hypotheses');}
+function smcDelSub(i,j){window.smcHon.hypotheses[i].sub.splice(j,1);smcRenderHypos();smcUpdateView('hypotheses');}
+
 function smcInitForm(){
-  // Remplit les champs simples + attache les listeners
   const form=document.getElementById('smc-form');if(!form)return;
-  if(form.dataset.smcInit==='1'){smcSyncFormFromData();smcRenderHypos();smcRenderPrestations();return;}
   smcSyncFormFromData();
-  form.querySelectorAll('[data-smc]').forEach(el=>{
-    el.addEventListener('input',function(){
-      const f=el.getAttribute('data-smc');
-      let v=el.value;
-      if(f==='pageCur'||f==='pageTot') v=parseInt(v)||1;
-      window.smcHon[f]=v;
-      smcUpdateView(f);
+  if(form.dataset.smcInit!=='1'){
+    form.querySelectorAll('[data-smc]').forEach(el=>{
+      el.addEventListener('input',function(){
+        const f=el.getAttribute('data-smc');
+        let v=el.value;
+        if(f==='pageCur'||f==='pageTot'||f==='reductionMt') v=parseInt(v)||0;
+        window.smcHon[f]=v;
+        smcUpdateView(f==='reductionMt'?'reduction':f);
+      });
     });
-  });
-  smcRenderHypos();
+    form.dataset.smcInit='1';
+  }
   smcRenderPrestations();
-  form.dataset.smcInit='1';
+  smcRenderLivrables();
+  smcRenderHypos();
 }
 function smcSyncFormFromData(){
   const form=document.getElementById('smc-form');if(!form)return;
   form.querySelectorAll('[data-smc]').forEach(el=>{el.value=window.smcHon[el.getAttribute('data-smc')];});
+  const chk=document.getElementById('smcf-red-on'),mt=document.getElementById('smcf-red-mt');
+  if(chk){chk.checked=!!window.smcHon.reductionActive;}
+  if(mt){mt.style.display=window.smcHon.reductionActive?'block':'none';}
+}
+function smcToggleReduction(on){
+  window.smcHon.reductionActive=!!on;
+  const mt=document.getElementById('smcf-red-mt');if(mt) mt.style.display=on?'block':'none';
+  smcUpdateView('reduction');
 }
 
-// Quand l'utilisateur navigue entre les slides, on bascule le panneau droit
+// Bascule automatique du panneau droit selon slide active
 function smcOnSlideChange(slide){
   const rp=document.getElementById('rpanel');if(!rp)return;
   if(slide && slide.id==='cond-hon'){
+    // Restaure smcHon persisté si disponible
+    if(typeof window.propaleActive==='number' && window.propalesSlideData && window.propalesSlideData[window.propaleActive] && window.propalesSlideData[window.propaleActive].smcHon){
+      window.smcHon=JSON.parse(JSON.stringify(window.propalesSlideData[window.propaleActive].smcHon));
+    }
     rp.classList.add('form-mode');
     smcInitForm();
     smcRerender();
   } else {
     rp.classList.remove('form-mode');
+  }
+}
+
+// Export PPTX natif (serveur) — construit un .pptx fidèle à la charte SMC
+async function smcExportPPTX(){
+  try{
+    const btn=document.querySelector('.bexp');const oldTxt=btn?btn.textContent:'';
+    if(btn){btn.textContent='Génération en cours…';btn.disabled=true;}
+    const resp=await fetch('/api/export-honoraires-pptx',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+(sessionStorage.getItem('gavroche_token')||'')},
+      body:JSON.stringify({smcHon:window.smcHon,cibleNom:(dF&&dF.entite&&dF.entite.nom)||'Propale'})
+    });
+    if(!resp.ok) throw new Error('HTTP '+resp.status);
+    const blob=await resp.blob();
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download=(dF&&dF.entite&&dF.entite.nom?dF.entite.nom:'Propale')+'_Honoraires.pptx';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+    if(btn){btn.textContent=oldTxt;btn.disabled=false;}
+  } catch(e){
+    alert('Export PPTX échoué : '+e.message);
+    const btn=document.querySelector('.bexp');if(btn){btn.textContent='↓ Exporter en PPTX';btn.disabled=false;}
   }
 }
 
@@ -1887,10 +2036,14 @@ function sauvegarderPropale() {
   // Bug 3 — Sauvegarder les slides propres a cette propale
   if (!window.propalesSlideData) window.propalesSlideData = {};
   const snavEl = document.getElementById('snav');
-  window.propalesSlideData[window.propaleActive] = {
-    slides: window.sD.slice(),
-    navHtml: snavEl ? snavEl.innerHTML : ''
-  };
+  window.propalesSlideData[window.propaleActive] = Object.assign(
+    window.propalesSlideData[window.propaleActive] || {},
+    {
+      slides: window.sD.slice(),
+      navHtml: snavEl ? snavEl.innerHTML : '',
+      smcHon: window.smcHon ? JSON.parse(JSON.stringify(window.smcHon)) : undefined
+    }
+  );
 
   refreshPropalesTable();
   refreshDashboard();
