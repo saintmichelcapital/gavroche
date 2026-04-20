@@ -358,14 +358,13 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 
 /* Colonne gauche : prestation + livrables */
 .smc-left{display:flex;flex-direction:column;gap:1.2em;}
-.smc-prest-head{display:flex;flex-direction:column;gap:0.1em;padding-bottom:0.6em;}
+.smc-prest-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding-bottom:0.5em;border-bottom:1px solid #E0E0DA;}
 .smc-prest-head .smc-prest-label{font-family:'Segoe UI',sans-serif;font-size:0.52em;font-weight:700;color:#1A1A1A;line-height:1.35;}
-.smc-prest-list{display:flex;flex-direction:column;gap:0.9em;}
-.smc-prest-row{display:flex;flex-direction:column;gap:0.3em;}
-.smc-prest-lib-line{display:flex;align-items:baseline;gap:4px;}
+.smc-prest-list{display:flex;flex-direction:column;gap:0.5em;}
+.smc-prest-row{display:flex;align-items:baseline;gap:4px;}
 .smc-prest-lib{font-family:'Segoe UI',sans-serif;font-size:0.55em;color:#1A1A1A;white-space:nowrap;}
-.smc-prest-dots{flex:1;color:#888;font-family:'Segoe UI',sans-serif;font-size:0.55em;overflow:hidden;letter-spacing:2px;text-align:right;white-space:nowrap;}
-.smc-prest-mt{align-self:flex-start;background:#D9D9D9;color:#1A1A1A;padding:3px 12px;font-family:'Segoe UI',sans-serif;font-size:0.58em;font-variant-numeric:tabular-nums;}
+.smc-prest-dots{flex:1;color:#888;font-family:'Segoe UI',sans-serif;font-size:0.55em;overflow:hidden;letter-spacing:2px;text-align:left;white-space:nowrap;padding:0 6px;}
+.smc-prest-mt{font-family:'Segoe UI',sans-serif;font-size:0.55em;color:#1A1A1A;font-variant-numeric:tabular-nums;white-space:nowrap;}
 .smc-reduction{font-family:'Segoe UI',sans-serif;font-size:0.48em;color:#404040;line-height:1.5;font-style:italic;padding-top:0.4em;border-top:1px dashed #E0E0DA;margin-top:0.4em;}
 .smc-duree{font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#404040;line-height:1.55;}
 .smc-livr-intro{font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#404040;line-height:1.55;margin-top:-0.5em;}
@@ -1695,8 +1694,9 @@ function smcFmtEur(n){const v=parseInt(n)||0;return v.toLocaleString('fr-FR').re
 function smcRenderPrestBlock(d){
   const rows=d.prestations.filter(p=>(parseInt(p.montant)||0)>0).map(p=>
     '<div class="smc-prest-row">'+
-      '<div class="smc-prest-lib-line"><span class="smc-prest-lib">'+smcEsc(p.libelle)+'</span><span class="smc-prest-dots">'+'. '.repeat(30)+'</span></div>'+
-      '<div class="smc-prest-mt">€&nbsp;'+smcFmtEur(p.montant)+'</div>'+
+      '<span class="smc-prest-lib">'+smcEsc(p.libelle)+'</span>'+
+      '<span class="smc-prest-dots">'+'. '.repeat(30)+'</span>'+
+      '<span class="smc-prest-mt">€&nbsp;'+smcFmtEur(p.montant)+'</span>'+
     '</div>'
   ).join('');
   const redHtml=d.reductionActive?'<div class="smc-reduction">En cas de non-réalisation de l\'opération envisagée, les honoraires seront réduits à €&nbsp;'+smcFmtEur(d.reductionMt)+' hors taxes.</div>':'';

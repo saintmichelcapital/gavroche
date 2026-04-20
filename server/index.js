@@ -218,21 +218,22 @@ app.post('/api/export-honoraires-pptx', requireAuth, async (req, res) => {
     const RIGHT_X = ML + LEFT_W + GAP;
     const RIGHT_W = W - MR - RIGHT_X;
 
-    // Colonne gauche — Prestation / Montant (HT) stacked labels
-    slide.addText('Prestation', { x: ML, y: BODY_Y, w: LEFT_W, h: 0.25, fontFace: 'Segoe UI', fontSize: 10, bold: true, color: '1A1A1A' });
-    slide.addText('Montant (HT)', { x: ML, y: BODY_Y + 0.25, w: LEFT_W, h: 0.25, fontFace: 'Segoe UI', fontSize: 10, bold: true, color: '1A1A1A' });
+    // Colonne gauche — Prestation / Montant (HT) en-têtes côte à côte
+    const MT_COL_W = 1.1;
+    slide.addText('Prestation', { x: ML, y: BODY_Y, w: LEFT_W - MT_COL_W, h: 0.25, fontFace: 'Segoe UI', fontSize: 10, bold: true, color: '1A1A1A' });
+    slide.addText('Montant (HT)', { x: ML + LEFT_W - MT_COL_W, y: BODY_Y, w: MT_COL_W, h: 0.25, fontFace: 'Segoe UI', fontSize: 10, bold: true, color: '1A1A1A', align: 'right' });
+    slide.addShape(pptx.ShapeType.line, { x: ML, y: BODY_Y + 0.28, w: LEFT_W, h: 0, line: { color: 'E0E0DA', width: 0.5 } });
 
-    // Prestations filtrées (montant > 0)
-    let prestY = BODY_Y + 0.75;
+    // Prestations filtrées (montant > 0) — libellé + dots + montant sur une ligne, fond blanc
+    let prestY = BODY_Y + 0.4;
     const prestations = (smcHon.prestations || []).filter(p => (parseInt(p.montant) || 0) > 0);
     prestations.forEach(p => {
-      slide.addText(p.libelle + '  ' + '.'.repeat(40), { x: ML, y: prestY, w: LEFT_W, h: 0.28, fontFace: 'Segoe UI', fontSize: 10, color: '1A1A1A' });
+      slide.addText(p.libelle + '  ' + '. '.repeat(40), { x: ML, y: prestY, w: LEFT_W - MT_COL_W, h: 0.25, fontFace: 'Segoe UI', fontSize: 10, color: '1A1A1A' });
       slide.addText('€ ' + (parseInt(p.montant) || 0).toLocaleString('fr-FR').replace(/\u202F/g, ' '), {
-        x: ML, y: prestY + 0.32, w: 1.5, h: 0.3,
-        fontFace: 'Segoe UI', fontSize: 11, color: '1A1A1A',
-        fill: { color: 'D9D9D9' }, margin: 0.08
+        x: ML + LEFT_W - MT_COL_W, y: prestY, w: MT_COL_W, h: 0.25,
+        fontFace: 'Segoe UI', fontSize: 10, color: '1A1A1A', align: 'right'
       });
-      prestY += 0.8;
+      prestY += 0.32;
     });
 
     // Clause de réduction (optionnelle)
