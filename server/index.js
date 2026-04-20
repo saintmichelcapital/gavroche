@@ -183,7 +183,7 @@ app.post('/api/export-honoraires-pptx', requireAuth, async (req, res) => {
         { text: smcHon.titreBold || 'Honoraires', options: { bold: true, color: '1A1A1A' } },
         { text: ' | ' + (smcHon.titreSuite || ''), options: { bold: false, color: '1A1A1A' } }
       ],
-      { x: ML, y: MT, w: TITLE_W, h: 1.1, fontFace: 'Segoe UI', fontSize: 14, align: 'left', valign: 'top' }
+      { x: ML, y: MT, w: TITLE_W, h: 1.1, fontFace: 'Cascadia Mono', fontSize: 14, align: 'left', valign: 'top' }
     );
 
     // Nav verticale haut-droite
@@ -200,7 +200,7 @@ app.post('/api/export-honoraires-pptx', requireAuth, async (req, res) => {
       }
       slide.addText(it.t, {
         x: navX + 0.12, y: navY, w: COL_RIGHT_W - 0.12, h: 0.3,
-        fontFace: 'Segoe UI', fontSize: 8,
+        fontFace: 'Cascadia Mono', fontSize: 8,
         color: it.active ? '1A1A1A' : '888888',
         align: 'left', valign: 'top'
       });
@@ -222,8 +222,8 @@ app.post('/api/export-honoraires-pptx', requireAuth, async (req, res) => {
     const MT_COL_W = 1.1;
     const LIB_COL_W = LEFT_W - MT_COL_W;
     const prestLabel = (smcHon.prestations || []).filter(p => (parseInt(p.montant) || 0) > 0).length > 1 ? 'Prestation(s)' : 'Prestation';
-    slide.addText(prestLabel, { x: ML, y: BODY_Y, w: LIB_COL_W, h: 0.25, fontFace: 'Segoe UI', fontSize: 9, bold: false, color: '1A1A1A', margin: 0 });
-    slide.addText('Montant (HT)', { x: ML + LIB_COL_W, y: BODY_Y, w: MT_COL_W, h: 0.25, fontFace: 'Segoe UI', fontSize: 9, bold: false, color: '1A1A1A', align: 'right', margin: 0 });
+    slide.addText(prestLabel, { x: ML, y: BODY_Y, w: LIB_COL_W, h: 0.25, fontFace: 'Cascadia Mono', fontSize: 9, bold: false, color: '1A1A1A', margin: 0 });
+    slide.addText('Montant (HT)', { x: ML + LIB_COL_W, y: BODY_Y, w: MT_COL_W, h: 0.25, fontFace: 'Cascadia Mono', fontSize: 9, bold: false, color: '1A1A1A', align: 'right', margin: 0 });
     slide.addShape(pptx.ShapeType.line, { x: ML, y: BODY_Y + 0.28, w: LEFT_W, h: 0, line: { color: 'E0E0DA', width: 0.5 } });
 
     // Lignes de prestation : libellé + montant sur une même ligne, taille 9
@@ -232,12 +232,12 @@ app.post('/api/export-honoraires-pptx', requireAuth, async (req, res) => {
     prestations.forEach(p => {
       slide.addText(p.libelle, {
         x: ML, y: prestY, w: LIB_COL_W, h: 0.28,
-        fontFace: 'Segoe UI', fontSize: 9, color: '1A1A1A',
+        fontFace: 'Cascadia Mono', fontSize: 9, color: '1A1A1A',
         wrap: false, valign: 'middle', margin: 0
       });
       slide.addText('€ ' + (parseInt(p.montant) || 0).toLocaleString('fr-FR').replace(/\u202F/g, ' '), {
         x: ML + LIB_COL_W, y: prestY, w: MT_COL_W, h: 0.28,
-        fontFace: 'Segoe UI', fontSize: 9, color: '1A1A1A', align: 'right', valign: 'middle', margin: 0
+        fontFace: 'Cascadia Mono', fontSize: 9, color: '1A1A1A', align: 'right', valign: 'middle', margin: 0
       });
       prestY += 0.32;
     });
@@ -245,38 +245,46 @@ app.post('/api/export-honoraires-pptx', requireAuth, async (req, res) => {
     // Clause de réduction (optionnelle)
     if (smcHon.reductionActive && smcHon.reductionMt) {
       slide.addText("En cas de non-réalisation de l'opération envisagée, les honoraires seront réduits à € " + (parseInt(smcHon.reductionMt) || 0).toLocaleString('fr-FR').replace(/\u202F/g, ' ') + " hors taxes.",
-        { x: ML, y: prestY, w: LEFT_W, h: 0.5, fontFace: 'Segoe UI', fontSize: 9, italic: true, color: '404040' });
+        { x: ML, y: prestY, w: LEFT_W, h: 0.5, fontFace: 'Cascadia Mono', fontSize: 9, italic: true, color: '404040' });
       prestY += 0.55;
     }
 
     // Durée estimée + intro livrables + liste livrables
     prestY += 0.15;
-    slide.addText(smcHon.dureeTxt || '', { x: ML, y: prestY, w: LEFT_W, h: 0.4, fontFace: 'Segoe UI', fontSize: 9, color: '404040' });
+    slide.addText(smcHon.dureeTxt || '', { x: ML, y: prestY, w: LEFT_W, h: 0.4, fontFace: 'Cascadia Mono', fontSize: 9, color: '404040' });
     prestY += 0.45;
-    slide.addText(smcHon.livrIntro || '', { x: ML, y: prestY, w: LEFT_W, h: 0.4, fontFace: 'Segoe UI', fontSize: 9, color: '404040' });
+    slide.addText(smcHon.livrIntro || '', { x: ML, y: prestY, w: LEFT_W, h: 0.4, fontFace: 'Cascadia Mono', fontSize: 9, color: '404040' });
     prestY += 0.4;
     (smcHon.livrables || []).forEach(l => {
-      slide.addText('⊢  ' + l, { x: ML + 0.05, y: prestY, w: LEFT_W - 0.05, h: 0.35, fontFace: 'Segoe UI', fontSize: 9, color: '404040' });
+      slide.addText('⊢  ' + l, { x: ML + 0.05, y: prestY, w: LEFT_W - 0.05, h: 0.35, fontFace: 'Cascadia Mono', fontSize: 9, color: '404040' });
       prestY += 0.38;
     });
 
-    // Colonne droite — hypothèses à puces (before 0, after 6pt)
+    // Colonne droite — puces prépendues manuellement pour contrôler exactement le gap puce ↔ texte
+    // ▪ + 2 nbsp + texte | sub : 4 nbsp + ⊢ + 2 nbsp + texte
+    const NBSP = '\u00A0';
     const bullets = [];
     (smcHon.hypotheses || []).forEach(h => {
-      bullets.push({ text: h.txt, options: { bullet: { code: '25AA' }, fontSize: 9, color: '404040', paraSpaceBefore: 0, paraSpaceAfter: 6, lineSpacingMultiple: 1.4 } });
+      bullets.push({
+        text: '▪' + NBSP + NBSP + h.txt,
+        options: { fontSize: 9, color: '404040', paraSpaceBefore: 0, paraSpaceAfter: 6, lineSpacingMultiple: 1.4 }
+      });
       (h.sub || []).filter(s => s && s.trim()).forEach(s => {
-        bullets.push({ text: s, options: { bullet: { code: '22A2' }, fontSize: 9, color: '404040', indentLevel: 1, paraSpaceBefore: 0, paraSpaceAfter: 6, lineSpacingMultiple: 1.4 } });
+        bullets.push({
+          text: NBSP + NBSP + NBSP + NBSP + '⊢' + NBSP + NBSP + s,
+          options: { fontSize: 9, color: '404040', paraSpaceBefore: 0, paraSpaceAfter: 6, lineSpacingMultiple: 1.4 }
+        });
       });
     });
-    slide.addText(bullets, { x: RIGHT_X, y: BODY_Y, w: RIGHT_W, h: BODY_H, fontFace: 'Segoe UI', valign: 'top' });
+    slide.addText(bullets, { x: RIGHT_X, y: BODY_Y, w: RIGHT_W, h: BODY_H, fontFace: 'Cascadia Mono', valign: 'top' });
 
     // Footer : trait + S-M.C + Page X sur Y (aligné pile sur le trait)
     const footerY = H - MB;
     slide.addShape(pptx.ShapeType.line, { x: ML, y: footerY - 0.12, w: W - ML - MR, h: 0, line: { color: 'E0E0DA', width: 0.5 } });
-    slide.addText('S-M.C', { x: ML, y: footerY, w: 2, h: 0.3, fontFace: 'Segoe UI', fontSize: 11, bold: true, color: '1A1A1A', margin: 0 });
+    slide.addText('S-M.C', { x: ML, y: footerY, w: 2, h: 0.3, fontFace: 'Cascadia Mono', fontSize: 11, bold: true, color: '1A1A1A', margin: 0 });
     slide.addText('Page ' + (smcHon.pageCur || 1) + ' sur ' + (smcHon.pageTot || 1), {
       x: W - MR - 2, y: footerY, w: 2, h: 0.3,
-      fontFace: 'Segoe UI', fontSize: 8, color: '888888', align: 'right', margin: 0
+      fontFace: 'Cascadia Mono', fontSize: 8, color: '888888', align: 'right', margin: 0
     });
 
     const buf = await pptx.write({ outputType: 'nodebuffer' });

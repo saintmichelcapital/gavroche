@@ -336,22 +336,22 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 
 /* ═══════════════════════════════════════════
    CHARTE SAINT-MICHEL CAPITAL (Retinax) — SLIDE HONORAIRES
-   Segoe UI, noir/blanc/gris, A4 paysage 297×210
+   Cascadia Mono (fallback Consolas), noir/blanc/gris, A4 paysage 297×210
 ═══════════════════════════════════════════ */
-.smc-slide{background:#ffffff;display:flex;flex-direction:column;padding:4% 5.5% 3.5% 5.5%;font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;color:#1A1A1A;}
+.smc-slide{background:#ffffff;display:flex;flex-direction:column;padding:4% 5.5% 3.5% 5.5%;font-family:'Cascadia Mono','Consolas','Courier New',monospace;color:#1A1A1A;}
 
-/* En-tête : titre (gauche) + nav verticale (droite, décalée plus loin du banner) */
-.smc-top{display:flex;gap:8%;align-items:flex-start;flex-shrink:0;justify-content:space-between;}
-.smc-title-block{flex:1;max-width:68%;}
-.smc-titre{font-family:'Segoe UI',sans-serif;font-size:0.75em;font-weight:400;color:#1A1A1A;line-height:1.55;letter-spacing:0;}
+/* En-tête : titre (gauche) + nav verticale (droite, arrive au bord droit comme la colonne wording) */
+.smc-top{display:flex;gap:8%;align-items:flex-start;flex-shrink:0;}
+.smc-title-block{flex:1;min-width:0;}
+.smc-titre{font-family:'Cascadia Mono','Consolas',monospace;font-size:0.75em;font-weight:400;color:#1A1A1A;line-height:1.55;letter-spacing:0;}
 .smc-titre-bold{font-weight:700;}
-.smc-nav{width:17%;display:flex;flex-direction:column;gap:0.6em;padding-top:0.25em;margin-left:auto;}
-.smc-nav-item{font-family:'Segoe UI',sans-serif;font-size:0.42em;color:#888888;line-height:1.25;position:relative;padding-left:10px;text-align:left;}
+.smc-nav{flex:0 0 17%;display:flex;flex-direction:column;gap:0.6em;padding-top:0.25em;}
+.smc-nav-item{font-family:'Cascadia Mono','Consolas',monospace;font-size:0.42em;color:#888888;line-height:1.25;position:relative;padding-left:10px;text-align:left;}
 .smc-nav-item.active{color:#1A1A1A;}
 .smc-nav-item.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:#000000;}
 
-/* Trait noir court sous le titre, calé sur l'alignement du texte — noir absolu, épaissi */
-.smc-trait{width:80px;height:4px;background:#000000;margin:3% 0 3% 2px;flex-shrink:0;}
+/* Trait noir court sous le titre — noir absolu, épaissi, aligné à gauche comme le texte */
+.smc-trait{width:80px;height:4px;background:#000000;margin:3% 0;flex-shrink:0;}
 
 /* Corps : deux colonnes */
 .smc-body{flex:1;display:grid;grid-template-columns:36% 1fr;gap:6%;overflow:hidden;align-content:start;}
@@ -359,32 +359,32 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 /* Colonne gauche : prestation + livrables */
 .smc-left{display:flex;flex-direction:column;gap:1.2em;}
 .smc-prest-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding-bottom:0.4em;border-bottom:1px solid #E0E0DA;margin-bottom:-0.6em;}
-.smc-prest-head .smc-prest-label{font-family:'Segoe UI',sans-serif;font-size:0.52em;font-weight:400;color:#1A1A1A;line-height:1.35;}
+.smc-prest-head .smc-prest-label{font-family:'Cascadia Mono','Consolas',monospace;font-size:0.52em;font-weight:400;color:#1A1A1A;line-height:1.35;}
 .smc-prest-list{display:flex;flex-direction:column;gap:0.5em;}
 .smc-prest-row{display:flex;align-items:baseline;gap:4px;}
-.smc-prest-lib{font-family:'Segoe UI',sans-serif;font-size:0.55em;color:#1A1A1A;white-space:nowrap;}
-.smc-prest-dots{flex:1;color:#888;font-family:'Segoe UI',sans-serif;font-size:0.55em;overflow:hidden;letter-spacing:2px;text-align:left;white-space:nowrap;padding:0 6px;}
-.smc-prest-mt{font-family:'Segoe UI',sans-serif;font-size:0.55em;color:#1A1A1A;font-variant-numeric:tabular-nums;white-space:nowrap;}
-.smc-reduction{font-family:'Segoe UI',sans-serif;font-size:0.48em;color:#404040;line-height:1.5;font-style:italic;padding-top:0.4em;border-top:1px dashed #E0E0DA;margin-top:0.4em;}
-.smc-duree{font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#404040;line-height:1.55;}
-.smc-livr-intro{font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#404040;line-height:1.55;margin-top:-0.5em;}
+.smc-prest-lib{font-family:'Cascadia Mono','Consolas',monospace;font-size:0.55em;color:#1A1A1A;white-space:nowrap;}
+.smc-prest-dots{flex:1;color:#888;font-family:'Cascadia Mono','Consolas',monospace;font-size:0.55em;overflow:hidden;letter-spacing:2px;text-align:left;white-space:nowrap;padding:0 6px;}
+.smc-prest-mt{font-family:'Cascadia Mono','Consolas',monospace;font-size:0.55em;color:#1A1A1A;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.smc-reduction{font-family:'Cascadia Mono','Consolas',monospace;font-size:0.48em;color:#404040;line-height:1.5;font-style:italic;padding-top:0.4em;border-top:1px dashed #E0E0DA;margin-top:0.4em;}
+.smc-duree{font-family:'Cascadia Mono','Consolas',monospace;font-size:0.5em;color:#404040;line-height:1.55;}
+.smc-livr-intro{font-family:'Cascadia Mono','Consolas',monospace;font-size:0.5em;color:#404040;line-height:1.55;margin-top:-0.5em;}
 .smc-livr{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.4em;}
-.smc-livr li{position:relative;padding-left:1.3em;font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#404040;line-height:1.55;}
+.smc-livr li{position:relative;padding-left:1.3em;font-family:'Cascadia Mono','Consolas',monospace;font-size:0.5em;color:#404040;line-height:1.55;}
 .smc-livr li::before{content:'⊢';position:absolute;left:0;top:0;color:#888;font-weight:400;}
 
 /* Colonne droite : hypothèses à puces */
 .smc-bullets{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.7em;}
-.smc-bullets > li{position:relative;padding-left:1.4em;font-family:'Segoe UI',sans-serif;font-size:0.55em;color:#404040;line-height:1.55;text-align:justify;}
+.smc-bullets > li{position:relative;padding-left:1.4em;font-family:'Cascadia Mono','Consolas',monospace;font-size:0.55em;color:#404040;line-height:1.55;text-align:justify;}
 .smc-bullets > li::before{content:'▪';position:absolute;left:0;top:-0.15em;color:#1A1A1A;font-size:0.9em;}
 .smc-bullets .sub{list-style:none;padding:0;margin:0.45em 0 0 0;display:flex;flex-direction:column;gap:0.5em;}
-.smc-bullets .sub li{position:relative;padding-left:1.4em;font-family:'Segoe UI',sans-serif;font-size:1em;color:#404040;line-height:1.55;}
+.smc-bullets .sub li{position:relative;padding-left:1.4em;font-family:'Cascadia Mono','Consolas',monospace;font-size:1em;color:#404040;line-height:1.55;}
 .smc-bullets .sub li::before{content:'⊢';position:absolute;left:0;top:0;color:#888;font-size:1em;}
 .smc-bullets u{text-decoration:underline;}
 
 /* Pied de slide : trait + S-M.C / Page X sur Y */
 .smc-page-footer{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding-top:1em;margin-top:1.5em;border-top:1px solid #E0E0DA;}
-.smc-ink{font-family:'Segoe UI',sans-serif;font-weight:700;color:#1A1A1A;font-size:0.58em;letter-spacing:0.02em;}
-.smc-pagenum{font-family:'Segoe UI',sans-serif;color:#888888;font-size:0.42em;letter-spacing:0.02em;}
+.smc-ink{font-family:'Cascadia Mono','Consolas',monospace;font-weight:700;color:#1A1A1A;font-size:0.58em;letter-spacing:0.02em;}
+.smc-pagenum{font-family:'Cascadia Mono','Consolas',monospace;color:#888888;font-size:0.42em;letter-spacing:0.02em;}
 
 /* Wrapper panneau droite : chat ↔ formulaire */
 .rpanel{display:flex;flex-direction:column;overflow:hidden;background:var(--blanc);border-left:1px solid var(--gris-tres-clair);}
