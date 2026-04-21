@@ -183,7 +183,7 @@ app.post('/api/export-honoraires-pptx', requireAuth, async (req, res) => {
         { text: smcHon.titreBold || 'Honoraires', options: { bold: true, color: '1A1A1A' } },
         { text: ' | ' + (smcHon.titreSuite || ''), options: { bold: false, color: '1A1A1A' } }
       ],
-      { x: ML, y: MT, w: TITLE_W, h: 1.1, fontFace: 'Segoe UI', fontSize: 14, align: 'left', valign: 'top', margin: 0, lineSpacingMultiple: 1.4 }
+      { x: ML, y: MT, w: TITLE_W, h: 1.1, fontFace: 'Segoe UI', fontSize: 13, align: 'left', valign: 'top', margin: 0, lineSpacingMultiple: 1.4 }
     );
 
     // Nav verticale haut-droite
@@ -227,6 +227,7 @@ app.post('/api/export-honoraires-pptx', requireAuth, async (req, res) => {
     slide.addShape(pptx.ShapeType.line, { x: ML, y: BODY_Y + 0.28, w: LEFT_W, h: 0, line: { color: 'E0E0DA', width: 0.5 } });
 
     // Lignes de prestation : libellé + montant sur une même ligne, taille 9
+    const DEV = smcHon.devise || '€';
     let prestY = BODY_Y + 0.32;
     const prestations = (smcHon.prestations || []).filter(p => (parseInt(p.montant) || 0) > 0);
     prestations.forEach(p => {
@@ -235,7 +236,7 @@ app.post('/api/export-honoraires-pptx', requireAuth, async (req, res) => {
         fontFace: 'Segoe UI', fontSize: 9, color: '1A1A1A',
         wrap: false, valign: 'middle', margin: 0
       });
-      slide.addText('€ ' + (parseInt(p.montant) || 0).toLocaleString('fr-FR').replace(/\u202F/g, ' '), {
+      slide.addText(DEV + ' ' + (parseInt(p.montant) || 0).toLocaleString('fr-FR').replace(/\u202F/g, ' '), {
         x: ML + LIB_COL_W, y: prestY, w: MT_COL_W, h: 0.28,
         fontFace: 'Segoe UI', fontSize: 9, color: '1A1A1A', align: 'right', valign: 'middle', margin: 0
       });
@@ -244,7 +245,7 @@ app.post('/api/export-honoraires-pptx', requireAuth, async (req, res) => {
 
     // Clause de réduction (optionnelle)
     if (smcHon.reductionActive && smcHon.reductionMt) {
-      slide.addText("En cas de non-réalisation de l'opération envisagée, les honoraires seront réduits à € " + (parseInt(smcHon.reductionMt) || 0).toLocaleString('fr-FR').replace(/\u202F/g, ' ') + " hors taxes.",
+      slide.addText("En cas de non-réalisation de l'opération envisagée, les honoraires seront réduits à " + DEV + " " + (parseInt(smcHon.reductionMt) || 0).toLocaleString('fr-FR').replace(/\u202F/g, ' ') + " hors taxes.",
         { x: ML, y: prestY, w: LEFT_W, h: 0.5, fontFace: 'Segoe UI', fontSize: 9, italic: true, color: '404040' });
       prestY += 0.55;
     }
@@ -260,19 +261,28 @@ app.post('/api/export-honoraires-pptx', requireAuth, async (req, res) => {
       prestY += 0.38;
     });
 
-    // Colonne droite — puces prépendues manuellement pour contrôler exactement le gap puce ↔ texte
-    // ▪ + 2 nbsp + texte | sub : 4 nbsp + ⊢ + 2 nbsp + texte
-    const NBSP = '\u00A0';
+    // Colonne droite — puces natives pptxgenjs, chaque entrée = paragraphe distinct
     const bullets = [];
     (smcHon.hypotheses || []).forEach(h => {
       bullets.push({
-        text: '▪' + NBSP + NBSP + h.txt,
-        options: { fontSize: 9, color: '404040', paraSpaceBefore: 0, paraSpaceAfter: 6, lineSpacingMultiple: 1.4 }
+        text: h.txt,
+        options: {
+          bullet: { code: '25AA' },
+          fontSize: 9, color: '404040',
+          paraSpaceBefore: 0, paraSpaceAfter: 6,
+          lineSpacingMultiple: 1.4
+        }
       });
       (h.sub || []).filter(s => s && s.trim()).forEach(s => {
         bullets.push({
-          text: NBSP + NBSP + NBSP + NBSP + '⊢' + NBSP + NBSP + s,
-          options: { fontSize: 9, color: '404040', paraSpaceBefore: 0, paraSpaceAfter: 6, lineSpacingMultiple: 1.4 }
+          text: s,
+          options: {
+            bullet: { code: '22A2' },
+            indentLevel: 1,
+            fontSize: 9, color: '404040',
+            paraSpaceBefore: 0, paraSpaceAfter: 6,
+            lineSpacingMultiple: 1.4
+          }
         });
       });
     });
