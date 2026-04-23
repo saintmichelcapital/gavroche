@@ -338,7 +338,7 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
    CHARTE SAINT-MICHEL CAPITAL (Retinax) — SLIDE HONORAIRES
    Segoe UI, noir/blanc/gris, A4 paysage 297×210
 ═══════════════════════════════════════════ */
-.smc-slide{background:#ffffff;display:flex;flex-direction:column;padding:4% 5.5% 3.5% 5.5%;font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;color:#1A1A1A;}
+.smc-slide{background:#ffffff;display:flex;flex-direction:column;padding:4% 5.5% 1.8% 5.5%;font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;color:#1A1A1A;}
 
 /* En-tête : titre (gauche) + nav verticale (droite, arrive au bord droit comme la colonne wording) */
 .smc-top{display:flex;gap:8%;align-items:flex-start;flex-shrink:0;}
@@ -385,46 +385,54 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .smc-page-footer{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding-top:1em;margin-top:1.5em;border-top:1px solid #E0E0DA;}
 
 /* ═══════════════════════════════════════════
-   SLIDE CALENDRIER (V8 Calendrier mensuel éditorial)
+   SLIDE CALENDRIER (V8 Calendrier mensuel éditorial — refonte)
+   Référence : maquette François (50/50, mois grands et aérés)
 ═══════════════════════════════════════════ */
-.smc-cal-body{flex:1;display:grid;grid-template-columns:48% 1fr;gap:4%;overflow:hidden;padding-top:1%;}
+/* Corps de la slide calendrier : grid 50/50 + ligne basse (légende+total) */
+.smc-cal-body{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:4%;overflow:hidden;padding-top:0.5%;min-height:0;}
 
 /* Colonne gauche : calendriers mensuels */
-.cal-mleft{display:flex;flex-direction:column;gap:0.8em;overflow:hidden;}
-.cal-months{display:grid;gap:0.8em;}
-.cal-months.two-col{grid-template-columns:1fr 1fr;}
+.cal-mleft{display:flex;flex-direction:column;overflow:hidden;min-height:0;}
+.cal-months-wrap{display:flex;flex-direction:column;flex:1;min-height:0;justify-content:space-evenly;gap:1.2em;}
 .cal-month{display:flex;flex-direction:column;gap:0.25em;}
-.cal-month-title{font-family:'Segoe UI',sans-serif;font-size:0.75em;font-weight:700;color:#1A1A1A;line-height:1;}
-.cal-dow{display:grid;grid-template-columns:repeat(7,1fr);padding-bottom:0.25em;border-bottom:1px solid #1A1A1A;}
-.cal-dow span{font-family:'Segoe UI',sans-serif;font-size:0.32em;letter-spacing:0.12em;color:#888;text-align:center;font-weight:400;}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);row-gap:0.2em;margin-top:0.15em;}
-.cal-day{font-family:'Segoe UI',sans-serif;font-size:0.45em;color:#404040;text-align:center;padding:0.25em 0;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;position:relative;}
-.cal-day.off{color:#BBB;}
-.cal-day.ph1{color:#1A1A1A;font-weight:500;}
-.cal-day.ph1::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1.4em;height:1.4em;border:1px solid #1A1A1A;border-radius:50%;}
-.cal-day.ph2{background:#E8E8E6;color:#1A1A1A;font-weight:400;}
+.cal-month-title{font-family:'Segoe UI',sans-serif;font-size:0.95em;font-weight:700;color:#1A1A1A;line-height:1;letter-spacing:-0.005em;}
+.cal-dow{display:grid;grid-template-columns:repeat(7,1fr);padding:0.4em 0;position:relative;}
+.cal-dow::after{content:'';position:absolute;left:0;bottom:0;right:1em;height:1px;background:#D5D5D2;}
+.cal-dow span{font-family:'Segoe UI',sans-serif;font-size:0.4em;letter-spacing:0.15em;color:#888;text-align:center;font-weight:400;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);row-gap:1em;margin-top:0.4em;}
+.cal-day{font-family:'Segoe UI',sans-serif;font-size:0.85em;color:#1A1A1A;font-weight:500;text-align:center;height:2em;display:flex;align-items:center;justify-content:center;position:relative;}
+.cal-day.off{color:#C8C8C8;font-weight:400;}
+.cal-day.ph1{color:#1A1A1A;font-weight:600;z-index:2;}
+.cal-day.ph1::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1.8em;height:1.8em;border:1px solid #1A1A1A;border-radius:50%;background:#fff;z-index:-1;}
+.cal-day.ph2{background:#F0F0F0;color:#1A1A1A;font-weight:600;}
 .cal-day.ph2-start{border-radius:999px 0 0 999px;}
 .cal-day.ph2-end{border-radius:0 999px 999px 0;}
 .cal-day.ph2-solo{border-radius:999px;}
-.cal-day.ph3{color:#fff;font-weight:500;position:relative;z-index:2;}
-.cal-day.ph3::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1.4em;height:1.4em;background:#1A1A1A;border-radius:50%;z-index:-1;}
-.cal-legend{display:flex;flex-direction:column;gap:0.3em;margin-top:auto;padding-top:0.6em;}
-.cal-leg-item{display:flex;align-items:center;gap:0.6em;font-family:'Segoe UI',sans-serif;font-size:0.4em;color:#404040;}
-.cal-leg-mark{width:0.85em;height:0.85em;border-radius:50%;flex-shrink:0;}
-.cal-leg-mark.ph1{border:1px solid #1A1A1A;background:#fff;}
-.cal-leg-mark.ph2{background:#E8E8E6;}
-.cal-leg-mark.ph3{background:#1A1A1A;}
+.cal-day.ph3{color:#fff;font-weight:600;z-index:2;}
+.cal-day.ph3::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1.8em;height:1.8em;background:#1A1A1A;border-radius:50%;z-index:-1;}
 
-/* Colonne droite : phases détaillées */
-.cal-mright{display:flex;flex-direction:column;gap:1em;overflow:hidden;}
-.cal-phases-list{display:flex;flex-direction:column;gap:0.9em;}
-.cal-phase{display:flex;flex-direction:column;gap:0.25em;border-left:1px solid #E0E0DA;padding-left:0.8em;}
-.cal-phase-n{font-family:'Segoe UI',sans-serif;font-size:0.4em;letter-spacing:0.2em;color:#888;font-weight:400;text-transform:uppercase;}
-.cal-phase-t{font-family:'Segoe UI',sans-serif;font-size:0.72em;font-weight:700;color:#1A1A1A;letter-spacing:0.02em;line-height:1;margin-top:0.1em;text-transform:uppercase;}
-.cal-phase-meta{display:flex;align-items:center;gap:0.7em;font-family:'Segoe UI',sans-serif;font-size:0.38em;letter-spacing:0.12em;color:#404040;font-weight:500;margin-top:0.35em;text-transform:uppercase;}
+/* Colonne droite : phases (pas de débordement à droite) */
+.cal-mright{display:flex;flex-direction:column;overflow:hidden;min-height:0;box-sizing:border-box;}
+.cal-mright *{overflow-wrap:break-word;box-sizing:border-box;}
+.cal-phases-list{display:flex;flex-direction:column;flex:1;min-height:0;justify-content:space-evenly;gap:1em;}
+.cal-phase{display:flex;flex-direction:column;gap:0.2em;border-left:1px solid #E0E0DA;padding-left:1em;}
+.cal-phase-n{font-family:'Segoe UI',sans-serif;font-size:0.45em;letter-spacing:0.22em;color:#888;font-weight:400;text-transform:uppercase;}
+.cal-phase-t{font-family:'Segoe UI',sans-serif;font-size:0.92em;font-weight:700;color:#1A1A1A;letter-spacing:0.02em;line-height:1;margin-top:0.2em;text-transform:uppercase;}
+.cal-phase-meta{display:flex;align-items:center;gap:0.8em;font-family:'Segoe UI',sans-serif;font-size:0.44em;letter-spacing:0.14em;color:#404040;font-weight:500;margin-top:0.5em;text-transform:uppercase;}
 .cal-phase-sep{color:#BBB;}
-.cal-phase-desc{font-family:'Segoe UI',sans-serif;font-size:0.42em;color:#404040;line-height:1.5;margin-top:0.35em;}
-.cal-total{display:flex;align-items:center;justify-content:space-between;padding-top:0.8em;border-top:1px solid #E0E0DA;font-family:'Segoe UI',sans-serif;font-size:0.4em;letter-spacing:0.12em;color:#404040;text-transform:uppercase;margin-top:auto;}
+.cal-phase-points{list-style:none;padding:0;margin:0.55em 0 0;display:flex;flex-direction:column;gap:0.7em;}
+.cal-phase-points li{position:relative;padding-left:1.4em;font-family:'Segoe UI',sans-serif;font-size:0.55em;color:#404040;line-height:1.55;}
+.cal-phase-points li::before{content:'▪';position:absolute;left:0;top:-0.15em;color:#1A1A1A;font-size:0.9em;}
+
+/* Ligne basse : légende (gauche) + durée totale (droite), même hauteur */
+.cal-bottom{display:flex;align-items:center;justify-content:space-between;gap:2em;padding-top:0.8em;flex-shrink:0;margin-top:0.8em;}
+.cal-legend{display:flex;flex-direction:row;flex-wrap:wrap;gap:1.5em;align-items:center;}
+.cal-leg-item{display:flex;align-items:center;gap:0.6em;font-family:'Segoe UI',sans-serif;font-size:0.55em;color:#404040;line-height:1;}
+.cal-leg-mark{width:1.1em;height:1.1em;border-radius:50%;flex-shrink:0;box-sizing:border-box;}
+.cal-leg-mark.ph1{border:1px solid #1A1A1A;background:#fff;}
+.cal-leg-mark.ph2{background:#F0F0F0;}
+.cal-leg-mark.ph3{background:#1A1A1A;}
+.cal-total{display:flex;align-items:center;gap:1.5em;font-family:'Segoe UI',sans-serif;font-size:0.55em;letter-spacing:0.14em;color:#404040;text-transform:uppercase;flex-shrink:0;}
 .cal-total-v{color:#1A1A1A;font-weight:700;}
 
 /* Formulaire édition Calendrier (mêmes styles que .smc-form) */
@@ -1696,16 +1704,26 @@ async function genPropale(reouvrir){
     window.smcCal.titreBold = "Calendrier prévisionnel";
     window.smcCal.titreSuite = "Notre équipe sera mobilisée sur toute la période d'exécution des travaux. Nous estimons que "+nbSemaines+" semaines seront nécessaires à la réalisation complète de nos due diligences.";
     window.smcCal.dateDebut = (d.phases[0]&&d.phases[0].date) || "2026-02-28";
-    const defaultNames=["Phase préliminaire","Travaux de Due Diligence","Finalisation"];
-    const defaultDescs=[
-      "Communication des éléments requis (Dataroom), lecture de la documentation et demande d'éléments complémentaires.",
-      "Revue de la documentation, analyses principales, sessions de questions-réponses avec le management et préparation du rapport.",
-      "Remise et restitution des conclusions, finalisation des points en suspens."
+    const defaultNames=["Préparation","Exécution","Restitution"];
+    const defaultPoints=[
+      [
+        "Communication des éléments requis pour l'exécution des travaux (dataroom)",
+        "Lecture de la documentation et demande d'éléments complémentaires"
+      ],
+      [
+        "Revue de la documentation rendue disponible, préparation des principales analyses répondant au périmètre des travaux",
+        "Organisation de sessions de questions-réponses avec le management",
+        "Préparation de notre rapport"
+      ],
+      [
+        "Remise de notre rapport et restitution de nos conclusions",
+        "Échanges et finalisation des points en suspens"
+      ]
     ];
     window.smcCal.phases = d.phases.map((p,i)=>({
       nom: p.label || defaultNames[i] || "Phase "+(i+1),
       dur: Math.max(1, parseInt(p.dur)||5),
-      desc: defaultDescs[i] || ""
+      points: defaultPoints[i] || []
     }));
     window.smcCal.pageCur = 1; // recalculé plus bas
     window.smcCal.pageTot = 1;
@@ -2090,12 +2108,22 @@ function smcAttachInlineEditors(){
 // ═══════════════════════════════════════════
 window.smcCal = {
   titreBold: "Calendrier prévisionnel",
-  titreSuite: "Notre équipe sera mobilisée sur toute la période d'exécution des travaux. Les phases s'enchaînent sur les jours ouvrés suivants.",
+  titreSuite: "Notre équipe sera mobilisée sur toute la période d'exécution des travaux. Nous estimons que 4-5 semaines seront nécessaires à la réalisation complète de nos due diligences.",
   dateDebut: "2026-02-28",
   phases: [
-    { nom: "Préparation", dur: 5, desc: "Cette première phase vise à cadrer le projet, aligner les objectifs et préparer les ressources." },
-    { nom: "Exécution", dur: 15, desc: "Phase clé du projet durant laquelle les actions sont déployées et les livrables produits." },
-    { nom: "Restitution", dur: 2, desc: "Présentation des résultats, restitution finale et recommandations." }
+    { nom: "Préparation", dur: 5, points: [
+      "Communication des éléments requis pour l'exécution des travaux (dataroom)",
+      "Lecture de la documentation et demande d'éléments complémentaires"
+    ] },
+    { nom: "Exécution", dur: 15, points: [
+      "Revue de la documentation rendue disponible, préparation des principales analyses répondant au périmètre des travaux",
+      "Organisation de sessions de questions-réponses avec le management",
+      "Préparation de notre rapport"
+    ] },
+    { nom: "Restitution", dur: 2, points: [
+      "Remise de notre rapport et restitution de nos conclusions",
+      "Échanges et finalisation des points en suspens"
+    ] }
   ],
   pageCur: 12,
   pageTot: 14
@@ -2155,16 +2183,14 @@ function smcCalPhaseIndex(day,periods){
 // Durée totale en jours ouvrés
 function smcCalTotalDurBiz(){return (window.smcCal.phases||[]).reduce((s,p)=>s+Math.max(1,parseInt(p.dur)||1),0);}
 function smcCalFmtDuree(dur){
+  // Format en semaines uniquement (pas de mention jours) : "1 semaine", "3 semaines", "4-5 semaines"
   const d=parseInt(dur)||0;
-  if(d<=0) return '0 jour';
-  if(d===1) return '1 jour';
-  if(d<5) return d+' jours';
-  const sem=Math.floor(d/5);
-  const rest=d%5;
-  let out=(sem===1?'1 semaine':sem+' semaines');
-  if(rest===1) out+=' et 1 jour';
-  else if(rest>1) out+=' et '+rest+' jours';
-  return out;
+  if(d<=0) return '0 semaine';
+  if(d<5) return '1 semaine';  // arrondi supérieur pour < 1 semaine
+  const min=Math.floor(d/5);
+  const max=Math.ceil(d/5);
+  if(min===max) return (min===1?'1 semaine':min+' semaines');
+  return min+'-'+max+' semaines';
 }
 
 // Calcule la liste des mois à afficher (de start[0] à end[last])
@@ -2185,62 +2211,55 @@ function smcCalRenderMonth(year,month,periods){
   const monthNames=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
   const first=new Date(year,month,1);
   const daysInMonth=new Date(year,month+1,0).getDate();
-  // Indice (0=lundi, 6=dimanche) du 1er du mois
   const firstDow=(first.getDay()+6)%7;
-  // Dernier jour du mois
   const last=new Date(year,month,daysInMonth);
   const lastDow=(last.getDay()+6)%7;
-  // Nb semaines à afficher (lignes)
-  const totalCells=firstDow+daysInMonth+(6-lastDow);
-  const weeks=totalCells/7;
-  let cells='';
-  // Calcule les classes pour chaque jour : off, ph1/ph2/ph3 avec start/mid/end
-  // D'abord : pour chaque jour du mois, quelle phase ?
-  const dayPhase=[]; // [{day, phase, dow}]
+  // Helper : pour chaque jour du mois, détermine sa phase (-1 si hors phase) et s'il est weekend
+  const dayInfo=[];
   for(let day=1;day<=daysInMonth;day++){
     const d=new Date(year,month,day);
-    const ph=smcCalPhaseIndex(d,periods);
-    dayPhase.push({day,phase:ph,dow:(d.getDay()+6)%7});
+    const ph=smcCalPhaseIndex(d,periods); // renvoie -1 pour les weekends aussi
+    const isWeekend=!smcCalIsBizDay(d);
+    dayInfo.push({day,phase:ph,isWeekend});
   }
-  // Pour ph=1 (pilule grise), il faut déterminer start/mid/end selon contiguïté
-  // Un jour est "start" si c'est le premier jour ouvré contigu dans la semaine
-  // et "end" si c'est le dernier jour ouvré contigu dans la semaine
   const isContigSame=(i,delta)=>{
-    const next=dayPhase[i+delta];
+    const next=dayInfo[i+delta];
     if(!next) return false;
-    if(next.phase!==dayPhase[i].phase) return false;
-    // Check they're on the same week (same row) = same dow relationship
-    // Actually : same row si les jours sont dans la même semaine civile (lundi-dimanche)
-    const d1=new Date(year,month,dayPhase[i].day);
-    const d2=new Date(year,month,dayPhase[i+delta].day);
+    if(next.phase!==dayInfo[i].phase) return false;
+    const d1=new Date(year,month,dayInfo[i].day);
+    const d2=new Date(year,month,dayInfo[i+delta].day);
     const w1=Math.floor((d1.getDate()+firstDow-1)/7);
     const w2=Math.floor((d2.getDate()+firstDow-1)/7);
     return w1===w2;
   };
-  // Construire les cellules
-  // Jours hors-mois (gris) avant
+  let cells='';
+  // Jours hors-mois avant (toujours en gris clair)
   for(let i=0;i<firstDow;i++){
     const d=new Date(year,month,1-firstDow+i);
     cells+='<div class="cal-day off">'+d.getDate()+'</div>';
   }
   // Jours du mois
-  for(let i=0;i<dayPhase.length;i++){
-    const {day,phase}=dayPhase[i];
+  for(let i=0;i<dayInfo.length;i++){
+    const {day,phase,isWeekend}=dayInfo[i];
     let cls='cal-day';
-    if(phase===-1) cls+=' off';
-    else if(phase===0) cls+=' ph1';
-    else if(phase===1){
+    if(phase===-1){
+      // Jour ouvré hors phase : foncé (pas de classe). Weekend : gris clair (.off)
+      if(isWeekend) cls+=' off';
+    } else if(phase===0){
+      cls+=' ph1';
+    } else if(phase===1){
       cls+=' ph2';
       const hasPrev=isContigSame(i,-1);
       const hasNext=isContigSame(i,+1);
       if(!hasPrev && !hasNext) cls+=' ph2-solo';
       else if(!hasPrev) cls+=' ph2-start';
       else if(!hasNext) cls+=' ph2-end';
+    } else if(phase===2){
+      cls+=' ph3';
     }
-    else if(phase===2) cls+=' ph3';
     cells+='<div class="'+cls+'">'+day+'</div>';
   }
-  // Jours hors-mois (gris) après
+  // Jours hors-mois après (toujours en gris clair)
   for(let i=0;i<(6-lastDow);i++){
     const d=new Date(year,month,daysInMonth+1+i);
     cells+='<div class="cal-day off">'+d.getDate()+'</div>';
@@ -2258,20 +2277,21 @@ function smcCalRenderSlide(){
   const periods=smcCalPhasePeriods();
   const months=smcCalListMonths(periods);
   const monthsHtml=months.map(m=>smcCalRenderMonth(m.year,m.month,periods)).join('');
-  const twoCol=months.length>3?' two-col':'';
-  // Phases détaillées (droite)
+  // Phases détaillées (droite) avec bullets (points[] = liste à puces)
   const phasesHtml=(d.phases||[]).map((ph,i)=>{
     const per=periods[i];
     const dur=parseInt(ph.dur)||0;
+    const pts=(ph.points||[]).map(p=>'<li>'+smcEsc(p)+'</li>').join('');
+    const ptsHtml=pts?'<ul class="cal-phase-points">'+pts+'</ul>':(ph.desc?'<div style="font-family:\'Segoe UI\',sans-serif;font-size:0.48em;color:#404040;line-height:1.55;margin-top:0.45em;">'+smcEsc(ph.desc)+'</div>':'');
     return '<div class="cal-phase">'+
       '<div class="cal-phase-n">Phase '+(i+1)+'</div>'+
       '<div class="cal-phase-t">'+smcEsc(ph.nom||'')+'</div>'+
       '<div class="cal-phase-meta"><span>'+smcEsc(smcCalFmtDuree(dur))+'</span><span class="cal-phase-sep">|</span><span>'+(per?smcEsc(smcCalFmtPeriod(per.start,per.end)):'')+'</span></div>'+
-      '<div class="cal-phase-desc">'+smcEsc(ph.desc||'')+'</div>'+
+      ptsHtml+
     '</div>';
   }).join('');
   const totalDur=smcCalTotalDurBiz();
-  // Légende
+  // Légende (affichée en bas, en ligne)
   const legend=(d.phases||[]).map((ph,i)=>{
     const cls=['ph1','ph2','ph3'][i]||'ph3';
     return '<div class="cal-leg-item"><span class="cal-leg-mark '+cls+'"></span>'+smcEsc(ph.nom||'')+' ('+smcCalFmtDuree(parseInt(ph.dur)||0)+')</div>';
@@ -2291,13 +2311,15 @@ function smcCalRenderSlide(){
       '<div class="smc-trait"></div>'+
       '<div class="smc-cal-body">'+
         '<div class="cal-mleft">'+
-          '<div class="cal-months'+twoCol+'">'+monthsHtml+'</div>'+
-          '<div class="cal-legend">'+legend+'</div>'+
+          '<div class="cal-months-wrap">'+monthsHtml+'</div>'+
         '</div>'+
         '<div class="cal-mright">'+
           '<div class="cal-phases-list">'+phasesHtml+'</div>'+
-          '<div class="cal-total"><span>Durée totale</span><span class="cal-total-v">'+smcEsc(smcCalFmtDuree(totalDur))+'</span></div>'+
         '</div>'+
+      '</div>'+
+      '<div class="cal-bottom">'+
+        '<div class="cal-legend">'+legend+'</div>'+
+        '<div class="cal-total"><span>Durée totale</span><span class="cal-total-v">'+smcEsc(smcCalFmtDuree(totalDur))+'</span></div>'+
       '</div>'+
       '<div class="smc-page-footer">'+
         '<span class="smc-ink">S-M.C</span>'+
@@ -2331,19 +2353,26 @@ function smcCalRerender(){
 // Formulaire droite — phases dynamiques (nom + durée jours ouvrés + description)
 function smcCalRenderPhases(){
   const c=document.getElementById('smcf-cal-phases');if(!c)return;
-  c.innerHTML=window.smcCal.phases.map((p,i)=>
-    '<div style="display:flex;flex-direction:column;gap:4px;padding:6px;border:1px solid var(--gris-tres-clair);background:var(--blanc);">'+
+  c.innerHTML=window.smcCal.phases.map((p,i)=>{
+    const pts=(p.points||[]);
+    const ptsRows=pts.map((pt,j)=>
+      '<div class="smcf-item" style="margin-left:10px;"><input type="text" class="smcf-i" data-cal-phase-pt="'+i+'-'+j+'" value="'+smcEsc(pt)+'" placeholder="Point"><button class="smcf-del" type="button" onclick="smcCalDelPt('+i+','+j+')" title="Supprimer">×</button></div>'
+    ).join('');
+    return '<div style="display:flex;flex-direction:column;gap:4px;padding:6px;border:1px solid var(--gris-tres-clair);background:var(--blanc);">'+
       '<div class="smcf-item"><input type="text" class="smcf-i" data-cal-phase-nom="'+i+'" value="'+smcEsc(p.nom)+'" placeholder="Nom de phase"><button class="smcf-del" type="button" onclick="smcCalDelPhase('+i+')" title="Supprimer">×</button></div>'+
       '<input type="number" class="smcf-i" data-cal-phase-dur="'+i+'" value="'+(p.dur||1)+'" placeholder="Durée (jours ouvrés)" min="1" step="1">'+
-      '<textarea class="smcf-ta" data-cal-phase-desc="'+i+'" rows="2" placeholder="Description de la phase">'+smcEsc(p.desc||'')+'</textarea>'+
-    '</div>'
-  ).join('');
+      ptsRows+
+      '<button class="smcf-add" type="button" onclick="smcCalAddPt('+i+')" style="align-self:flex-start;margin-top:2px;">+ Point</button>'+
+    '</div>';
+  }).join('');
   c.querySelectorAll('input[data-cal-phase-nom]').forEach(el=>{el.addEventListener('input',function(){const i=parseInt(el.getAttribute('data-cal-phase-nom'));window.smcCal.phases[i].nom=el.value;smcCalUpdateView('phases');});});
   c.querySelectorAll('input[data-cal-phase-dur]').forEach(el=>{el.addEventListener('input',function(){const i=parseInt(el.getAttribute('data-cal-phase-dur'));window.smcCal.phases[i].dur=Math.max(1,parseInt(el.value)||1);smcCalUpdateView('phases');});});
-  c.querySelectorAll('textarea[data-cal-phase-desc]').forEach(el=>{el.addEventListener('input',function(){const i=parseInt(el.getAttribute('data-cal-phase-desc'));window.smcCal.phases[i].desc=el.value;smcCalUpdateView('phases');});});
+  c.querySelectorAll('input[data-cal-phase-pt]').forEach(el=>{el.addEventListener('input',function(){const [i,j]=el.getAttribute('data-cal-phase-pt').split('-').map(Number);window.smcCal.phases[i].points=window.smcCal.phases[i].points||[];window.smcCal.phases[i].points[j]=el.value;smcCalUpdateView('phases');});});
 }
-function smcCalAddPhase(){window.smcCal.phases.push({nom:'Nouvelle phase',dur:5,desc:''});smcCalRenderPhases();smcCalUpdateView('phases');}
+function smcCalAddPhase(){window.smcCal.phases.push({nom:'Nouvelle phase',dur:5,points:[]});smcCalRenderPhases();smcCalUpdateView('phases');}
 function smcCalDelPhase(i){window.smcCal.phases.splice(i,1);smcCalRenderPhases();smcCalUpdateView('phases');}
+function smcCalAddPt(i){window.smcCal.phases[i].points=window.smcCal.phases[i].points||[];window.smcCal.phases[i].points.push('Nouveau point');smcCalRenderPhases();smcCalUpdateView('phases');}
+function smcCalDelPt(i,j){window.smcCal.phases[i].points.splice(j,1);smcCalRenderPhases();smcCalUpdateView('phases');}
 
 function smcCalInitForm(){
   const form=document.getElementById('smc-cal-form');if(!form)return;
