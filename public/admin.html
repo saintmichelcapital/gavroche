@@ -383,6 +383,55 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 
 /* Pied de slide : trait + S-M.C / Page X sur Y */
 .smc-page-footer{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding-top:1em;margin-top:1.5em;border-top:1px solid #E0E0DA;}
+
+/* ═══════════════════════════════════════════
+   SLIDE CALENDRIER (V8 Calendrier mensuel éditorial)
+═══════════════════════════════════════════ */
+.smc-cal-body{flex:1;display:grid;grid-template-columns:48% 1fr;gap:4%;overflow:hidden;padding-top:1%;}
+
+/* Colonne gauche : calendriers mensuels */
+.cal-mleft{display:flex;flex-direction:column;gap:0.8em;overflow:hidden;}
+.cal-months{display:grid;gap:0.8em;}
+.cal-months.two-col{grid-template-columns:1fr 1fr;}
+.cal-month{display:flex;flex-direction:column;gap:0.25em;}
+.cal-month-title{font-family:'Segoe UI',sans-serif;font-size:0.75em;font-weight:700;color:#1A1A1A;line-height:1;}
+.cal-dow{display:grid;grid-template-columns:repeat(7,1fr);padding-bottom:0.25em;border-bottom:1px solid #1A1A1A;}
+.cal-dow span{font-family:'Segoe UI',sans-serif;font-size:0.32em;letter-spacing:0.12em;color:#888;text-align:center;font-weight:400;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);row-gap:0.2em;margin-top:0.15em;}
+.cal-day{font-family:'Segoe UI',sans-serif;font-size:0.45em;color:#404040;text-align:center;padding:0.25em 0;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;position:relative;}
+.cal-day.off{color:#BBB;}
+.cal-day.ph1{color:#1A1A1A;font-weight:500;}
+.cal-day.ph1::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1.4em;height:1.4em;border:1px solid #1A1A1A;border-radius:50%;}
+.cal-day.ph2{background:#E8E8E6;color:#1A1A1A;font-weight:400;}
+.cal-day.ph2-start{border-radius:999px 0 0 999px;}
+.cal-day.ph2-end{border-radius:0 999px 999px 0;}
+.cal-day.ph2-solo{border-radius:999px;}
+.cal-day.ph3{color:#fff;font-weight:500;position:relative;z-index:2;}
+.cal-day.ph3::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1.4em;height:1.4em;background:#1A1A1A;border-radius:50%;z-index:-1;}
+.cal-legend{display:flex;flex-direction:column;gap:0.3em;margin-top:auto;padding-top:0.6em;}
+.cal-leg-item{display:flex;align-items:center;gap:0.6em;font-family:'Segoe UI',sans-serif;font-size:0.4em;color:#404040;}
+.cal-leg-mark{width:0.85em;height:0.85em;border-radius:50%;flex-shrink:0;}
+.cal-leg-mark.ph1{border:1px solid #1A1A1A;background:#fff;}
+.cal-leg-mark.ph2{background:#E8E8E6;}
+.cal-leg-mark.ph3{background:#1A1A1A;}
+
+/* Colonne droite : phases détaillées */
+.cal-mright{display:flex;flex-direction:column;gap:1em;overflow:hidden;}
+.cal-phases-list{display:flex;flex-direction:column;gap:0.9em;}
+.cal-phase{display:flex;flex-direction:column;gap:0.25em;border-left:1px solid #E0E0DA;padding-left:0.8em;}
+.cal-phase-n{font-family:'Segoe UI',sans-serif;font-size:0.4em;letter-spacing:0.2em;color:#888;font-weight:400;text-transform:uppercase;}
+.cal-phase-t{font-family:'Segoe UI',sans-serif;font-size:0.72em;font-weight:700;color:#1A1A1A;letter-spacing:0.02em;line-height:1;margin-top:0.1em;text-transform:uppercase;}
+.cal-phase-meta{display:flex;align-items:center;gap:0.7em;font-family:'Segoe UI',sans-serif;font-size:0.38em;letter-spacing:0.12em;color:#404040;font-weight:500;margin-top:0.35em;text-transform:uppercase;}
+.cal-phase-sep{color:#BBB;}
+.cal-phase-desc{font-family:'Segoe UI',sans-serif;font-size:0.42em;color:#404040;line-height:1.5;margin-top:0.35em;}
+.cal-total{display:flex;align-items:center;justify-content:space-between;padding-top:0.8em;border-top:1px solid #E0E0DA;font-family:'Segoe UI',sans-serif;font-size:0.4em;letter-spacing:0.12em;color:#404040;text-transform:uppercase;margin-top:auto;}
+.cal-total-v{color:#1A1A1A;font-weight:700;}
+
+/* Formulaire édition Calendrier (mêmes styles que .smc-form) */
+.rpanel.cal-mode > .cp{display:none;}
+.rpanel.cal-mode > .smc-form{display:none;}
+.rpanel.cal-mode > .smc-cal-form{display:flex;}
+.smc-cal-form{background:var(--blanc);flex-direction:column;overflow:hidden;font-family:var(--font-corps);display:none;}
 .smc-ink{font-family:'Segoe UI',sans-serif;font-weight:700;color:#1A1A1A;font-size:0.58em;letter-spacing:0.02em;}
 .smc-pagenum{font-family:'Segoe UI',sans-serif;color:#888888;font-size:0.42em;letter-spacing:0.02em;}
 
@@ -742,6 +791,46 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
             <div>
               <label class="smcf-l">Page totale</label>
               <input class="smcf-i" data-smc="pageTot" type="number" min="1">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="smc-cal-form smc-form" id="smc-cal-form">
+        <div class="smcf-h">
+          <div class="smcf-t">Calendrier — Édition</div>
+          <div class="smcf-s">Mise à jour en direct de la slide. Pas de bouton Enregistrer.</div>
+        </div>
+        <div class="smcf-body">
+          <div class="smcf-sep">Banner</div>
+          <div class="smcf-g">
+            <label class="smcf-l">Titre Banner (mot en gras)</label>
+            <input class="smcf-i" data-cal="titreBold" type="text">
+          </div>
+          <div class="smcf-g">
+            <label class="smcf-l">Banner - Suite</label>
+            <textarea class="smcf-ta" data-cal="titreSuite" rows="2"></textarea>
+          </div>
+          <div class="smcf-sep">Date de démarrage</div>
+          <div class="smcf-g">
+            <label class="smcf-l">Date de début de la phase 1</label>
+            <input class="smcf-i" data-cal="dateDebut" type="date">
+            <div class="smcf-hint">Les dates des phases suivantes sont calculées automatiquement en jours ouvrés (weekends exclus).</div>
+          </div>
+          <div class="smcf-sep">Phases</div>
+          <div class="smcf-g">
+            <label class="smcf-l">Phases<button class="smcf-add" type="button" onclick="smcCalAddPhase()">+ Phase</button></label>
+            <div class="smcf-list" id="smcf-cal-phases"></div>
+            <div class="smcf-hint">Durée en jours ouvrés. Chaque phase contient son nom, sa durée et sa description.</div>
+          </div>
+          <div class="smcf-sep">Pagination</div>
+          <div class="smcf-g smcf-pg">
+            <div>
+              <label class="smcf-l">Page courante</label>
+              <input class="smcf-i" data-cal="pageCur" type="number" min="1">
+            </div>
+            <div>
+              <label class="smcf-l">Page totale</label>
+              <input class="smcf-i" data-cal="pageTot" type="number" min="1">
             </div>
           </div>
         </div>
@@ -1589,11 +1678,8 @@ async function genPropale(reouvrir){
     if(cx.has_presse&&pr.length){addS(1,"ctx-pr","Revue de presse",'<div class="sc std"><div class="std-h"><div class="std-b">Contexte</div><div class="std-t" contenteditable="true">Revue de presse recente</div></div><div class="std-body"><div class="prlist">'+pr.slice(0,4).map(function(p){return '<div class="pritem"><div class="prdate" contenteditable="true">'+p.date+'</div><div class="prtit" contenteditable="true">'+p.titre+'</div><div class="prsrc" contenteditable="true">'+(p.source||"")+'</div></div>';}).join("")+'</div></div></div>');}
   }
 
-  if(d.parties.p2){
-    const fmtD=function(dt){return dt?new Date(dt).toLocaleDateString("fr-FR",{day:"numeric",month:"long"}):"--";};
-    const totJ=(parseInt(d.phases[0].dur)||0)+(parseInt(d.phases[1].dur)||0)+(parseInt(d.phases[2].dur)||0);
-    addS(2,"app-plan","Retroplanning",'<div class="sc std"><div class="std-h"><div class="std-b">Notre approche</div><div class="std-t" contenteditable="true">Retroplanning d\'intervention</div></div><div class="std-body"><div style="font-size:0.65em;color:var(--gris-moyen);margin-bottom:3%;" contenteditable="true">Intervention de '+totJ+' jours ouvres, articulee en trois phases.</div><div class="pphases">'+d.phases.map(function(p,i){return '<div class="pph '+(i===1?"ex":"")+'"><div class="pphn">Phase '+(i+1)+'</div><div class="ppht" contenteditable="true">'+p.label+'</div><div class="pphd" contenteditable="true">'+fmtD(p.date)+'</div><div class="pphdur" contenteditable="true">'+(p.dur?p.dur+" j. ouvres":"--")+'</div></div>';}).join('<div style="display:flex;align-items:center;color:var(--gris-tres-clair);font-size:14px;padding:0 6px;">-&gt;</div>')+'</div></div></div>');
-  }
+  // NB : la slide calendrier a été déplacée de p2 (Notre approche) vers p4 (Conditions),
+  // juste avant la slide Honoraires, pour coller au pattern Retinax.
 
   if(d.parties.p3){
     const exL=d.exercices.map(function(e){return e.lib;}).join(", ")||"N, N-1, N-2";
@@ -1603,8 +1689,32 @@ async function genPropale(reouvrir){
   if(d.parties.p4){
     const totJ2=(parseInt(d.phases[0].dur)||0)+(parseInt(d.phases[1].dur)||0)+(parseInt(d.phases[2].dur)||0);
     const mt=parseInt(d.honMt)||0;
-    // PILOTE SMC — pré-remplit window.smcHon à partir des éléments saisis en étape 2
     const nbSemaines = Math.max(1, Math.ceil(totJ2/5));
+
+    // Slide Calendrier (V8 - calendrier mensuel éditorial)
+    window.smcCal = window.smcCal || {};
+    window.smcCal.titreBold = "Calendrier prévisionnel";
+    window.smcCal.titreSuite = "Notre équipe sera mobilisée sur toute la période d'exécution des travaux. Nous estimons que "+nbSemaines+" semaines seront nécessaires à la réalisation complète de nos due diligences.";
+    window.smcCal.dateDebut = (d.phases[0]&&d.phases[0].date) || "2026-02-28";
+    const defaultNames=["Phase préliminaire","Travaux de Due Diligence","Finalisation"];
+    const defaultDescs=[
+      "Communication des éléments requis (Dataroom), lecture de la documentation et demande d'éléments complémentaires.",
+      "Revue de la documentation, analyses principales, sessions de questions-réponses avec le management et préparation du rapport.",
+      "Remise et restitution des conclusions, finalisation des points en suspens."
+    ];
+    window.smcCal.phases = d.phases.map((p,i)=>({
+      nom: p.label || defaultNames[i] || "Phase "+(i+1),
+      dur: Math.max(1, parseInt(p.dur)||5),
+      desc: defaultDescs[i] || ""
+    }));
+    window.smcCal.pageCur = 1; // recalculé plus bas
+    window.smcCal.pageTot = 1;
+    if (typeof window.propaleActive === 'number' && window.propalesSlideData && window.propalesSlideData[window.propaleActive]) {
+      window.propalesSlideData[window.propaleActive].smcCal = JSON.parse(JSON.stringify(window.smcCal));
+    }
+    addS(4,"cond-cal","Calendrier",smcCalRenderSlide());
+
+    // PILOTE SMC — pré-remplit window.smcHon à partir des éléments saisis en étape 2
     window.smcHon = window.smcHon || {};
     window.smcHon.titreBold = "Honoraires";
     window.smcHon.titreSuite = "Notre équipe sera mobilisée sur toute la période d'exécution des travaux. Nous estimons que "+nbSemaines+" semaines seront nécessaires à la réalisation complète de nos due diligences.";
@@ -1643,12 +1753,18 @@ async function genPropale(reouvrir){
   addS(6,"footer-pg","Page finale",'<div class="sc ftpg"><div class="ftcab" contenteditable="true">Gavroche</div></div>');
 
   window.sD=slides;window.sA=0;window.cH=[];
-  // PILOTE SMC — recale les numéros de page de la slide Honoraires selon sa position réelle
+  // PILOTE SMC — recale les numéros de page des slides SMC selon leur position réelle
   const idxHon=slides.findIndex(function(s){return s.id==='cond-hon';});
   if(idxHon>=0 && window.smcHon){
     window.smcHon.pageCur=idxHon+1;
     window.smcHon.pageTot=slides.length;
     slides[idxHon].html=smcRenderSlide();
+  }
+  const idxCal=slides.findIndex(function(s){return s.id==='cond-cal';});
+  if(idxCal>=0 && window.smcCal){
+    window.smcCal.pageCur=idxCal+1;
+    window.smcCal.pageTot=slides.length;
+    slides[idxCal].html=smcCalRenderSlide();
   }
   const sv=document.getElementById("sv");
   sv.innerHTML=slides.map(function(s,i){return '<div class="sf '+(i===0?"on":"")+'" id="sf-'+i+'">'+s.html+'</div>';}).join("");
@@ -1715,30 +1831,32 @@ function smcFmtEur(n){const v=parseInt(n)||0;return v.toLocaleString('fr-FR').re
 
 function smcRenderPrestBlock(d){
   const dev=d.devise||'€';
-  const rows=d.prestations.filter(p=>(parseInt(p.montant)||0)>0).map(p=>
-    '<div class="smc-prest-row">'+
-      '<span class="smc-prest-lib">'+smcEsc(p.libelle)+'</span>'+
+  const idxMap=[];d.prestations.forEach((p,i)=>{if((parseInt(p.montant)||0)>0)idxMap.push(i);});
+  const rows=idxMap.map(i=>{
+    const p=d.prestations[i];
+    return '<div class="smc-prest-row">'+
+      '<span class="smc-prest-lib" contenteditable="true" data-smc-edit="prestLib:'+i+'">'+smcEsc(p.libelle)+'</span>'+
       '<span class="smc-prest-dots">'+'. '.repeat(30)+'</span>'+
-      '<span class="smc-prest-mt">'+smcEsc(dev)+'&nbsp;'+smcFmtEur(p.montant)+'</span>'+
-    '</div>'
-  ).join('');
-  const redHtml=d.reductionActive?'<div class="smc-reduction">En cas de non-réalisation de l\'opération envisagée, les honoraires seront réduits à '+smcEsc(dev)+'&nbsp;'+smcFmtEur(d.reductionMt)+' hors taxes.</div>':'';
+      '<span class="smc-prest-mt">'+smcEsc(dev)+'&nbsp;<span contenteditable="true" data-smc-edit="prestMt:'+i+'">'+smcFmtEur(p.montant)+'</span></span>'+
+    '</div>';
+  }).join('');
+  const redHtml=d.reductionActive?'<div class="smc-reduction">En cas de non-réalisation de l\'opération envisagée, les honoraires seront réduits à '+smcEsc(dev)+'&nbsp;<span contenteditable="true" data-smc-edit="reductionMt">'+smcFmtEur(d.reductionMt)+'</span> hors taxes.</div>':'';
   return '<div class="smc-prest-list">'+rows+redHtml+'</div>';
 }
 
 function smcRenderSlide(){
   const d=window.smcHon;
-  const livrItems=(d.livrables||[]).map(l=>'<li>'+smcEsc(l)+'</li>').join('');
-  const hypoItems=(d.hypotheses||[]).map(h=>{
+  const livrItems=(d.livrables||[]).map((l,i)=>'<li contenteditable="true" data-smc-edit="livrable:'+i+'">'+smcEsc(l)+'</li>').join('');
+  const hypoItems=(d.hypotheses||[]).map((h,i)=>{
     const subs=(h.sub||[]).filter(s=>s&&s.trim());
-    const subHtml=subs.length?'<ul class="sub">'+subs.map(s=>'<li>'+smcEsc(s)+'</li>').join('')+'</ul>':'';
-    return '<li>'+smcEsc(h.txt)+subHtml+'</li>';
+    const subHtml=subs.length?'<ul class="sub">'+subs.map((s,j)=>'<li contenteditable="true" data-smc-edit="sub:'+i+':'+j+'">'+smcEsc(s)+'</li>').join('')+'</ul>':'';
+    return '<li><span contenteditable="true" data-smc-edit="hypo:'+i+'">'+smcEsc(h.txt)+'</span>'+subHtml+'</li>';
   }).join('');
   return ''+
     '<div class="sc smc-slide">'+
       '<div class="smc-top">'+
         '<div class="smc-title-block">'+
-          '<div class="smc-titre"><span class="smc-titre-bold" data-smc-view="titreBold">'+smcEsc(d.titreBold)+'</span> | <span data-smc-view="titreSuite">'+smcEsc(d.titreSuite)+'</span></div>'+
+          '<div class="smc-titre"><span class="smc-titre-bold" contenteditable="true" data-smc-view="titreBold" data-smc-edit="titreBold">'+smcEsc(d.titreBold)+'</span> | <span contenteditable="true" data-smc-view="titreSuite" data-smc-edit="titreSuite">'+smcEsc(d.titreSuite)+'</span></div>'+
         '</div>'+
         '<div class="smc-nav">'+
           '<div class="smc-nav-item">Contexte</div>'+
@@ -1751,8 +1869,8 @@ function smcRenderSlide(){
         '<div class="smc-left">'+
           '<div class="smc-prest-head"><span class="smc-prest-label" data-smc-view="prestLabel">'+(d.prestations.filter(p=>(parseInt(p.montant)||0)>0).length>1?'Prestation(s)':'Prestation')+'</span><span class="smc-prest-label">Montant (HT)</span></div>'+
           '<div data-smc-view="prestations">'+smcRenderPrestBlock(d)+'</div>'+
-          '<div class="smc-duree" data-smc-view="dureeTxt">'+smcEsc(d.dureeTxt)+'</div>'+
-          '<div class="smc-livr-intro" data-smc-view="livrIntro">'+smcEsc(d.livrIntro)+'</div>'+
+          '<div class="smc-duree" contenteditable="true" data-smc-view="dureeTxt" data-smc-edit="dureeTxt">'+smcEsc(d.dureeTxt)+'</div>'+
+          '<div class="smc-livr-intro" contenteditable="true" data-smc-view="livrIntro" data-smc-edit="livrIntro">'+smcEsc(d.livrIntro)+'</div>'+
           '<ul class="smc-livr" data-smc-view="livrables">'+livrItems+'</ul>'+
         '</div>'+
         '<ul class="smc-bullets" data-smc-view="hypotheses">'+hypoItems+'</ul>'+
@@ -1906,21 +2024,364 @@ function smcToggleReduction(on){
 // Bascule automatique du panneau droit selon slide active
 function smcOnSlideChange(slide){
   const rp=document.getElementById('rpanel');if(!rp)return;
+  rp.classList.remove('form-mode','cal-mode');
   if(slide && slide.id==='cond-hon'){
-    // Restaure smcHon persisté si disponible
     if(typeof window.propaleActive==='number' && window.propalesSlideData && window.propalesSlideData[window.propaleActive] && window.propalesSlideData[window.propaleActive].smcHon){
       window.smcHon=JSON.parse(JSON.stringify(window.propalesSlideData[window.propaleActive].smcHon));
     }
     rp.classList.add('form-mode');
     smcInitForm();
     smcRerender();
-  } else {
-    rp.classList.remove('form-mode');
+    smcAttachInlineEditors();
+  } else if(slide && slide.id==='cond-cal'){
+    if(typeof window.propaleActive==='number' && window.propalesSlideData && window.propalesSlideData[window.propaleActive] && window.propalesSlideData[window.propaleActive].smcCal){
+      window.smcCal=JSON.parse(JSON.stringify(window.propalesSlideData[window.propaleActive].smcCal));
+    }
+    rp.classList.add('cal-mode');
+    smcCalInitForm();
+    smcCalRerender();
   }
 }
 
-// Export PPTX natif (serveur) — construit un .pptx fidèle à la charte SMC
+// ═══════════════════════════════════════════
+// Édition inline sur la slide : listener délégué qui écoute chaque frappe
+// sur les éléments [data-smc-edit] et synchronise window.smcHon + formulaire droit
+// ═══════════════════════════════════════════
+function smcAttachInlineEditors(){
+  const sv=document.getElementById('sv');if(!sv)return;
+  if(sv.dataset.smcInlineBound==='1')return;
+  sv.addEventListener('input',function(e){
+    const el=e.target.closest('[data-smc-edit]');if(!el)return;
+    const key=el.getAttribute('data-smc-edit');
+    const txt=el.textContent;
+    const d=window.smcHon;
+    window.smcInlineFocus=el; // flag pour empêcher smcUpdateView de perdre le curseur
+    if(key==='titreBold' || key==='titreSuite' || key==='dureeTxt' || key==='livrIntro'){
+      d[key]=txt;
+    } else if(key.startsWith('prestLib:')){
+      const i=parseInt(key.split(':')[1]);if(d.prestations[i]) d.prestations[i].libelle=txt;
+    } else if(key.startsWith('prestMt:')){
+      const i=parseInt(key.split(':')[1]);if(d.prestations[i]) d.prestations[i].montant=parseInt(String(txt).replace(/[^0-9]/g,''))||0;
+    } else if(key==='reductionMt'){
+      d.reductionMt=parseInt(String(txt).replace(/[^0-9]/g,''))||0;
+    } else if(key.startsWith('livrable:')){
+      const i=parseInt(key.split(':')[1]);d.livrables[i]=txt;
+    } else if(key.startsWith('hypo:')){
+      const i=parseInt(key.split(':')[1]);if(d.hypotheses[i]) d.hypotheses[i].txt=txt;
+    } else if(key.startsWith('sub:')){
+      const parts=key.split(':');const i=parseInt(parts[1]);const j=parseInt(parts[2]);
+      if(d.hypotheses[i] && d.hypotheses[i].sub) d.hypotheses[i].sub[j]=txt;
+    }
+    // Synchronise le formulaire droit + persistance + total vers propale
+    smcSyncFormFromData();
+    if(typeof smcRenderPrestations==='function') smcRenderPrestations();
+    if(typeof smcRenderLivrables==='function') smcRenderLivrables();
+    if(typeof smcRenderHypos==='function') smcRenderHypos();
+    smcSyncToPropale();
+    smcPersist();
+    window.smcInlineFocus=null;
+  });
+  sv.dataset.smcInlineBound='1';
+}
+
+// ═══════════════════════════════════════════
+// SLIDE CALENDRIER (V8 Calendrier mensuel éditorial)
+// Dates calculées depuis dateDebut + durées en jours ouvrés
+// ═══════════════════════════════════════════
+window.smcCal = {
+  titreBold: "Calendrier prévisionnel",
+  titreSuite: "Notre équipe sera mobilisée sur toute la période d'exécution des travaux. Les phases s'enchaînent sur les jours ouvrés suivants.",
+  dateDebut: "2026-02-28",
+  phases: [
+    { nom: "Préparation", dur: 5, desc: "Cette première phase vise à cadrer le projet, aligner les objectifs et préparer les ressources." },
+    { nom: "Exécution", dur: 15, desc: "Phase clé du projet durant laquelle les actions sont déployées et les livrables produits." },
+    { nom: "Restitution", dur: 2, desc: "Présentation des résultats, restitution finale et recommandations." }
+  ],
+  pageCur: 12,
+  pageTot: 14
+};
+
+// Helpers dates
+function smcCalToDate(iso){if(!iso)return null;const d=new Date(iso);return isNaN(d.getTime())?null:d;}
+function smcCalIsoDay(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function smcCalIsBizDay(d){const w=d.getDay();return w!==0 && w!==6;}
+function smcCalNextBizDay(d){const r=new Date(d);do{r.setDate(r.getDate()+1);}while(!smcCalIsBizDay(r));return r;}
+function smcCalSameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();}
+
+// Calcule les périodes [start, end] de chaque phase à partir de dateDebut + durs
+function smcCalPhasePeriods(){
+  const d=window.smcCal;
+  const start0=smcCalToDate(d.dateDebut)||new Date();
+  let cur=new Date(start0);
+  while(!smcCalIsBizDay(cur)) cur.setDate(cur.getDate()+1);
+  const periods=[];
+  (d.phases||[]).forEach(ph=>{
+    const dur=Math.max(1,parseInt(ph.dur)||1);
+    const s=new Date(cur);
+    let e=new Date(cur);
+    let added=1;
+    while(added<dur){
+      e.setDate(e.getDate()+1);
+      if(smcCalIsBizDay(e)) added++;
+    }
+    periods.push({start:s,end:e});
+    cur=smcCalNextBizDay(e);
+  });
+  return periods;
+}
+
+// Format français "DD mois YYYY" (ou "DD – DD mois YYYY" si même mois)
+function smcCalFmtDate(d){
+  const mois=['janv.','févr.','mars','avril','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+  return d.getDate()+' '+mois[d.getMonth()]+' '+d.getFullYear();
+}
+function smcCalFmtPeriod(s,e){
+  if(s.getMonth()===e.getMonth() && s.getFullYear()===e.getFullYear()){
+    const mois=['janv.','févr.','mars','avril','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+    return s.getDate()+' – '+e.getDate()+' '+mois[s.getMonth()]+' '+s.getFullYear();
+  }
+  return smcCalFmtDate(s)+' – '+smcCalFmtDate(e);
+}
+
+// Détermine dans quelle phase (index) tombe un jour, ou -1
+function smcCalPhaseIndex(day,periods){
+  if(!smcCalIsBizDay(day)) return -1;
+  for(let i=0;i<periods.length;i++){
+    if(day>=periods[i].start && day<=periods[i].end) return i;
+  }
+  return -1;
+}
+
+// Durée totale en jours ouvrés
+function smcCalTotalDurBiz(){return (window.smcCal.phases||[]).reduce((s,p)=>s+Math.max(1,parseInt(p.dur)||1),0);}
+function smcCalFmtDuree(dur){
+  const d=parseInt(dur)||0;
+  if(d<=0) return '0 jour';
+  if(d===1) return '1 jour';
+  if(d<5) return d+' jours';
+  const sem=Math.floor(d/5);
+  const rest=d%5;
+  let out=(sem===1?'1 semaine':sem+' semaines');
+  if(rest===1) out+=' et 1 jour';
+  else if(rest>1) out+=' et '+rest+' jours';
+  return out;
+}
+
+// Calcule la liste des mois à afficher (de start[0] à end[last])
+function smcCalListMonths(periods){
+  if(!periods.length) return [];
+  const s=periods[0].start, e=periods[periods.length-1].end;
+  const months=[];
+  let y=s.getFullYear(),m=s.getMonth();
+  while(y<e.getFullYear() || (y===e.getFullYear() && m<=e.getMonth())){
+    months.push({year:y,month:m});
+    m++; if(m>11){m=0;y++;}
+  }
+  return months;
+}
+
+// Rendu d'un mois (table 7 cols)
+function smcCalRenderMonth(year,month,periods){
+  const monthNames=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  const first=new Date(year,month,1);
+  const daysInMonth=new Date(year,month+1,0).getDate();
+  // Indice (0=lundi, 6=dimanche) du 1er du mois
+  const firstDow=(first.getDay()+6)%7;
+  // Dernier jour du mois
+  const last=new Date(year,month,daysInMonth);
+  const lastDow=(last.getDay()+6)%7;
+  // Nb semaines à afficher (lignes)
+  const totalCells=firstDow+daysInMonth+(6-lastDow);
+  const weeks=totalCells/7;
+  let cells='';
+  // Calcule les classes pour chaque jour : off, ph1/ph2/ph3 avec start/mid/end
+  // D'abord : pour chaque jour du mois, quelle phase ?
+  const dayPhase=[]; // [{day, phase, dow}]
+  for(let day=1;day<=daysInMonth;day++){
+    const d=new Date(year,month,day);
+    const ph=smcCalPhaseIndex(d,periods);
+    dayPhase.push({day,phase:ph,dow:(d.getDay()+6)%7});
+  }
+  // Pour ph=1 (pilule grise), il faut déterminer start/mid/end selon contiguïté
+  // Un jour est "start" si c'est le premier jour ouvré contigu dans la semaine
+  // et "end" si c'est le dernier jour ouvré contigu dans la semaine
+  const isContigSame=(i,delta)=>{
+    const next=dayPhase[i+delta];
+    if(!next) return false;
+    if(next.phase!==dayPhase[i].phase) return false;
+    // Check they're on the same week (same row) = same dow relationship
+    // Actually : same row si les jours sont dans la même semaine civile (lundi-dimanche)
+    const d1=new Date(year,month,dayPhase[i].day);
+    const d2=new Date(year,month,dayPhase[i+delta].day);
+    const w1=Math.floor((d1.getDate()+firstDow-1)/7);
+    const w2=Math.floor((d2.getDate()+firstDow-1)/7);
+    return w1===w2;
+  };
+  // Construire les cellules
+  // Jours hors-mois (gris) avant
+  for(let i=0;i<firstDow;i++){
+    const d=new Date(year,month,1-firstDow+i);
+    cells+='<div class="cal-day off">'+d.getDate()+'</div>';
+  }
+  // Jours du mois
+  for(let i=0;i<dayPhase.length;i++){
+    const {day,phase}=dayPhase[i];
+    let cls='cal-day';
+    if(phase===-1) cls+=' off';
+    else if(phase===0) cls+=' ph1';
+    else if(phase===1){
+      cls+=' ph2';
+      const hasPrev=isContigSame(i,-1);
+      const hasNext=isContigSame(i,+1);
+      if(!hasPrev && !hasNext) cls+=' ph2-solo';
+      else if(!hasPrev) cls+=' ph2-start';
+      else if(!hasNext) cls+=' ph2-end';
+    }
+    else if(phase===2) cls+=' ph3';
+    cells+='<div class="'+cls+'">'+day+'</div>';
+  }
+  // Jours hors-mois (gris) après
+  for(let i=0;i<(6-lastDow);i++){
+    const d=new Date(year,month,daysInMonth+1+i);
+    cells+='<div class="cal-day off">'+d.getDate()+'</div>';
+  }
+  return ''+
+    '<div class="cal-month">'+
+      '<div class="cal-month-title">'+monthNames[month]+' '+year+'</div>'+
+      '<div class="cal-dow"><span>LUN</span><span>MAR</span><span>MER</span><span>JEU</span><span>VEN</span><span>SAM</span><span>DIM</span></div>'+
+      '<div class="cal-grid">'+cells+'</div>'+
+    '</div>';
+}
+
+function smcCalRenderSlide(){
+  const d=window.smcCal;
+  const periods=smcCalPhasePeriods();
+  const months=smcCalListMonths(periods);
+  const monthsHtml=months.map(m=>smcCalRenderMonth(m.year,m.month,periods)).join('');
+  const twoCol=months.length>3?' two-col':'';
+  // Phases détaillées (droite)
+  const phasesHtml=(d.phases||[]).map((ph,i)=>{
+    const per=periods[i];
+    const dur=parseInt(ph.dur)||0;
+    return '<div class="cal-phase">'+
+      '<div class="cal-phase-n">Phase '+(i+1)+'</div>'+
+      '<div class="cal-phase-t">'+smcEsc(ph.nom||'')+'</div>'+
+      '<div class="cal-phase-meta"><span>'+smcEsc(smcCalFmtDuree(dur))+'</span><span class="cal-phase-sep">|</span><span>'+(per?smcEsc(smcCalFmtPeriod(per.start,per.end)):'')+'</span></div>'+
+      '<div class="cal-phase-desc">'+smcEsc(ph.desc||'')+'</div>'+
+    '</div>';
+  }).join('');
+  const totalDur=smcCalTotalDurBiz();
+  // Légende
+  const legend=(d.phases||[]).map((ph,i)=>{
+    const cls=['ph1','ph2','ph3'][i]||'ph3';
+    return '<div class="cal-leg-item"><span class="cal-leg-mark '+cls+'"></span>'+smcEsc(ph.nom||'')+' ('+smcCalFmtDuree(parseInt(ph.dur)||0)+')</div>';
+  }).join('');
+  return ''+
+    '<div class="sc smc-slide">'+
+      '<div class="smc-top">'+
+        '<div class="smc-title-block">'+
+          '<div class="smc-titre"><span class="smc-titre-bold" data-cal-view="titreBold">'+smcEsc(d.titreBold)+'</span> | <span data-cal-view="titreSuite">'+smcEsc(d.titreSuite)+'</span></div>'+
+        '</div>'+
+        '<div class="smc-nav">'+
+          '<div class="smc-nav-item">Contexte</div>'+
+          '<div class="smc-nav-item">Périmètre des travaux</div>'+
+          '<div class="smc-nav-item active">Conditions</div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="smc-trait"></div>'+
+      '<div class="smc-cal-body">'+
+        '<div class="cal-mleft">'+
+          '<div class="cal-months'+twoCol+'">'+monthsHtml+'</div>'+
+          '<div class="cal-legend">'+legend+'</div>'+
+        '</div>'+
+        '<div class="cal-mright">'+
+          '<div class="cal-phases-list">'+phasesHtml+'</div>'+
+          '<div class="cal-total"><span>Durée totale</span><span class="cal-total-v">'+smcEsc(smcCalFmtDuree(totalDur))+'</span></div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="smc-page-footer">'+
+        '<span class="smc-ink">S-M.C</span>'+
+        '<span class="smc-pagenum">Page <span data-cal-view="pageCur">'+smcEsc(d.pageCur)+'</span> sur <span data-cal-view="pageTot">'+smcEsc(d.pageTot)+'</span></span>'+
+      '</div>'+
+    '</div>';
+}
+
+function smcCalUpdateView(field){
+  const sv=document.getElementById('sv');if(!sv)return;
+  const active=sv.querySelector('.sf.on');
+  if(!active || !active.querySelector('.smc-cal-body'))return;
+  if(['titreBold','titreSuite','pageCur','pageTot'].includes(field)){
+    const target=active.querySelector('[data-cal-view="'+field+'"]');
+    if(target) target.textContent=window.smcCal[field];
+  } else {
+    // Tout changement structurel : re-render complet
+    active.innerHTML=smcCalRenderSlide();
+  }
+  smcCalPersist();
+}
+
+function smcCalRerender(){
+  const sv=document.getElementById('sv');if(!sv)return;
+  const active=sv.querySelector('.sf.on');
+  if(!active)return;
+  if(!active.querySelector('.smc-cal-body'))return;
+  active.innerHTML=smcCalRenderSlide();
+}
+
+// Formulaire droite — phases dynamiques (nom + durée jours ouvrés + description)
+function smcCalRenderPhases(){
+  const c=document.getElementById('smcf-cal-phases');if(!c)return;
+  c.innerHTML=window.smcCal.phases.map((p,i)=>
+    '<div style="display:flex;flex-direction:column;gap:4px;padding:6px;border:1px solid var(--gris-tres-clair);background:var(--blanc);">'+
+      '<div class="smcf-item"><input type="text" class="smcf-i" data-cal-phase-nom="'+i+'" value="'+smcEsc(p.nom)+'" placeholder="Nom de phase"><button class="smcf-del" type="button" onclick="smcCalDelPhase('+i+')" title="Supprimer">×</button></div>'+
+      '<input type="number" class="smcf-i" data-cal-phase-dur="'+i+'" value="'+(p.dur||1)+'" placeholder="Durée (jours ouvrés)" min="1" step="1">'+
+      '<textarea class="smcf-ta" data-cal-phase-desc="'+i+'" rows="2" placeholder="Description de la phase">'+smcEsc(p.desc||'')+'</textarea>'+
+    '</div>'
+  ).join('');
+  c.querySelectorAll('input[data-cal-phase-nom]').forEach(el=>{el.addEventListener('input',function(){const i=parseInt(el.getAttribute('data-cal-phase-nom'));window.smcCal.phases[i].nom=el.value;smcCalUpdateView('phases');});});
+  c.querySelectorAll('input[data-cal-phase-dur]').forEach(el=>{el.addEventListener('input',function(){const i=parseInt(el.getAttribute('data-cal-phase-dur'));window.smcCal.phases[i].dur=Math.max(1,parseInt(el.value)||1);smcCalUpdateView('phases');});});
+  c.querySelectorAll('textarea[data-cal-phase-desc]').forEach(el=>{el.addEventListener('input',function(){const i=parseInt(el.getAttribute('data-cal-phase-desc'));window.smcCal.phases[i].desc=el.value;smcCalUpdateView('phases');});});
+}
+function smcCalAddPhase(){window.smcCal.phases.push({nom:'Nouvelle phase',dur:5,desc:''});smcCalRenderPhases();smcCalUpdateView('phases');}
+function smcCalDelPhase(i){window.smcCal.phases.splice(i,1);smcCalRenderPhases();smcCalUpdateView('phases');}
+
+function smcCalInitForm(){
+  const form=document.getElementById('smc-cal-form');if(!form)return;
+  smcCalSyncFormFromData();
+  if(form.dataset.smcCalInit!=='1'){
+    form.querySelectorAll('[data-cal]').forEach(el=>{
+      el.addEventListener('input',function(){
+        const f=el.getAttribute('data-cal');
+        let v=el.value;
+        if(f==='pageCur'||f==='pageTot') v=parseInt(v)||1;
+        window.smcCal[f]=v;
+        smcCalUpdateView(f);
+      });
+    });
+    form.dataset.smcCalInit='1';
+  }
+  smcCalRenderPhases();
+}
+function smcCalSyncFormFromData(){
+  const form=document.getElementById('smc-cal-form');if(!form)return;
+  form.querySelectorAll('[data-cal]').forEach(el=>{el.value=window.smcCal[el.getAttribute('data-cal')];});
+}
+function smcCalPersist(){
+  if(typeof window.propaleActive !== 'number') return;
+  if(!window.propalesSlideData) window.propalesSlideData={};
+  const slot=window.propalesSlideData[window.propaleActive]=window.propalesSlideData[window.propaleActive]||{};
+  slot.smcCal=JSON.parse(JSON.stringify(window.smcCal));
+}
+
+// Export PPTX natif (serveur) — dispatch selon la slide active
 async function smcExportPPTX(){
+  const slide=(window.sD||[])[window.sA||0];
+  if(!slide) return alert('Aucune slide active.');
+  if(slide.id==='cond-hon') return smcExportHonoraires();
+  if(slide.id==='cond-cal') return smcExportCalendrier();
+  alert("L'export PPTX natif n'est disponible que pour les slides Honoraires et Calendrier pour le moment.");
+}
+async function smcExportHonoraires(){
   try{
     const btn=document.querySelector('.bexp');const oldTxt=btn?btn.textContent:'';
     if(btn){btn.textContent='Génération en cours…';btn.disabled=true;}
@@ -1933,6 +2394,26 @@ async function smcExportPPTX(){
     const blob=await resp.blob();
     const url=URL.createObjectURL(blob);
     const a=document.createElement('a');a.href=url;a.download=(dF&&dF.entite&&dF.entite.nom?dF.entite.nom:'Propale')+'_Honoraires.pptx';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+    if(btn){btn.textContent=oldTxt;btn.disabled=false;}
+  } catch(e){
+    alert('Export PPTX échoué : '+e.message);
+    const btn=document.querySelector('.bexp');if(btn){btn.textContent='↓ Exporter en PPTX';btn.disabled=false;}
+  }
+}
+async function smcExportCalendrier(){
+  try{
+    const btn=document.querySelector('.bexp');const oldTxt=btn?btn.textContent:'';
+    if(btn){btn.textContent='Génération en cours…';btn.disabled=true;}
+    const resp=await fetch('/api/export-calendrier-pptx',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+(sessionStorage.getItem('gavroche_token')||'')},
+      body:JSON.stringify({smcCal:window.smcCal,cibleNom:(dF&&dF.entite&&dF.entite.nom)||'Propale'})
+    });
+    if(!resp.ok) throw new Error('HTTP '+resp.status);
+    const blob=await resp.blob();
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download=(dF&&dF.entite&&dF.entite.nom?dF.entite.nom:'Propale')+'_Calendrier.pptx';
     document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
     if(btn){btn.textContent=oldTxt;btn.disabled=false;}
   } catch(e){
@@ -2078,7 +2559,8 @@ function sauvegarderPropale() {
     {
       slides: window.sD.slice(),
       navHtml: snavEl ? snavEl.innerHTML : '',
-      smcHon: window.smcHon ? JSON.parse(JSON.stringify(window.smcHon)) : undefined
+      smcHon: window.smcHon ? JSON.parse(JSON.stringify(window.smcHon)) : undefined,
+      smcCal: window.smcCal ? JSON.parse(JSON.stringify(window.smcCal)) : undefined
     }
   );
 
