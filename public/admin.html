@@ -612,6 +612,14 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .perim-dil{display:flex;align-items:flex-start;gap:8px;padding:6px 0;font-size:12px;line-height:1.5;color:var(--noir);}
 .perim-dil input[type=checkbox]{margin-top:3px;accent-color:var(--noir);cursor:pointer;width:13px;height:13px;flex-shrink:0;}
 .perim-dil-text{flex:1;}
+.perim-subs{margin:0 0 4px 28px;padding:0;}
+.perim-sub{display:flex;align-items:flex-start;gap:8px;padding:3px 0;font-size:11px;line-height:1.45;color:var(--gris-clair);}
+.perim-sub input[type=checkbox]{margin-top:2px;accent-color:var(--noir);cursor:pointer;width:11px;height:11px;flex-shrink:0;}
+.perim-sub-text{flex:1;}
+.perim-sub-text[contenteditable=true]{outline:1px dashed transparent;padding:1px 3px;border-radius:2px;}
+.perim-sub-text[contenteditable=true]:hover{outline-color:var(--gris-tres-clair);background:var(--blanc);}
+.perim-sub-text[contenteditable=true]:focus{outline-color:var(--noir);background:var(--blanc);}
+.perim-cat-sep{font-family:var(--font-titre);font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gris-moyen);margin:24px 0 12px 0;padding-bottom:6px;border-bottom:1px solid var(--gris-tres-clair);}
 .perim-dil-text[contenteditable=true]{outline:1px dashed transparent;padding:2px 4px;border-radius:2px;}
 .perim-dil-text[contenteditable=true]:hover{outline-color:var(--gris-tres-clair);background:var(--blanc);}
 .perim-dil-text[contenteditable=true]:focus{outline-color:var(--noir);background:var(--blanc);}
@@ -3013,6 +3021,22 @@ function smcPerimSetFilter(f){
   smcPerimRender();
 }
 
+// Ordre canonique des catégories (standards puis additionnels)
+window.SMC_PERIM_ORDER = [
+  { type: 'standard',    label: 'Quality of financial information' },
+  { type: 'standard',    label: 'Quality of earnings' },
+  { type: 'standard',    label: 'Quality of net cash flows' },
+  { type: 'standard',    label: 'Quality of net debt (/cash)' },
+  { type: 'standard',    label: 'Quality of forecast' },
+  { type: 'standard',    label: 'Autres' },
+  { type: 'additionnel', label: 'Contrat de cession / acquisition' },
+  { type: 'additionnel', label: 'Due diligence IT' },
+  { type: 'additionnel', label: 'Due diligence Pensions & Social' },
+  { type: 'additionnel', label: 'Due diligence fiscale' },
+  { type: 'additionnel', label: 'Due diligence opérationnelle' },
+  { type: 'additionnel', label: "Leviers d'activité" },
+];
+
 function smcPerimRender(){
   if (!window.smcPerimData) return;
   const el = document.getElementById('perim-content');
@@ -3022,25 +3046,35 @@ function smcPerimRender(){
 
   // Filtrer + grouper par bloc
   const grouped = {};
-  window.smcPerimData.forEach(o => {
-    if (f==='standard' && o.tag!=='standard') return;
-    if (f==='additionnel' && o.tag!=='additionnel') return;
+  function addObj(o, isCustom){
+    if (f==='standard' && (o.categorie_type||o.tag)!=='standard') return;
+    if (f==='additionnel' && (o.categorie_type||o.tag)!=='additionnel') return;
     if (q) {
-      const blob = (o.objectif_titre+' '+(o.objectif_finalite||'')+' '+((o.diligences||[]).join(' '))).toLowerCase();
+      const dilsBlob = (o.diligences||[]).map(d => (d && d.text) ? d.text+' '+(d.subs||[]).join(' ') : (d||'')).join(' ');
+      const blob = (o.objectif_titre+' '+(o.objectif_finalite||'')+' '+dilsBlob).toLowerCase();
       if (!blob.includes(q)) return;
     }
-    const k = o.bloc || '(non rattache)';
+    const k = o.bloc || 'Autres';
     grouped[k] = grouped[k] || [];
-    grouped[k].push(o);
-  });
-  (window.smcPerimCustoms||[]).forEach(c => {
-    const k = c.bloc || '(non rattache)';
-    grouped[k] = grouped[k] || [];
-    grouped[k].push(Object.assign({}, c, { _custom: true }));
+    grouped[k].push(isCustom ? Object.assign({}, o, { _custom: true }) : o);
+  }
+  window.smcPerimData.forEach(o => addObj(o, false));
+  (window.smcPerimCustoms||[]).forEach(c => addObj(c, true));
+
+  // Construire l'ordre : selon SMC_PERIM_ORDER, puis ajout des blocs custom non listés
+  const orderedKeys = [];
+  const seen = new Set();
+  window.SMC_PERIM_ORDER.forEach(spec => { if (grouped[spec.label]) { orderedKeys.push(spec); seen.add(spec.label); } });
+  Object.keys(grouped).sort().forEach(k => {
+    if (!seen.has(k)) {
+      // bloc custom user → on devine le type (par défaut "additionnel" si l'user l'a créé)
+      const objs = grouped[k];
+      const ct = (objs[0] && (objs[0].categorie_type || objs[0].tag)) || 'standard';
+      orderedKeys.push({ type: ct, label: k });
+    }
   });
 
-  const blocKeys = Object.keys(grouped).sort();
-  if (!blocKeys.length) {
+  if (!orderedKeys.length) {
     el.innerHTML = '<div class="perim-empty">Aucun objectif ne correspond aux filtres.</div>'
       + '<button class="perim-add-obj" style="margin-top:16px;" onclick="smcPerimAddCustomObj(null)">+ Ajouter un objectif sur-mesure</button>';
     smcPerimCountUpdate();
@@ -3048,21 +3082,29 @@ function smcPerimRender(){
   }
 
   let html = '';
-  blocKeys.forEach(k => {
-    const objs = grouped[k];
+  let lastType = null;
+  orderedKeys.forEach(spec => {
+    const k = spec.label;
+    const objs = grouped[k] || [];
+    if (!objs.length) return;
+    // Séparateur visuel quand on change de section
+    if (spec.type !== lastType) {
+      html += '<div class="perim-cat-sep">'+(spec.type==='standard'?'Standards':'Additionnels')+'</div>';
+      lastType = spec.type;
+    }
     const nSel = objs.filter(o => (window.smcPerimSel[o.id]||{}).selected).length;
     const isOpen = (window.smcPerimOpen.blocs[k] !== false);
     html += '<div class="perim-bloc '+(isOpen?'open':'')+'" data-bloc="'+smcEsc(k)+'">';
-    html += '<div class="perim-bloc-h" onclick="smcPerimToggleBloc(this)">';
-    html +=   '<span class="perim-bloc-caret">▶</span>';
-    html +=   '<span class="perim-bloc-t">'+smcEsc(k)+'</span>';
-    html +=   '<span class="perim-bloc-stat">'+nSel+' / '+objs.length+'</span>';
-    html += '</div>';
-    html += '<div class="perim-bloc-body">';
+    html +=   '<div class="perim-bloc-h" onclick="smcPerimToggleBloc(this)">';
+    html +=     '<span class="perim-bloc-caret">▶</span>';
+    html +=     '<span class="perim-bloc-t">'+smcEsc(k)+'</span>';
+    html +=     '<span class="perim-bloc-stat">'+nSel+' / '+objs.length+'</span>';
+    html +=   '</div>';
+    html +=   '<div class="perim-bloc-body">';
     objs.forEach(o => {
-      const sel = window.smcPerimSel[o.id] || { selected:false, dils:{}, extraDils:[] };
+      const sel = window.smcPerimSel[o.id] || { selected:false, dils:{}, subs:{}, extraDils:[] };
       const isObjOpen = (window.smcPerimOpen.objs[o.id] === true);
-      const tag = o._custom ? 'custom' : (o.tag==='additionnel' ? 'additionnel' : 'standard');
+      const tag = o._custom ? 'custom' : ((o.categorie_type||o.tag)==='additionnel' ? 'additionnel' : 'standard');
       const oidEsc = smcEsc(o.id).replace(/'/g,"\\'");
       html += '<div class="perim-obj '+(isObjOpen?'open':'')+'" data-obj="'+smcEsc(o.id)+'">';
       html +=   '<div class="perim-obj-h">';
@@ -3084,12 +3126,27 @@ function smcPerimRender(){
         html += '<div style="padding-top:12px;font-size:11px;color:var(--gris-moyen);font-style:italic;line-height:1.5;">«&nbsp;'+smcEsc(o.objectif_finalite)+'&nbsp;»</div>';
       }
       html +=     '<div class="perim-dil-list">';
-      (o.diligences||[]).forEach((d,i) => {
+      (o.diligences||[]).forEach((d, i) => {
+        // d peut être string (ancien format) ou {text, subs[]} (nouveau format v2)
+        const dText = (typeof d === 'string') ? d : (d && d.text) || '';
+        const dSubs = (typeof d === 'string') ? [] : ((d && d.subs) || []);
         const dsel = !!(sel.dils && sel.dils[i]);
         html +=     '<label class="perim-dil">';
         html +=       '<input type="checkbox" '+(dsel?'checked':'')+' onchange="smcPerimToggleDil(\''+oidEsc+'\','+i+',this.checked)">';
-        html +=       '<span class="perim-dil-text">'+smcEsc(d)+'</span>';
+        html +=       '<span class="perim-dil-text">'+smcEsc(dText)+'</span>';
         html +=     '</label>';
+        if (dSubs.length){
+          html += '<div class="perim-subs">';
+          dSubs.forEach((s, j) => {
+            const subKey = i+'_'+j;
+            const ssel = !!(sel.subs && sel.subs[subKey]);
+            html += '<label class="perim-sub">';
+            html +=   '<input type="checkbox" '+(ssel?'checked':'')+' onchange="smcPerimToggleSub(\''+oidEsc+'\','+i+','+j+',this.checked)">';
+            html +=   '<span class="perim-sub-text">'+smcEsc(s)+'</span>';
+            html += '</label>';
+          });
+          html += '</div>';
+        }
       });
       (sel.extraDils||[]).forEach((d, i) => {
         const dchecked = (d.selected !== false);
@@ -3106,7 +3163,7 @@ function smcPerimRender(){
     });
     const blocKeyEsc = smcEsc(k).replace(/'/g,"\\'");
     html += '<button class="perim-add-obj" onclick="smcPerimAddCustomObj(\''+blocKeyEsc+'\')">+ Ajouter un objectif dans ce bloc</button>';
-    html += '</div>';
+    html +=   '</div>';
     html += '</div>';
   });
   html += '<button class="perim-add-obj" style="margin-top:20px;border-style:solid;" onclick="smcPerimAddCustomObj(null)">+ Ajouter un objectif dans un nouveau bloc</button>';
@@ -3145,17 +3202,24 @@ function smcPerimToggleObjOpen(objEl){
 }
 
 function smcPerimToggleObj(id, checked){
-  window.smcPerimSel[id] = window.smcPerimSel[id] || { selected:false, dils:{}, extraDils:[] };
+  window.smcPerimSel[id] = window.smcPerimSel[id] || { selected:false, dils:{}, subs:{}, extraDils:[] };
   window.smcPerimSel[id].selected = checked;
-  // Premier cochage : auto-coche toutes les diligences standards de l'objectif
+  if (!window.smcPerimSel[id].subs) window.smcPerimSel[id].subs = {};
+  // Premier cochage : auto-coche toutes les diligences + tous leurs sub-bullets
   if (checked) {
     const obj = (window.smcPerimData||[]).find(o => o.id === id) || (window.smcPerimCustoms||[]).find(o => o.id === id);
     if (obj && obj.diligences) {
       const cur = window.smcPerimSel[id].dils || {};
+      const curSubs = window.smcPerimSel[id].subs || {};
       const alreadyHas = Object.values(cur).some(v => v);
       if (!alreadyHas) {
-        obj.diligences.forEach((_,i) => { cur[i] = true; });
+        obj.diligences.forEach((d, i) => {
+          cur[i] = true;
+          const subs = (typeof d === 'string') ? [] : ((d && d.subs) || []);
+          subs.forEach((_, j) => { curSubs[i+'_'+j] = true; });
+        });
         window.smcPerimSel[id].dils = cur;
+        window.smcPerimSel[id].subs = curSubs;
       }
     }
   }
@@ -3163,28 +3227,40 @@ function smcPerimToggleObj(id, checked){
 }
 
 function smcPerimToggleDil(objId, i, checked){
-  window.smcPerimSel[objId] = window.smcPerimSel[objId] || { selected:false, dils:{}, extraDils:[] };
+  window.smcPerimSel[objId] = window.smcPerimSel[objId] || { selected:false, dils:{}, subs:{}, extraDils:[] };
   window.smcPerimSel[objId].dils = window.smcPerimSel[objId].dils || {};
+  window.smcPerimSel[objId].subs = window.smcPerimSel[objId].subs || {};
   window.smcPerimSel[objId].dils[i] = checked;
+  // Cascade : (dé)cocher tous les subs de cette diligence
+  const obj = (window.smcPerimData||[]).find(o => o.id === objId) || (window.smcPerimCustoms||[]).find(o => o.id === objId);
+  if (obj && obj.diligences && obj.diligences[i]) {
+    const d = obj.diligences[i];
+    const subs = (typeof d === 'string') ? [] : ((d && d.subs) || []);
+    subs.forEach((_, j) => { window.smcPerimSel[objId].subs[i+'_'+j] = checked; });
+  }
   if (checked && !window.smcPerimSel[objId].selected) {
     window.smcPerimSel[objId].selected = true;
-    smcPerimRender();
-    return;
   }
-  smcPerimCountUpdate();
-  // Mettre a jour le compteur du bloc sans re-render complet
-  const objEl = document.querySelector('[data-obj="'+objId+'"]');
-  if (objEl) {
-    const blocEl = objEl.closest('.perim-bloc');
-    if (blocEl) {
-      const stat = blocEl.querySelector('.perim-bloc-stat');
-      if (stat) {
-        const total = blocEl.querySelectorAll('.perim-obj').length;
-        const nSel = blocEl.querySelectorAll('.perim-obj-check:checked').length;
-        stat.textContent = nSel + ' / ' + total;
-      }
+  smcPerimRender();  // re-render pour mettre à jour les checkboxes des subs
+}
+
+function smcPerimToggleSub(objId, dilIdx, subIdx, checked){
+  window.smcPerimSel[objId] = window.smcPerimSel[objId] || { selected:false, dils:{}, subs:{}, extraDils:[] };
+  window.smcPerimSel[objId].subs = window.smcPerimSel[objId].subs || {};
+  window.smcPerimSel[objId].subs[dilIdx+'_'+subIdx] = checked;
+  if (checked) {
+    if (!window.smcPerimSel[objId].dils[dilIdx]) {
+      window.smcPerimSel[objId].dils[dilIdx] = true;
+      smcPerimRender();
+      return;
+    }
+    if (!window.smcPerimSel[objId].selected) {
+      window.smcPerimSel[objId].selected = true;
+      smcPerimRender();
+      return;
     }
   }
+  smcPerimCountUpdate();
 }
 
 function smcPerimToggleExtraDil(objId, i, checked){
@@ -3233,21 +3309,35 @@ function smcPerimAddCustomObj(blocKey){
 }
 
 function smcPerimCollect(){
-  const out = { blocs: {}, totalObjectifs: 0, totalDiligences: 0 };
+  const out = { blocs: {}, totalObjectifs: 0, totalDiligences: 0, totalSubs: 0 };
   const all = (window.smcPerimData||[]).concat(window.smcPerimCustoms||[]);
   all.forEach(o => {
     const s = window.smcPerimSel[o.id];
     if (!s || !s.selected) return;
     const dils = [];
-    (o.diligences||[]).forEach((d,i) => { if (s.dils && s.dils[i]) dils.push(d); });
-    (s.extraDils||[]).forEach(ed => {
-      if (ed.selected !== false && (ed.text||'').trim()) dils.push(ed.text.trim());
+    (o.diligences||[]).forEach((d, i) => {
+      if (!(s.dils && s.dils[i])) return;
+      const dText = (typeof d === 'string') ? d : (d && d.text) || '';
+      const dSubsAll = (typeof d === 'string') ? [] : ((d && d.subs) || []);
+      const subsKept = [];
+      dSubsAll.forEach((sb, j) => {
+        if (s.subs && s.subs[i+'_'+j]) { subsKept.push(sb); out.totalSubs++; }
+      });
+      dils.push({ text: dText, subs: subsKept });
     });
-    const k = o.bloc || '(non rattache)';
+    (s.extraDils||[]).forEach(ed => {
+      if (ed.selected !== false && (ed.text||'').trim()) dils.push({ text: ed.text.trim(), subs: [] });
+    });
+    const k = o.bloc || 'Autres';
     out.blocs[k] = out.blocs[k] || [];
     out.blocs[k].push({
-      id: o.id, titre: o.objectif_titre, finalite: o.objectif_finalite,
-      diligences: dils, tag: o.tag, custom: (o.id||'').indexOf('custom_') === 0
+      id: o.id,
+      titre: o.objectif_titre,
+      finalite: o.objectif_finalite,
+      diligences: dils,
+      tag: o.tag || o.categorie_type,
+      categorie_type: o.categorie_type || o.tag,
+      custom: (o.id||'').indexOf('custom_') === 0
     });
     out.totalObjectifs++;
     out.totalDiligences += dils.length;
