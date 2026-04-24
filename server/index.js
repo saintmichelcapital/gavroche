@@ -308,8 +308,79 @@ app.post('/api/export-honoraires-pptx', requireAuth, async (req, res) => {
 });
 
 // ═══════════════════════════════════════════
-// EXPORT PPTX — Slide Calendrier (V8 Calendrier mensuel éditorial)
+// EXPORT PPTX — Slide Calendrier V8 (calendrier mensuel éditorial, refonte 25/04/2026)
+// Aligné sur le rendu HTML admin.html
 // ═══════════════════════════════════════════
+function smcCalHelpersV8() {
+  const pad2 = n => String(n).padStart(2, '0');
+  const keyOf = d => d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+  // Parse ISO "YYYY-MM-DD" en date LOCALE (évite décalage UTC)
+  const parseLocal = iso => {
+    if (!iso) return null;
+    const m = /^(\d{4})-(\d{1,2})-(\d{1,2})/.exec(String(iso));
+    if (!m) return null;
+    return new Date(parseInt(m[1]), parseInt(m[2]) - 1, parseInt(m[3]));
+  };
+  // Pâques (Meeus/Jones/Butcher)
+  const easter = year => {
+    const a = year % 19, b = Math.floor(year / 100), c = year % 100, d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25), g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30, i = Math.floor(c / 4), k = c % 4, l = (32 + 2 * e + 2 * i - h - k) % 7, m2 = Math.floor((a + 11 * h + 22 * l) / 451), month = Math.floor((h + l - 7 * m2 + 114) / 31), day = ((h + l - 7 * m2 + 114) % 31) + 1;
+    return new Date(year, month - 1, day);
+  };
+  const feriesCache = {};
+  const feries = year => {
+    if (feriesCache[year]) return feriesCache[year];
+    const e = easter(year);
+    const lp = new Date(e); lp.setDate(e.getDate() + 1);
+    const asc = new Date(e); asc.setDate(e.getDate() + 39);
+    const pente = new Date(e); pente.setDate(e.getDate() + 50);
+    const s = new Set([
+      keyOf(new Date(year, 0, 1)), keyOf(lp), keyOf(new Date(year, 4, 1)), keyOf(new Date(year, 4, 8)),
+      keyOf(asc), keyOf(pente), keyOf(new Date(year, 6, 14)), keyOf(new Date(year, 7, 15)),
+      keyOf(new Date(year, 10, 1)), keyOf(new Date(year, 10, 11)), keyOf(new Date(year, 11, 25))
+    ]);
+    feriesCache[year] = s;
+    return s;
+  };
+  const isFerie = d => feries(d.getFullYear()).has(keyOf(d));
+  const isBiz = d => { const w = d.getDay(); if (w === 0 || w === 6) return false; return !isFerie(d); };
+  const nextBiz = d => { const r = new Date(d); do { r.setDate(r.getDate() + 1); } while (!isBiz(r)); return r; };
+  const fmtDuree = dur => {
+    const d = parseInt(dur) || 0;
+    if (d <= 0) return '0 semaine';
+    if (d < 5) return '1 semaine';
+    const min = Math.floor(d / 5), max = Math.ceil(d / 5);
+    if (min === max) return (min === 1 ? '1 semaine' : min + ' semaines');
+    return min + '-' + max + ' semaines';
+  };
+  const mois = ['janv.', 'févr.', 'mars', 'avril', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+  const fmtPeriod = (s, e) => {
+    if (s.getMonth() === e.getMonth() && s.getFullYear() === e.getFullYear())
+      return s.getDate() + ' – ' + e.getDate() + ' ' + mois[s.getMonth()] + ' ' + s.getFullYear();
+    return s.getDate() + ' ' + mois[s.getMonth()] + ' – ' + e.getDate() + ' ' + mois[e.getMonth()] + ' ' + e.getFullYear();
+  };
+  const phasePeriods = (dateDebut, phases) => {
+    const s0 = parseLocal(dateDebut) || new Date();
+    let cur = new Date(s0);
+    while (!isBiz(cur)) cur.setDate(cur.getDate() + 1);
+    const out = [];
+    phases.forEach(ph => {
+      const dur = Math.max(1, parseInt(ph.dur) || 1);
+      const s = new Date(cur); let e = new Date(cur); let added = 1;
+      while (added < dur) { e.setDate(e.getDate() + 1); if (isBiz(e)) added++; }
+      out.push({ start: s, end: e });
+      cur = nextBiz(e);
+    });
+    return out;
+  };
+  const phaseIndex = (day, periods) => {
+    if (!isBiz(day)) return -1;
+    for (let i = 0; i < periods.length; i++) if (day >= periods[i].start && day <= periods[i].end) return i;
+    return -1;
+  };
+  return { isBiz, isFerie, nextBiz, fmtDuree, fmtPeriod, phasePeriods, phaseIndex, parseLocal, keyOf, mois };
+}
+
+// Ancien helpers (garde pour compat avec d'autres appels éventuels)
 function smcCalHelpers() {
   const isBiz = d => d.getDay() !== 0 && d.getDay() !== 6;
   const nextBiz = d => { const r = new Date(d); do { r.setDate(r.getDate() + 1); } while (!isBiz(r)); return r; };
@@ -357,7 +428,7 @@ app.post('/api/export-calendrier-pptx', requireAuth, async (req, res) => {
     const { smcCal, cibleNom } = req.body;
     if (!smcCal) return res.status(400).json({ success: false, error: 'smcCal manquant.' });
 
-    const H = smcCalHelpers();
+    const H = smcCalHelpersV8();
     const pptx = new PptxGenJS();
     pptx.defineLayout({ name: 'A4L', width: 11.69, height: 8.27 });
     pptx.layout = 'A4L';
@@ -367,20 +438,20 @@ app.post('/api/export-calendrier-pptx', requireAuth, async (req, res) => {
     const slide = pptx.addSlide();
     slide.background = { color: 'FFFFFF' };
 
+    // ─── Dimensions ───
     const W = 11.69, SH = 8.27;
-    const ML = 0.7, MR = 0.7, MT = 0.5, MB = 0.4;
-    const COL_RIGHT_W = 2.0;
+    const ML = 0.55, MR = 0.55, MT = 0.4, MB = 0.25;
+    const COL_RIGHT_W = 1.9;
     const TITLE_W = W - ML - MR - COL_RIGHT_W - 0.3;
 
-    // Banner
+    // ─── Banner ───
     slide.addText(
       [
         { text: smcCal.titreBold || 'Calendrier prévisionnel', options: { bold: true, color: '1A1A1A' } },
         { text: ' | ' + (smcCal.titreSuite || ''), options: { bold: false, color: '1A1A1A' } }
       ],
-      { x: ML, y: MT, w: TITLE_W, h: 1.1, fontFace: 'Segoe UI', fontSize: 13, align: 'left', valign: 'top', margin: 0, lineSpacingMultiple: 1.4 }
+      { x: ML, y: MT, w: TITLE_W, h: 0.9, fontFace: 'Segoe UI', fontSize: 13, align: 'left', valign: 'top', margin: 0, lineSpacingMultiple: 1.4 }
     );
-
     // Nav droite
     const navX = W - MR - COL_RIGHT_W;
     const navItems = [{ t: 'Contexte', a: false }, { t: 'Périmètre des travaux', a: false }, { t: 'Conditions', a: true }];
@@ -390,22 +461,22 @@ app.post('/api/export-calendrier-pptx', requireAuth, async (req, res) => {
       slide.addText(it.t, { x: navX + 0.12, y: navY, w: COL_RIGHT_W - 0.12, h: 0.3, fontFace: 'Segoe UI', fontSize: 8, color: it.a ? '1A1A1A' : '888888', align: 'left', valign: 'top', margin: 0 });
       navY += 0.34;
     });
-
     // Trait noir
-    slide.addShape(pptx.ShapeType.rect, { x: ML, y: MT + 1.2, w: 0.8, h: 0.05, fill: { color: '000000' }, line: { color: '000000' } });
+    slide.addShape(pptx.ShapeType.rect, { x: ML, y: MT + 1.05, w: 0.8, h: 0.05, fill: { color: '000000' }, line: { color: '000000' } });
 
-    // Corps : 2 colonnes (calendrier gauche 48%, phases droite 48%)
-    const BODY_Y = MT + 1.5;
-    const BODY_H = SH - BODY_Y - MB - 0.4;
-    const COL_W = (W - ML - MR - 0.4) / 2;
+    // ─── Zones ───
+    const BODY_Y = MT + 1.3;
+    const FOOTER_Y = SH - MB - 0.25;              // haut du footer S-M.C
+    const BOTTOM_Y = FOOTER_Y - 0.5;              // ligne basse (légende + durée totale)
+    const BODY_H = BOTTOM_Y - BODY_Y - 0.15;
+    const COL_W = (W - ML - MR - 0.3) / 2;
     const LEFT_X = ML;
-    const RIGHT_X = ML + COL_W + 0.4;
+    const RIGHT_X = ML + COL_W + 0.3;
 
     const phases = smcCal.phases || [];
     const periods = H.phasePeriods(smcCal.dateDebut || '2026-02-28', phases);
 
-    // ─── Colonne gauche : calendriers mensuels + légende ───
-    // Liste des mois à afficher
+    // ─── Liste des mois à afficher ───
     const months = [];
     if (periods.length) {
       const s = periods[0].start, e = periods[periods.length - 1].end;
@@ -415,113 +486,149 @@ app.post('/api/export-calendrier-pptx', requireAuth, async (req, res) => {
         m++; if (m > 11) { m = 0; y++; }
       }
     }
-    const twoCol = months.length > 3;
-    const monthsPerCol = twoCol ? Math.ceil(months.length / 2) : months.length;
-    const mColW = twoCol ? (COL_W - 0.1) / 2 : COL_W;
-    const mRowH = 1.15;  // hauteur approximative d'un mois (title + dow + 6 semaines)
+    // Mois principal = celui avec le plus de jours de phase
+    let mainIdx = 0, bestCount = -1;
+    months.forEach((mm, i) => {
+      const daysInMonth = new Date(mm.year, mm.month + 1, 0).getDate();
+      let count = 0;
+      for (let d = 1; d <= daysInMonth; d++) {
+        if (H.phaseIndex(new Date(mm.year, mm.month, d), periods) >= 0) count++;
+      }
+      if (count > bestCount) { bestCount = count; mainIdx = i; }
+    });
 
+    // ─── Construction des semaines à afficher pour chaque mois ───
     const frMonthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
     const dows = ['LUN', 'MAR', 'MER', 'JEU', 'VEN', 'SAM', 'DIM'];
 
-    months.forEach((mDef, mi) => {
-      const col = twoCol ? Math.floor(mi / monthsPerCol) : 0;
-      const row = twoCol ? mi % monthsPerCol : mi;
-      const mX = LEFT_X + col * (mColW + 0.1);
-      const mY = BODY_Y + row * mRowH;
-      // Titre mois
-      slide.addText(frMonthNames[mDef.month] + ' ' + mDef.year, {
-        x: mX, y: mY, w: mColW, h: 0.2,
-        fontFace: 'Segoe UI', fontSize: 9, bold: true, color: '1A1A1A', align: 'left', valign: 'top', margin: 0
-      });
-      // Days of week header
-      const cellW = mColW / 7;
-      const dowY = mY + 0.22;
-      dows.forEach((dw, di) => {
-        slide.addText(dw, {
-          x: mX + di * cellW, y: dowY, w: cellW, h: 0.12,
-          fontFace: 'Segoe UI', fontSize: 5, color: '888888', align: 'center', valign: 'top', margin: 0, charSpacing: 1
-        });
-      });
-      // Ligne sous les dow
-      slide.addShape(pptx.ShapeType.line, { x: mX, y: dowY + 0.13, w: mColW, h: 0, line: { color: '1A1A1A', width: 0.5 } });
-      // Grille jours
+    const monthsData = months.map((mDef, mi) => {
       const first = new Date(mDef.year, mDef.month, 1);
       const daysInMonth = new Date(mDef.year, mDef.month + 1, 0).getDate();
       const firstDow = (first.getDay() + 6) % 7;
-      const cellH = 0.14;
-      const gridY = dowY + 0.17;
-      // Jours hors-mois avant
-      for (let i = 0; i < firstDow; i++) {
-        const d = new Date(mDef.year, mDef.month, 1 - firstDow + i);
-        slide.addText(String(d.getDate()), {
-          x: mX + i * cellW, y: gridY, w: cellW, h: cellH,
-          fontFace: 'Segoe UI', fontSize: 6, color: 'BBBBBB', align: 'center', valign: 'middle', margin: 0
-        });
-      }
-      // Jours du mois
-      for (let day = 1; day <= daysInMonth; day++) {
-        const idx = firstDow + day - 1;
-        const cx = mX + (idx % 7) * cellW;
-        const cy = gridY + Math.floor(idx / 7) * cellH;
-        const d = new Date(mDef.year, mDef.month, day);
-        const ph = H.phaseIndex(d, periods);
-        let color = '404040', fill = null;
-        if (ph === 0) {
-          // Cercle blanc avec bordure
-          slide.addShape(pptx.ShapeType.ellipse, {
-            x: cx + cellW / 2 - 0.08, y: cy + cellH / 2 - 0.08, w: 0.16, h: 0.16,
-            fill: { color: 'FFFFFF' }, line: { color: '1A1A1A', width: 0.75 }
-          });
-          color = '1A1A1A';
-        } else if (ph === 1) {
-          // Rectangle arrondi gris
-          slide.addShape(pptx.ShapeType.roundRect, {
-            x: cx + 0.01, y: cy + cellH / 2 - 0.06, w: cellW - 0.02, h: 0.12,
-            fill: { color: 'E8E8E6' }, line: { color: 'E8E8E6' }, rectRadius: 0.05
-          });
-          color = '1A1A1A';
-        } else if (ph === 2) {
-          // Cercle noir plein
-          slide.addShape(pptx.ShapeType.ellipse, {
-            x: cx + cellW / 2 - 0.08, y: cy + cellH / 2 - 0.08, w: 0.16, h: 0.16,
-            fill: { color: '1A1A1A' }, line: { color: '1A1A1A' }
-          });
-          color = 'FFFFFF';
-        } else if (ph === -1) {
-          if (!H.isBiz(d)) color = 'BBBBBB';
-        }
-        slide.addText(String(day), {
-          x: cx, y: cy, w: cellW, h: cellH,
-          fontFace: 'Segoe UI', fontSize: 6, color: color, align: 'center', valign: 'middle', margin: 0, bold: (ph !== -1)
-        });
-      }
-    });
+      const last = new Date(mDef.year, mDef.month, daysInMonth);
+      const lastDow = (last.getDay() + 6) % 7;
+      const totalCells = firstDow + daysInMonth + (6 - lastDow);
+      const cells = [];
+      for (let i = 0; i < firstDow; i++) cells.push({ date: new Date(mDef.year, mDef.month, 1 - firstDow + i), inMonth: false });
+      for (let d = 1; d <= daysInMonth; d++) cells.push({ date: new Date(mDef.year, mDef.month, d), inMonth: true });
+      for (let i = 0; i < (6 - lastDow); i++) cells.push({ date: new Date(mDef.year, mDef.month, daysInMonth + 1 + i), inMonth: false });
+      cells.forEach(c => { c.phase = H.phaseIndex(c.date, periods); c.isWeekend = !H.isBiz(c.date); });
+      // Découper en semaines de 7
+      const weeks = [];
+      for (let i = 0; i < cells.length; i += 7) weeks.push(cells.slice(i, i + 7));
+      // Si ce n'est pas le mois principal, on ne garde que les semaines avec au moins 1 jour de phase
+      const keptWeeks = (mi === mainIdx) ? weeks : weeks.filter(w => w.some(c => c.phase >= 0));
+      return { mDef, keptWeeks };
+    }).filter(md => md.keptWeeks.length > 0);
 
-    // Légende en bas gauche
-    const legendY = BODY_Y + BODY_H - 0.6;
-    phases.forEach((ph, i) => {
-      const legY = legendY + i * 0.18;
-      const mark = ['ph1', 'ph2', 'ph3'][i] || 'ph3';
-      // Point : cercle blanc bordé, carré gris ou cercle noir
-      if (i === 0) slide.addShape(pptx.ShapeType.ellipse, { x: LEFT_X, y: legY + 0.02, w: 0.1, h: 0.1, fill: { color: 'FFFFFF' }, line: { color: '1A1A1A', width: 0.75 } });
-      else if (i === 1) slide.addShape(pptx.ShapeType.ellipse, { x: LEFT_X, y: legY + 0.02, w: 0.1, h: 0.1, fill: { color: 'E8E8E6' }, line: { color: 'E8E8E6' } });
-      else slide.addShape(pptx.ShapeType.ellipse, { x: LEFT_X, y: legY + 0.02, w: 0.1, h: 0.1, fill: { color: '1A1A1A' }, line: { color: '1A1A1A' } });
-      slide.addText((ph.nom || '') + ' (' + H.fmtDuree(ph.dur) + ')', {
-        x: LEFT_X + 0.15, y: legY, w: COL_W - 0.2, h: 0.15,
-        fontFace: 'Segoe UI', fontSize: 7, color: '404040', align: 'left', valign: 'top', margin: 0
+    // ─── Dessin des mois ───
+    // Hauteur totale du calendrier
+    const totalWeeks = monthsData.reduce((s, md) => s + md.keptWeeks.length, 0);
+    const MONTH_TITLE_H = 0.2, DOW_H = 0.18, CELL_H = 0.25;
+    const availH = BODY_H;
+    const neededH = monthsData.length * (MONTH_TITLE_H + DOW_H) + totalWeeks * CELL_H + (monthsData.length - 1) * 0.12;
+    const scale = neededH > availH ? (availH / neededH) : 1;
+    const titleH = MONTH_TITLE_H * scale;
+    const dowH = DOW_H * scale;
+    const cellH = CELL_H * scale;
+    const mGap = 0.12 * scale;
+
+    const mColW = COL_W;
+    const cellW = mColW / 7;
+    let curY = BODY_Y;
+
+    monthsData.forEach(({ mDef, keptWeeks }) => {
+      const mX = LEFT_X;
+      const mY = curY;
+      // Titre mois
+      slide.addText(frMonthNames[mDef.month] + ' ' + mDef.year, {
+        x: mX, y: mY, w: mColW, h: titleH,
+        fontFace: 'Segoe UI', fontSize: 11, bold: true, color: '1A1A1A', align: 'left', valign: 'top', margin: 0
       });
+      // DOW + trait gris (raccourci à droite)
+      const dowY = mY + titleH;
+      dows.forEach((dw, di) => {
+        slide.addText(dw, {
+          x: mX + di * cellW, y: dowY, w: cellW, h: dowH,
+          fontFace: 'Segoe UI', fontSize: 6, color: '888888', align: 'center', valign: 'top', margin: 0, charSpacing: 1.5
+        });
+      });
+      // Trait gris sous les DOW (raccourci à droite de ~0.2")
+      slide.addShape(pptx.ShapeType.line, { x: mX, y: dowY + dowH, w: mColW - 0.2, h: 0, line: { color: 'D5D5D2', width: 0.5 } });
+      // Semaines
+      const gridY = dowY + dowH + 0.04;
+      keptWeeks.forEach((week, wi) => {
+        const rowY = gridY + wi * cellH;
+        week.forEach((c, ci) => {
+          const cx = mX + ci * cellW;
+          const cy = rowY;
+          const d = c.date;
+          const ph = c.phase;
+          let textColor = '1A1A1A', bold = true;
+          if (ph === 0) {
+            // Cercle blanc bordé
+            const circleD = Math.min(cellW * 0.85, cellH * 0.85);
+            slide.addShape(pptx.ShapeType.ellipse, {
+              x: cx + (cellW - circleD) / 2, y: cy + (cellH - circleD) / 2,
+              w: circleD, h: circleD,
+              fill: { color: 'FFFFFF' }, line: { color: '1A1A1A', width: 0.75 }
+            });
+          } else if (ph === 1) {
+            // Pilule grise : rectangle arrondi selon start/mid/end
+            const prev = ci > 0 ? week[ci - 1] : null;
+            const next = ci < 6 ? week[ci + 1] : null;
+            const hasPrev = prev && prev.phase === 1;
+            const hasNext = next && next.phase === 1;
+            const barH = cellH * 0.7;
+            const barY = cy + (cellH - barH) / 2;
+            let rx = cx, rw = cellW;
+            if (!hasPrev) rx = cx + 0.02;
+            if (!hasNext) rw = cellW - 0.02 - (!hasPrev ? 0.02 : 0);
+            else if (!hasPrev) rw = cellW - 0.02;
+            const radius = !hasPrev && !hasNext ? barH / 2 : (!hasPrev || !hasNext ? barH / 2 : 0);
+            slide.addShape(pptx.ShapeType.roundRect, {
+              x: rx, y: barY, w: rw, h: barH,
+              fill: { color: 'F0F0F0' }, line: { color: 'F0F0F0' }, rectRadius: radius
+            });
+          } else if (ph === 2) {
+            // Cercle noir plein
+            const circleD = Math.min(cellW * 0.85, cellH * 0.85);
+            slide.addShape(pptx.ShapeType.ellipse, {
+              x: cx + (cellW - circleD) / 2, y: cy + (cellH - circleD) / 2,
+              w: circleD, h: circleD,
+              fill: { color: '1A1A1A' }, line: { color: '1A1A1A' }
+            });
+            textColor = 'FFFFFF';
+          } else {
+            // Hors phase : jour ouvré = noir, weekend/hors mois = gris clair
+            if (!c.inMonth || c.isWeekend) { textColor = 'C8C8C8'; bold = false; }
+          }
+          slide.addText(String(d.getDate()), {
+            x: cx, y: cy, w: cellW, h: cellH,
+            fontFace: 'Segoe UI', fontSize: 9, color: textColor, align: 'center', valign: 'middle', margin: 0, bold: bold
+          });
+        });
+      });
+      curY += titleH + dowH + 0.04 + keptWeeks.length * cellH + mGap;
     });
 
-    // ─── Colonne droite : phases détaillées + total ───
-    let pY = BODY_Y;
+    // ─── Colonne droite : 3 phases (titre + meta + bullets) ───
+    const PHASE_H = (BODY_H - 0.2) / phases.length;
     phases.forEach((ph, i) => {
       const per = periods[i];
+      const pY = BODY_Y + i * PHASE_H + 0.1;
       // Trait vertical gauche
-      slide.addShape(pptx.ShapeType.line, { x: RIGHT_X, y: pY, w: 0, h: 0.9, line: { color: 'E0E0DA', width: 0.75 } });
-      // PHASE N
-      slide.addText('PHASE ' + (i + 1), { x: RIGHT_X + 0.12, y: pY, w: COL_W - 0.12, h: 0.15, fontFace: 'Segoe UI', fontSize: 7, color: '888888', charSpacing: 2, margin: 0 });
+      slide.addShape(pptx.ShapeType.line, { x: RIGHT_X, y: pY, w: 0, h: PHASE_H - 0.2, line: { color: 'E0E0DA', width: 0.75 } });
+      // PHASE N (petit caps)
+      slide.addText('PHASE ' + (i + 1), {
+        x: RIGHT_X + 0.15, y: pY, w: COL_W - 0.15, h: 0.15,
+        fontFace: 'Segoe UI', fontSize: 7, color: '888888', charSpacing: 2, margin: 0, bold: false
+      });
       // NOM (gros)
-      slide.addText((ph.nom || '').toUpperCase(), { x: RIGHT_X + 0.12, y: pY + 0.18, w: COL_W - 0.12, h: 0.3, fontFace: 'Segoe UI', fontSize: 13, bold: true, color: '1A1A1A', margin: 0 });
+      slide.addText((ph.nom || '').toUpperCase(), {
+        x: RIGHT_X + 0.15, y: pY + 0.2, w: COL_W - 0.15, h: 0.35,
+        fontFace: 'Segoe UI', fontSize: 14, bold: true, color: '1A1A1A', margin: 0, charSpacing: 0.3
+      });
       // Meta : durée | période
       const dureeTxt = H.fmtDuree(ph.dur).toUpperCase();
       const periodTxt = per ? H.fmtPeriod(per.start, per.end).toUpperCase() : '';
@@ -531,25 +638,57 @@ app.post('/api/export-calendrier-pptx', requireAuth, async (req, res) => {
           { text: '   |   ', options: { color: 'BBBBBB' } },
           { text: periodTxt, options: { color: '404040', bold: true } }
         ],
-        { x: RIGHT_X + 0.12, y: pY + 0.5, w: COL_W - 0.12, h: 0.18, fontFace: 'Segoe UI', fontSize: 7, charSpacing: 1, margin: 0 }
+        { x: RIGHT_X + 0.15, y: pY + 0.6, w: COL_W - 0.15, h: 0.18, fontFace: 'Segoe UI', fontSize: 7, charSpacing: 1.5, margin: 0 }
       );
-      // Description
-      slide.addText(ph.desc || '', { x: RIGHT_X + 0.12, y: pY + 0.7, w: COL_W - 0.12, h: 0.45, fontFace: 'Segoe UI', fontSize: 8, color: '404040', margin: 0, lineSpacingMultiple: 1.3 });
-      pY += 1.25;
+      // Bullets Retinax
+      const pts = (ph.points || []);
+      if (pts.length) {
+        const bullets = pts.map(pt => ({
+          text: pt,
+          options: { bullet: { code: '25AA' }, fontSize: 8, color: '404040', paraSpaceBefore: 0, paraSpaceAfter: 4, lineSpacingMultiple: 1.35 }
+        }));
+        slide.addText(bullets, {
+          x: RIGHT_X + 0.15, y: pY + 0.85, w: COL_W - 0.15, h: PHASE_H - 1,
+          fontFace: 'Segoe UI', valign: 'top'
+        });
+      }
     });
-    // Total
-    const totalY = BODY_Y + BODY_H - 0.3;
-    slide.addShape(pptx.ShapeType.line, { x: RIGHT_X, y: totalY - 0.05, w: COL_W, h: 0, line: { color: 'E0E0DA', width: 0.5 } });
-    slide.addText('DURÉE TOTALE', { x: RIGHT_X, y: totalY, w: COL_W / 2, h: 0.2, fontFace: 'Segoe UI', fontSize: 7, color: '404040', charSpacing: 2, align: 'left', margin: 0 });
-    const totalDur = phases.reduce((s, p) => s + Math.max(1, parseInt(p.dur) || 1), 0);
-    slide.addText(H.fmtDuree(totalDur).toUpperCase(), { x: RIGHT_X + COL_W / 2, y: totalY, w: COL_W / 2, h: 0.2, fontFace: 'Segoe UI', fontSize: 7, color: '1A1A1A', bold: true, charSpacing: 2, align: 'right', margin: 0 });
 
-    // Pied : trait + S-M.C + Page X sur Y
-    const footerY = SH - MB;
-    slide.addShape(pptx.ShapeType.line, { x: ML, y: footerY - 0.12, w: W - ML - MR, h: 0, line: { color: 'E0E0DA', width: 0.5 } });
-    slide.addText('S-M.C', { x: ML, y: footerY, w: 2, h: 0.3, fontFace: 'Segoe UI', fontSize: 11, bold: true, color: '1A1A1A', margin: 0 });
+    // ─── Ligne basse : légende à gauche + durée totale à droite ───
+    // Légende en ligne : 3 items côte à côte
+    let legX = ML;
+    phases.forEach((ph, i) => {
+      const circleY = BOTTOM_Y + 0.05;
+      const circleD = 0.12;
+      if (i === 0) slide.addShape(pptx.ShapeType.ellipse, { x: legX, y: circleY, w: circleD, h: circleD, fill: { color: 'FFFFFF' }, line: { color: '1A1A1A', width: 0.75 } });
+      else if (i === 1) slide.addShape(pptx.ShapeType.ellipse, { x: legX, y: circleY, w: circleD, h: circleD, fill: { color: 'F0F0F0' }, line: { color: 'F0F0F0' } });
+      else slide.addShape(pptx.ShapeType.ellipse, { x: legX, y: circleY, w: circleD, h: circleD, fill: { color: '1A1A1A' }, line: { color: '1A1A1A' } });
+      const legTxt = (ph.nom || '') + ' (' + H.fmtDuree(ph.dur) + ')';
+      // Estimation largeur texte : ~0.07 par caractère à font 7
+      const approxW = legTxt.length * 0.055 + 0.25;
+      slide.addText(legTxt, {
+        x: legX + circleD + 0.08, y: BOTTOM_Y, w: approxW, h: 0.3,
+        fontFace: 'Segoe UI', fontSize: 8, color: '404040', align: 'left', valign: 'middle', margin: 0
+      });
+      legX += circleD + 0.08 + approxW + 0.2;
+    });
+    // Durée totale (tout à droite)
+    const totalDur = phases.reduce((s, p) => s + Math.max(1, parseInt(p.dur) || 1), 0);
+    const totalValue = H.fmtDuree(totalDur).toUpperCase();
+    slide.addText('DURÉE TOTALE', {
+      x: W - MR - 2.7, y: BOTTOM_Y, w: 1.4, h: 0.3,
+      fontFace: 'Segoe UI', fontSize: 8, color: '404040', charSpacing: 1.5, align: 'right', valign: 'middle', margin: 0
+    });
+    slide.addText(totalValue, {
+      x: W - MR - 1.2, y: BOTTOM_Y, w: 1.2, h: 0.3,
+      fontFace: 'Segoe UI', fontSize: 8, color: '1A1A1A', bold: true, charSpacing: 1.5, align: 'right', valign: 'middle', margin: 0
+    });
+
+    // ─── Footer S-M.C ───
+    slide.addShape(pptx.ShapeType.line, { x: ML, y: FOOTER_Y, w: W - ML - MR, h: 0, line: { color: 'E0E0DA', width: 0.5 } });
+    slide.addText('S-M.C', { x: ML, y: FOOTER_Y + 0.08, w: 2, h: 0.25, fontFace: 'Segoe UI', fontSize: 11, bold: true, color: '1A1A1A', margin: 0 });
     slide.addText('Page ' + (smcCal.pageCur || 1) + ' sur ' + (smcCal.pageTot || 1), {
-      x: W - MR - 2, y: footerY, w: 2, h: 0.3,
+      x: W - MR - 2, y: FOOTER_Y + 0.08, w: 2, h: 0.25,
       fontFace: 'Segoe UI', fontSize: 8, color: '888888', align: 'right', margin: 0
     });
 

@@ -414,14 +414,14 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 /* Colonne droite : phases (pas de débordement à droite) */
 .cal-mright{display:flex;flex-direction:column;overflow:hidden;min-height:0;box-sizing:border-box;}
 .cal-mright *{overflow-wrap:break-word;box-sizing:border-box;}
-.cal-phases-list{display:flex;flex-direction:column;flex:1;min-height:0;justify-content:space-evenly;gap:1em;}
-.cal-phase{display:flex;flex-direction:column;gap:0.2em;border-left:1px solid #E0E0DA;padding-left:1em;}
+.cal-phases-list{display:flex;flex-direction:column;flex:1;min-height:0;justify-content:space-evenly;gap:0.7em;}
+.cal-phase{display:flex;flex-direction:column;gap:0.15em;border-left:1px solid #E0E0DA;padding-left:1em;}
 .cal-phase-n{font-family:'Segoe UI',sans-serif;font-size:0.45em;letter-spacing:0.22em;color:#888;font-weight:400;text-transform:uppercase;}
-.cal-phase-t{font-family:'Segoe UI',sans-serif;font-size:0.92em;font-weight:700;color:#1A1A1A;letter-spacing:0.02em;line-height:1;margin-top:0.2em;text-transform:uppercase;}
-.cal-phase-meta{display:flex;align-items:center;gap:0.8em;font-family:'Segoe UI',sans-serif;font-size:0.44em;letter-spacing:0.14em;color:#404040;font-weight:500;margin-top:0.5em;text-transform:uppercase;}
+.cal-phase-t{font-family:'Segoe UI',sans-serif;font-size:0.92em;font-weight:700;color:#1A1A1A;letter-spacing:0.02em;line-height:1;margin-top:0.15em;text-transform:uppercase;}
+.cal-phase-meta{display:flex;align-items:center;gap:0.8em;font-family:'Segoe UI',sans-serif;font-size:0.44em;letter-spacing:0.14em;color:#404040;font-weight:500;margin-top:0.35em;text-transform:uppercase;}
 .cal-phase-sep{color:#BBB;}
-.cal-phase-points{list-style:none;padding:0;margin:0.55em 0 0;display:flex;flex-direction:column;gap:0.7em;}
-.cal-phase-points li{position:relative;padding-left:1.4em;font-family:'Segoe UI',sans-serif;font-size:0.55em;color:#404040;line-height:1.55;}
+.cal-phase-points{list-style:none;padding:0;margin:0.35em 0 0;display:flex;flex-direction:column;gap:0.45em;}
+.cal-phase-points li{position:relative;padding-left:1.4em;font-family:'Segoe UI',sans-serif;font-size:0.52em;color:#404040;line-height:1.45;}
 .cal-phase-points li::before{content:'▪';position:absolute;left:0;top:-0.15em;color:#1A1A1A;font-size:0.9em;}
 
 /* Ligne basse : légende (gauche) + durée totale (droite), même hauteur */
@@ -2130,9 +2130,52 @@ window.smcCal = {
 };
 
 // Helpers dates
-function smcCalToDate(iso){if(!iso)return null;const d=new Date(iso);return isNaN(d.getTime())?null:d;}
+function smcCalToDate(iso){
+  // Parse manuel pour éviter le décalage UTC : new Date("2026-04-27") crée minuit UTC,
+  // ce qui devient la veille en heure locale Paris. On construit une Date locale.
+  if(!iso)return null;
+  const m=/^(\d{4})-(\d{1,2})-(\d{1,2})/.exec(String(iso));
+  if(!m)return null;
+  const y=parseInt(m[1]),mo=parseInt(m[2]),d=parseInt(m[3]);
+  if(!y||!mo||!d)return null;
+  return new Date(y,mo-1,d);
+}
 function smcCalIsoDay(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
-function smcCalIsBizDay(d){const w=d.getDay();return w!==0 && w!==6;}
+// Calcul de Pâques (algorithme de Meeus/Jones/Butcher) pour jours fériés mobiles
+function smcCalEaster(year){
+  const a=year%19,b=Math.floor(year/100),c=year%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m2=Math.floor((a+11*h+22*l)/451),month=Math.floor((h+l-7*m2+114)/31),day=((h+l-7*m2+114)%31)+1;
+  return new Date(year,month-1,day);
+}
+// Retourne un Set de chaînes "YYYY-MM-DD" des jours fériés français pour l'année
+const smcCalFeriesCache={};
+function smcCalFeries(year){
+  if(smcCalFeriesCache[year]) return smcCalFeriesCache[year];
+  const toKey=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  const easter=smcCalEaster(year);
+  const lundiPaques=new Date(easter);lundiPaques.setDate(easter.getDate()+1);
+  const ascension=new Date(easter);ascension.setDate(easter.getDate()+39);
+  const lundiPentecote=new Date(easter);lundiPentecote.setDate(easter.getDate()+50);
+  const set=new Set([
+    toKey(new Date(year,0,1)),   // 1er janvier
+    toKey(lundiPaques),          // Lundi de Pâques
+    toKey(new Date(year,4,1)),   // 1er mai
+    toKey(new Date(year,4,8)),   // 8 mai
+    toKey(ascension),            // Ascension
+    toKey(lundiPentecote),       // Lundi de Pentecôte
+    toKey(new Date(year,6,14)),  // 14 juillet
+    toKey(new Date(year,7,15)),  // 15 août
+    toKey(new Date(year,10,1)),  // 1er novembre
+    toKey(new Date(year,10,11)), // 11 novembre
+    toKey(new Date(year,11,25))  // 25 décembre
+  ]);
+  smcCalFeriesCache[year]=set;
+  return set;
+}
+function smcCalIsFerie(d){
+  const key=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  return smcCalFeries(d.getFullYear()).has(key);
+}
+function smcCalIsBizDay(d){const w=d.getDay();if(w===0||w===6)return false;return !smcCalIsFerie(d);}
 function smcCalNextBizDay(d){const r=new Date(d);do{r.setDate(r.getDate()+1);}while(!smcCalIsBizDay(r));return r;}
 function smcCalSameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();}
 
@@ -2207,63 +2250,69 @@ function smcCalListMonths(periods){
 }
 
 // Rendu d'un mois (table 7 cols)
-function smcCalRenderMonth(year,month,periods){
+function smcCalRenderMonth(year,month,periods,opts){
+  // opts.onlyActiveWeeks : si true, on n'affiche que les semaines contenant au moins 1 jour de phase
+  opts=opts||{};
   const monthNames=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
   const first=new Date(year,month,1);
   const daysInMonth=new Date(year,month+1,0).getDate();
   const firstDow=(first.getDay()+6)%7;
   const last=new Date(year,month,daysInMonth);
   const lastDow=(last.getDay()+6)%7;
-  // Helper : pour chaque jour du mois, détermine sa phase (-1 si hors phase) et s'il est weekend
-  const dayInfo=[];
-  for(let day=1;day<=daysInMonth;day++){
-    const d=new Date(year,month,day);
-    const ph=smcCalPhaseIndex(d,periods); // renvoie -1 pour les weekends aussi
-    const isWeekend=!smcCalIsBizDay(d);
-    dayInfo.push({day,phase:ph,isWeekend});
-  }
-  const isContigSame=(i,delta)=>{
-    const next=dayInfo[i+delta];
-    if(!next) return false;
-    if(next.phase!==dayInfo[i].phase) return false;
-    const d1=new Date(year,month,dayInfo[i].day);
-    const d2=new Date(year,month,dayInfo[i+delta].day);
-    const w1=Math.floor((d1.getDate()+firstDow-1)/7);
-    const w2=Math.floor((d2.getDate()+firstDow-1)/7);
-    return w1===w2;
-  };
-  let cells='';
-  // Jours hors-mois avant (toujours en gris clair)
+  // Tableau complet de cellules (incluant les jours hors-mois avant/après)
+  const totalCells=firstDow+daysInMonth+(6-lastDow);
+  const allCells=[];
+  // Jours hors-mois avant
   for(let i=0;i<firstDow;i++){
     const d=new Date(year,month,1-firstDow+i);
-    cells+='<div class="cal-day off">'+d.getDate()+'</div>';
+    allCells.push({date:d,inMonth:false});
   }
   // Jours du mois
-  for(let i=0;i<dayInfo.length;i++){
-    const {day,phase,isWeekend}=dayInfo[i];
+  for(let day=1;day<=daysInMonth;day++){
+    const d=new Date(year,month,day);
+    allCells.push({date:d,inMonth:true});
+  }
+  // Jours hors-mois après
+  for(let i=0;i<(6-lastDow);i++){
+    const d=new Date(year,month,daysInMonth+1+i);
+    allCells.push({date:d,inMonth:false});
+  }
+  // Pour chaque cellule, calculer phase et weekend
+  allCells.forEach(c=>{
+    c.phase=smcCalPhaseIndex(c.date,periods);
+    c.isWeekend=!smcCalIsBizDay(c.date);
+  });
+  // Découpage en semaines (lignes de 7)
+  const weeks=[];
+  for(let i=0;i<allCells.length;i+=7) weeks.push(allCells.slice(i,i+7));
+  // Filtre : si onlyActiveWeeks, on ne garde que les semaines avec au moins 1 cellule en phase (0/1/2)
+  const keptWeeks = opts.onlyActiveWeeks
+    ? weeks.filter(w => w.some(c => c.phase >= 0))
+    : weeks;
+  if (keptWeeks.length === 0) return ''; // aucune semaine à afficher, pas de mois
+  // Pour les pilules phase 2 : un jour est start/end selon la contiguïté DANS SA SEMAINE
+  const cellHtml = (cell, idxInWeek, week) => {
+    const {date,phase,isWeekend}=cell;
     let cls='cal-day';
     if(phase===-1){
-      // Jour ouvré hors phase : foncé (pas de classe). Weekend : gris clair (.off)
-      if(isWeekend) cls+=' off';
+      if(isWeekend||!cell.inMonth) cls+=' off';
     } else if(phase===0){
       cls+=' ph1';
     } else if(phase===1){
       cls+=' ph2';
-      const hasPrev=isContigSame(i,-1);
-      const hasNext=isContigSame(i,+1);
+      const prev = idxInWeek>0 ? week[idxInWeek-1] : null;
+      const next = idxInWeek<6 ? week[idxInWeek+1] : null;
+      const hasPrev = prev && prev.phase===1;
+      const hasNext = next && next.phase===1;
       if(!hasPrev && !hasNext) cls+=' ph2-solo';
       else if(!hasPrev) cls+=' ph2-start';
       else if(!hasNext) cls+=' ph2-end';
     } else if(phase===2){
       cls+=' ph3';
     }
-    cells+='<div class="'+cls+'">'+day+'</div>';
-  }
-  // Jours hors-mois après (toujours en gris clair)
-  for(let i=0;i<(6-lastDow);i++){
-    const d=new Date(year,month,daysInMonth+1+i);
-    cells+='<div class="cal-day off">'+d.getDate()+'</div>';
-  }
+    return '<div class="'+cls+'">'+date.getDate()+'</div>';
+  };
+  const cells = keptWeeks.map(w => w.map((c,i) => cellHtml(c,i,w)).join('')).join('');
   return ''+
     '<div class="cal-month">'+
       '<div class="cal-month-title">'+monthNames[month]+' '+year+'</div>'+
@@ -2272,11 +2321,28 @@ function smcCalRenderMonth(year,month,periods){
     '</div>';
 }
 
+// Détermine le mois "principal" (celui avec le plus de jours de phase)
+function smcCalMainMonthIdx(months,periods){
+  let best=0,bestCount=-1;
+  months.forEach((m,i)=>{
+    const first=new Date(m.year,m.month,1);
+    const daysInMonth=new Date(m.year,m.month+1,0).getDate();
+    let count=0;
+    for(let day=1;day<=daysInMonth;day++){
+      const d=new Date(m.year,m.month,day);
+      if(smcCalPhaseIndex(d,periods)>=0) count++;
+    }
+    if(count>bestCount){bestCount=count;best=i;}
+  });
+  return best;
+}
+
 function smcCalRenderSlide(){
   const d=window.smcCal;
   const periods=smcCalPhasePeriods();
   const months=smcCalListMonths(periods);
-  const monthsHtml=months.map(m=>smcCalRenderMonth(m.year,m.month,periods)).join('');
+  const mainIdx=smcCalMainMonthIdx(months,periods);
+  const monthsHtml=months.map((m,i)=>smcCalRenderMonth(m.year,m.month,periods,{onlyActiveWeeks: i!==mainIdx})).join('');
   // Phases détaillées (droite) avec bullets (points[] = liste à puces)
   const phasesHtml=(d.phases||[]).map((ph,i)=>{
     const per=periods[i];
