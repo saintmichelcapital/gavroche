@@ -78,6 +78,19 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
+// Bibliotheque Perimetre des diligences (objectifs + diligences extraits des LoM EY SaT 2022)
+app.get('/api/bibliotheque-perimetre', requireAuth, (req, res) => {
+  try {
+    const fs = require('fs');
+    const biblioPath = path.join(__dirname, '../data/bibliotheque_perimetre.json');
+    const raw = fs.readFileSync(biblioPath, 'utf8');
+    const data = JSON.parse(raw);
+    res.json({ success: true, data });
+  } catch (e) {
+    res.status(500).json({ success: false, error: 'Bibliotheque indisponible.' });
+  }
+});
+
 app.post('/api/generate', requireAuth, async (req, res) => {
   try {
     const { entite, typeMission, typeDD, commentaires, complement } = req.body;

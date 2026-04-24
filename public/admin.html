@@ -571,6 +571,67 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .section-head-titre{font-family:var(--font-titre);font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--noir);margin-bottom:6px;}
 .section-head-desc{font-size:13px;color:var(--gris-clair);line-height:1.6;}
 
+/* ═══ Module Perimetre des diligences ═══ */
+.perim-wrap{padding:32px 48px 80px 48px;max-width:1100px;margin:0 auto;}
+.perim-filters{display:flex;gap:8px;margin-bottom:24px;align-items:center;flex-wrap:wrap;}
+.perim-filter{background:var(--blanc);border:1px solid var(--gris-tres-clair);padding:7px 14px;font-family:var(--font-titre);font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gris-moyen);cursor:pointer;transition:all 0.15s;}
+.perim-filter:hover{border-color:var(--noir);color:var(--noir);}
+.perim-filter.actif{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+.perim-search{flex:1;min-width:240px;padding:7px 12px;border:1px solid var(--gris-tres-clair);font-family:'Segoe UI',sans-serif;font-size:12px;color:var(--noir);}
+.perim-search:focus{outline:none;border-color:var(--noir);}
+.perim-count{font-family:var(--font-titre);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gris-moyen);margin-left:auto;}
+.perim-count strong{color:var(--noir);}
+
+.perim-bloc{border:1px solid var(--gris-tres-clair);margin-bottom:16px;background:var(--blanc);}
+.perim-bloc-h{padding:14px 20px;border-bottom:1px solid var(--gris-tres-clair);display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;}
+.perim-bloc-h:hover{background:var(--gris-surface);}
+.perim-bloc-caret{font-size:10px;color:var(--gris-moyen);transition:transform 0.15s;display:inline-block;width:12px;}
+.perim-bloc.open .perim-bloc-caret{transform:rotate(90deg);}
+.perim-bloc-t{font-family:var(--font-titre);font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--noir);flex:1;}
+.perim-bloc-stat{font-family:var(--font-titre);font-size:10px;letter-spacing:0.12em;color:var(--gris-moyen);}
+.perim-bloc-body{display:none;padding:8px 0;}
+.perim-bloc.open .perim-bloc-body{display:block;}
+
+.perim-obj{border-top:1px solid var(--gris-tres-clair);padding:0;}
+.perim-obj:first-child{border-top:none;}
+.perim-obj-h{display:flex;align-items:flex-start;gap:10px;padding:14px 20px;cursor:pointer;user-select:none;}
+.perim-obj-h:hover{background:var(--gris-surface);}
+.perim-obj-check{margin-top:3px;accent-color:var(--noir);cursor:pointer;width:14px;height:14px;flex-shrink:0;}
+.perim-obj-caret{color:var(--gris-moyen);font-size:10px;flex-shrink:0;margin-top:3px;transition:transform 0.15s;width:10px;}
+.perim-obj.open .perim-obj-caret{transform:rotate(90deg);}
+.perim-obj-main{flex:1;min-width:0;}
+.perim-obj-titre{font-size:13px;font-weight:700;color:var(--noir);line-height:1.4;}
+.perim-obj-titre em{font-style:normal;font-weight:400;color:var(--gris-clair);font-size:11px;margin-left:8px;}
+.perim-obj-finalite{font-size:11px;color:var(--gris-moyen);font-style:italic;margin-top:4px;line-height:1.5;}
+.perim-tag{font-family:var(--font-titre);font-size:8px;letter-spacing:0.12em;text-transform:uppercase;padding:2px 8px;border:1px solid var(--gris-tres-clair);color:var(--gris-moyen);flex-shrink:0;margin-top:2px;}
+.perim-tag.additionnel{background:#f7f0e7;border-color:#e0cfae;color:#8a6d3b;}
+.perim-tag.custom{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+.perim-obj-body{display:none;padding:0 20px 16px 44px;border-top:1px dashed var(--gris-tres-clair);background:var(--gris-surface);}
+.perim-obj.open .perim-obj-body{display:block;}
+.perim-dil-list{margin:12px 0;}
+.perim-dil{display:flex;align-items:flex-start;gap:8px;padding:6px 0;font-size:12px;line-height:1.5;color:var(--noir);}
+.perim-dil input[type=checkbox]{margin-top:3px;accent-color:var(--noir);cursor:pointer;width:13px;height:13px;flex-shrink:0;}
+.perim-dil-text{flex:1;}
+.perim-dil-text[contenteditable=true]{outline:1px dashed transparent;padding:2px 4px;border-radius:2px;}
+.perim-dil-text[contenteditable=true]:hover{outline-color:var(--gris-tres-clair);background:var(--blanc);}
+.perim-dil-text[contenteditable=true]:focus{outline-color:var(--noir);background:var(--blanc);}
+.perim-dil-del{background:none;border:none;color:var(--gris-clair);cursor:pointer;font-size:14px;padding:0 4px;line-height:1;}
+.perim-dil-del:hover{color:#b33;}
+.perim-add-dil{background:none;border:1px dashed var(--gris-tres-clair);color:var(--gris-moyen);padding:6px 12px;font-family:var(--font-titre);font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;margin-top:6px;}
+.perim-add-dil:hover{border-color:var(--noir);color:var(--noir);border-style:solid;}
+.perim-add-obj{display:block;width:100%;background:none;border:1px dashed var(--gris-tres-clair);color:var(--gris-moyen);padding:12px;font-family:var(--font-titre);font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;margin-top:4px;}
+.perim-add-obj:hover{border-color:var(--noir);color:var(--noir);border-style:solid;}
+
+.perim-custom-form{padding:14px 20px;background:var(--gris-surface);border-top:1px dashed var(--gris-tres-clair);}
+.perim-custom-form input,.perim-custom-form textarea{width:100%;padding:8px 10px;border:1px solid var(--gris-tres-clair);background:var(--blanc);font-family:'Segoe UI',sans-serif;font-size:12px;margin-bottom:8px;color:var(--noir);box-sizing:border-box;}
+.perim-custom-form input:focus,.perim-custom-form textarea:focus{outline:none;border-color:var(--noir);}
+.perim-custom-form textarea{resize:vertical;min-height:60px;line-height:1.5;}
+.perim-custom-actions{display:flex;gap:8px;}
+.perim-custom-btn{background:var(--noir);color:var(--blanc);border:none;padding:7px 14px;font-family:var(--font-titre);font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;}
+.perim-custom-btn.sec{background:var(--blanc);color:var(--noir);border:1px solid var(--gris-tres-clair);}
+
+.perim-loading{text-align:center;padding:60px;color:var(--gris-moyen);font-size:12px;}
+.perim-empty{text-align:center;padding:40px;color:var(--gris-clair);font-size:12px;font-style:italic;}
 </style>
 </head>
 <body>
@@ -645,8 +706,8 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 <!-- ETAPE 1 -->
 <div class="page" id="page-lead-sapiens-1">
   <div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><button class="bc" onclick="ap('proposition')">Proposition</button><span class="bc-sep">›</span><span class="bc actif">Lead sapiens</span></div>
-  <div class="stepper"><button class="stepper-item actif"><div class="stepper-num">1</div><div class="stepper-label">Identification de l'entite</div></button><button class="stepper-item inactif"><div class="stepper-num">2</div><div class="stepper-label">Elements de la propale</div></button><button class="stepper-item inactif"><div class="stepper-num">3</div><div class="stepper-label">Presentation & edition</div></button></div>
-  <div class="admin-header"><div class="admin-titre">Identification de <em>l'entite</em></div><div class="admin-sous-titre">Les champs marques * sont obligatoires.</div></div>
+  <div class="stepper"><button class="stepper-item actif"><div class="stepper-num">1</div><div class="stepper-label">Identification de la cible</div></button><button class="stepper-item inactif"><div class="stepper-num">2</div><div class="stepper-label">Parametres cles</div></button><button class="stepper-item inactif"><div class="stepper-num">3</div><div class="stepper-label">Perimetre des diligences</div></button><button class="stepper-item inactif"><div class="stepper-num">4</div><div class="stepper-label">Presentation & edition</div></button></div>
+  <div class="admin-header"><div class="admin-titre">Identification de <em>la cible</em></div><div class="admin-sous-titre">Les champs marques * sont obligatoires.</div></div>
   <div class="fw">
     <div class="fs"><div class="fs-t"><span class="fs-n">01</span>Type de structure *</div><div class="tg"><button class="to on" id="btn-mono" onclick="setTS('mono')">Mono-entite</button><button class="to" id="btn-multi" onclick="setTS('multi')">Multi-entite</button></div></div>
     <div class="fs" id="bloc-mono">
@@ -684,8 +745,8 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 <!-- ETAPE 2 -->
 <div class="page" id="page-lead-sapiens-2">
   <div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><button class="bc" onclick="ap('proposition')">Proposition</button><span class="bc-sep">›</span><span class="bc actif">Lead sapiens</span></div>
-  <div class="stepper"><button class="stepper-item complete" onclick="ap('lead-sapiens-1')"><div class="stepper-num">✓</div><div class="stepper-label">Identification de l'entite</div></button><button class="stepper-item actif"><div class="stepper-num">2</div><div class="stepper-label">Elements de la propale</div></button><button class="stepper-item inactif"><div class="stepper-num">3</div><div class="stepper-label">Presentation & edition</div></button></div>
-  <div class="admin-header"><div class="admin-titre">Elements de la <em>propale</em></div><div class="admin-sous-titre">Les champs marques * sont obligatoires.</div></div>
+  <div class="stepper"><button class="stepper-item complete" onclick="ap('lead-sapiens-1')"><div class="stepper-num">✓</div><div class="stepper-label">Identification de la cible</div></button><button class="stepper-item actif"><div class="stepper-num">2</div><div class="stepper-label">Parametres cles</div></button><button class="stepper-item inactif"><div class="stepper-num">3</div><div class="stepper-label">Perimetre des diligences</div></button><button class="stepper-item inactif"><div class="stepper-num">4</div><div class="stepper-label">Presentation & edition</div></button></div>
+  <div class="admin-header"><div class="admin-titre">Parametres <em>cles</em></div><div class="admin-sous-titre">Les champs marques * sont obligatoires.</div></div>
   <div class="fw">
     <div class="fs"><div class="fs-t"><span class="fs-n">01</span>Type de mission *</div><div class="tg"><button class="to on" id="btn-bsdd" onclick="stg('btn-bsdd','btn-vdd')">BSDD — Buy-Side</button><button class="to" id="btn-vdd" onclick="stg('btn-vdd','btn-bsdd')">VDD — Sell-Side</button></div></div>
     <div class="fs"><div class="fs-t"><span class="fs-n">02</span>Type de DD *</div><div class="tg"><button class="to on" id="btn-std" onclick="stg('btn-std','btn-fla')">Standard DD</button><button class="to" id="btn-fla" onclick="stg('btn-fla','btn-std')">Flash DD</button></div></div>
@@ -710,18 +771,43 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
       <div class="tirl" id="tirl"></div><button class="badd" onclick="addTir()">+ Ajouter un tiroir facultatif</button>
     </div>
     <div class="fs"><div class="fs-t"><span class="fs-n">07</span>Commentaires <span style="font-weight:400;color:var(--gris-clair);font-size:8px;letter-spacing:0.14em;border:1px solid var(--gris-tres-clair);padding:2px 6px;">Facultatif</span></div><textarea class="fta" id="comm" placeholder="Contexte particulier, secteur si non identifie, fourchette de CA…"></textarea></div>
-    <div class="fa"><button class="bret" onclick="ap('lead-sapiens-1')">← Etape precedente</button><button class="bsuiv" onclick="val2()">Generer la propale →</button></div>
+    <div class="fa"><button class="bret" onclick="ap('lead-sapiens-1')">← Etape precedente</button><button class="bsuiv" onclick="val2()">Etape suivante →</button></div>
   </div>
   <div class="af"><div class="aft">Gavroche</div></div>
 </div>
 
-<!-- ETAPE 3 -->
+<!-- ETAPE 3 : PERIMETRE DES DILIGENCES -->
+<div class="page" id="page-lead-sapiens-perimetre">
+  <div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><button class="bc" onclick="ap('proposition')">Proposition</button><span class="bc-sep">›</span><span class="bc actif">Lead sapiens</span></div>
+  <div class="stepper">
+    <button class="stepper-item complete" onclick="ap('lead-sapiens-1')"><div class="stepper-num">✓</div><div class="stepper-label">Identification de la cible</div></button>
+    <button class="stepper-item complete" onclick="ap('lead-sapiens-2')"><div class="stepper-num">✓</div><div class="stepper-label">Parametres cles</div></button>
+    <button class="stepper-item actif"><div class="stepper-num">3</div><div class="stepper-label">Perimetre des diligences</div></button>
+    <button class="stepper-item inactif"><div class="stepper-num">4</div><div class="stepper-label">Presentation & edition</div></button>
+  </div>
+  <div class="admin-header"><div class="admin-titre">Perimetre des <em>diligences</em></div><div class="admin-sous-titre">Selectionnez les objectifs pertinents pour la mission, puis les diligences associees. Vous pouvez ajouter des objectifs ou des diligences sur-mesure.</div></div>
+  <div class="perim-wrap">
+    <div class="perim-filters">
+      <button class="perim-filter actif" data-perim-filter="tous" onclick="smcPerimSetFilter('tous')">Tous</button>
+      <button class="perim-filter" data-perim-filter="standard" onclick="smcPerimSetFilter('standard')">Standards</button>
+      <button class="perim-filter" data-perim-filter="additionnel" onclick="smcPerimSetFilter('additionnel')">Additionnels</button>
+      <input class="perim-search" type="text" id="perim-search" placeholder="Rechercher un objectif ou une diligence…" oninput="smcPerimRender()">
+      <div class="perim-count" id="perim-count"><strong id="perim-count-sel">0</strong> objectif(s) &middot; <strong id="perim-count-dil">0</strong> diligence(s) selectionnes</div>
+    </div>
+    <div id="perim-content"><div class="perim-loading">Chargement de la bibliotheque…</div></div>
+    <div class="fa"><button class="bret" onclick="ap('lead-sapiens-2')">← Etape precedente</button><button class="bsuiv" onclick="valPerim()">Generer la propale →</button></div>
+  </div>
+  <div class="af"><div class="aft">Gavroche</div></div>
+</div>
+
+<!-- ETAPE 4 -->
 <div class="page" id="page-lead-sapiens-3">
   <div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><button class="bc" onclick="ap('proposition')">Proposition</button><span class="bc-sep">›</span><span class="bc actif" id="bc-propale-nom">Lead sapiens</span></div>
   <div class="stepper">
-    <button class="stepper-item complete" onclick="ap('lead-sapiens-1')"><div class="stepper-num">✓</div><div class="stepper-label">Identification de l'entite</div></button>
-    <button class="stepper-item complete" onclick="ap('lead-sapiens-2')"><div class="stepper-num">✓</div><div class="stepper-label">Elements de la propale</div></button>
-    <button class="stepper-item actif"><div class="stepper-num">3</div><div class="stepper-label">Presentation & edition</div></button>
+    <button class="stepper-item complete" onclick="ap('lead-sapiens-1')"><div class="stepper-num">✓</div><div class="stepper-label">Identification de la cible</div></button>
+    <button class="stepper-item complete" onclick="ap('lead-sapiens-2')"><div class="stepper-num">✓</div><div class="stepper-label">Parametres cles</div></button>
+    <button class="stepper-item complete" onclick="ap('lead-sapiens-perimetre')"><div class="stepper-num">✓</div><div class="stepper-label">Perimetre des diligences</div></button>
+    <button class="stepper-item actif"><div class="stepper-num">4</div><div class="stepper-label">Presentation & edition</div></button>
     <div style="flex:1;"></div>
     <div style="display:flex;align-items:center;gap:8px;padding:0 24px;">
       <button class="cbtn" style="background:rgba(139,26,26,0.12);border-color:rgba(139,26,26,0.3);color:#8b1a1a;padding:8px 16px;" onclick="marquerStatut('perdue')">Marquer comme perdue</button>
@@ -1400,7 +1486,7 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 if (!sessionStorage.getItem('gavroche_token')) { window.location.href = '/index.html'; }
 
 // Navigation
-function ap(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('actif'));const c=document.getElementById('page-'+id);if(c){c.classList.add('actif');window.scrollTo(0,0);}}
+function ap(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('actif'));const c=document.getElementById('page-'+id);if(c){c.classList.add('actif');window.scrollTo(0,0);}if(id==='lead-sapiens-perimetre'&&typeof smcPerimLoad==='function'){smcPerimLoad();}}
 function stg(a,b){document.getElementById(a).classList.add('on');document.getElementById(b).classList.remove('on');}
 
 // Mono/Multi
@@ -2867,20 +2953,306 @@ function saveSlidesData() {
   }
 }
 
-// Hook sur val2 pour sauvegarder apres generation
+// Etape 2 : valider les parametres cles et router vers Perimetre des diligences
 async function val2() {
   if (!document.querySelector('#exl .exr')) { alert('Veuillez ajouter au moins un exercice.'); return; }
   if (!document.getElementById('hon-mt').value) { alert('Veuillez saisir le montant des honoraires.'); return; }
   // Lire les donnees du formulaire maintenant (avant navigation)
   dF = colData();
-  // Enregistrer la propale en-cours immediatement pour qu'elle apparaisse dans la liste
+  // Enregistrer la propale en-cours (etat intermediaire)
+  sauvegarderPropale();
+  // Naviguer vers le module Perimetre des diligences
+  ap('lead-sapiens-perimetre');
+  // Charger la bibliotheque si pas encore fait
+  if (typeof smcPerimLoad === 'function') smcPerimLoad();
+}
+
+// Etape 3 : valider le perimetre des diligences et declencher la generation
+async function valPerim() {
+  // Recuperer la selection (objectifs+diligences coches + ajouts libres)
+  if (typeof smcPerimCollect === 'function') {
+    dF.perimetre = smcPerimCollect();
+  }
   sauvegarderPropale();
   ap('lead-sapiens-3');
   await genPropale(true);
-  // Mettre a jour les slides sauvegardees apres generation
   saveSlidesData();
   refreshPropalesTable();
   refreshDashboard();
+}
+
+// ═══════════════════════════════════════════════════
+// MODULE PERIMETRE DES DILIGENCES (Etape 3)
+// ═══════════════════════════════════════════════════
+
+window.smcPerimData = null;         // bibliotheque chargee depuis /api/bibliotheque-perimetre
+window.smcPerimCustoms = [];        // objectifs ajoutes manuellement par l'utilisateur
+window.smcPerimSel = {};            // etat de selection par objId : {selected, dils:{i:true}, extraDils:[{text,selected}]}
+window.smcPerimFilter = 'tous';
+window.smcPerimOpen = { blocs: {}, objs: {} };
+
+async function smcPerimLoad(){
+  const el = document.getElementById('perim-content');
+  if (window.smcPerimData && Array.isArray(window.smcPerimData)) { smcPerimRender(); return; }
+  if (el) el.innerHTML = '<div class="perim-loading">Chargement de la bibliotheque…</div>';
+  try {
+    const token = sessionStorage.getItem('gavroche_token') || '';
+    const r = await fetch('/api/bibliotheque-perimetre', { headers: { 'Authorization': 'Bearer '+token } });
+    const j = await r.json();
+    if (!j || !j.success) throw new Error(j && j.error ? j.error : 'Reponse invalide');
+    window.smcPerimData = j.data || [];
+    smcPerimRender();
+  } catch(e) {
+    if (el) el.innerHTML = '<div class="perim-empty">Impossible de charger la bibliotheque ('+(e.message||'erreur')+'). Verifiez votre session.</div>';
+  }
+}
+
+function smcPerimSetFilter(f){
+  window.smcPerimFilter = f;
+  document.querySelectorAll('.perim-filter').forEach(b => b.classList.toggle('actif', b.dataset.perimFilter === f));
+  smcPerimRender();
+}
+
+function smcPerimRender(){
+  if (!window.smcPerimData) return;
+  const el = document.getElementById('perim-content');
+  if (!el) return;
+  const q = (document.getElementById('perim-search').value||'').trim().toLowerCase();
+  const f = window.smcPerimFilter || 'tous';
+
+  // Filtrer + grouper par bloc
+  const grouped = {};
+  window.smcPerimData.forEach(o => {
+    if (f==='standard' && o.tag!=='standard') return;
+    if (f==='additionnel' && o.tag!=='additionnel') return;
+    if (q) {
+      const blob = (o.objectif_titre+' '+(o.objectif_finalite||'')+' '+((o.diligences||[]).join(' '))).toLowerCase();
+      if (!blob.includes(q)) return;
+    }
+    const k = o.bloc || '(non rattache)';
+    grouped[k] = grouped[k] || [];
+    grouped[k].push(o);
+  });
+  (window.smcPerimCustoms||[]).forEach(c => {
+    const k = c.bloc || '(non rattache)';
+    grouped[k] = grouped[k] || [];
+    grouped[k].push(Object.assign({}, c, { _custom: true }));
+  });
+
+  const blocKeys = Object.keys(grouped).sort();
+  if (!blocKeys.length) {
+    el.innerHTML = '<div class="perim-empty">Aucun objectif ne correspond aux filtres.</div>'
+      + '<button class="perim-add-obj" style="margin-top:16px;" onclick="smcPerimAddCustomObj(null)">+ Ajouter un objectif sur-mesure</button>';
+    smcPerimCountUpdate();
+    return;
+  }
+
+  let html = '';
+  blocKeys.forEach(k => {
+    const objs = grouped[k];
+    const nSel = objs.filter(o => (window.smcPerimSel[o.id]||{}).selected).length;
+    const isOpen = (window.smcPerimOpen.blocs[k] !== false);
+    html += '<div class="perim-bloc '+(isOpen?'open':'')+'" data-bloc="'+smcEsc(k)+'">';
+    html += '<div class="perim-bloc-h" onclick="smcPerimToggleBloc(this)">';
+    html +=   '<span class="perim-bloc-caret">▶</span>';
+    html +=   '<span class="perim-bloc-t">'+smcEsc(k)+'</span>';
+    html +=   '<span class="perim-bloc-stat">'+nSel+' / '+objs.length+'</span>';
+    html += '</div>';
+    html += '<div class="perim-bloc-body">';
+    objs.forEach(o => {
+      const sel = window.smcPerimSel[o.id] || { selected:false, dils:{}, extraDils:[] };
+      const isObjOpen = (window.smcPerimOpen.objs[o.id] === true);
+      const tag = o._custom ? 'custom' : (o.tag==='additionnel' ? 'additionnel' : 'standard');
+      const oidEsc = smcEsc(o.id).replace(/'/g,"\\'");
+      html += '<div class="perim-obj '+(isObjOpen?'open':'')+'" data-obj="'+smcEsc(o.id)+'">';
+      html +=   '<div class="perim-obj-h">';
+      html +=     '<input type="checkbox" class="perim-obj-check" '+(sel.selected?'checked':'')+' onchange="smcPerimToggleObj(\''+oidEsc+'\', this.checked)" onclick="event.stopPropagation()">';
+      html +=     '<span class="perim-obj-caret" onclick="smcPerimToggleObjOpen(this.parentElement.parentElement)">▶</span>';
+      html +=     '<div class="perim-obj-main" onclick="smcPerimToggleObjOpen(this.parentElement.parentElement)">';
+      html +=       '<div class="perim-obj-titre">'+smcEsc(o.objectif_titre);
+      if (o.objectif_finalite) {
+        const fShort = o.objectif_finalite.length > 140 ? o.objectif_finalite.substring(0,140)+'…' : o.objectif_finalite;
+        html +=       '<em>«&nbsp;'+smcEsc(fShort)+'&nbsp;»</em>';
+      }
+      html +=       '</div>';
+      html +=     '</div>';
+      if (tag==='additionnel') html += '<span class="perim-tag additionnel">Additionnel</span>';
+      else if (tag==='custom') html += '<span class="perim-tag custom">Custom</span>';
+      html +=   '</div>';
+      html +=   '<div class="perim-obj-body">';
+      if (o.objectif_finalite) {
+        html += '<div style="padding-top:12px;font-size:11px;color:var(--gris-moyen);font-style:italic;line-height:1.5;">«&nbsp;'+smcEsc(o.objectif_finalite)+'&nbsp;»</div>';
+      }
+      html +=     '<div class="perim-dil-list">';
+      (o.diligences||[]).forEach((d,i) => {
+        const dsel = !!(sel.dils && sel.dils[i]);
+        html +=     '<label class="perim-dil">';
+        html +=       '<input type="checkbox" '+(dsel?'checked':'')+' onchange="smcPerimToggleDil(\''+oidEsc+'\','+i+',this.checked)">';
+        html +=       '<span class="perim-dil-text">'+smcEsc(d)+'</span>';
+        html +=     '</label>';
+      });
+      (sel.extraDils||[]).forEach((d, i) => {
+        const dchecked = (d.selected !== false);
+        html +=     '<label class="perim-dil">';
+        html +=       '<input type="checkbox" '+(dchecked?'checked':'')+' onchange="smcPerimToggleExtraDil(\''+oidEsc+'\','+i+',this.checked)">';
+        html +=       '<span class="perim-dil-text" contenteditable="true" oninput="smcPerimEditExtraDil(\''+oidEsc+'\','+i+',this.textContent)">'+smcEsc(d.text)+'</span>';
+        html +=       '<button class="perim-dil-del" onclick="smcPerimDelExtraDil(\''+oidEsc+'\','+i+')">×</button>';
+        html +=     '</label>';
+      });
+      html +=     '</div>';
+      html +=     '<button class="perim-add-dil" onclick="smcPerimAddExtraDil(\''+oidEsc+'\')">+ Ajouter une diligence sur-mesure</button>';
+      html +=   '</div>';
+      html += '</div>';
+    });
+    const blocKeyEsc = smcEsc(k).replace(/'/g,"\\'");
+    html += '<button class="perim-add-obj" onclick="smcPerimAddCustomObj(\''+blocKeyEsc+'\')">+ Ajouter un objectif dans ce bloc</button>';
+    html += '</div>';
+    html += '</div>';
+  });
+  html += '<button class="perim-add-obj" style="margin-top:20px;border-style:solid;" onclick="smcPerimAddCustomObj(null)">+ Ajouter un objectif dans un nouveau bloc</button>';
+  el.innerHTML = html;
+  smcPerimCountUpdate();
+}
+
+function smcPerimCountUpdate(){
+  let nObj = 0, nDil = 0;
+  Object.keys(window.smcPerimSel).forEach(id => {
+    const s = window.smcPerimSel[id];
+    if (!s) return;
+    if (s.selected) nObj++;
+    Object.keys(s.dils||{}).forEach(k => { if (s.dils[k]) nDil++; });
+    (s.extraDils||[]).forEach(d => { if (d.selected !== false && (d.text||'').trim()) nDil++; });
+  });
+  const elO = document.getElementById('perim-count-sel');
+  const elD = document.getElementById('perim-count-dil');
+  if (elO) elO.textContent = nObj;
+  if (elD) elD.textContent = nDil;
+}
+
+function smcPerimToggleBloc(headerEl){
+  const bloc = headerEl.closest('.perim-bloc');
+  if (!bloc) return;
+  const key = bloc.dataset.bloc;
+  const isOpen = bloc.classList.toggle('open');
+  window.smcPerimOpen.blocs[key] = isOpen;
+}
+
+function smcPerimToggleObjOpen(objEl){
+  if (!objEl) return;
+  const id = objEl.dataset.obj;
+  const isOpen = objEl.classList.toggle('open');
+  window.smcPerimOpen.objs[id] = isOpen;
+}
+
+function smcPerimToggleObj(id, checked){
+  window.smcPerimSel[id] = window.smcPerimSel[id] || { selected:false, dils:{}, extraDils:[] };
+  window.smcPerimSel[id].selected = checked;
+  // Premier cochage : auto-coche toutes les diligences standards de l'objectif
+  if (checked) {
+    const obj = (window.smcPerimData||[]).find(o => o.id === id) || (window.smcPerimCustoms||[]).find(o => o.id === id);
+    if (obj && obj.diligences) {
+      const cur = window.smcPerimSel[id].dils || {};
+      const alreadyHas = Object.values(cur).some(v => v);
+      if (!alreadyHas) {
+        obj.diligences.forEach((_,i) => { cur[i] = true; });
+        window.smcPerimSel[id].dils = cur;
+      }
+    }
+  }
+  smcPerimRender();
+}
+
+function smcPerimToggleDil(objId, i, checked){
+  window.smcPerimSel[objId] = window.smcPerimSel[objId] || { selected:false, dils:{}, extraDils:[] };
+  window.smcPerimSel[objId].dils = window.smcPerimSel[objId].dils || {};
+  window.smcPerimSel[objId].dils[i] = checked;
+  if (checked && !window.smcPerimSel[objId].selected) {
+    window.smcPerimSel[objId].selected = true;
+    smcPerimRender();
+    return;
+  }
+  smcPerimCountUpdate();
+  // Mettre a jour le compteur du bloc sans re-render complet
+  const objEl = document.querySelector('[data-obj="'+objId+'"]');
+  if (objEl) {
+    const blocEl = objEl.closest('.perim-bloc');
+    if (blocEl) {
+      const stat = blocEl.querySelector('.perim-bloc-stat');
+      if (stat) {
+        const total = blocEl.querySelectorAll('.perim-obj').length;
+        const nSel = blocEl.querySelectorAll('.perim-obj-check:checked').length;
+        stat.textContent = nSel + ' / ' + total;
+      }
+    }
+  }
+}
+
+function smcPerimToggleExtraDil(objId, i, checked){
+  const s = window.smcPerimSel[objId];
+  if (!s || !s.extraDils || !s.extraDils[i]) return;
+  s.extraDils[i].selected = checked;
+  smcPerimCountUpdate();
+}
+
+function smcPerimEditExtraDil(objId, i, text){
+  const s = window.smcPerimSel[objId];
+  if (!s || !s.extraDils || !s.extraDils[i]) return;
+  s.extraDils[i].text = text;
+}
+
+function smcPerimAddExtraDil(objId){
+  window.smcPerimSel[objId] = window.smcPerimSel[objId] || { selected:true, dils:{}, extraDils:[] };
+  window.smcPerimSel[objId].extraDils.push({ text: 'Nouvelle diligence…', selected: true });
+  if (!window.smcPerimSel[objId].selected) window.smcPerimSel[objId].selected = true;
+  window.smcPerimOpen.objs[objId] = true;
+  smcPerimRender();
+}
+
+function smcPerimDelExtraDil(objId, i){
+  const s = window.smcPerimSel[objId];
+  if (!s || !s.extraDils) return;
+  s.extraDils.splice(i, 1);
+  smcPerimRender();
+}
+
+function smcPerimAddCustomObj(blocKey){
+  const bloc = blocKey || prompt('Nom du bloc thematique :', 'Nouveau bloc');
+  if (!bloc) return;
+  const titre = prompt('Titre de l\'objectif :', '');
+  if (!titre) return;
+  const finalite = prompt('Finalite (apparaitra entre guillemets, optionnel) :', '') || '';
+  const id = 'custom_' + Date.now() + '_' + Math.floor(Math.random()*1000);
+  window.smcPerimCustoms.push({
+    id: id, bloc: bloc, objectif_titre: titre, objectif_finalite: finalite,
+    objectif_contexte: '', diligences: [], sources: ['Custom'], types_mission: [], tag: 'custom'
+  });
+  window.smcPerimSel[id] = { selected: true, dils: {}, extraDils: [] };
+  window.smcPerimOpen.blocs[bloc] = true;
+  window.smcPerimOpen.objs[id] = true;
+  smcPerimRender();
+}
+
+function smcPerimCollect(){
+  const out = { blocs: {}, totalObjectifs: 0, totalDiligences: 0 };
+  const all = (window.smcPerimData||[]).concat(window.smcPerimCustoms||[]);
+  all.forEach(o => {
+    const s = window.smcPerimSel[o.id];
+    if (!s || !s.selected) return;
+    const dils = [];
+    (o.diligences||[]).forEach((d,i) => { if (s.dils && s.dils[i]) dils.push(d); });
+    (s.extraDils||[]).forEach(ed => {
+      if (ed.selected !== false && (ed.text||'').trim()) dils.push(ed.text.trim());
+    });
+    const k = o.bloc || '(non rattache)';
+    out.blocs[k] = out.blocs[k] || [];
+    out.blocs[k].push({
+      id: o.id, titre: o.objectif_titre, finalite: o.objectif_finalite,
+      diligences: dils, tag: o.tag, custom: (o.id||'').indexOf('custom_') === 0
+    });
+    out.totalObjectifs++;
+    out.totalDiligences += dils.length;
+  });
+  return out;
 }
 
 </script>
