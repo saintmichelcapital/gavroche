@@ -1,55 +1,7 @@
 [
   {
-    "id": "e0e1d64f",
-    "bloc": "Quality of financial information",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Digital",
-    "objectif_finalite": "",
-    "objectif_contexte": "«Digital» (ou « Transformation Digitale ») est défini ci-après comme une forme continue de ruptures dans les business modèles existants (ou nouveaux), les produits, services ou expériences existantes (ou nouvelles), permise par l’utilisation des données et la technologie dans l'ensemble de l'entreprise. Nos travaux de due diligence financière sont concentrés sur la compréhension des changements stratégiques mis en œuvre par la Cible, ainsi que, dans la mesure du possible, des changements sur le marché qui ont eu un impact sur le client ou pourraient avoir un impact imminent sur le client, en fonction de nos discussions avec le Management de la Cible – le périmètre de nos travaux de due diligence financière ne comprend pas de procédures permettant de former séparément un point de vue sur l'évolution du marché ou les futurs développements du marché qui ont ou qui pourraient avoir un impact sur la Cible.",
-    "diligences": [],
-    "sources": [
-      "Pre-acquisition",
-      "VDD"
-    ],
-    "types_mission": [
-      "buy-side",
-      "sell-side"
-    ]
-  },
-  {
-    "id": "e4e40a7a",
-    "bloc": "Quality of financial information",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Elaboration des prévisions",
-    "objectif_finalite": "Comprendre et évaluer la méthode d’élaboration des prévisions utilisée et la justesse de cette méthode par le passé",
-    "objectif_contexte": "Des problèmes relatifs aux processus de prévisions peuvent être rencontrés, altérant ainsi la fiabilité des informations financières prévisionnelles. En particulier : Calendrier  du processus de préparation des prévisions et fréquence des révisions/mises à jour au cours de l’année Influences du top management sur les aspects sujets à discussion Aspects spécifiques du secteur qui augmente le risque inhérent des prévisions La banque conseil peut avoir eu une influence significative dans l’élaboration des prévisions qui ne reflèteraient plus ainsi le point de vue du seul management",
-    "diligences": [
-      {
-        "text": "Fournir des commentaires sur les éléments suivants :",
-        "subs": [
-          "Quelle est la méthodologie utilisée pour élaborer les prévisions (c’est-à-dire approche détaillée par sujet puis consolidation des données ou approche d’ensemble puis affectation aux différents sujets)?",
-          "Les hypothèses sous tendant les projections sont-elles les mêmes qu’utilisées par le passé ?",
-          "Quels sont les principaux problèmes rencontrés dans l’élaboration de prévisions pour ce secteur/ entreprise ? Le degré de difficulté ?",
-          "Quelles en sont les conséquences sur le niveau de risque inhérent aux prévisions ?",
-          "Quel a été le degré de justesse des prévisions par le passé ?",
-          "Y a-t-il des risques relatifs à la transaction ?",
-          "[Quelles procédures complémentaires seraient à réaliser en plus de celles de la VDD ?]",
-          "[Questions supplémentaires de la part du Client sur un point particulier de la transaction]"
-        ]
-      }
-    ],
-    "sources": [
-      "Pre-acquisition"
-    ],
-    "types_mission": [
-      "buy-side"
-    ]
-  },
-  {
     "id": "55e67c14",
-    "bloc": "Quality of financial information",
+    "bloc": "Evaluation du rapport de Vendor Due Diligence",
     "categorie_type": "standard",
     "tag": "standard",
     "objectif_titre": "Evaluation du rapport de vendor due diligence [le cas échéant]",
@@ -80,13 +32,13 @@
     ]
   },
   {
-    "id": "7a207dce",
+    "id": "2658e368",
     "bloc": "Quality of financial information",
     "categorie_type": "standard",
     "tag": "standard",
-    "objectif_titre": "Principales règles et méthodes comptables",
-    "objectif_finalite": "Comprendre les règles et méthodes comptables appliquées afin d’établir l’information financière",
-    "objectif_contexte": "Les politiques, procédures et pratiques appliquées au cours de la préparation des informations financières sont spécifiques au secteur d’activité, au pays, etc. et peuvent influer sur les performances passées ou futures.",
+    "objectif_titre": "Qualité de l'information financière",
+    "objectif_finalite": "Comprendre et évaluer la pertinence de l'information financière fournie pour l'évaluation financière de l'entreprise",
+    "objectif_contexte": "",
     "diligences": [
       {
         "text": "Commenter les éléments suivants :",
@@ -98,66 +50,85 @@
           "Des aspects inhérents aux normes comptables locales pourraient-ils impacter la compréhension des chiffres une fois passés en normes IFRS ?",
           "[Questions supplémentaires de la part du Client sur un point particulier de la transaction]"
         ]
-      }
-    ],
-    "sources": [
-      "Pre-acquisition"
-    ],
-    "types_mission": [
-      "buy-side"
-    ]
-  },
-  {
-    "id": "a8d30e61",
-    "bloc": "Quality of financial information",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Processus d’élaboration des budgets et des prévisions",
-    "objectif_finalite": "",
-    "objectif_contexte": "Quelles sont les bases servant à l’élaboration des budgets annuels et du business-plan à long terme ?",
-    "diligences": [
+      },
       {
         "text": "Commenter les éléments suivants :",
         "subs": [
-          "Sur quelle base/méthodologie sont établies les prévisions ?",
-          "Le processus d’élaboration des projections est-il le même actuellement qu’au cours de la période historique ?",
-          "Quels sont les problèmes principaux et le degré de difficulté dans l’élaboration de prévisions pour ce secteur ? Quelles sont les conséquences sur le niveau de risque inhérent des prévisions ?",
-          "Par le passé, quel était le degré d’exactitude des prévisions ?",
-          "Sur quelle base/méthodologie sont établies les prévisions ?"
+          "Comment est produite l’information fournie par le management ? Est-elle pertinente dans la compréhension des besoins actuels et futurs de l’entreprise ?",
+          "Quels KPI sont évalués ? Sont-ils pertinents pour la Cible et cohérents avec la norme du secteur ?",
+          "Dans quelle mesure les chiffres mensuels sont-ils fondés sur des estimations ?",
+          "Quels sont les outils de gestion financière principaux et les contrôles en place ?",
+          "Quels problèmes ont été soulevés par les audits internes au sujet des contrôles en place ?",
+          "Comment la trésorerie de l’entreprise est-elle organisée et comment est géré le risque de change ?",
+          "Quels sont les outils de gestion financière principaux et les contrôles en place ?"
         ]
       },
       {
-        "text": "Commenter les sujets suivants :",
+        "text": "Commenter les éléments suivants:",
         "subs": [
-          "Quelle est la méthodologie utilisée pour préparer les prévisions ?",
-          "Les hypothèses sous tendant les projections sont-elles les mêmes qu’utilisées par le passé ?",
-          "Quels sont les principaux problèmes rencontrés dans l’élaboration de prévisions pour ce secteur d’activité ?",
-          "Quelles en sont les conséquences sur le niveau de risque inhérent aux prévisions ?",
-          "Quel a été le degré de justesse des prévisions par le passé ?",
+          "Comment l’information est-elle produite ? A quel point est-elle utile dans le contexte actuel ? dans un contexte d’anticipation des besoins de l’entreprise ?",
+          "Quels KPI sont mesurés et sont-ils adaptés à l’entreprise ? Sont-ils cohérents avec la norme de l’industrie ?",
+          "Quel est le degré d’estimation des chiffres mensuels ?",
+          "Quels systèmes/outils financiers existe-t-il ? Quels sont les contrôles ?",
+          "[Questions supplémentaires de la part du Client sur un point particulier de la transaction]",
+          "Comment est produite l’information fournie par le management ? Est-elle adaptée à la compréhension des besoins actuels et futurs de la Cible ?",
+          "Quels KPI sont mesurés et sont-ils adaptés à l’entreprise ? Sont-ils cohérents avec la pratique de l’industrie ?",
           "[Procédures complémentaires aux analyses présentées dans le rapport de vendor due diligence]",
           "[Sujets spécifiques à la transaction ou demandes particulières du Client]"
+        ]
+      },
+      {
+        "text": "Présenter les sujets suivants :",
+        "subs": [
+          "Règles et méthodes comptables",
+          "Impact des principaux changements de méthodes comptables sur la période historique"
+        ]
+      },
+      {
+        "text": "Fournir des commentaires sur les éléments suivants :",
+        "subs": [
+          "Sources des données chiffrées principales et réconciliation",
+          "Explications / justification des écarts de réconciliation",
+          "Hypothèses retenues et nature et degré d’estimation des données financières",
+          "Problématiques de « carve-out » ou pro forma,"
         ]
       }
     ],
     "sources": [
       "Business Plan",
+      "Completion accounts",
+      "Pre-acquisition",
       "Refinancing",
+      "SID",
       "VDD"
     ],
     "types_mission": [
       "buy-side",
+      "completion",
       "refinancing",
       "sell-side"
     ]
   },
   {
-    "id": "beaba5c0",
+    "id": "81fe1edb",
     "bloc": "Quality of financial information",
     "categorie_type": "standard",
     "tag": "standard",
-    "objectif_titre": "Périmètre d’audit des comptes",
-    "objectif_finalite": "Comprendre la base des travaux d’audit réalisés et évaluer si les comptes audités fournissent une base de travail fiable pour la due diligence",
-    "objectif_contexte": "Problèmes inhérents au périmètre/matérialité des travaux d’audit ou conclusions d’audit pouvant biaiser la fiabilité des informations auditées. Notamment si : La cible est une petite filiale d’un grand groupe coté La cible est une division pouvant ne pas être une entité auditée Des reportings peuvent être préparés sous différentes normes comptables Le contrôle interne et l’environnement de contrôle peuvent conduire à une information financière  et des reportings opérationnels non fiables et/ou non disponibles dans les délais requis.",
+    "objectif_titre": "Vision combinée aux bornes du périmètre de l'opération",
+    "objectif_finalite": "",
+    "objectif_contexte": "",
+    "diligences": [],
+    "sources": [],
+    "types_mission": []
+  },
+  {
+    "id": "83853517",
+    "bloc": "Quality of financial information",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Périmètre d'audit des comptes",
+    "objectif_finalite": "Comprendre la base des travaux d'audit réalisés et évaluer si les comptes audités fournissent une base de travail fiable pour la due diligence",
+    "objectif_contexte": "",
     "diligences": [
       {
         "text": "Prendre connaissance des dossiers de travail de l’auditeur concernant les derniers comptes audités [et les revues trimestrielles pour l’année en cours (si disponibles)]",
@@ -198,316 +169,14 @@
       }
     ],
     "sources": [
-      "Pre-acquisition"
-    ],
-    "types_mission": [
-      "buy-side"
-    ]
-  },
-  {
-    "id": "4bc2f0e0",
-    "bloc": "Quality of financial information",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Périmètre d’audit des comptes et résultats",
-    "objectif_finalite": "",
-    "objectif_contexte": "Comprendre la base des travaux d’audit réalisés et évaluer si les comptes audités fournissent une base de travail fiable pour la due diligence",
-    "diligences": [
-      {
-        "text": "Commenter les éléments suivants :",
-        "subs": [
-          "Quels sont le périmètre et la matérialité des audits ?",
-          "Quelles opinions sur les comptes ont été rendues ?",
-          "Quels ajustements ont été proposés / effectués ? Quels problèmes significatifs d’audit ont été soulevés ? Quels points de la « management letter » ont été soulevés ? (Note : dépendant du secret professionnel en France)"
-        ]
-      }
-    ],
-    "sources": [
+      "Pre-acquisition",
       "Refinancing",
-      "VDD"
-    ],
-    "types_mission": [
-      "refinancing",
-      "sell-side"
-    ]
-  },
-  {
-    "id": "4983710d",
-    "bloc": "Quality of financial information",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Qualité de l’information fournie par le management",
-    "objectif_finalite": "",
-    "objectif_contexte": "Comment est produite l’information fournie par le management ? Est-elle pertinente dans la compréhension des besoins actuels et futurs de l’entreprise ?",
-    "diligences": [
-      {
-        "text": "Commenter les éléments suivants :",
-        "subs": [
-          "Comment est produite l’information fournie par le management ? Est-elle pertinente dans la compréhension des besoins actuels et futurs de l’entreprise ?",
-          "Quels KPI sont évalués ? Sont-ils pertinents pour la Cible et cohérents avec la norme du secteur ?",
-          "Dans quelle mesure les chiffres mensuels sont-ils fondés sur des estimations ?",
-          "Quels sont les outils de gestion financière principaux et les contrôles en place ?",
-          "Quels problèmes ont été soulevés par les audits internes au sujet des contrôles en place ?",
-          "Comment la trésorerie de l’entreprise est-elle organisée et comment est géré le risque de change ?",
-          "Quels sont les outils de gestion financière principaux et les contrôles en place ?"
-        ]
-      }
-    ],
-    "sources": [
-      "Refinancing",
-      "VDD"
-    ],
-    "types_mission": [
-      "refinancing",
-      "sell-side"
-    ]
-  },
-  {
-    "id": "67cad5ce",
-    "bloc": "Quality of financial information",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Qualité des outils de gestion et de reporting",
-    "objectif_finalite": "Evaluer les risques relatifs au reporting de la Cible",
-    "objectif_contexte": "La qualité de l’information et des reportings n’est pas au niveau adapté, et fait douter de la capacité de la Cible à respecter les délais de reporting et autres exigences",
-    "diligences": [
-      {
-        "text": "Commenter les éléments suivants:",
-        "subs": [
-          "Comment l’information est-elle produite ? A quel point est-elle utile dans le contexte actuel ? dans un contexte d’anticipation des besoins de l’entreprise ?",
-          "Quels KPI sont mesurés et sont-ils adaptés à l’entreprise ? Sont-ils cohérents avec la norme de l’industrie ?",
-          "Quel est le degré d’estimation des chiffres mensuels ?",
-          "Quels systèmes/outils financiers existe-t-il ? Quels sont les contrôles ?",
-          "[Questions supplémentaires de la part du Client sur un point particulier de la transaction]",
-          "Comment est produite l’information fournie par le management ? Est-elle adaptée à la compréhension des besoins actuels et futurs de la Cible ?",
-          "Quels KPI sont mesurés et sont-ils adaptés à l’entreprise ? Sont-ils cohérents avec la pratique de l’industrie ?",
-          "[Procédures complémentaires aux analyses présentées dans le rapport de vendor due diligence]",
-          "[Sujets spécifiques à la transaction ou demandes particulières du Client]"
-        ]
-      }
-    ],
-    "sources": [
-      "Business Plan",
-      "Pre-acquisition"
-    ],
-    "types_mission": [
-      "buy-side"
-    ]
-  },
-  {
-    "id": "edd993e3",
-    "bloc": "Quality of financial information",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Règles et méthodes comptables",
-    "objectif_finalite": "",
-    "objectif_contexte": "Les règles et méthodes comptables en place sont-elles en accord avec celles généralement appliquées ? Comment sont traités les points comptables sujets à discussion ?",
-    "diligences": [
-      {
-        "text": "Commenter les éléments suivants :",
-        "subs": [
-          "Détails sur les règles et méthodes comptables ?",
-          "Ont-elles été appliquées systématiquement ?",
-          "Quels sont les points sujets à discussion ?",
-          "Existe-t-il des indices suggérant que des règles comptables ont été utilisées dans le but de manipuler les résultats présentés ? [Cible channel 2]",
-          "Y a-t- il des aspects des normes comptables locales qui pourraient influer sur la compréhension des chiffres ?",
-          "Impact de tout changement dans les pratiques/procédures comptables au cours de la période historique",
-          "Les règles et méthodes comptables sont-elles adaptées et conformes aux pratiques du secteur d’activité ?",
-          "Ont-elles été appliquées de façon permanente?",
-          "Quels sont les points subjectifs ?",
-          "Des éléments indiquent-ils que les résultats comptables ont été manipulés?",
-          "Des aspects inhérents aux normes comptables locales pourraient-ils impacter la compréhension des chiffres?",
-          "[Procédures complémentaires aux analyses présentées dans le rapport de vendor due diligence]",
-          "[Sujets spécifiques à la transaction ou demandes particulières du Client]",
-          "Existe-t-il des indices suggérant que des règles comptables ont été utilisées dans le but de manipuler les résultats présentés ?"
-        ]
-      },
-      {
-        "text": "Présenter les sujets suivants :",
-        "subs": [
-          "Règles et méthodes comptables",
-          "Impact des principaux changements de méthodes comptables sur la période historique"
-        ]
-      }
-    ],
-    "sources": [
-      "Business Plan",
-      "Refinancing",
-      "SID",
       "VDD"
     ],
     "types_mission": [
       "buy-side",
       "refinancing",
       "sell-side"
-    ]
-  },
-  {
-    "id": "f7e378ed",
-    "bloc": "Quality of financial information",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Source des données chiffrées et réconciliations",
-    "objectif_finalite": "",
-    "objectif_contexte": "Les données financières communiquées sont-elles pertinentes dans le cadre de l’évaluation financière de la Société ?",
-    "diligences": [
-      {
-        "text": "Commenter les éléments suivants :",
-        "subs": [
-          "La base et la solidité de l’élaboration des données financières historiques utilisées pour la VDD, y compris la démarche d’audit menant aux comptes de l’entreprise et aux états financiers audités",
-          "Les écarts de réconciliation",
-          "Tout élément ayant trait au “carve-out” ou élément pro-forma, revenant ainsi à identifier les ajustements principaux opérés sur les données chiffrées à des fins de profitabilité",
-          "Les hypothèses sous-tendant les données financières, la nature et le degré des estimations faites",
-          "Toute hypothèse fondant une allocation ou un découpage des données historiques"
-        ]
-      }
-    ],
-    "sources": [
-      "Refinancing",
-      "VDD"
-    ],
-    "types_mission": [
-      "refinancing",
-      "sell-side"
-    ]
-  },
-  {
-    "id": "64640a51",
-    "bloc": "Quality of financial information",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Source des données et éléments de réconciliation",
-    "objectif_finalite": "",
-    "objectif_contexte": "",
-    "diligences": [
-      {
-        "text": "Présenter les sujets suivants :",
-        "subs": [
-          "Procédures de préparation des états financiers et des comptes de gestion et réconciliation entre ces deux sources de documents",
-          "Principale politique et clés d’allocation spécifique dans l’établissement des comptes historiques"
-        ]
-      }
-    ],
-    "sources": [
-      "SID"
-    ],
-    "types_mission": [
-      "sell-side"
-    ]
-  },
-  {
-    "id": "64412bb8",
-    "bloc": "Quality of financial information",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Sources des données chiffrées et réconciliation",
-    "objectif_finalite": "",
-    "objectif_contexte": "Comprendre et évaluer la pertinence de l’information financière fournie pour l’évaluation financière de la Cible",
-    "diligences": [
-      {
-        "text": "Commenter les éléments suivants :",
-        "subs": [
-          "Principales sources des données chiffrées et réconciliations",
-          "Explications / justifications des écarts de réconciliation",
-          "Hypothèses retenues et nature et niveau d’estimation des données financières",
-          "Problématiques de « carve-out » ou pro forma",
-          "[Procédures complémentaires aux analyses présentées dans le rapport de vendor due diligence]",
-          "[Sujets spécifiques à la transaction ou demandes particulières du Client]",
-          "Les règles et méthodes comptables ont-elles été systématiquement appliquées ?",
-          "Des éléments indiquent-ils que les résultats ont été manipulés comptablement ?",
-          "Des aspects inhérents aux normes comptables locales pourraient-ils impacter la compréhension des chiffres une fois passés en normes IFRS ?"
-        ]
-      },
-      {
-        "text": "Fournir des commentaires sur les éléments suivants :",
-        "subs": [
-          "Sources des données chiffrées principales et réconciliation",
-          "Explications / justification des écarts de réconciliation",
-          "Hypothèses retenues et nature et degré d’estimation des données financières",
-          "Problématiques de « carve-out » ou pro forma,"
-        ]
-      }
-    ],
-    "sources": [
-      "Business Plan",
-      "Completion accounts"
-    ],
-    "types_mission": [
-      "buy-side",
-      "completion"
-    ]
-  },
-  {
-    "id": "2336fa82",
-    "bloc": "Quality of financial information",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Sources des données chiffrées et réconciliations",
-    "objectif_finalite": "Comprendre et évaluer la pertinence de l’information financière fournie pour l’évaluation financière de l’entreprise",
-    "objectif_contexte": "La pertinence de l’information financière fournie peut être compromise par : Des différences entre les chiffres issus de l’information memorandum (IM), des comptes audités, de la VDD, du management Des ajustements pro forma significatifs afin d’obtenir les chiffres de l’IM Le champ de la transaction en termes d’entités/actifs à acquérir est différent de celui énoncé dans l’IM Impacts de change importants Acquisitions ou désengagements significatifs au cours des dernières années Contrats stratégiques perdus/gagnés Coûts de séparation de l’activité / standalone Les problèmes spécifiques à la transaction identifiés par nos équipes ou par le Client lors de la phase préliminaire à la Due Diligence doivent être intégrés",
-    "diligences": [
-      {
-        "text": "Fournir des commentaires sur les éléments suivants :",
-        "subs": [
-          "Sources des données chiffrées principales et réconciliations",
-          "Explications / justifications des écarts",
-          "Hypothèses retenues, nature et degré d’estimation des données financières",
-          "Problématiques de « carve-out » ou pro forma, c’est-à-dire relever les principaux ajustements effectués pour augmenter la profitabilité",
-          "[Quelles procédures complémentaires seraient nécessaires en sus de celles réalisées pour le rapport de VDD ?]",
-          "[Questions supplémentaires de la part du Client sur un point particulier de la transaction]"
-        ]
-      }
-    ],
-    "sources": [
-      "Pre-acquisition"
-    ],
-    "types_mission": [
-      "buy-side"
-    ]
-  },
-  {
-    "id": "842d6840",
-    "bloc": "Quality of financial information",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "« Comprendre l’impact du Digital sur les principaux moteurs de croissance et de profitabilité historique [et future] »",
-    "objectif_finalite": "",
-    "objectif_contexte": "La réalisation de la performance financière prévue par la Cible, ou la durabilité de la performance financière historique peuvent être mises en cause par : Ruptures provenant des nouveaux business modèles, des nouvelles technologies, etc., pouvant concurrencer la Cible, ou La cible ne réussit pas à tirer parti des nouveaux business modèles, nouvelles technologies, etc. («Innovation Digitale ») pour remporter des contrats.",
-    "diligences": [
-      {
-        "text": "Discuter avec le Management de la Cible de l’incidence de la transformation digitale sur l'entreprise dans les domaines suivants: activités et processus opérationnels (ex : fabrication, back office, gestion des talents), relations clients (expérience client, offre de produits / services, nouveaux modèles transactionnels), fournisseurs (commande en temps réel, livraison en flux tendus, réapprovisionnement virtuel), pour comprendre l'impact de la transformation digitale sur les comptes historiques [et prévisionnels]",
-        "subs": []
-      },
-      {
-        "text": "Discuter avec le Management de la Cible des initiatives passées, en cours ou planifiées relatives à la transformation digitale (par exemple, le recrutement d'un Directeur en charge du digitale, la stratégie digitale, le budget alloué à la transformation digitale, les acquisitions, alliances ou JV dans le Digital) et leur impact sur les comptes historiques [et prévisionnels]",
-        "subs": []
-      },
-      {
-        "text": "Discuter avec le Management de la Cible de la stratégie digitale de l’entreprise et de l’impact qu’elle aura sur sa croissance et sur le marché",
-        "subs": []
-      },
-      {
-        "text": "Analyser le carnet de commandes et le pipeline de l'entreprise, ainsi que les gains de nouveaux clients pour des services digitaux ou la conversion de clients existants à des nouveaux services, le cas échéant",
-        "subs": []
-      },
-      {
-        "text": "[Discuter avec le Management de la Cible des revenus futurs générés par les lancements et améliorations de produits liés au Digital ainsi que du calendrier prévu pour la réalisation de ces revenus]",
-        "subs": []
-      },
-      {
-        "text": "[Discuter avec le Management de la Cible de tout autre projet de développement des revenus résultant de la révolution digitale existante et anticipée]",
-        "subs": []
-      },
-      {
-        "text": "[Discuter avec le Management de la Cible des coûts et des économies prévus résultant de la révolution digitale, ainsi que des dépenses d’investissements associées]",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Pre-acquisition"
-    ],
-    "types_mission": [
-      "buy-side"
     ]
   },
   {
@@ -574,51 +243,6 @@
     ],
     "types_mission": [
       "restructuring"
-    ]
-  },
-  {
-    "id": "443a0b6e",
-    "bloc": "Quality of earnings",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Comprendre l’impact du Digital sur les principaux moteurs de croissance et de profitabilité historique [et future]",
-    "objectif_finalite": "",
-    "objectif_contexte": "",
-    "diligences": [
-      {
-        "text": "Discuter avec le Management de la Cible de l’incidence de la transformation digitale sur l'entreprise dans les domaines suivants: activités et processus opérationnels (ex : fabrication, back office, gestion des talents), relations clients (expérience client, offre de produits / services, nouveaux modèles transactionnels), fournisseurs (commande en temps réel, livraison en flux tendus, réapprovisionnement virtuel), pour comprendre l'impact de la transformation digitale sur les comptes historiques [et prévisionnels]",
-        "subs": []
-      },
-      {
-        "text": "Discuter avec le Management de la Cible des initiatives passées, en cours ou planifiées relatives à la transformation digitale (par exemple, le recrutement d'un Directeur en charge du digitale, la stratégie digitale, le budget alloué à la transformation digitale, les acquisitions, alliances ou JV dans le Digital) et leur impact sur les comptes historiques [et prévisionnels]",
-        "subs": []
-      },
-      {
-        "text": "Discuter avec le Management de la Cible de la stratégie digitale de l’entreprise et de l’impact qu’elle aura sur sa croissance et sur le marché",
-        "subs": []
-      },
-      {
-        "text": "Analyser le carnet de commandes et le pipeline de l'entreprise, ainsi que les gains de nouveaux clients pour des services digitaux ou la conversion de clients existants à des nouveaux services, le cas échéant",
-        "subs": []
-      },
-      {
-        "text": "[Discuter avec le Management de la Cible des revenus futurs générés par les lancements et améliorations de produits liés au Digital ainsi que du calendrier prévu pour la réalisation de ces revenus]",
-        "subs": []
-      },
-      {
-        "text": "[Discuter avec le Management de la Cible de tout autre projet de développement des revenus résultant de la révolution digitale existante et anticipée]",
-        "subs": []
-      },
-      {
-        "text": "[Discuter avec le Management de la Cible des coûts et des économies prévus résultant de la révolution digitale, ainsi que des dépenses d’investissements associées]",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "VDD"
-    ],
-    "types_mission": [
-      "sell-side"
     ]
   },
   {
@@ -2144,6 +1768,36 @@
     ]
   },
   {
+    "id": "e4e40a7a",
+    "bloc": "Quality of forecast",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Elaboration des prévisions",
+    "objectif_finalite": "Comprendre et évaluer la méthode d’élaboration des prévisions utilisée et la justesse de cette méthode par le passé",
+    "objectif_contexte": "Des problèmes relatifs aux processus de prévisions peuvent être rencontrés, altérant ainsi la fiabilité des informations financières prévisionnelles. En particulier : Calendrier  du processus de préparation des prévisions et fréquence des révisions/mises à jour au cours de l’année Influences du top management sur les aspects sujets à discussion Aspects spécifiques du secteur qui augmente le risque inhérent des prévisions La banque conseil peut avoir eu une influence significative dans l’élaboration des prévisions qui ne reflèteraient plus ainsi le point de vue du seul management",
+    "diligences": [
+      {
+        "text": "Fournir des commentaires sur les éléments suivants :",
+        "subs": [
+          "Quelle est la méthodologie utilisée pour élaborer les prévisions (c’est-à-dire approche détaillée par sujet puis consolidation des données ou approche d’ensemble puis affectation aux différents sujets)?",
+          "Les hypothèses sous tendant les projections sont-elles les mêmes qu’utilisées par le passé ?",
+          "Quels sont les principaux problèmes rencontrés dans l’élaboration de prévisions pour ce secteur/ entreprise ? Le degré de difficulté ?",
+          "Quelles en sont les conséquences sur le niveau de risque inhérent aux prévisions ?",
+          "Quel a été le degré de justesse des prévisions par le passé ?",
+          "Y a-t-il des risques relatifs à la transaction ?",
+          "[Quelles procédures complémentaires seraient à réaliser en plus de celles de la VDD ?]",
+          "[Questions supplémentaires de la part du Client sur un point particulier de la transaction]"
+        ]
+      }
+    ],
+    "sources": [
+      "Pre-acquisition"
+    ],
+    "types_mission": [
+      "buy-side"
+    ]
+  },
+  {
     "id": "324c03de",
     "bloc": "Quality of forecast",
     "categorie_type": "standard",
@@ -2164,6 +1818,49 @@
       "SID"
     ],
     "types_mission": [
+      "sell-side"
+    ]
+  },
+  {
+    "id": "a8d30e61",
+    "bloc": "Quality of forecast",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Processus d’élaboration des budgets et des prévisions",
+    "objectif_finalite": "",
+    "objectif_contexte": "Quelles sont les bases servant à l’élaboration des budgets annuels et du business-plan à long terme ?",
+    "diligences": [
+      {
+        "text": "Commenter les éléments suivants :",
+        "subs": [
+          "Sur quelle base/méthodologie sont établies les prévisions ?",
+          "Le processus d’élaboration des projections est-il le même actuellement qu’au cours de la période historique ?",
+          "Quels sont les problèmes principaux et le degré de difficulté dans l’élaboration de prévisions pour ce secteur ? Quelles sont les conséquences sur le niveau de risque inhérent des prévisions ?",
+          "Par le passé, quel était le degré d’exactitude des prévisions ?",
+          "Sur quelle base/méthodologie sont établies les prévisions ?"
+        ]
+      },
+      {
+        "text": "Commenter les sujets suivants :",
+        "subs": [
+          "Quelle est la méthodologie utilisée pour préparer les prévisions ?",
+          "Les hypothèses sous tendant les projections sont-elles les mêmes qu’utilisées par le passé ?",
+          "Quels sont les principaux problèmes rencontrés dans l’élaboration de prévisions pour ce secteur d’activité ?",
+          "Quelles en sont les conséquences sur le niveau de risque inhérent aux prévisions ?",
+          "Quel a été le degré de justesse des prévisions par le passé ?",
+          "[Procédures complémentaires aux analyses présentées dans le rapport de vendor due diligence]",
+          "[Sujets spécifiques à la transaction ou demandes particulières du Client]"
+        ]
+      }
+    ],
+    "sources": [
+      "Business Plan",
+      "Refinancing",
+      "VDD"
+    ],
+    "types_mission": [
+      "buy-side",
+      "refinancing",
       "sell-side"
     ]
   },
@@ -2502,31 +2199,6 @@
     ]
   },
   {
-    "id": "bfcc5806",
-    "bloc": "Autres",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Qualité de l’information et organisation",
-    "objectif_finalite": "",
-    "objectif_contexte": "",
-    "diligences": [
-      {
-        "text": "Présenter les sujets suivants :",
-        "subs": [
-          "Principaux drivers suivis par le management dans le cadre du pilotage de la société",
-          "Systèmes clés et contrôles",
-          "Organisation des fonctions finance et trésorerie"
-        ]
-      }
-    ],
-    "sources": [
-      "SID"
-    ],
-    "types_mission": [
-      "sell-side"
-    ]
-  },
-  {
     "id": "c4c0c1e9",
     "bloc": "Autres",
     "categorie_type": "standard",
@@ -2668,6 +2340,69 @@
     ],
     "types_mission": [
       "completion"
+    ]
+  },
+  {
+    "id": "443a0b6e",
+    "bloc": "Due diligence IT",
+    "categorie_type": "additionnel",
+    "tag": "additionnel",
+    "objectif_titre": "Comprendre l’impact du Digital sur les principaux moteurs de croissance et de profitabilité historique [et future]",
+    "objectif_finalite": "",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Discuter avec le Management de la Cible de l’incidence de la transformation digitale sur l'entreprise dans les domaines suivants: activités et processus opérationnels (ex : fabrication, back office, gestion des talents), relations clients (expérience client, offre de produits / services, nouveaux modèles transactionnels), fournisseurs (commande en temps réel, livraison en flux tendus, réapprovisionnement virtuel), pour comprendre l'impact de la transformation digitale sur les comptes historiques [et prévisionnels]",
+        "subs": []
+      },
+      {
+        "text": "Discuter avec le Management de la Cible des initiatives passées, en cours ou planifiées relatives à la transformation digitale (par exemple, le recrutement d'un Directeur en charge du digitale, la stratégie digitale, le budget alloué à la transformation digitale, les acquisitions, alliances ou JV dans le Digital) et leur impact sur les comptes historiques [et prévisionnels]",
+        "subs": []
+      },
+      {
+        "text": "Discuter avec le Management de la Cible de la stratégie digitale de l’entreprise et de l’impact qu’elle aura sur sa croissance et sur le marché",
+        "subs": []
+      },
+      {
+        "text": "Analyser le carnet de commandes et le pipeline de l'entreprise, ainsi que les gains de nouveaux clients pour des services digitaux ou la conversion de clients existants à des nouveaux services, le cas échéant",
+        "subs": []
+      },
+      {
+        "text": "[Discuter avec le Management de la Cible des revenus futurs générés par les lancements et améliorations de produits liés au Digital ainsi que du calendrier prévu pour la réalisation de ces revenus]",
+        "subs": []
+      },
+      {
+        "text": "[Discuter avec le Management de la Cible de tout autre projet de développement des revenus résultant de la révolution digitale existante et anticipée]",
+        "subs": []
+      },
+      {
+        "text": "[Discuter avec le Management de la Cible des coûts et des économies prévus résultant de la révolution digitale, ainsi que des dépenses d’investissements associées]",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "VDD"
+    ],
+    "types_mission": [
+      "sell-side"
+    ]
+  },
+  {
+    "id": "e0e1d64f",
+    "bloc": "Due diligence IT",
+    "categorie_type": "additionnel",
+    "tag": "additionnel",
+    "objectif_titre": "Digital",
+    "objectif_finalite": "",
+    "objectif_contexte": "«Digital» (ou « Transformation Digitale ») est défini ci-après comme une forme continue de ruptures dans les business modèles existants (ou nouveaux), les produits, services ou expériences existantes (ou nouvelles), permise par l’utilisation des données et la technologie dans l'ensemble de l'entreprise. Nos travaux de due diligence financière sont concentrés sur la compréhension des changements stratégiques mis en œuvre par la Cible, ainsi que, dans la mesure du possible, des changements sur le marché qui ont eu un impact sur le client ou pourraient avoir un impact imminent sur le client, en fonction de nos discussions avec le Management de la Cible – le périmètre de nos travaux de due diligence financière ne comprend pas de procédures permettant de former séparément un point de vue sur l'évolution du marché ou les futurs développements du marché qui ont ou qui pourraient avoir un impact sur la Cible.",
+    "diligences": [],
+    "sources": [
+      "Pre-acquisition",
+      "VDD"
+    ],
+    "types_mission": [
+      "buy-side",
+      "sell-side"
     ]
   },
   {
@@ -2856,6 +2591,51 @@
       "buy-side",
       "refinancing",
       "sell-side"
+    ]
+  },
+  {
+    "id": "842d6840",
+    "bloc": "Due diligence IT",
+    "categorie_type": "additionnel",
+    "tag": "additionnel",
+    "objectif_titre": "« Comprendre l’impact du Digital sur les principaux moteurs de croissance et de profitabilité historique [et future] »",
+    "objectif_finalite": "",
+    "objectif_contexte": "La réalisation de la performance financière prévue par la Cible, ou la durabilité de la performance financière historique peuvent être mises en cause par : Ruptures provenant des nouveaux business modèles, des nouvelles technologies, etc., pouvant concurrencer la Cible, ou La cible ne réussit pas à tirer parti des nouveaux business modèles, nouvelles technologies, etc. («Innovation Digitale ») pour remporter des contrats.",
+    "diligences": [
+      {
+        "text": "Discuter avec le Management de la Cible de l’incidence de la transformation digitale sur l'entreprise dans les domaines suivants: activités et processus opérationnels (ex : fabrication, back office, gestion des talents), relations clients (expérience client, offre de produits / services, nouveaux modèles transactionnels), fournisseurs (commande en temps réel, livraison en flux tendus, réapprovisionnement virtuel), pour comprendre l'impact de la transformation digitale sur les comptes historiques [et prévisionnels]",
+        "subs": []
+      },
+      {
+        "text": "Discuter avec le Management de la Cible des initiatives passées, en cours ou planifiées relatives à la transformation digitale (par exemple, le recrutement d'un Directeur en charge du digitale, la stratégie digitale, le budget alloué à la transformation digitale, les acquisitions, alliances ou JV dans le Digital) et leur impact sur les comptes historiques [et prévisionnels]",
+        "subs": []
+      },
+      {
+        "text": "Discuter avec le Management de la Cible de la stratégie digitale de l’entreprise et de l’impact qu’elle aura sur sa croissance et sur le marché",
+        "subs": []
+      },
+      {
+        "text": "Analyser le carnet de commandes et le pipeline de l'entreprise, ainsi que les gains de nouveaux clients pour des services digitaux ou la conversion de clients existants à des nouveaux services, le cas échéant",
+        "subs": []
+      },
+      {
+        "text": "[Discuter avec le Management de la Cible des revenus futurs générés par les lancements et améliorations de produits liés au Digital ainsi que du calendrier prévu pour la réalisation de ces revenus]",
+        "subs": []
+      },
+      {
+        "text": "[Discuter avec le Management de la Cible de tout autre projet de développement des revenus résultant de la révolution digitale existante et anticipée]",
+        "subs": []
+      },
+      {
+        "text": "[Discuter avec le Management de la Cible des coûts et des économies prévus résultant de la révolution digitale, ainsi que des dépenses d’investissements associées]",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Pre-acquisition"
+    ],
+    "types_mission": [
+      "buy-side"
     ]
   },
   {

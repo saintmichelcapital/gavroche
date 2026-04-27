@@ -609,7 +609,16 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .perim-obj-body{display:none;padding:0 20px 16px 44px;border-top:1px dashed var(--gris-tres-clair);background:var(--gris-surface);}
 .perim-obj.open .perim-obj-body{display:block;}
 .perim-dil-list{margin:12px 0;}
-.perim-dil{display:flex;align-items:flex-start;gap:8px;padding:6px 0;font-size:12px;line-height:1.5;color:var(--noir);}
+.perim-dil{display:flex;align-items:flex-start;gap:8px;padding:6px 0;font-size:12px;line-height:1.5;color:var(--noir);position:relative;cursor:grab;user-select:none;border-radius:2px;transition:background 0.1s;}
+.perim-dil:active{cursor:grabbing;}
+.perim-dil:hover{background:rgba(0,0,0,0.025);}
+.perim-dil.dragging{opacity:0.45;background:var(--gris-surface);}
+.perim-dil.drop-target-before::before,.perim-dil.drop-target-after::after{content:'';position:absolute;left:0;right:0;height:2px;background:var(--noir);pointer-events:none;}
+.perim-dil.drop-target-before::before{top:-1px;}
+.perim-dil.drop-target-after::after{bottom:-1px;}
+.perim-drag-handle{flex:0 0 12px;color:var(--gris-clair);font-size:10px;line-height:1.5;align-self:flex-start;margin-top:4px;cursor:grab;}
+.perim-dil:hover .perim-drag-handle{color:var(--gris-moyen);}
+.perim-obj-body.drop-target-empty{outline:2px dashed var(--noir);outline-offset:-4px;background:rgba(0,0,0,0.02);}
 .perim-dil input[type=checkbox]{margin-top:3px;accent-color:var(--noir);cursor:pointer;width:13px;height:13px;flex-shrink:0;}
 .perim-dil-text{flex:1;}
 .perim-subs{margin:0 0 4px 28px;padding:0;}
@@ -3023,6 +3032,7 @@ function smcPerimSetFilter(f){
 
 // Ordre canonique des catégories (standards puis additionnels)
 window.SMC_PERIM_ORDER = [
+  { type: 'standard',    label: 'Evaluation du rapport de Vendor Due Diligence' },
   { type: 'standard',    label: 'Quality of financial information' },
   { type: 'standard',    label: 'Quality of earnings' },
   { type: 'standard',    label: 'Quality of net cash flows' },
@@ -3125,13 +3135,28 @@ function smcPerimRender(){
       if (o.objectif_finalite) {
         html += '<div style="padding-top:12px;font-size:11px;color:var(--gris-moyen);font-style:italic;line-height:1.5;">«&nbsp;'+smcEsc(o.objectif_finalite)+'&nbsp;»</div>';
       }
-      html +=     '<div class="perim-dil-list">';
-      (o.diligences||[]).forEach((d, i) => {
-        // d peut être string (ancien format) ou {text, subs[]} (nouveau format v2)
+      html +=     '<div class="perim-dil-list" data-dil-list="'+oidEsc+'" ondragover="smcPerimDilListDragOver(event)" ondragleave="smcPerimDilListDragLeave(event)" ondrop="smcPerimDilListDrop(event,\''+oidEsc+'\')">';
+      // Construire l'ordre de rendu (en respectant smcPerimSel[id].dilOrder si défini)
+      const dilCount = (o.diligences||[]).length;
+      const removed = (sel.removedDils || {});
+      let order = (sel.dilOrder && sel.dilOrder.length ? sel.dilOrder.slice() : null);
+      if (!order || order.length !== dilCount) {
+        order = [];
+        for (let k=0; k<dilCount; k++) order.push(k);
+      }
+      order.forEach((i, posIdx) => {
+        if (removed[i]) return;
+        const d = (o.diligences||[])[i];
         const dText = (typeof d === 'string') ? d : (d && d.text) || '';
         const dSubs = (typeof d === 'string') ? [] : ((d && d.subs) || []);
         const dsel = !!(sel.dils && sel.dils[i]);
-        html +=     '<label class="perim-dil">';
+        html +=     '<label class="perim-dil" draggable="true" data-dil-idx="'+i+'" data-dil-kind="lib"';
+        html +=       ' ondragstart="smcPerimDilDragStart(event,\''+oidEsc+'\','+i+',\'lib\')"';
+        html +=       ' ondragover="smcPerimDilDragOver(event,'+i+')"';
+        html +=       ' ondragleave="smcPerimDilDragLeave(event)"';
+        html +=       ' ondrop="smcPerimDilDrop(event,\''+oidEsc+'\','+i+',\'lib\')"';
+        html +=       ' ondragend="smcPerimDilDragEnd(event)">';
+        html +=       '<span class="perim-drag-handle" title="Cliquer-glisser pour réorganiser">⋮⋮</span>';
         html +=       '<input type="checkbox" '+(dsel?'checked':'')+' onchange="smcPerimToggleDil(\''+oidEsc+'\','+i+',this.checked)">';
         html +=       '<span class="perim-dil-text">'+smcEsc(dText)+'</span>';
         html +=     '</label>';
@@ -3148,13 +3173,28 @@ function smcPerimRender(){
           html += '</div>';
         }
       });
+      // Diligences custom / déplacées (extraDils)
       (sel.extraDils||[]).forEach((d, i) => {
         const dchecked = (d.selected !== false);
-        html +=     '<label class="perim-dil">';
+        const eSubs = (d && d.subs) ? d.subs : [];
+        html +=     '<label class="perim-dil" draggable="true" data-dil-idx="'+i+'" data-dil-kind="extra"';
+        html +=       ' ondragstart="smcPerimDilDragStart(event,\''+oidEsc+'\','+i+',\'extra\')"';
+        html +=       ' ondragover="smcPerimDilDragOver(event,'+i+')"';
+        html +=       ' ondragleave="smcPerimDilDragLeave(event)"';
+        html +=       ' ondrop="smcPerimDilDrop(event,\''+oidEsc+'\','+i+',\'extra\')"';
+        html +=       ' ondragend="smcPerimDilDragEnd(event)">';
+        html +=       '<span class="perim-drag-handle" title="Cliquer-glisser pour réorganiser">⋮⋮</span>';
         html +=       '<input type="checkbox" '+(dchecked?'checked':'')+' onchange="smcPerimToggleExtraDil(\''+oidEsc+'\','+i+',this.checked)">';
-        html +=       '<span class="perim-dil-text" contenteditable="true" oninput="smcPerimEditExtraDil(\''+oidEsc+'\','+i+',this.textContent)">'+smcEsc(d.text)+'</span>';
-        html +=       '<button class="perim-dil-del" onclick="smcPerimDelExtraDil(\''+oidEsc+'\','+i+')">×</button>';
+        html +=       '<span class="perim-dil-text" contenteditable="true" oninput="smcPerimEditExtraDil(\''+oidEsc+'\','+i+',this.textContent)">'+smcEsc(d.text||'')+'</span>';
+        html +=       '<button class="perim-dil-del" onclick="smcPerimDelExtraDil(\''+oidEsc+'\','+i+')" onmousedown="event.stopPropagation()">×</button>';
         html +=     '</label>';
+        if (eSubs.length){
+          html += '<div class="perim-subs">';
+          eSubs.forEach((s) => {
+            html += '<label class="perim-sub"><input type="checkbox" checked disabled><span class="perim-sub-text">'+smcEsc(s)+'</span></label>';
+          });
+          html += '</div>';
+        }
       });
       html +=     '</div>';
       html +=     '<button class="perim-add-dil" onclick="smcPerimAddExtraDil(\''+oidEsc+'\')">+ Ajouter une diligence sur-mesure</button>';
@@ -3308,6 +3348,183 @@ function smcPerimAddCustomObj(blocKey){
   smcPerimRender();
 }
 
+// ═══ DRAG-AND-DROP DES DILIGENCES ═══
+window.smcPerimDnD = null;  // { srcObjId, srcIdx, srcKind, ghostHeight }
+
+function smcPerimEnsureOrder(objId){
+  // S'assure que dilOrder existe et reflète la liste de diligences à jour
+  const obj = (window.smcPerimData||[]).find(o => o.id===objId) || (window.smcPerimCustoms||[]).find(o => o.id===objId);
+  if (!obj) return null;
+  const sel = window.smcPerimSel[objId] = window.smcPerimSel[objId] || { selected:false, dils:{}, subs:{}, extraDils:[], dilOrder:null, removedDils:{} };
+  if (!sel.dilOrder || sel.dilOrder.length !== (obj.diligences||[]).length) {
+    sel.dilOrder = (obj.diligences||[]).map((_,i) => i);
+  }
+  if (!sel.removedDils) sel.removedDils = {};
+  return sel;
+}
+
+function smcPerimDilDragStart(e, objId, idx, kind){
+  window.smcPerimDnD = { srcObjId: objId, srcIdx: idx, srcKind: kind };
+  e.target.classList.add('dragging');
+  // Permettre le drop avec dataTransfer
+  try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', objId+'|'+idx+'|'+kind); } catch(_){}
+}
+
+function smcPerimDilDragOver(e, idx){
+  if (!window.smcPerimDnD) return;
+  e.preventDefault();
+  e.stopPropagation();
+  e.dataTransfer.dropEffect = 'move';
+  // Indiquer position : avant ou après selon position de la souris
+  const target = e.currentTarget;
+  const rect = target.getBoundingClientRect();
+  const after = (e.clientY - rect.top) > rect.height / 2;
+  // Nettoyer les autres indicateurs
+  target.parentElement.querySelectorAll('.drop-target-before,.drop-target-after').forEach(el => {
+    if (el !== target) el.classList.remove('drop-target-before','drop-target-after');
+  });
+  target.classList.toggle('drop-target-before', !after);
+  target.classList.toggle('drop-target-after', after);
+}
+
+function smcPerimDilDragLeave(e){
+  e.currentTarget.classList.remove('drop-target-before','drop-target-after');
+}
+
+function smcPerimDilListDragOver(e){
+  if (!window.smcPerimDnD) return;
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  // Si la liste est vide ou la souris est en bas, montrer l'indicateur empty
+  const list = e.currentTarget;
+  if (!list.querySelector('.perim-dil')) {
+    list.parentElement.classList.add('drop-target-empty');
+  }
+}
+
+function smcPerimDilListDragLeave(e){
+  e.currentTarget.parentElement.classList.remove('drop-target-empty');
+}
+
+function smcPerimDilListDrop(e, targetObjId){
+  // Drop sur le conteneur (pas sur une diligence) → ajouter à la fin
+  if (!window.smcPerimDnD) return;
+  e.preventDefault();
+  e.stopPropagation();
+  const list = e.currentTarget;
+  list.parentElement.classList.remove('drop-target-empty');
+  // Si on drop sur le conteneur, on ajoute à la fin (insertAt = nb diligences)
+  smcPerimDilDoMove(window.smcPerimDnD.srcObjId, window.smcPerimDnD.srcIdx, window.smcPerimDnD.srcKind, targetObjId, null, false);
+  window.smcPerimDnD = null;
+}
+
+function smcPerimDilDrop(e, targetObjId, targetIdx, targetKind){
+  if (!window.smcPerimDnD) return;
+  e.preventDefault();
+  e.stopPropagation();
+  const target = e.currentTarget;
+  const rect = target.getBoundingClientRect();
+  const after = (e.clientY - rect.top) > rect.height / 2;
+  target.classList.remove('drop-target-before','drop-target-after');
+  smcPerimDilDoMove(window.smcPerimDnD.srcObjId, window.smcPerimDnD.srcIdx, window.smcPerimDnD.srcKind, targetObjId, { idx: targetIdx, kind: targetKind, after }, false);
+  window.smcPerimDnD = null;
+}
+
+function smcPerimDilDragEnd(e){
+  e.target.classList.remove('dragging');
+  document.querySelectorAll('.drop-target-before,.drop-target-after').forEach(el => el.classList.remove('drop-target-before','drop-target-after'));
+  document.querySelectorAll('.drop-target-empty').forEach(el => el.classList.remove('drop-target-empty'));
+  window.smcPerimDnD = null;
+}
+
+function smcPerimDilDoMove(srcObjId, srcIdx, srcKind, tgtObjId, tgtPos, _){
+  // tgtPos : null (drop dans la liste, append) ou {idx, kind, after}
+  const sameObj = (srcObjId === tgtObjId);
+  const srcSel = smcPerimEnsureOrder(srcObjId);
+  const tgtSel = smcPerimEnsureOrder(tgtObjId);
+  if (!srcSel || !tgtSel) return;
+
+  // Récupérer le payload de la diligence source (text + subs + selection state)
+  let payload = null;
+  if (srcKind === 'lib') {
+    const srcObj = (window.smcPerimData||[]).find(o => o.id===srcObjId) || (window.smcPerimCustoms||[]).find(o => o.id===srcObjId);
+    if (!srcObj) return;
+    const d = (srcObj.diligences||[])[srcIdx];
+    if (!d) return;
+    const dText = (typeof d === 'string') ? d : (d.text||'');
+    const dSubs = (typeof d === 'string') ? [] : ((d.subs||[]).slice());
+    const dilSelected = !!(srcSel.dils && srcSel.dils[srcIdx]);
+    payload = { text: dText, subs: dSubs, selected: dilSelected, kind: 'lib', srcIdx: srcIdx };
+  } else if (srcKind === 'extra') {
+    const ed = (srcSel.extraDils||[])[srcIdx];
+    if (!ed) return;
+    payload = { text: ed.text||'', subs: (ed.subs||[]).slice(), selected: ed.selected !== false, kind: 'extra', srcIdx: srcIdx };
+  }
+  if (!payload) return;
+
+  if (sameObj) {
+    // Réordonner uniquement si même type (lib vers lib, extra vers extra)
+    if (srcKind === 'lib' && (!tgtPos || tgtPos.kind === 'lib')) {
+      // Réordonner dilOrder
+      const order = srcSel.dilOrder.slice();
+      const fromPos = order.indexOf(srcIdx);
+      if (fromPos < 0) return;
+      order.splice(fromPos, 1);
+      let toPos;
+      if (!tgtPos) toPos = order.length;
+      else {
+        toPos = order.indexOf(tgtPos.idx);
+        if (toPos < 0) toPos = order.length;
+        if (tgtPos.after) toPos++;
+      }
+      order.splice(toPos, 0, srcIdx);
+      srcSel.dilOrder = order;
+    } else if (srcKind === 'extra' && (!tgtPos || tgtPos.kind === 'extra')) {
+      // Réordonner extraDils
+      const arr = srcSel.extraDils;
+      const item = arr.splice(srcIdx, 1)[0];
+      let toPos = (!tgtPos) ? arr.length : tgtPos.idx;
+      if (tgtPos && tgtPos.after) toPos++;
+      if (toPos > arr.length) toPos = arr.length;
+      arr.splice(toPos, 0, item);
+    } else {
+      // Mix lib/extra dans le même objectif : on transforme en mouvement inter-types
+      // Pour simplifier : on déplace en transformant la lib en extra ou inversement (rare).
+      // V1 : on ignore ce cas, on ne fait rien.
+    }
+  } else {
+    // INTER-OBJECTIFS : retirer de la source, ajouter dans tgt.extraDils
+    if (srcKind === 'lib') {
+      // Marquer la diligence source comme "removed" (cachée)
+      srcSel.removedDils[srcIdx] = true;
+      if (srcSel.dils) srcSel.dils[srcIdx] = false;
+      // Décocher aussi les sub-bullets associés
+      if (srcSel.subs) {
+        Object.keys(srcSel.subs).forEach(k => { if (k.indexOf(srcIdx+'_')===0) srcSel.subs[k] = false; });
+      }
+    } else {
+      // Retirer de extraDils source
+      srcSel.extraDils.splice(srcIdx, 1);
+    }
+    // Ajouter dans extraDils du target à la position voulue
+    const newItem = { text: payload.text, subs: payload.subs, selected: payload.selected };
+    if (!tgtPos) {
+      tgtSel.extraDils.push(newItem);
+    } else if (tgtPos.kind === 'extra') {
+      let toPos = tgtPos.idx;
+      if (tgtPos.after) toPos++;
+      tgtSel.extraDils.splice(toPos, 0, newItem);
+    } else {
+      // tgt est une lib → on l'insère en tête des extraDils (les extras sont rendus après les libs)
+      tgtSel.extraDils.unshift(newItem);
+    }
+    // Cocher l'objectif cible si la diligence est cochée
+    if (newItem.selected && !tgtSel.selected) tgtSel.selected = true;
+  }
+
+  smcPerimRender();
+}
+
 function smcPerimCollect(){
   const out = { blocs: {}, totalObjectifs: 0, totalDiligences: 0, totalSubs: 0 };
   const all = (window.smcPerimData||[]).concat(window.smcPerimCustoms||[]);
@@ -3315,8 +3532,14 @@ function smcPerimCollect(){
     const s = window.smcPerimSel[o.id];
     if (!s || !s.selected) return;
     const dils = [];
-    (o.diligences||[]).forEach((d, i) => {
-      if (!(s.dils && s.dils[i])) return;
+    const removed = s.removedDils || {};
+    const dilCount = (o.diligences||[]).length;
+    let order = (s.dilOrder && s.dilOrder.length===dilCount) ? s.dilOrder.slice() : null;
+    if (!order) { order = []; for (let k=0;k<dilCount;k++) order.push(k); }
+    order.forEach(i => {
+      if (removed[i]) return;                     // diligence déplacée vers un autre objectif
+      if (!(s.dils && s.dils[i])) return;         // diligence non cochée
+      const d = (o.diligences||[])[i];
       const dText = (typeof d === 'string') ? d : (d && d.text) || '';
       const dSubsAll = (typeof d === 'string') ? [] : ((d && d.subs) || []);
       const subsKept = [];
@@ -3326,7 +3549,11 @@ function smcPerimCollect(){
       dils.push({ text: dText, subs: subsKept });
     });
     (s.extraDils||[]).forEach(ed => {
-      if (ed.selected !== false && (ed.text||'').trim()) dils.push({ text: ed.text.trim(), subs: [] });
+      if (ed.selected !== false && (ed.text||'').trim()) {
+        const subs = (ed.subs||[]).slice();
+        out.totalSubs += subs.length;
+        dils.push({ text: ed.text.trim(), subs: subs });
+      }
     });
     const k = o.bloc || 'Autres';
     out.blocs[k] = out.blocs[k] || [];
