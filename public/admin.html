@@ -596,7 +596,47 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .perim-obj:first-child{border-top:none;}
 .perim-obj-h{display:flex;align-items:flex-start;gap:10px;padding:14px 20px;cursor:pointer;user-select:none;}
 .perim-obj-h:hover{background:var(--gris-surface);}
-.perim-obj-check{margin-top:3px;accent-color:var(--noir);cursor:pointer;width:14px;height:14px;flex-shrink:0;}
+/* Cases à cocher — V12 Typographic brackets [ ] → [✓] */
+.perim-obj-check,
+.perim-dil input[type=checkbox],
+.perim-sub input[type=checkbox]{
+  appearance:none;-webkit-appearance:none;-moz-appearance:none;
+  margin:0;padding:0;cursor:pointer;flex-shrink:0;
+  background:transparent;border:none;
+  position:relative;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:'Consolas','Courier New','Menlo',monospace;
+  font-weight:700;color:var(--noir);
+  transition:opacity 0.15s ease;
+}
+.perim-obj-check::before,
+.perim-dil input[type=checkbox]::before,
+.perim-sub input[type=checkbox]::before{
+  content:'[ ]';line-height:1;
+}
+.perim-obj-check:checked::before,
+.perim-dil input[type=checkbox]:checked::before,
+.perim-sub input[type=checkbox]:checked::before{
+  content:'[✓]';
+}
+.perim-obj-check:hover,
+.perim-dil input[type=checkbox]:hover,
+.perim-sub input[type=checkbox]:hover{
+  opacity:0.55;
+}
+.perim-obj-check:focus-visible,
+.perim-dil input[type=checkbox]:focus-visible,
+.perim-sub input[type=checkbox]:focus-visible{
+  outline:1.5px dashed var(--noir);outline-offset:3px;
+}
+.perim-obj-check:disabled,
+.perim-dil input[type=checkbox]:disabled,
+.perim-sub input[type=checkbox]:disabled{opacity:0.4;cursor:not-allowed;}
+
+/* Tailles différenciées : objectif > diligence > sub */
+.perim-obj-check{width:30px;height:24px;font-size:18px;margin-top:1px;}
+.perim-dil input[type=checkbox]{width:28px;height:22px;font-size:16px;margin-top:2px;}
+.perim-sub input[type=checkbox]{width:24px;height:18px;font-size:13px;margin-top:2px;}
 .perim-obj-caret{color:var(--gris-moyen);font-size:10px;flex-shrink:0;margin-top:3px;transition:transform 0.15s;width:10px;}
 .perim-obj.open .perim-obj-caret{transform:rotate(90deg);}
 .perim-obj-main{flex:1;min-width:0;}
@@ -609,7 +649,7 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .perim-obj-body{display:none;padding:0 20px 16px 44px;border-top:1px dashed var(--gris-tres-clair);background:var(--gris-surface);}
 .perim-obj.open .perim-obj-body{display:block;}
 .perim-dil-list{margin:12px 0;}
-.perim-dil{display:flex;align-items:flex-start;gap:8px;padding:6px 0;font-size:12px;line-height:1.5;color:var(--noir);position:relative;cursor:grab;user-select:none;border-radius:2px;transition:background 0.1s;}
+.perim-dil{display:flex;align-items:flex-start;gap:10px;padding:8px 0;font-size:12px;line-height:1.5;color:var(--noir);position:relative;cursor:grab;user-select:none;border-radius:2px;transition:background 0.1s;}
 .perim-dil:active{cursor:grabbing;}
 .perim-dil:hover{background:rgba(0,0,0,0.025);}
 .perim-dil.dragging{opacity:0.45;background:var(--gris-surface);}
@@ -619,11 +659,9 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .perim-drag-handle{flex:0 0 12px;color:var(--gris-clair);font-size:10px;line-height:1.5;align-self:flex-start;margin-top:4px;cursor:grab;}
 .perim-dil:hover .perim-drag-handle{color:var(--gris-moyen);}
 .perim-obj-body.drop-target-empty{outline:2px dashed var(--noir);outline-offset:-4px;background:rgba(0,0,0,0.02);}
-.perim-dil input[type=checkbox]{margin-top:3px;accent-color:var(--noir);cursor:pointer;width:13px;height:13px;flex-shrink:0;}
 .perim-dil-text{flex:1;}
 .perim-subs{margin:0 0 4px 28px;padding:0;}
-.perim-sub{display:flex;align-items:flex-start;gap:8px;padding:3px 0;font-size:11px;line-height:1.45;color:var(--gris-clair);}
-.perim-sub input[type=checkbox]{margin-top:2px;accent-color:var(--noir);cursor:pointer;width:11px;height:11px;flex-shrink:0;}
+.perim-sub{display:flex;align-items:flex-start;gap:9px;padding:5px 0;font-size:11px;line-height:1.5;color:var(--gris-clair);}
 .perim-sub-text{flex:1;}
 .perim-sub-text[contenteditable=true]{outline:1px dashed transparent;padding:1px 3px;border-radius:2px;}
 .perim-sub-text[contenteditable=true]:hover{outline-color:var(--gris-tres-clair);background:var(--blanc);}

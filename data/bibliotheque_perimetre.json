@@ -41,7 +41,7 @@
     "objectif_contexte": "",
     "diligences": [
       {
-        "text": "Commenter les éléments suivants :",
+        "text": "Règles et méthodes comptables — Commenter les éléments suivants :",
         "subs": [
           "Les règles et méthodes comptables sont-elles adaptées et conformes à celles du secteur ?",
           "Ont-elles été systématiquement appliquées ?",
@@ -52,7 +52,7 @@
         ]
       },
       {
-        "text": "Commenter les éléments suivants :",
+        "text": "Qualité de l'information fournie par le management — Commenter les éléments suivants :",
         "subs": [
           "Comment est produite l’information fournie par le management ? Est-elle pertinente dans la compréhension des besoins actuels et futurs de l’entreprise ?",
           "Quels KPI sont évalués ? Sont-ils pertinents pour la Cible et cohérents avec la norme du secteur ?",
@@ -64,7 +64,7 @@
         ]
       },
       {
-        "text": "Commenter les éléments suivants:",
+        "text": "Qualité des outils de gestion et de reporting — Commenter les éléments suivants:",
         "subs": [
           "Comment l’information est-elle produite ? A quel point est-elle utile dans le contexte actuel ? dans un contexte d’anticipation des besoins de l’entreprise ?",
           "Quels KPI sont mesurés et sont-ils adaptés à l’entreprise ? Sont-ils cohérents avec la norme de l’industrie ?",
@@ -78,14 +78,14 @@
         ]
       },
       {
-        "text": "Présenter les sujets suivants :",
+        "text": "Règles et méthodes comptables — Présenter les sujets suivants :",
         "subs": [
           "Règles et méthodes comptables",
           "Impact des principaux changements de méthodes comptables sur la période historique"
         ]
       },
       {
-        "text": "Fournir des commentaires sur les éléments suivants :",
+        "text": "Sources des données et réconciliations — Fournir des commentaires sur les éléments suivants :",
         "subs": [
           "Sources des données chiffrées principales et réconciliation",
           "Explications / justification des écarts de réconciliation",
@@ -115,9 +115,30 @@
     "categorie_type": "standard",
     "tag": "standard",
     "objectif_titre": "Vision combinée aux bornes du périmètre de l'opération",
-    "objectif_finalite": "",
+    "objectif_finalite": "Présenter les états financiers et indicateurs aux bornes du périmètre de l'opération envisagée",
     "objectif_contexte": "",
-    "diligences": [],
+    "diligences": [
+      {
+        "text": "Construction des données financières en vision consolidée (non certifiée) sur la période d'analyse, ainsi que sur l'exercice en cours",
+        "subs": []
+      },
+      {
+        "text": "Identification et élimination des flux et positions intra-groupes et validation de leur réciprocité",
+        "subs": []
+      },
+      {
+        "text": "Présentation des données consolidées (non certifiées) en vision contributive, permettant l'observation :",
+        "subs": [
+          "(1) des données statutaires de chaque entité du périmètre",
+          "(2) de l'élimination des flux et positions intra-groupes",
+          "(3) des éventuelles écritures de consolidation devant être considérées pour clarifier la lecture des états et ratios financiers"
+        ]
+      },
+      {
+        "text": "Expliquer la méthode retenue pour la construction et la présentation de la vision consolidée et les éventuelles limites rencontrées dans le cadre de l'exercice (si applicable)",
+        "subs": []
+      }
+    ],
     "sources": [],
     "types_mission": []
   },
