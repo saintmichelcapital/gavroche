@@ -9,19 +9,32 @@
     "objectif_contexte": "Des problèmes relatifs à la préparation et/ou au contenu du rapport de VDD peuvent affecter la fiabilité des données. Notamment : Scope insuffisant, points majeurs exclus Limitations de l’accès à l’information, peu d’information fournie Manque d’explications sur les résultats obtenus ou conclusions [Problèmes spécifiques à la transaction identifiés]",
     "diligences": [
       {
-        "text": "Fournir des commentaires sur les éléments suivants :",
+        "text": "Lecture du rapport de Vendor Due Diligence et organisation/animation d'une session de question(s)-réponse(s) (expert-session) avec l'équipe ayant préparé la VDD (et le Management, le cas échéant).",
+        "subs": []
+      },
+      {
+        "text": "Apporter les commentaires nécessaires sur les éléments suivants :",
         "subs": [
-          "Comment a été déterminé le périmètre des travaux ?",
-          "Des éléments qui auraient dû être inclus dans le périmètre des travaux ont-ils été exclus ?",
-          "Les compétences et l’expérience de l’équipe de VDD ainsi que les temps passés sur le projet sont-ils en relation avec la complexité du secteur ?",
-          "A combien s’élèvent les honoraires ? Y a-t-il une partie conditionnelle ?",
-          "Quel a été le niveau de matérialité retenu pour la VDD ?",
-          "Quelles ont été les restrictions décidées par le vendeur ou le management concernant le périmètre des travaux ou l’accès/communication avec le management ?",
-          "De quels processus de révision/relecture par le vendeur et/ou le management le rapport a-t-il été l’objet ?",
-          "Des commentaires du vendeur ou du management sur les rapports (non finaux) ont-ils influé sur les résultats ? Le contenu du rapport final ?",
-          "Quelles explications ont été apportées aux conclusions ou opinions concernant les points subjectifs ?",
-          "Des travaux supplémentaires sont-ils prévus ?"
+          "1) Cohérence des ressources mobilisées par le cabinet pour la réalisation des travaux (compétences, équipe mobilisée, durée de la mission, etc.)",
+          "2) Etendue des travaux et pertinence du périmètre des diligences menées - Vérifier la cohérence entre les diligences effectivement conduites et le périmètre des travaux initialement contractualisé",
+          "3) Pertinence du niveau de matérialité retenu dans le cadre des analyses",
+          "4) Difficultés rencontrées pour la réalisation des diligences du fait de restrictions quant à l'accès au management et/ou à l'information"
         ]
+      },
+      {
+        "text": "Exposer et expliquer les principales restrictions ou limitations rencontrées par l'équipe de VDD dans le cadre des travaux. Indiquer si ces limitations tiennent à la disponibilité des informations ou aux arbitrages et décisions du vendeur ou du management concernant l'accès ou la communication des informations.",
+        "subs": []
+      },
+      {
+        "text": "Obtenir la lettre d'affirmation du Management et s'instruire :",
+        "subs": [
+          "1) du processus de révision/relecture du rapport par le vendeur et/ou le management",
+          "2) de l'étendue des commentaires formulés par le vendeur ou le management sur les conclusions et le contenu des analyses réalisées"
+        ]
+      },
+      {
+        "text": "Comprendre si des travaux complémentaires au rapport de VDD sont prévus et s'instruire du calendrier de réalisation et communication de ces travaux complémentaires.",
+        "subs": []
       }
     ],
     "sources": [
