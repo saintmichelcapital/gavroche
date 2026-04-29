@@ -15,11 +15,12 @@
       {
         "text": "Apporter les commentaires nécessaires sur les éléments suivants :",
         "subs": [
-          "1) Cohérence des ressources mobilisées par le cabinet pour la réalisation des travaux (compétences, équipe mobilisée, durée de la mission, etc.)",
-          "2) Etendue des travaux et pertinence du périmètre des diligences menées - Vérifier la cohérence entre les diligences effectivement conduites et le périmètre des travaux initialement contractualisé",
-          "3) Pertinence du niveau de matérialité retenu dans le cadre des analyses",
-          "4) Difficultés rencontrées pour la réalisation des diligences du fait de restrictions quant à l'accès au management et/ou à l'information"
-        ]
+          "Cohérence des ressources mobilisées par le cabinet pour la réalisation des travaux (compétences, équipe mobilisée, durée de la mission, etc.)",
+          "Etendue des travaux et pertinence du périmètre des diligences menées - Vérifier la cohérence entre les diligences effectivement conduites et le périmètre des travaux initialement contractualisé",
+          "Pertinence du niveau de matérialité retenu dans le cadre des analyses",
+          "Difficultés rencontrées pour la réalisation des diligences du fait de restrictions quant à l'accès au management et/ou à l'information"
+        ],
+        "numbering": "1)"
       },
       {
         "text": "Exposer et expliquer les principales restrictions ou limitations rencontrées par l'équipe de VDD dans le cadre des travaux. Indiquer si ces limitations tiennent à la disponibilité des informations ou aux arbitrages et décisions du vendeur ou du management concernant l'accès ou la communication des informations.",
@@ -28,9 +29,10 @@
       {
         "text": "Obtenir la lettre d'affirmation du Management et s'instruire :",
         "subs": [
-          "1) du processus de révision/relecture du rapport par le vendeur et/ou le management",
-          "2) de l'étendue des commentaires formulés par le vendeur ou le management sur les conclusions et le contenu des analyses réalisées"
-        ]
+          "du processus de révision/relecture du rapport par le vendeur et/ou le management",
+          "de l'étendue des commentaires formulés par le vendeur ou le management sur les conclusions et le contenu des analyses réalisées"
+        ],
+        "numbering": "1)"
       },
       {
         "text": "Comprendre si des travaux complémentaires au rapport de VDD sont prévus et s'instruire du calendrier de réalisation et communication de ces travaux complémentaires.",
@@ -54,57 +56,44 @@
     "objectif_contexte": "",
     "diligences": [
       {
-        "text": "Règles et méthodes comptables — Commenter les éléments suivants :",
-        "subs": [
-          "Les règles et méthodes comptables sont-elles adaptées et conformes à celles du secteur ?",
-          "Ont-elles été systématiquement appliquées ?",
-          "Quels sont les points subjectifs ?",
-          "Des éléments indiquent-ils que les résultats ont été manipulés comptablement? [Cible CHANNEL 2]",
-          "Des aspects inhérents aux normes comptables locales pourraient-ils impacter la compréhension des chiffres une fois passés en normes IFRS ?",
-          "[Questions supplémentaires de la part du Client sur un point particulier de la transaction]"
-        ]
+        "text": "Revue critique de la méthode de construction des données financières historiques aux bornes du périmètre de l'opération (cohérence entre le périmètre cible et le périmètre de présentation des états financiers, élimination des flux et positions internes, éventuelles écritures de consolidation)",
+        "subs": []
       },
       {
-        "text": "Qualité de l'information fournie par le management — Commenter les éléments suivants :",
-        "subs": [
-          "Comment est produite l’information fournie par le management ? Est-elle pertinente dans la compréhension des besoins actuels et futurs de l’entreprise ?",
-          "Quels KPI sont évalués ? Sont-ils pertinents pour la Cible et cohérents avec la norme du secteur ?",
-          "Dans quelle mesure les chiffres mensuels sont-ils fondés sur des estimations ?",
-          "Quels sont les outils de gestion financière principaux et les contrôles en place ?",
-          "Quels problèmes ont été soulevés par les audits internes au sujet des contrôles en place ?",
-          "Comment la trésorerie de l’entreprise est-elle organisée et comment est géré le risque de change ?",
-          "Quels sont les outils de gestion financière principaux et les contrôles en place ?"
-        ]
+        "text": "Décrire la procédure de préparation des états financiers et des comptes de gestion et expliquer la réconciliation entre ces deux sources de documents",
+        "subs": []
       },
       {
-        "text": "Qualité des outils de gestion et de reporting — Commenter les éléments suivants:",
-        "subs": [
-          "Comment l’information est-elle produite ? A quel point est-elle utile dans le contexte actuel ? dans un contexte d’anticipation des besoins de l’entreprise ?",
-          "Quels KPI sont mesurés et sont-ils adaptés à l’entreprise ? Sont-ils cohérents avec la norme de l’industrie ?",
-          "Quel est le degré d’estimation des chiffres mensuels ?",
-          "Quels systèmes/outils financiers existe-t-il ? Quels sont les contrôles ?",
-          "[Questions supplémentaires de la part du Client sur un point particulier de la transaction]",
-          "Comment est produite l’information fournie par le management ? Est-elle adaptée à la compréhension des besoins actuels et futurs de la Cible ?",
-          "Quels KPI sont mesurés et sont-ils adaptés à l’entreprise ? Sont-ils cohérents avec la pratique de l’industrie ?",
-          "[Procédures complémentaires aux analyses présentées dans le rapport de vendor due diligence]",
-          "[Sujets spécifiques à la transaction ou demandes particulières du Client]"
-        ]
+        "text": "Comprendre les systèmes et outils de reporting financier, le processus et la fréquence de production de l'information financière utilisée par le Management (données financières, indicateurs clés)",
+        "subs": []
       },
       {
-        "text": "Règles et méthodes comptables — Présenter les sujets suivants :",
-        "subs": [
-          "Règles et méthodes comptables",
-          "Impact des principaux changements de méthodes comptables sur la période historique"
-        ]
+        "text": "Obtenir les états de gestion utilisés par la direction pour le suivi et le pilotage de la performance, et commenter les sources des données chiffrées et réconciliations. Justifier les écarts avec les comptes publiés",
+        "subs": []
       },
       {
-        "text": "Sources des données et réconciliations — Fournir des commentaires sur les éléments suivants :",
+        "text": "Compréhension et identification des flux existant entre la cible et les parties liées (holding-actionnaires, dirigeants, sociétés liées, SCI, collatéraux, etc.)",
+        "subs": []
+      },
+      {
+        "text": "Si applicable, décrire les principales règles et méthodes comptables et les points subjectifs retenus pour l'élaboration des données financières (hypothèses, nature et degré d'estimation des données financières)",
+        "subs": []
+      },
+      {
+        "text": "Si applicable, indiquer les impacts des principaux changements de méthodes comptables sur la période historique",
+        "subs": []
+      },
+      {
+        "text": "Décrire l'organisation de la fonction finance (organigramme, cartographie IT et systèmes, recours à d'éventuels prestataires extérieurs)",
+        "subs": []
+      },
+      {
+        "text": "Indiquer si les entités du périmètre font l'objet ou non d'un audit légal de certification de leurs états financiers. Le cas échéant :",
         "subs": [
-          "Sources des données chiffrées principales et réconciliation",
-          "Explications / justification des écarts de réconciliation",
-          "Hypothèses retenues et nature et degré d’estimation des données financières",
-          "Problématiques de « carve-out » ou pro forma,"
-        ]
+          "Obtenir les rapports des commissaires aux comptes et prendre connaissance de l'opinion émise sur l'ensemble de la période couverte",
+          "En cas de réserves ou d'observations formulées dans l'opinion, comprendre et expliquer les incidences sur la lecture des ratios financiers"
+        ],
+        "numbering": "(1)"
       }
     ],
     "sources": [
@@ -142,10 +131,11 @@
       {
         "text": "Présentation des données consolidées (non certifiées) en vision contributive, permettant l'observation :",
         "subs": [
-          "(1) des données statutaires de chaque entité du périmètre",
-          "(2) de l'élimination des flux et positions intra-groupes",
-          "(3) des éventuelles écritures de consolidation devant être considérées pour clarifier la lecture des états et ratios financiers"
-        ]
+          "des données statutaires de chaque entité du périmètre",
+          "de l'élimination des flux et positions intra-groupes",
+          "des éventuelles écritures de consolidation devant être considérées pour clarifier la lecture des états et ratios financiers"
+        ],
+        "numbering": "(1)"
       },
       {
         "text": "Expliquer la méthode retenue pour la construction et la présentation de la vision consolidée et les éventuelles limites rencontrées dans le cadre de l'exercice (si applicable)",
@@ -157,9 +147,9 @@
   },
   {
     "id": "83853517",
-    "bloc": "Quality of financial information",
-    "categorie_type": "standard",
-    "tag": "standard",
+    "bloc": "Audit des comptes",
+    "categorie_type": "additionnel",
+    "tag": "additionnel",
     "objectif_titre": "Périmètre d'audit des comptes",
     "objectif_finalite": "Comprendre la base des travaux d'audit réalisés et évaluer si les comptes audités fournissent une base de travail fiable pour la due diligence",
     "objectif_contexte": "",
