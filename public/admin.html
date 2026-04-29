@@ -596,47 +596,51 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .perim-obj:first-child{border-top:none;}
 .perim-obj-h{display:flex;align-items:flex-start;gap:10px;padding:14px 20px;cursor:pointer;user-select:none;}
 .perim-obj-h:hover{background:var(--gris-surface);}
-/* Cases à cocher — V12 Typographic brackets [ ] → [✓] */
+/* Cases à cocher — cb16 Inset frame (cadre intérieur blanc + bordure noire) */
 .perim-obj-check,
 .perim-dil input[type=checkbox],
 .perim-sub input[type=checkbox]{
   appearance:none;-webkit-appearance:none;-moz-appearance:none;
   margin:0;padding:0;cursor:pointer;flex-shrink:0;
-  background:transparent;border:none;
+  background:var(--blanc);border:1.5px solid var(--noir);border-radius:3px;
   position:relative;
   display:inline-flex;align-items:center;justify-content:center;
-  font-family:'Consolas','Courier New','Menlo',monospace;
-  font-weight:700;color:var(--noir);
-  transition:opacity 0.15s ease;
-}
-.perim-obj-check::before,
-.perim-dil input[type=checkbox]::before,
-.perim-sub input[type=checkbox]::before{
-  content:'[ ]';line-height:1;
-}
-.perim-obj-check:checked::before,
-.perim-dil input[type=checkbox]:checked::before,
-.perim-sub input[type=checkbox]:checked::before{
-  content:'[✓]';
+  transition:all 0.15s ease;
 }
 .perim-obj-check:hover,
 .perim-dil input[type=checkbox]:hover,
 .perim-sub input[type=checkbox]:hover{
-  opacity:0.55;
+  box-shadow:inset 0 0 0 2px var(--blanc),0 0 0 1px var(--noir);
+}
+.perim-obj-check:checked,
+.perim-dil input[type=checkbox]:checked,
+.perim-sub input[type=checkbox]:checked{
+  background:var(--noir);
+  box-shadow:inset 0 0 0 2px var(--blanc),0 0 0 2px var(--noir);
+}
+.perim-obj-check:checked::after,
+.perim-dil input[type=checkbox]:checked::after,
+.perim-sub input[type=checkbox]:checked::after{
+  content:'';position:absolute;
+  border:solid var(--noir);border-width:0 2px 2px 0;
+  transform:rotate(45deg) translate(-1px,-1px);
 }
 .perim-obj-check:focus-visible,
 .perim-dil input[type=checkbox]:focus-visible,
 .perim-sub input[type=checkbox]:focus-visible{
-  outline:1.5px dashed var(--noir);outline-offset:3px;
+  outline:2px solid var(--noir);outline-offset:3px;
 }
 .perim-obj-check:disabled,
 .perim-dil input[type=checkbox]:disabled,
 .perim-sub input[type=checkbox]:disabled{opacity:0.4;cursor:not-allowed;}
 
 /* Tailles différenciées : objectif > diligence > sub */
-.perim-obj-check{width:30px;height:24px;font-size:18px;margin-top:1px;}
-.perim-dil input[type=checkbox]{width:28px;height:22px;font-size:16px;margin-top:2px;}
-.perim-sub input[type=checkbox]{width:24px;height:18px;font-size:13px;margin-top:2px;}
+.perim-obj-check{width:22px;height:22px;margin-top:1px;}
+.perim-obj-check:checked::after{width:5px;height:9px;border-width:0 2px 2px 0;}
+.perim-dil input[type=checkbox]{width:20px;height:20px;margin-top:2px;}
+.perim-dil input[type=checkbox]:checked::after{width:5px;height:9px;border-width:0 2px 2px 0;}
+.perim-sub input[type=checkbox]{width:16px;height:16px;margin-top:2px;border-width:1.25px;}
+.perim-sub input[type=checkbox]:checked::after{width:4px;height:7px;border-width:0 1.5px 1.5px 0;}
 .perim-obj-caret{color:var(--gris-moyen);font-size:10px;flex-shrink:0;margin-top:3px;transition:transform 0.15s;width:10px;}
 .perim-obj.open .perim-obj-caret{transform:rotate(90deg);}
 .perim-obj-main{flex:1;min-width:0;}
@@ -3077,6 +3081,7 @@ window.SMC_PERIM_ORDER = [
   { type: 'standard',    label: 'Quality of net debt (/cash)' },
   { type: 'standard',    label: 'Quality of forecast' },
   { type: 'standard',    label: 'Autres' },
+  { type: 'additionnel', label: 'Audit des comptes' },
   { type: 'additionnel', label: 'Contrat de cession / acquisition' },
   { type: 'additionnel', label: 'Due diligence IT' },
   { type: 'additionnel', label: 'Due diligence Pensions & Social' },
@@ -3200,12 +3205,20 @@ function smcPerimRender(){
         html +=     '</label>';
         if (dSubs.length){
           html += '<div class="perim-subs">';
+          // Numérotation dynamique : si la diligence parente a un format numbering, on numérote uniquement les sub cochés
+          const numFmt = (typeof d === 'object' && d) ? (d.numbering || null) : null;
+          let nCheckedSub = 0;
           dSubs.forEach((s, j) => {
             const subKey = i+'_'+j;
             const ssel = !!(sel.subs && sel.subs[subKey]);
+            let prefix = '';
+            if (numFmt && ssel) {
+              nCheckedSub++;
+              prefix = (numFmt === '(1)') ? '('+nCheckedSub+') ' : nCheckedSub+') ';
+            }
             html += '<label class="perim-sub">';
             html +=   '<input type="checkbox" '+(ssel?'checked':'')+' onchange="smcPerimToggleSub(\''+oidEsc+'\','+i+','+j+',this.checked)">';
-            html +=   '<span class="perim-sub-text">'+smcEsc(s)+'</span>';
+            html +=   '<span class="perim-sub-text">'+(prefix?'<strong style="color:var(--gris-fonce);font-weight:700;">'+smcEsc(prefix)+'</strong>':'')+smcEsc(s)+'</span>';
             html += '</label>';
           });
           html += '</div>';
@@ -3327,18 +3340,11 @@ function smcPerimToggleSub(objId, dilIdx, subIdx, checked){
   window.smcPerimSel[objId].subs = window.smcPerimSel[objId].subs || {};
   window.smcPerimSel[objId].subs[dilIdx+'_'+subIdx] = checked;
   if (checked) {
-    if (!window.smcPerimSel[objId].dils[dilIdx]) {
-      window.smcPerimSel[objId].dils[dilIdx] = true;
-      smcPerimRender();
-      return;
-    }
-    if (!window.smcPerimSel[objId].selected) {
-      window.smcPerimSel[objId].selected = true;
-      smcPerimRender();
-      return;
-    }
+    if (!window.smcPerimSel[objId].dils[dilIdx]) window.smcPerimSel[objId].dils[dilIdx] = true;
+    if (!window.smcPerimSel[objId].selected) window.smcPerimSel[objId].selected = true;
   }
-  smcPerimCountUpdate();
+  // Re-render systématique pour que la numérotation auto se rafraîchisse
+  smcPerimRender();
 }
 
 function smcPerimToggleExtraDil(objId, i, checked){
@@ -3580,9 +3586,19 @@ function smcPerimCollect(){
       const d = (o.diligences||[])[i];
       const dText = (typeof d === 'string') ? d : (d && d.text) || '';
       const dSubsAll = (typeof d === 'string') ? [] : ((d && d.subs) || []);
+      const numFmt = (typeof d === 'object' && d) ? (d.numbering || null) : null;
       const subsKept = [];
+      let n = 0;
       dSubsAll.forEach((sb, j) => {
-        if (s.subs && s.subs[i+'_'+j]) { subsKept.push(sb); out.totalSubs++; }
+        if (s.subs && s.subs[i+'_'+j]) {
+          let label = sb;
+          if (numFmt) {
+            n++;
+            label = (numFmt === '(1)') ? '('+n+') '+sb : n+') '+sb;
+          }
+          subsKept.push(label);
+          out.totalSubs++;
+        }
       });
       dils.push({ text: dText, subs: subsKept });
     });
