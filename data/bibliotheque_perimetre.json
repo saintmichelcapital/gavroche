@@ -20,7 +20,7 @@
           "Pertinence du niveau de matérialité retenu dans le cadre des analyses",
           "Difficultés rencontrées pour la réalisation des diligences du fait de restrictions quant à l'accès au management et/ou à l'information"
         ],
-        "numbering": "1)"
+        "numbering": "(1)"
       },
       {
         "text": "Exposer et expliquer les principales restrictions ou limitations rencontrées par l'équipe de VDD dans le cadre des travaux. Indiquer si ces limitations tiennent à la disponibilité des informations ou aux arbitrages et décisions du vendeur ou du management concernant l'accès ou la communication des informations.",
@@ -32,7 +32,7 @@
           "du processus de révision/relecture du rapport par le vendeur et/ou le management",
           "de l'étendue des commentaires formulés par le vendeur ou le management sur les conclusions et le contenu des analyses réalisées"
         ],
-        "numbering": "1)"
+        "numbering": "(1)"
       },
       {
         "text": "Comprendre si des travaux complémentaires au rapport de VDD sont prévus et s'instruire du calendrier de réalisation et communication de ces travaux complémentaires.",
@@ -146,60 +146,58 @@
     "types_mission": []
   },
   {
-    "id": "83853517",
-    "bloc": "Audit des comptes",
-    "categorie_type": "additionnel",
-    "tag": "additionnel",
-    "objectif_titre": "Périmètre d'audit des comptes",
-    "objectif_finalite": "Comprendre la base des travaux d'audit réalisés et évaluer si les comptes audités fournissent une base de travail fiable pour la due diligence",
+    "id": "7399219a",
+    "bloc": "Quality of earnings",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Analyses projets",
+    "objectif_finalite": "Qualifier la composition et la répartition des revenus et marges par projet ou typologie de projet",
     "objectif_contexte": "",
     "diligences": [
       {
-        "text": "Prendre connaissance des dossiers de travail de l’auditeur concernant les derniers comptes audités [et les revues trimestrielles pour l’année en cours (si disponibles)]",
+        "text": "Collecter les données analytiques de suivi par affaires utilisées par le management et les responsables de projets pour assurer le pilotage et le suivi courant de la rentabilité des affaires (« Base affaires ») – S'assurer de la qualité de cette base en la rapprochant des données comptables.",
         "subs": []
       },
       {
-        "text": "Prendre connaissance des lettres de recommandations émises par l’auditeur ou rapports équivalents",
+        "text": "Analyser la dispersion de la rentabilité par affaires et expliquer les facteurs de surperformance ou sous-performance des affaires présentant une rentabilité supérieure/inférieure à la moyenne +/- l'écart-type",
         "subs": []
       },
       {
-        "text": "Discuter avec l’auditeur les principales problématiques comptables notées, notamment l’audit des filiales, la préparation des comptes consolidés, les ajustements d’audit comptabilisés et non comptabilisés, les changements de méthodes comptables et/ou procédures, les divergences de vue avec le management, les différences avec [les US Gaap / IFRS], etc.",
+        "text": "Calculer et analyser la dérive statistique de rentabilité des affaires terminées par rapport aux données initialement budgétées",
         "subs": []
       },
       {
-        "text": "Commenter les éléments suivants :",
+        "text": "Identifier les affaires dont les caractéristiques financières ont significativement impacté la rentabilité et en expliquer les facteurs clés :",
         "subs": [
-          "Quels sont le périmètre et la matérialité des audits ?",
-          "Quelles opinions sur les comptes ont été rendues ?",
-          "Quels ajustements ont été proposés / effectués ? Quels problèmes significatifs d’audit ont été soulevés ? Quels points de la « management letter » ont été soulevés ?",
-          "Existe-t-il des différences entre les règles et méthodes comptables utilisées pour les arrêtés intermédiaires et celles utilisées pour les comptes annuels ?"
-        ]
+          "Top projets en revenus",
+          "Top projets en rentabilité",
+          "Principaux contrats ayant généré des pertes ou des marges limitées",
+          "Principaux projets montrant une dérive matérielle par rapport aux données initialement budgétées"
+        ],
+        "numbering": "(1)"
       },
       {
-        "text": "Identification de points d’attention éventuels à suivre par les équipes financières post acquisition",
+        "text": "Au regard des données collectées, comprendre dans quelle mesure la société parvient à négocier des avenants (/réclamations) afin de compenser les éventuels décalages entre coûts estimés et coûts réels",
         "subs": []
       },
       {
-        "text": "[US – Environnement de contrôle interne [et sujets SOX] et implication du Comité d’Audit dans les sujets comptables et financiers] [Quelles procédures complémentaires seraient à réaliser en plus de celles de la VDD ?]",
-        "subs": []
+        "text": "Obtenir la liste des réclamations formulées et comprendre :",
+        "subs": [
+          "Si ces réclamations ont été présentées et acceptées par le donneur d'ordre",
+          "Si ces réclamations ont été prises en compte pour la détermination de la marge à terminaison et la reconnaissance des revenus et de la marge"
+        ],
+        "numbering": "(1)"
       },
       {
-        "text": "[Questions supplémentaires de la part du Client sur un point particulier de la transaction]",
-        "subs": []
-      },
-      {
-        "text": "[Note : Procédures à adapter pour les cibles françaises, en fonction du secret professionnel qui ne permet pas l’accès aux dossiers de l’auditeur]",
+        "text": "Obtenir et décomposer le carnet de commandes à la dernière date disponible par affaires, en présentant pour chacune (1) le chiffre d'affaires attendu et (2) le niveau de rentabilité attendu. Mettre ces rentabilités en perspective des données historiques.",
         "subs": []
       }
     ],
     "sources": [
-      "Pre-acquisition",
-      "Refinancing",
-      "VDD"
+      "SMC"
     ],
     "types_mission": [
       "buy-side",
-      "refinancing",
       "sell-side"
     ]
   },
@@ -270,104 +268,113 @@
     ]
   },
   {
+    "id": "7d256acb",
+    "bloc": "Quality of earnings",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Current trading et atterrissage",
+    "objectif_finalite": "Mesurer le niveau de sécurisation de l'atterrissage pour l'exercice en cours",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Obtenir le dernier arrêté comptable établi et s'instruire de la qualité du processus de clôture par rapport aux arrêtés annuels",
+        "subs": []
+      },
+      {
+        "text": "Comparer les données obtenues avec celles des exercices précédents sur les mêmes périodes, et expliquer les principales sources d'amélioration ou détérioration de la performance",
+        "subs": []
+      },
+      {
+        "text": "Obtenir le dernier atterrissage révisé par le management, intégrant si applicable :",
+        "subs": [
+          "les données d'activités récentes issues d'une situation intermédiaire ou de données extra-comptables (current trading), et",
+          "l'écoulement du carnet de commandes et de la liste des opportunités identifiées"
+        ],
+        "numbering": "(1)"
+      },
+      {
+        "text": "Présenter et expliquer les principales variations/évolutions par rapport au budget initialement établi",
+        "subs": []
+      },
+      {
+        "text": "Apprécier le profil de saisonnalité de l'activité au regard des exercices antérieurs et mettre en perspective la performance à date :",
+        "subs": [
+          "Décomposer mensuellement (ou trimestriellement) les revenus et marges sur les exercices précédents et comparer le poids relatif des mois écoulés au sein de l'année pleine historique",
+          "Apprécier la cohérence de l'atterrissage projeté au regard du restant à faire et du profil de saisonnalité observé"
+        ],
+        "numbering": "(1)"
+      },
+      {
+        "text": "Au regard des données de performance à date (current trading) :",
+        "subs": [
+          "Présenter le year-to-date / year-to-go et le comparer avec les niveaux d'avancement des exercices précédents",
+          "Mesurer le taux de couverture/sécurisation de l'atterrissage au regard du carnet et de son écoulement attendu",
+          "Expliquer les principaux facteurs de sur(/sous)-performance à l'aide des indications du management"
+        ],
+        "numbering": "(1)"
+      },
+      {
+        "text": "Décomposer le restant à faire entre (1) la part sécurisée par le carnet, (2) la part couverte par les opportunités identifiées et (3) la part de revenus et de marge reposant sur la dynamique commerciale en cours ou à venir",
+        "subs": []
+      },
+      {
+        "text": "Identifier les impacts des actions de restructuration initiées ou envisagées : coût, calendrier, économies attendues et impacts année pleine",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "SMC"
+    ],
+    "types_mission": [
+      "buy-side",
+      "sell-side"
+    ]
+  },
+  {
     "id": "b030648b",
     "bloc": "Quality of earnings",
     "categorie_type": "standard",
     "tag": "standard",
     "objectif_titre": "EBITDA ajusté",
-    "objectif_finalite": "Permettre la comparaison des résultats historiques année par année et analyser les tendances de croissance et de marge",
-    "objectif_contexte": "Les résultats passés peuvent être impactés par : Eléments exceptionnels / non récurrents Provisions effectuées / reprises Acquisitions / cessions Ouvertures / fermetures incluant les cessations d’activité Effets de change, taux de change (effets de conversion et de transaction) Modification des pratiques comptables Coûts prévus de l’activité « standalone » (par ex. coût des nouveaux sièges sociaux) Modification de la structure des coûts suite à un changement dans la structure capitalistique Base (et cohérence) de l’allocation des coûts entre les divisions Produits et charges constatés d’avance / Provisions pour charges à payer Contribution d’entités non consolidées (JV) ou autres participations [Autres]",
+    "objectif_finalite": "Déterminer la capacité bénéficiaire récurrente du groupe et permettre la comparaison de ses résultats historiques année par année",
+    "objectif_contexte": "",
     "diligences": [
       {
-        "text": "Lire le rapport de VDD et l’information en dataroom afin de comprendre les ajustements réalisés et d’en évaluer la pertinence",
+        "text": "Lecture et analyse critique des ajustements retenus dans le rapport de Vendor Due Diligence afin d'en évaluer la pertinence, le principe et le montant",
         "subs": []
       },
       {
-        "text": "Analyser l’information financière disponible et aborder avec le management les éléments exceptionnels / non récurrents identifiés dans les états financiers, tout changement de pratique comptable et/ou tout changement structurel dans l’activité au cours de la période",
+        "text": "Lecture et analyse critique des ajustements retenus dans l'Information Memorandum afin d'en évaluer la pertinence, le principe et le montant",
         "subs": []
       },
       {
-        "text": "Analyser les coûts potentiels inhérents à l’activité « standalone » suite à la séparation",
-        "subs": []
-      },
-      {
-        "text": "Etudier les transactions intragroupes et notamment le caractère courant des conditions appliquées",
-        "subs": []
-      },
-      {
-        "text": "Expliquer la nature des ajustements, commenter leur impact et leurs conséquences sur les futurs résultats [identifier les ajustements supplémentaires]",
-        "subs": []
-      },
-      {
-        "text": "Préparer [Mettre à jour] le tableau d’EBITDA ajusté pour [FYXX-FYXX]",
-        "subs": []
-      },
-      {
-        "text": "Analyser les ajustements préparés par le management ayant un impact sur les résultats (éléments non récurrents et autres ajustements), et présentation des tendances (commenter tout élément exceptionnel)",
-        "subs": []
-      },
-      {
-        "text": "Analyser les problèmes potentiels liés à la séparation d’une entité et quantifiés par le management dans la mesure du possible",
-        "subs": []
-      },
-      {
-        "text": "Prendre en compte les transactions entre partie liées",
-        "subs": []
-      },
-      {
-        "text": "Commenter les variations de change historiques, et les ajustements des résultats à change constant, si possible",
-        "subs": []
-      },
-      {
-        "text": "Débattre de la nature de chaque élément non récurrent afin de permettre aux acquéreurs potentiels d’avoir leur propre vision de l’impact",
-        "subs": []
-      },
-      {
-        "text": "Analyser les « run rates » de chaque entité y compris les acquisitions / lancements de nouveaux produits au cours de la période",
-        "subs": []
-      },
-      {
-        "text": "Présenter les éléments suivants basés sur les informations fournies par le management :",
+        "text": "Analyser l'information financière disponible et discuter avec le management quant aux éventuels retraitements à considérer, au regard notamment :",
         "subs": [
-          "Eléments non récurrents et autres éléments d’ajustement sur le résultat,",
-          "Relations avec les parties liées",
-          "Taux de change utilisés pour la conversion des résultats historiques,"
-        ]
+          "des évènements exceptionnels ayant engendré des profits ou pertes non-récurrentes",
+          "de tout changement dans les paramètres de valorisation des stocks ou encours de production",
+          "des éventuels impacts de changements de méthode comptable",
+          "de tout changement structurel dans les conditions d'exploitation (approvisionnement, révisions tarifaires, inflations, restructuration, lancement d'activité, etc.)"
+        ],
+        "numbering": "(1)"
       },
       {
-        "text": "Obtenir les commentaires du management sur les éléments d’ajustement détaillés ci-dessus.",
+        "text": "Pour les projets pluriannuels, comprendre et neutraliser l'impact des révisions des taux de marge à terminaison sur la reconnaissance des revenus et des marges (lissage de marge)",
         "subs": []
       },
       {
-        "text": "Identification des ajustements  ayant un impact sur les résultats (éléments non récurrents et autres ajustements), et présentation des tendances (commenter tout élément exceptionnel)",
+        "text": "Analyser les refacturations émanant du groupe au titre des ressources mutualisées/partagées, et s'instruire de la vision du management quant aux coûts récurrents à considérer pour assurer la conduite de l'activité « standalone »",
         "subs": []
       },
       {
-        "text": "Identifier les problèmes potentiels liés à la séparation d’une entité, et estimer les impacts fiscaux sur le résultat (si possible)",
+        "text": "Etudier les transactions avec les parties liées (actionnaires, collatéraux, sociétés liées, SCI propriétaire des locaux exploités, etc.) et le caractère courant des conditions appliquées",
         "subs": []
       },
       {
-        "text": "Analyse des ajustements préparés par le management ayant un impact sur les résultats (éléments non récurrents et autres ajustements), et présentation des tendances (commenter tout élément exceptionnel)",
+        "text": "Si applicable, comprendre et mesurer l'impact des fluctuations des taux de change sur la lecture des résultats historiques. Présenter les ratios de rentabilité à taux de change constant.",
         "subs": []
       },
       {
-        "text": "Identifier les problèmes potentiels liés à la séparation d’une entité, et quantifiés par le management dans la mesure du possible",
-        "subs": []
-      },
-      {
-        "text": "Analyse des « run rates » de chaque entité y compris les acquisitions / lancements de nouveaux produits au cours de la période",
-        "subs": []
-      },
-      {
-        "text": "Aborder avec le management les éléments exceptionnels / non récurrents identifiés dans les états financiers, tout changement de pratique comptable et/ou tout changement structurel dans l’activité au cours de la période",
-        "subs": []
-      },
-      {
-        "text": "Expliquer la nature des ajustements d’EBITDA, commenter leur impact et leurs conséquences sur les résultats à date [identifier les ajustements supplémentaires]",
-        "subs": []
-      },
-      {
-        "text": "Analyser l’EBITDA ajusté par rapport aux résultats des douze derniers mois et les comparer aux prévisions pour l’année complète",
+        "text": "Expliquer la nature des ajustements, leur impact et leurs conséquences sur les résultats futurs – Préparer une table d'EBITDA ajusté pour la période {{periode}}",
         "subs": []
       }
     ],
@@ -2248,6 +2255,64 @@
       "SID"
     ],
     "types_mission": [
+      "sell-side"
+    ]
+  },
+  {
+    "id": "83853517",
+    "bloc": "Audit des comptes",
+    "categorie_type": "additionnel",
+    "tag": "additionnel",
+    "objectif_titre": "Périmètre d'audit des comptes",
+    "objectif_finalite": "Comprendre la base des travaux d'audit réalisés et évaluer si les comptes audités fournissent une base de travail fiable pour la due diligence",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Prendre connaissance des dossiers de travail de l’auditeur concernant les derniers comptes audités [et les revues trimestrielles pour l’année en cours (si disponibles)]",
+        "subs": []
+      },
+      {
+        "text": "Prendre connaissance des lettres de recommandations émises par l’auditeur ou rapports équivalents",
+        "subs": []
+      },
+      {
+        "text": "Discuter avec l’auditeur les principales problématiques comptables notées, notamment l’audit des filiales, la préparation des comptes consolidés, les ajustements d’audit comptabilisés et non comptabilisés, les changements de méthodes comptables et/ou procédures, les divergences de vue avec le management, les différences avec [les US Gaap / IFRS], etc.",
+        "subs": []
+      },
+      {
+        "text": "Commenter les éléments suivants :",
+        "subs": [
+          "Quels sont le périmètre et la matérialité des audits ?",
+          "Quelles opinions sur les comptes ont été rendues ?",
+          "Quels ajustements ont été proposés / effectués ? Quels problèmes significatifs d’audit ont été soulevés ? Quels points de la « management letter » ont été soulevés ?",
+          "Existe-t-il des différences entre les règles et méthodes comptables utilisées pour les arrêtés intermédiaires et celles utilisées pour les comptes annuels ?"
+        ]
+      },
+      {
+        "text": "Identification de points d’attention éventuels à suivre par les équipes financières post acquisition",
+        "subs": []
+      },
+      {
+        "text": "[US – Environnement de contrôle interne [et sujets SOX] et implication du Comité d’Audit dans les sujets comptables et financiers] [Quelles procédures complémentaires seraient à réaliser en plus de celles de la VDD ?]",
+        "subs": []
+      },
+      {
+        "text": "[Questions supplémentaires de la part du Client sur un point particulier de la transaction]",
+        "subs": []
+      },
+      {
+        "text": "[Note : Procédures à adapter pour les cibles françaises, en fonction du secret professionnel qui ne permet pas l’accès aux dossiers de l’auditeur]",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Pre-acquisition",
+      "Refinancing",
+      "VDD"
+    ],
+    "types_mission": [
+      "buy-side",
+      "refinancing",
       "sell-side"
     ]
   },

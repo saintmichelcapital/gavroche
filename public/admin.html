@@ -3041,6 +3041,72 @@ async function valPerim() {
 }
 
 // ═══════════════════════════════════════════════════
+// SYSTEME D'INTERPOLATION DES PLACEHOLDERS (Perimetre)
+// Lit en live l'etat des Parametres cles et substitue
+// {{cible}}, {{entite}}, {{l_entite}}, {{de_l_entite}},
+// {{FY_PREMIER}}, {{FY_DERNIER}}, {{periode}}
+// ═══════════════════════════════════════════════════
+function smcGetInterpolationContext(){
+  const data = (typeof dF !== 'undefined' && dF) ? dF : {};
+  const isMulti = (typeof ts !== 'undefined' && ts === 'multi');
+
+  let cible = '[nom de la cible]';
+  if (!isMulti) {
+    if (data.entite && data.entite.nom && data.entite.nom !== '—') cible = data.entite.nom;
+    else {
+      // fallback : lire le nom affiche dans la fiche mono
+      const fe = document.getElementById('fe-n-mono');
+      if (fe && fe.textContent && fe.textContent.trim() !== '—') cible = fe.textContent.trim();
+    }
+  } else {
+    const entRows = document.querySelectorAll('#entl .ent-row, #entl > div');
+    const noms = [];
+    entRows.forEach(r => {
+      const inp = r.querySelector('input[type=text]');
+      if (inp && inp.value) noms.push(inp.value.trim());
+    });
+    if (noms.length) cible = noms.join(', ');
+    else cible = '[périmètre]';
+  }
+
+  // Exercices : extraire les annees
+  const years = ((data.exercices || [])).map(ex => {
+    const d = (ex && (ex.date || ex.cloture || ex.lib)) || '';
+    const m = String(d).match(/(\d{4})/);
+    return m ? parseInt(m[1]) : null;
+  }).filter(y => y).sort((a,b) => a-b);
+
+  const fmt = (y) => 'FY'+String(y).slice(-2)+'A';
+  const FY_PREMIER = years.length ? fmt(years[0]) : '[FYxxA]';
+  const FY_DERNIER = years.length ? fmt(years[years.length-1]) : '[FYxxA]';
+  let periode;
+  if (years.length === 0) periode = '[période]';
+  else if (years.length === 1) periode = FY_PREMIER;
+  else periode = FY_PREMIER+'-'+FY_DERNIER;
+
+  return {
+    cible: cible,
+    entite: isMulti ? 'groupe' : 'société',
+    l_entite: isMulti ? 'le groupe' : 'la société',
+    de_l_entite: isMulti ? 'du groupe' : 'de la société',
+    FY_PREMIER: FY_PREMIER,
+    FY_DERNIER: FY_DERNIER,
+    periode: periode
+  };
+}
+
+function smcPerimInterpolate(text){
+  if (!text) return text;
+  const ctx = smcGetInterpolationContext();
+  let out = String(text);
+  Object.keys(ctx).forEach(k => {
+    const re = new RegExp('\\{\\{\\s*'+k+'\\s*\\}\\}', 'g');
+    out = out.replace(re, ctx[k]);
+  });
+  return out;
+}
+
+// ═══════════════════════════════════════════════════
 // MODULE PERIMETRE DES DILIGENCES (Etape 3)
 // ═══════════════════════════════════════════════════
 
@@ -3164,9 +3230,10 @@ function smcPerimRender(){
       html +=     '<input type="checkbox" class="perim-obj-check" '+(sel.selected?'checked':'')+' onchange="smcPerimToggleObj(\''+oidEsc+'\', this.checked)" onclick="event.stopPropagation()">';
       html +=     '<span class="perim-obj-caret" onclick="smcPerimToggleObjOpen(this.parentElement.parentElement)">▶</span>';
       html +=     '<div class="perim-obj-main" onclick="smcPerimToggleObjOpen(this.parentElement.parentElement)">';
-      html +=       '<div class="perim-obj-titre">'+smcEsc(o.objectif_titre);
+      html +=       '<div class="perim-obj-titre">'+smcEsc(smcPerimInterpolate(o.objectif_titre));
       if (o.objectif_finalite) {
-        const fShort = o.objectif_finalite.length > 140 ? o.objectif_finalite.substring(0,140)+'…' : o.objectif_finalite;
+        const fInt = smcPerimInterpolate(o.objectif_finalite);
+        const fShort = fInt.length > 140 ? fInt.substring(0,140)+'…' : fInt;
         html +=       '<em>«&nbsp;'+smcEsc(fShort)+'&nbsp;»</em>';
       }
       html +=       '</div>';
@@ -3176,7 +3243,7 @@ function smcPerimRender(){
       html +=   '</div>';
       html +=   '<div class="perim-obj-body">';
       if (o.objectif_finalite) {
-        html += '<div style="padding-top:12px;font-size:11px;color:var(--gris-moyen);font-style:italic;line-height:1.5;">«&nbsp;'+smcEsc(o.objectif_finalite)+'&nbsp;»</div>';
+        html += '<div style="padding-top:12px;font-size:11px;color:var(--gris-moyen);font-style:italic;line-height:1.5;">«&nbsp;'+smcEsc(smcPerimInterpolate(o.objectif_finalite))+'&nbsp;»</div>';
       }
       html +=     '<div class="perim-dil-list" data-dil-list="'+oidEsc+'" ondragover="smcPerimDilListDragOver(event)" ondragleave="smcPerimDilListDragLeave(event)" ondrop="smcPerimDilListDrop(event,\''+oidEsc+'\')">';
       // Construire l'ordre de rendu (en respectant smcPerimSel[id].dilOrder si défini)
@@ -3201,7 +3268,7 @@ function smcPerimRender(){
         html +=       ' ondragend="smcPerimDilDragEnd(event)">';
         html +=       '<span class="perim-drag-handle" title="Cliquer-glisser pour réorganiser">⋮⋮</span>';
         html +=       '<input type="checkbox" '+(dsel?'checked':'')+' onchange="smcPerimToggleDil(\''+oidEsc+'\','+i+',this.checked)">';
-        html +=       '<span class="perim-dil-text">'+smcEsc(dText)+'</span>';
+        html +=       '<span class="perim-dil-text">'+smcEsc(smcPerimInterpolate(dText))+'</span>';
         html +=     '</label>';
         if (dSubs.length){
           html += '<div class="perim-subs">';
@@ -3218,7 +3285,7 @@ function smcPerimRender(){
             }
             html += '<label class="perim-sub">';
             html +=   '<input type="checkbox" '+(ssel?'checked':'')+' onchange="smcPerimToggleSub(\''+oidEsc+'\','+i+','+j+',this.checked)">';
-            html +=   '<span class="perim-sub-text">'+(prefix?'<strong style="color:var(--gris-fonce);font-weight:700;">'+smcEsc(prefix)+'</strong>':'')+smcEsc(s)+'</span>';
+            html +=   '<span class="perim-sub-text">'+(prefix?'<strong style="color:var(--gris-fonce);font-weight:700;">'+smcEsc(prefix)+'</strong>':'')+smcEsc(smcPerimInterpolate(s))+'</span>';
             html += '</label>';
           });
           html += '</div>';
@@ -3591,16 +3658,16 @@ function smcPerimCollect(){
       let n = 0;
       dSubsAll.forEach((sb, j) => {
         if (s.subs && s.subs[i+'_'+j]) {
-          let label = sb;
+          let label = smcPerimInterpolate(sb);
           if (numFmt) {
             n++;
-            label = (numFmt === '(1)') ? '('+n+') '+sb : n+') '+sb;
+            label = (numFmt === '(1)') ? '('+n+') '+label : n+') '+label;
           }
           subsKept.push(label);
           out.totalSubs++;
         }
       });
-      dils.push({ text: dText, subs: subsKept });
+      dils.push({ text: smcPerimInterpolate(dText), subs: subsKept });
     });
     (s.extraDils||[]).forEach(ed => {
       if (ed.selected !== false && (ed.text||'').trim()) {
@@ -3613,8 +3680,8 @@ function smcPerimCollect(){
     out.blocs[k] = out.blocs[k] || [];
     out.blocs[k].push({
       id: o.id,
-      titre: o.objectif_titre,
-      finalite: o.objectif_finalite,
+      titre: smcPerimInterpolate(o.objectif_titre),
+      finalite: smcPerimInterpolate(o.objectif_finalite || ''),
       diligences: dils,
       tag: o.tag || o.categorie_type,
       categorie_type: o.categorie_type || o.tag,
