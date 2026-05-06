@@ -146,50 +146,58 @@
     "types_mission": []
   },
   {
-    "id": "7399219a",
+    "id": "8f8964da",
     "bloc": "Quality of earnings",
     "categorie_type": "standard",
     "tag": "standard",
-    "objectif_titre": "Analyses projets",
-    "objectif_finalite": "Qualifier la composition et la répartition des revenus et marges par projet ou typologie de projet",
+    "objectif_titre": "Profitabilité et EBITDA ajusté",
+    "objectif_finalite": "Apprécier la capacité bénéficiaire récurrente du groupe et comprendre les principaux leviers de croissance et de profitabilité",
     "objectif_contexte": "",
     "diligences": [
       {
-        "text": "Collecter les données analytiques de suivi par affaires utilisées par le management et les responsables de projets pour assurer le pilotage et le suivi courant de la rentabilité des affaires (« Base affaires ») – S'assurer de la qualité de cette base en la rapprochant des données comptables.",
+        "text": "Présenter le compte de résultat historique sur un format économique permettant la lecture des principaux ratios de croissance et de rentabilité",
         "subs": []
       },
       {
-        "text": "Analyser la dispersion de la rentabilité par affaires et expliquer les facteurs de surperformance ou sous-performance des affaires présentant une rentabilité supérieure/inférieure à la moyenne +/- l'écart-type",
+        "text": "Décomposer l'évolution des revenus et de la marge par axe d'analyse pertinent (activité, produit, segment de clientèle, géographie) et expliquer les principaux facteurs d'amélioration ou de dégradation sur la période",
         "subs": []
       },
       {
-        "text": "Calculer et analyser la dérive statistique de rentabilité des affaires terminées par rapport aux données initialement budgétées",
-        "subs": []
-      },
-      {
-        "text": "Identifier les affaires dont les caractéristiques financières ont significativement impacté la rentabilité et en expliquer les facteurs clés :",
+        "text": "Construire et analyser les bridges d'EBITDA en vue d'expliquer :",
         "subs": [
-          "Top projets en revenus",
-          "Top projets en rentabilité",
-          "Principaux contrats ayant généré des pertes ou des marges limitées",
-          "Principaux projets montrant une dérive matérielle par rapport aux données initialement budgétées"
+          "les effets volumes-prix-mix",
+          "l'impact des révisions tarifaires et des gains de productivité",
+          "les améliorations/détériorations imputables à l'évolution des frais de structure et coûts indirects",
+          "l'impact des éventuelles autres initiatives mises en place sur la période"
         ],
         "numbering": "(1)"
       },
       {
-        "text": "Au regard des données collectées, comprendre dans quelle mesure la société parvient à négocier des avenants (/réclamations) afin de compenser les éventuels décalages entre coûts estimés et coûts réels",
+        "text": "Procéder à une lecture critique des ajustements retenus dans le rapport de Vendor Due Diligence ou l'Information Memorandum afin d'en évaluer la pertinence, le principe et le montant",
         "subs": []
       },
       {
-        "text": "Obtenir la liste des réclamations formulées et comprendre :",
+        "text": "Identifier les retraitements complémentaires à intégrer dans le calcul de l'EBITDA ajusté, au regard notamment :",
         "subs": [
-          "Si ces réclamations ont été présentées et acceptées par le donneur d'ordre",
-          "Si ces réclamations ont été prises en compte pour la détermination de la marge à terminaison et la reconnaissance des revenus et de la marge"
+          "des évènements exceptionnels et non-récurrents",
+          "des changements de méthode comptable et de la valorisation des stocks ou encours de production",
+          "des changements structurels dans les conditions d'exploitation (acquisitions/cessions, restructuration, lancement d'activité)",
+          "des transactions intragroupes et flux avec les parties liées (actionnaires, collatéraux, SCI, etc.)",
+          "des coûts inhérents à l'activité « standalone » et des refacturations groupe",
+          "des fluctuations de taux de change (présenter les ratios à change constant si applicable)"
         ],
         "numbering": "(1)"
       },
       {
-        "text": "Obtenir et décomposer le carnet de commandes à la dernière date disponible par affaires, en présentant pour chacune (1) le chiffre d'affaires attendu et (2) le niveau de rentabilité attendu. Mettre ces rentabilités en perspective des données historiques.",
+        "text": "Décomposer le chiffre d'affaires entre revenus récurrents (contrats pluriannuels, abonnements, maintenance) et revenus non-récurrents (projets ponctuels, ventes one-shot), et mesurer l'évolution de la part récurrente sur la période",
+        "subs": []
+      },
+      {
+        "text": "Décomposer et analyser les produits et coûts exclus de la définition de l'EBITDA (produits et charges exceptionnels, résultat financier) et porter un regard critique sur leur caractère courant/non-courant",
+        "subs": []
+      },
+      {
+        "text": "Préparer une table d'EBITDA ajusté pour la période {{periode}} en expliquant la nature, l'impact et les conséquences des ajustements retenus sur les résultats futurs",
         "subs": []
       }
     ],
@@ -199,126 +207,72 @@
     "types_mission": [
       "buy-side",
       "sell-side"
-    ]
+    ],
+    "position": 1
   },
   {
-    "id": "221b8be0",
+    "id": "77736299",
     "bloc": "Quality of earnings",
     "categorie_type": "standard",
     "tag": "standard",
-    "objectif_titre": "Chiffrer l’impact d’éléments non récurrents ou d’éventuelles erreurs de classification sur l’EBITDA présenté",
-    "objectif_finalite": "",
+    "objectif_titre": "Performance historique : croissance et rentabilité",
+    "objectif_finalite": "Comprendre les principaux leviers de croissance et de profitabilité",
     "objectif_contexte": "",
     "diligences": [
       {
-        "text": "Revue analytique des comptes de gestions à date et discussion avec le management du Groupe afin d’identifier tout élément / impact exceptionnel / non récurrent ;",
+        "text": "Présentation du compte de résultat historique sur un format économique, permettant la lecture des principaux ratios de croissance et de rentabilité",
         "subs": []
       },
       {
-        "text": "Analyse de l’évolution des provisions au titre de l’atterrissage ;",
+        "text": "Décomposer l'évolution des revenus et de la marge par axe d'analyse pertinent (activité, produit, segment de clientèle, géographie) et expliquer les principaux facteurs d'amélioration ou de dégradation sur la période",
         "subs": []
       },
       {
-        "text": "Analyse des éléments non pris en compte dans l’EBITDA.",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Restructuring"
-    ],
-    "types_mission": [
-      "restructuring"
-    ]
-  },
-  {
-    "id": "0f89682e",
-    "bloc": "Quality of earnings",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Comment a été préparé l’atterrissage FYXX (compte de résultat et bilan) ?",
-    "objectif_finalite": "",
-    "objectif_contexte": "Quelles sont les principales hypothèses ayant servies à la construction de cet atterrissage ? Quel niveau d’assurance le carnet de commandes donne-t-il au regard de l’atterrissage ? Quel est le niveau de l’avancement du budget au regard de la performance à date ? Quel a été le mode de construction des positions de trésorerie et de besoin en fonds de roulement de fin d’année ?",
-    "diligences": [
-      {
-        "text": "Analyse de l’atterrissage au regard de l’historique du Groupe ainsi que le budget initial ;",
-        "subs": []
-      },
-      {
-        "text": "Analyse de l’atterrissage au regard de la performance à date et du carnet de commandes ;",
-        "subs": []
-      },
-      {
-        "text": "Identification d’éventuels éléments non récurrents ;",
-        "subs": []
-      },
-      {
-        "text": "Identification des hypothèses de restructuration : coût, calendrier, impacts réels et impacts année pleine ;",
-        "subs": []
-      },
-      {
-        "text": "Analyse des positions de fin d’année de besoin en fonds de roulement et de dette nette au regard des éléments historiques.",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Restructuring"
-    ],
-    "types_mission": [
-      "restructuring"
-    ]
-  },
-  {
-    "id": "7d256acb",
-    "bloc": "Quality of earnings",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Current trading et atterrissage",
-    "objectif_finalite": "Mesurer le niveau de sécurisation de l'atterrissage pour l'exercice en cours",
-    "objectif_contexte": "",
-    "diligences": [
-      {
-        "text": "Obtenir le dernier arrêté comptable établi et s'instruire de la qualité du processus de clôture par rapport aux arrêtés annuels",
-        "subs": []
-      },
-      {
-        "text": "Comparer les données obtenues avec celles des exercices précédents sur les mêmes périodes, et expliquer les principales sources d'amélioration ou détérioration de la performance",
-        "subs": []
-      },
-      {
-        "text": "Obtenir le dernier atterrissage révisé par le management, intégrant si applicable :",
+        "text": "Construire et analyser les bridges d'EBITDA en vue d'expliquer :",
         "subs": [
-          "les données d'activités récentes issues d'une situation intermédiaire ou de données extra-comptables (current trading), et",
-          "l'écoulement du carnet de commandes et de la liste des opportunités identifiées"
+          "les effets volumes-prix-mix",
+          "l'impact des révisions tarifaires",
+          "l'impact des gains de productivité",
+          "les améliorations/détériorations de rentabilité imputables à l'évolution des frais de structure et coûts indirects de fonctionnement",
+          "l'impact des éventuelles autres initiatives mises en place sur la période"
         ],
         "numbering": "(1)"
       },
       {
-        "text": "Présenter et expliquer les principales variations/évolutions par rapport au budget initialement établi",
+        "text": "Identifier les KPI opérationnels clés (volume produit, taux d'occupation, panier moyen, taux d'utilisation, taux de transformation, etc.) et analyser leur évolution historique — Mettre en perspective avec l'évolution des revenus et marges pour valider la cohérence de la performance financière",
         "subs": []
       },
       {
-        "text": "Apprécier le profil de saisonnalité de l'activité au regard des exercices antérieurs et mettre en perspective la performance à date :",
+        "text": "Présenter l'évolution du portefeuille clients en vue de :",
         "subs": [
-          "Décomposer mensuellement (ou trimestriellement) les revenus et marges sur les exercices précédents et comparer le poids relatif des mois écoulés au sein de l'année pleine historique",
-          "Apprécier la cohérence de l'atterrissage projeté au regard du restant à faire et du profil de saisonnalité observé"
+          "Déterminer le taux de rotation et d'attrition de ce portefeuille",
+          "S'instruire du cadre contractuel en vigueur avec les principaux clients",
+          "Mesurer le niveau d'engagement contractuel et la visibilité/prédictibilité quant aux volumes d'affaires attendus"
         ],
         "numbering": "(1)"
       },
       {
-        "text": "Au regard des données de performance à date (current trading) :",
-        "subs": [
-          "Présenter le year-to-date / year-to-go et le comparer avec les niveaux d'avancement des exercices précédents",
-          "Mesurer le taux de couverture/sécurisation de l'atterrissage au regard du carnet et de son écoulement attendu",
-          "Expliquer les principaux facteurs de sur(/sous)-performance à l'aide des indications du management"
-        ],
-        "numbering": "(1)"
-      },
-      {
-        "text": "Décomposer le restant à faire entre (1) la part sécurisée par le carnet, (2) la part couverte par les opportunités identifiées et (3) la part de revenus et de marge reposant sur la dynamique commerciale en cours ou à venir",
+        "text": "Décomposer le chiffre d'affaires entre revenus récurrents (contrats pluriannuels, abonnements, maintenance) et revenus non-récurrents (projets ponctuels, ventes one-shot) — Mesurer l'évolution de la part récurrente sur la période et son impact sur la prédictibilité de la performance",
         "subs": []
       },
       {
-        "text": "Identifier les impacts des actions de restructuration initiées ou envisagées : coût, calendrier, économies attendues et impacts année pleine",
+        "text": "Présenter les volumes d'achats réalisés annuellement auprès des principaux fournisseurs et s'instruire du cadre contractuel en vigueur avec ces derniers",
+        "subs": []
+      },
+      {
+        "text": "Analyser l'évolution de la masse salariale et des effectifs, en distinguant si possible (1) les effets de croissance du nombre d'ETP et (2) les effets d'évolution des conditions salariales. Préciser les fonctions impactées par ces évolutions.",
+        "subs": []
+      },
+      {
+        "text": "Isoler la rémunération des dirigeants (prestations, salaires, autres) ainsi que l'ensemble des flux non-courants réalisés avec les parties liées",
+        "subs": []
+      },
+      {
+        "text": "Analyser le(s) contrat(s) de bail en vigueur et mettre les termes contractuels en corrélation avec les loyers comptabilisés",
+        "subs": []
+      },
+      {
+        "text": "Décomposer et analyser les produits et coûts exclus de la définition de l'EBITDA (e.g. produits et charges exceptionnels, résultat financier) et porter un regard critique sur leur caractère courant/non-courant.",
         "subs": []
       }
     ],
@@ -328,7 +282,8 @@
     "types_mission": [
       "buy-side",
       "sell-side"
-    ]
+    ],
+    "position": 2
   },
   {
     "id": "b030648b",
@@ -391,287 +346,129 @@
       "completion",
       "refinancing",
       "sell-side"
-    ]
+    ],
+    "position": 3
   },
   {
-    "id": "ed985a39",
+    "id": "7d256acb",
     "bloc": "Quality of earnings",
     "categorie_type": "standard",
     "tag": "standard",
-    "objectif_titre": "EBITDA “Pro forma”",
-    "objectif_finalite": "Permettre la comparaison homogène des résultats historiques et prévisionnels",
-    "objectif_contexte": "Les résultats de l’année en cours peuvent ne pas refléter l’intégralité des actions et initiatives engagées / investissements contractés. Les résultats ajustés peuvent ne pas prendre en compte les effets année pleine de : Acquisitions / ouvertures Nouveaux contrats gagnés / perdus Modification des conditions de vente et/ou d’achat Investissements de production ou de capacité Restructuration et rationalisation des coûts L’opération envisagée peut entraîner un changement dans la prise en compte du chiffre d’affaires et la structure de coût qui n’est pas reflété dans la profitabilité historique. Impact année pleine des synergies Coûts estimés d’une activité « standalone » Changement de méthodes comptables",
+    "objectif_titre": "Current trading et atterrissage",
+    "objectif_finalite": "Mesurer le niveau de sécurisation de l'atterrissage pour l'exercice en cours",
+    "objectif_contexte": "",
     "diligences": [
       {
-        "text": "[Lire le rapport de VDD / les informations financières fournies en dataroom afin de porter un jugement critique sur la nature des ajustements pro forma présentés dans le rapport de VDD]",
+        "text": "Obtenir le dernier arrêté comptable établi et s'instruire de la qualité du processus de clôture par rapport aux arrêtés annuels",
         "subs": []
       },
       {
-        "text": "[Analyser l’information financière disponible et discuter avec le management de l’existence potentielle d’ajustements « pro forma »]",
+        "text": "Comparer les données obtenues avec celles des exercices précédents sur les mêmes périodes, et expliquer les principales sources d'amélioration ou détérioration de la performance",
         "subs": []
       },
       {
-        "text": "Expliquer la nature des ajustements et commenter leurs impacts sur les profits futurs [identifier des ajustements additionnels]",
+        "text": "Obtenir le dernier atterrissage révisé par le management, intégrant si applicable :",
+        "subs": [
+          "les données d'activités récentes issues d'une situation intermédiaire ou de données extra-comptables (current trading), et",
+          "l'écoulement du carnet de commandes et de la liste des opportunités identifiées"
+        ],
+        "numbering": "(1)"
+      },
+      {
+        "text": "Présenter et expliquer les principales variations/évolutions par rapport au budget initialement établi",
         "subs": []
       },
       {
-        "text": "Expliquer la nature des ajustements, commenter leur impact sur les résultats futurs [et identifier d’éventuels ajustements complémentaires]",
+        "text": "Apprécier le profil de saisonnalité de l'activité au regard des exercices antérieurs et mettre en perspective la performance à date :",
+        "subs": [
+          "Décomposer mensuellement (ou trimestriellement) les revenus et marges sur les exercices précédents et comparer le poids relatif des mois écoulés au sein de l'année pleine historique",
+          "Apprécier la cohérence de l'atterrissage projeté au regard du restant à faire et du profil de saisonnalité observé"
+        ],
+        "numbering": "(1)"
+      },
+      {
+        "text": "Au regard des données de performance à date (current trading) :",
+        "subs": [
+          "Présenter le year-to-date / year-to-go et le comparer avec les niveaux d'avancement des exercices précédents",
+          "Mesurer le taux de couverture/sécurisation de l'atterrissage au regard du carnet et de son écoulement attendu",
+          "Expliquer les principaux facteurs de sur(/sous)-performance à l'aide des indications du management"
+        ],
+        "numbering": "(1)"
+      },
+      {
+        "text": "Décomposer le restant à faire entre (1) la part sécurisée par le carnet, (2) la part couverte par les opportunités identifiées et (3) la part de revenus et de marge reposant sur la dynamique commerciale en cours ou à venir",
         "subs": []
       },
       {
-        "text": "Préparer un tableau [Mettre à jour] [d’EBITDA “Pro forma” ajusté pour les années [X].",
-        "subs": []
-      },
-      {
-        "text": "Analyser les ajustements pro forma sur la profitabilité",
-        "subs": []
-      },
-      {
-        "text": "Commenter la nature de chaque élément non récurrent",
-        "subs": []
-      },
-      {
-        "text": "Identifier et expliquer les ajustements pro forma sur la profitabilité",
+        "text": "Identifier les impacts des actions de restructuration initiées ou envisagées : coût, calendrier, économies attendues et impacts année pleine",
         "subs": []
       }
     ],
     "sources": [
-      "Pre-acquisition",
-      "Refinancing",
-      "VDD"
+      "SMC"
     ],
     "types_mission": [
       "buy-side",
-      "refinancing",
       "sell-side"
-    ]
+    ],
+    "position": 4
   },
   {
-    "id": "52ed3976",
+    "id": "7399219a",
     "bloc": "Quality of earnings",
     "categorie_type": "standard",
     "tag": "standard",
-    "objectif_titre": "Notre analyse du besoin en fonds de roulement et de la conversion de l’EBITDA en cash pourrait permettre d’identifier des mesures d’amélioration de la gestion du BFR du Groupe.",
-    "objectif_finalite": "",
+    "objectif_titre": "Analyses projets",
+    "objectif_finalite": "Qualifier la composition et la répartition des revenus et marges par projet ou typologie de projet",
     "objectif_contexte": "",
     "diligences": [
       {
-        "text": "Sur la base de nos travaux, nous préparerons une synthèse des principaux éléments identifiés au titre de la gestion du besoin en fonds de roulement du Groupe.",
+        "text": "Collecter les données analytiques de suivi par affaires utilisées par le management et les responsables de projets pour assurer le pilotage et le suivi courant de la rentabilité des affaires (« Base affaires ») – S'assurer de la qualité de cette base en la rapprochant des données comptables.",
         "subs": []
-      }
-    ],
-    "sources": [
-      "Restructuring"
-    ],
-    "types_mission": [
-      "restructuring"
-    ]
-  },
-  {
-    "id": "f74ea241",
-    "bloc": "Quality of earnings",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Performance historique et prévisionnelle",
-    "objectif_finalite": "",
-    "objectif_contexte": "",
-    "diligences": [
+      },
       {
-        "text": "Présenter les éléments suivants basés sur les informations fournies par le management :",
+        "text": "Analyser la dispersion de la rentabilité par affaires et expliquer les facteurs de surperformance ou sous-performance des affaires présentant une rentabilité supérieure/inférieure à la moyenne +/- l'écart-type",
+        "subs": []
+      },
+      {
+        "text": "Calculer et analyser la dérive statistique de rentabilité des affaires terminées par rapport aux données initialement budgétées",
+        "subs": []
+      },
+      {
+        "text": "Identifier les affaires dont les caractéristiques financières ont significativement impacté la rentabilité et en expliquer les facteurs clés :",
         "subs": [
-          "Performance historique et prévisionnelle incluant le chiffre d’affaires, la marge, l’EBITDA (et tout autre KPI applicable) par :",
-          "Client, segment, produit",
-          "Prix et volume;",
-          "croissance organique vs externe; et",
-          "autre segmentation clé définie par le management.",
-          "Bridge de chiffre d’affaires et de résultat"
-        ]
+          "Top projets en revenus",
+          "Top projets en rentabilité",
+          "Principaux contrats ayant généré des pertes ou des marges limitées",
+          "Principaux projets montrant une dérive matérielle par rapport aux données initialement budgétées"
+        ],
+        "numbering": "(1)"
       },
       {
-        "text": "Synthèse de la saisonnalité annuelle de ventes et des résultats",
+        "text": "Au regard des données collectées, comprendre dans quelle mesure la société parvient à négocier des avenants (/réclamations) afin de compenser les éventuels décalages entre coûts estimés et coûts réels",
         "subs": []
       },
       {
-        "text": "Ventilation des coûts par nature en incluant le détail des coûts de structure",
-        "subs": []
+        "text": "Obtenir la liste des réclamations formulées et comprendre :",
+        "subs": [
+          "Si ces réclamations ont été présentées et acceptées par le donneur d'ordre",
+          "Si ces réclamations ont été prises en compte pour la détermination de la marge à terminaison et la reconnaissance des revenus et de la marge"
+        ],
+        "numbering": "(1)"
       },
       {
-        "text": "Principales politiques d’amélioration de la performance",
+        "text": "Obtenir et décomposer le carnet de commandes à la dernière date disponible par affaires, en présentant pour chacune (1) le chiffre d'affaires attendu et (2) le niveau de rentabilité attendu. Mettre ces rentabilités en perspective des données historiques.",
         "subs": []
       }
     ],
     "sources": [
-      "SID"
+      "SMC"
     ],
     "types_mission": [
+      "buy-side",
       "sell-side"
-    ]
-  },
-  {
-    "id": "7d7595ce",
-    "bloc": "Quality of earnings",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Profitabilité",
-    "objectif_finalite": "",
-    "objectif_contexte": "Quels sont les principaux leviers de la croissance et de la profitabilité passées et futures ?",
-    "diligences": [
-      {
-        "text": "Analyse des résultats historiques et prévisionnels (chiffre d’affaires, marge brute, EBITDA et KPI si possible) par :",
-        "subs": [
-          "Ligne d’activité/ business unit",
-          "Marque, le cas échéant",
-          "Marché géographique",
-          "Catégorie de clients et principaux clients"
-        ]
-      },
-      {
-        "text": "Construire et analyser les variations de résultat incluant ventes, marge brute, marge d’EBITDA à taux de change constant",
-        "subs": []
-      },
-      {
-        "text": "Analyse les effets prix/volume/mix du chiffre d’affaires",
-        "subs": []
-      },
-      {
-        "text": "Analyse de la structure de coûts :",
-        "subs": [
-          "Ecarts industriels",
-          "Coûts par nature et site",
-          "Coûts fixes/variables",
-          "Coûts directs/indirects",
-          "Coûts directs par matière première",
-          "Impact des programmes de restructuration",
-          "Coûts par fournisseur"
-        ]
-      },
-      {
-        "text": "Analyse du carnet de commandes",
-        "subs": []
-      }
     ],
-    "sources": [
-      "Business Plan"
-    ],
-    "types_mission": [
-      "buy-side"
-    ]
-  },
-  {
-    "id": "78fb3f7f",
-    "bloc": "Quality of earnings",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Présenter, en préalable des analyses détaillées d’hypothèses de construction, une synthèse d’une à deux pages couvrant les résultats du business plan en terme d’EBITDA, cash-flow, ratios et respect des covenants",
-    "objectif_finalite": "",
-    "objectif_contexte": "",
-    "diligences": [
-      {
-        "text": "Préparer une courte synthèse présentant le compte de résultat consolidé et tableau de flux de trésorerie (y compris covenants et autres ratios) sur la période historique FYXX et FYXX ainsi que le prévisionnel FYXX-XX",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Restructuring"
-    ],
-    "types_mission": [
-      "restructuring"
-    ]
-  },
-  {
-    "id": "2d5b13fc",
-    "bloc": "Quality of earnings",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Quelles sont les principales données et les principaux ratios de la période historique FYXXA, FYXX pour ce qui est du compte de résultat et du carnet de commandes ?",
-    "objectif_finalite": "",
-    "objectif_contexte": "",
-    "diligences": [
-      {
-        "text": "Analyse des procédures internes qui régissent la préparation des états financiers (rythmes de facturation, opérations intercompagnie…) ;",
-        "subs": []
-      },
-      {
-        "text": "Analyse du chiffre d’affaires et de la marge brute sur les exercices FYXXA et FYXX par famille de produit, business unit et filiale en adoptant une approche effet prix / volume ;",
-        "subs": []
-      },
-      {
-        "text": "Analyse de la structure de coûts fixes, son évolution ainsi que les impacts des éventuelles mesures de restructuration en cours ;",
-        "subs": []
-      },
-      {
-        "text": "Analyse de la saisonnalité mensuelle (ventes, achats, coûts fixes…).",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Restructuring"
-    ],
-    "types_mission": [
-      "restructuring"
-    ]
-  },
-  {
-    "id": "e92596ef",
-    "bloc": "Quality of earnings",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Résultats Pro forma",
-    "objectif_finalite": "",
-    "objectif_contexte": "",
-    "diligences": [
-      {
-        "text": "Présenter les éléments suivants basés sur les informations fournies par le management :",
-        "subs": [
-          "Ajustements pro forma impactant les résultats,",
-          "Coûts de séparation, Coûts “standalone” éventuels,",
-          "Impact des acquisitions/cessions sur la période historique et prévisionnelle."
-        ]
-      },
-      {
-        "text": "Obtenir les commentaires du management sur les éléments d’ajustement détaillés ci-dessus.",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "SID"
-    ],
-    "types_mission": [
-      "sell-side"
-    ]
-  },
-  {
-    "id": "3ca2e2a5",
-    "bloc": "Quality of earnings",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Résultats à date et atterrissage de fin d’année",
-    "objectif_finalite": "",
-    "objectif_contexte": "",
-    "diligences": [
-      {
-        "text": "Présentation du résultat à date (“RAD”) en comparaison à l’exercice précédent et au budget",
-        "subs": []
-      },
-      {
-        "text": "Présentation du chiffre d’affaires et de l’EBITDA restant à faire (“RAF”) basé sur le dernier estimé en année pleine retraité du résultat à date (RAD),",
-        "subs": []
-      },
-      {
-        "text": "Comparaison du RAF à l’exercice précédent et au budget",
-        "subs": []
-      },
-      {
-        "text": "Synthétiser les événements impactant les prix/volume/mix ainsi que les coûts tels qu’identifiés par le management",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "SID"
-    ],
-    "types_mission": [
-      "sell-side"
-    ]
+    "position": 5
   },
   {
     "id": "77f8e9c1",
@@ -2131,6 +1928,72 @@
     ]
   },
   {
+    "id": "221b8be0",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Chiffrer l’impact d’éléments non récurrents ou d’éventuelles erreurs de classification sur l’EBITDA présenté",
+    "objectif_finalite": "",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Revue analytique des comptes de gestions à date et discussion avec le management du Groupe afin d’identifier tout élément / impact exceptionnel / non récurrent ;",
+        "subs": []
+      },
+      {
+        "text": "Analyse de l’évolution des provisions au titre de l’atterrissage ;",
+        "subs": []
+      },
+      {
+        "text": "Analyse des éléments non pris en compte dans l’EBITDA.",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Restructuring"
+    ],
+    "types_mission": [
+      "restructuring"
+    ]
+  },
+  {
+    "id": "0f89682e",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Comment a été préparé l’atterrissage FYXX (compte de résultat et bilan) ?",
+    "objectif_finalite": "",
+    "objectif_contexte": "Quelles sont les principales hypothèses ayant servies à la construction de cet atterrissage ? Quel niveau d’assurance le carnet de commandes donne-t-il au regard de l’atterrissage ? Quel est le niveau de l’avancement du budget au regard de la performance à date ? Quel a été le mode de construction des positions de trésorerie et de besoin en fonds de roulement de fin d’année ?",
+    "diligences": [
+      {
+        "text": "Analyse de l’atterrissage au regard de l’historique du Groupe ainsi que le budget initial ;",
+        "subs": []
+      },
+      {
+        "text": "Analyse de l’atterrissage au regard de la performance à date et du carnet de commandes ;",
+        "subs": []
+      },
+      {
+        "text": "Identification d’éventuels éléments non récurrents ;",
+        "subs": []
+      },
+      {
+        "text": "Identification des hypothèses de restructuration : coût, calendrier, impacts réels et impacts année pleine ;",
+        "subs": []
+      },
+      {
+        "text": "Analyse des positions de fin d’année de besoin en fonds de roulement et de dette nette au regard des éléments historiques.",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Restructuring"
+    ],
+    "types_mission": [
+      "restructuring"
+    ]
+  },
+  {
     "id": "7064bce2",
     "bloc": "Autres",
     "categorie_type": "standard",
@@ -2201,6 +2064,59 @@
     ]
   },
   {
+    "id": "ed985a39",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "EBITDA “Pro forma”",
+    "objectif_finalite": "Permettre la comparaison homogène des résultats historiques et prévisionnels",
+    "objectif_contexte": "Les résultats de l’année en cours peuvent ne pas refléter l’intégralité des actions et initiatives engagées / investissements contractés. Les résultats ajustés peuvent ne pas prendre en compte les effets année pleine de : Acquisitions / ouvertures Nouveaux contrats gagnés / perdus Modification des conditions de vente et/ou d’achat Investissements de production ou de capacité Restructuration et rationalisation des coûts L’opération envisagée peut entraîner un changement dans la prise en compte du chiffre d’affaires et la structure de coût qui n’est pas reflété dans la profitabilité historique. Impact année pleine des synergies Coûts estimés d’une activité « standalone » Changement de méthodes comptables",
+    "diligences": [
+      {
+        "text": "[Lire le rapport de VDD / les informations financières fournies en dataroom afin de porter un jugement critique sur la nature des ajustements pro forma présentés dans le rapport de VDD]",
+        "subs": []
+      },
+      {
+        "text": "[Analyser l’information financière disponible et discuter avec le management de l’existence potentielle d’ajustements « pro forma »]",
+        "subs": []
+      },
+      {
+        "text": "Expliquer la nature des ajustements et commenter leurs impacts sur les profits futurs [identifier des ajustements additionnels]",
+        "subs": []
+      },
+      {
+        "text": "Expliquer la nature des ajustements, commenter leur impact sur les résultats futurs [et identifier d’éventuels ajustements complémentaires]",
+        "subs": []
+      },
+      {
+        "text": "Préparer un tableau [Mettre à jour] [d’EBITDA “Pro forma” ajusté pour les années [X].",
+        "subs": []
+      },
+      {
+        "text": "Analyser les ajustements pro forma sur la profitabilité",
+        "subs": []
+      },
+      {
+        "text": "Commenter la nature de chaque élément non récurrent",
+        "subs": []
+      },
+      {
+        "text": "Identifier et expliquer les ajustements pro forma sur la profitabilité",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Pre-acquisition",
+      "Refinancing",
+      "VDD"
+    ],
+    "types_mission": [
+      "buy-side",
+      "refinancing",
+      "sell-side"
+    ]
+  },
+  {
     "id": "39562777",
     "bloc": "Autres",
     "categorie_type": "standard",
@@ -2230,6 +2146,171 @@
     ]
   },
   {
+    "id": "52ed3976",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Notre analyse du besoin en fonds de roulement et de la conversion de l’EBITDA en cash pourrait permettre d’identifier des mesures d’amélioration de la gestion du BFR du Groupe.",
+    "objectif_finalite": "",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Sur la base de nos travaux, nous préparerons une synthèse des principaux éléments identifiés au titre de la gestion du besoin en fonds de roulement du Groupe.",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Restructuring"
+    ],
+    "types_mission": [
+      "restructuring"
+    ]
+  },
+  {
+    "id": "f74ea241",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Performance historique et prévisionnelle",
+    "objectif_finalite": "",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Présenter les éléments suivants basés sur les informations fournies par le management :",
+        "subs": [
+          "Performance historique et prévisionnelle incluant le chiffre d’affaires, la marge, l’EBITDA (et tout autre KPI applicable) par :",
+          "Client, segment, produit",
+          "Prix et volume;",
+          "croissance organique vs externe; et",
+          "autre segmentation clé définie par le management.",
+          "Bridge de chiffre d’affaires et de résultat"
+        ]
+      },
+      {
+        "text": "Synthèse de la saisonnalité annuelle de ventes et des résultats",
+        "subs": []
+      },
+      {
+        "text": "Ventilation des coûts par nature en incluant le détail des coûts de structure",
+        "subs": []
+      },
+      {
+        "text": "Principales politiques d’amélioration de la performance",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "SID"
+    ],
+    "types_mission": [
+      "sell-side"
+    ]
+  },
+  {
+    "id": "7d7595ce",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Profitabilité",
+    "objectif_finalite": "",
+    "objectif_contexte": "Quels sont les principaux leviers de la croissance et de la profitabilité passées et futures ?",
+    "diligences": [
+      {
+        "text": "Analyse des résultats historiques et prévisionnels (chiffre d’affaires, marge brute, EBITDA et KPI si possible) par :",
+        "subs": [
+          "Ligne d’activité/ business unit",
+          "Marque, le cas échéant",
+          "Marché géographique",
+          "Catégorie de clients et principaux clients"
+        ]
+      },
+      {
+        "text": "Construire et analyser les variations de résultat incluant ventes, marge brute, marge d’EBITDA à taux de change constant",
+        "subs": []
+      },
+      {
+        "text": "Analyse les effets prix/volume/mix du chiffre d’affaires",
+        "subs": []
+      },
+      {
+        "text": "Analyse de la structure de coûts :",
+        "subs": [
+          "Ecarts industriels",
+          "Coûts par nature et site",
+          "Coûts fixes/variables",
+          "Coûts directs/indirects",
+          "Coûts directs par matière première",
+          "Impact des programmes de restructuration",
+          "Coûts par fournisseur"
+        ]
+      },
+      {
+        "text": "Analyse du carnet de commandes",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Business Plan"
+    ],
+    "types_mission": [
+      "buy-side"
+    ]
+  },
+  {
+    "id": "78fb3f7f",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Présenter, en préalable des analyses détaillées d’hypothèses de construction, une synthèse d’une à deux pages couvrant les résultats du business plan en terme d’EBITDA, cash-flow, ratios et respect des covenants",
+    "objectif_finalite": "",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Préparer une courte synthèse présentant le compte de résultat consolidé et tableau de flux de trésorerie (y compris covenants et autres ratios) sur la période historique FYXX et FYXX ainsi que le prévisionnel FYXX-XX",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Restructuring"
+    ],
+    "types_mission": [
+      "restructuring"
+    ]
+  },
+  {
+    "id": "2d5b13fc",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Quelles sont les principales données et les principaux ratios de la période historique FYXXA, FYXX pour ce qui est du compte de résultat et du carnet de commandes ?",
+    "objectif_finalite": "",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Analyse des procédures internes qui régissent la préparation des états financiers (rythmes de facturation, opérations intercompagnie…) ;",
+        "subs": []
+      },
+      {
+        "text": "Analyse du chiffre d’affaires et de la marge brute sur les exercices FYXXA et FYXX par famille de produit, business unit et filiale en adoptant une approche effet prix / volume ;",
+        "subs": []
+      },
+      {
+        "text": "Analyse de la structure de coûts fixes, son évolution ainsi que les impacts des éventuelles mesures de restructuration en cours ;",
+        "subs": []
+      },
+      {
+        "text": "Analyse de la saisonnalité mensuelle (ventes, achats, coûts fixes…).",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Restructuring"
+    ],
+    "types_mission": [
+      "restructuring"
+    ]
+  },
+  {
     "id": "c4c0c1e9",
     "bloc": "Autres",
     "categorie_type": "standard",
@@ -2248,6 +2329,68 @@
       },
       {
         "text": "Isoler les impacts des acquisitions ou cessions clés réalisées sur la période historique et/ou prévues au business plan.",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "SID"
+    ],
+    "types_mission": [
+      "sell-side"
+    ]
+  },
+  {
+    "id": "e92596ef",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Résultats Pro forma",
+    "objectif_finalite": "",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Présenter les éléments suivants basés sur les informations fournies par le management :",
+        "subs": [
+          "Ajustements pro forma impactant les résultats,",
+          "Coûts de séparation, Coûts “standalone” éventuels,",
+          "Impact des acquisitions/cessions sur la période historique et prévisionnelle."
+        ]
+      },
+      {
+        "text": "Obtenir les commentaires du management sur les éléments d’ajustement détaillés ci-dessus.",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "SID"
+    ],
+    "types_mission": [
+      "sell-side"
+    ]
+  },
+  {
+    "id": "3ca2e2a5",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Résultats à date et atterrissage de fin d’année",
+    "objectif_finalite": "",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Présentation du résultat à date (“RAD”) en comparaison à l’exercice précédent et au budget",
+        "subs": []
+      },
+      {
+        "text": "Présentation du chiffre d’affaires et de l’EBITDA restant à faire (“RAF”) basé sur le dernier estimé en année pleine retraité du résultat à date (RAD),",
+        "subs": []
+      },
+      {
+        "text": "Comparaison du RAF à l’exercice précédent et au budget",
+        "subs": []
+      },
+      {
+        "text": "Synthétiser les événements impactant les prix/volume/mix ainsi que les coûts tels qu’identifiés par le management",
         "subs": []
       }
     ],
