@@ -72,7 +72,7 @@
         "subs": []
       },
       {
-        "text": "Compréhension et identification des flux existant entre la cible et les parties liées (holding-actionnaires, dirigeants, sociétés liées, SCI, collatéraux, etc.)",
+        "text": "Compréhension et identification des flux existant entre {{cible}} et les parties liées (holding-actionnaires, dirigeants, sociétés liées, SCI, collatéraux, etc.)",
         "subs": []
       },
       {
@@ -445,7 +445,7 @@
         "numbering": "(1)"
       },
       {
-        "text": "Au regard des données collectées, comprendre dans quelle mesure la société parvient à négocier des avenants (/réclamations) afin de compenser les éventuels décalages entre coûts estimés et coûts réels",
+        "text": "Au regard des données collectées, comprendre dans quelle mesure {{l_entite}} parvient à négocier des avenants (/réclamations) afin de compenser les éventuels décalages entre coûts estimés et coûts réels",
         "subs": []
       },
       {
@@ -469,6 +469,284 @@
       "sell-side"
     ],
     "position": 5
+  },
+  {
+    "id": "37de483b",
+    "bloc": "Quality of earnings",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "position": 6,
+    "objectif_titre": "Impacts Pro forma (évolution du périmètre)",
+    "objectif_finalite": "Comparer les résultats historiques à périmètre homogène et refléter la contribution en année pleine des évolutions structurelles récentes",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Identifier les évolutions structurelles ayant affecté le périmètre du groupe sur la période d'analyse (acquisitions, cessions, ouvertures/fermetures d'activité, gains ou pertes de contrats significatifs)",
+        "subs": []
+      },
+      {
+        "text": "Analyser les impacts Pro forma à intégrer dans le calcul de l'EBITDA récurrent, au regard notamment :",
+        "subs": [
+          "des acquisitions récentes — retraiter les résultats comme si l'entité acquise avait fait partie du périmètre depuis le début de la période",
+          "des cessions ou activités abandonnées — retraiter les résultats comme si l'activité ne faisait plus partie du périmètre",
+          "des ouvertures et lancements d'activité — mesurer l'impact contributif en année pleine des nouvelles activités",
+          "des fermetures ou arrêts d'activité — neutraliser les contributions résiduelles",
+          "des gains ou pertes de contrats majeurs — mesurer l'impact année pleine des évolutions du portefeuille",
+          "des révisions tarifaires n'ayant produit qu'un effet partiel sur la période"
+        ],
+        "numbering": "(1)"
+      },
+      {
+        "text": "Pour les acquisitions récentes, obtenir les états financiers pré-acquisition des entités cibles et rapprocher les données avec la documentation de closing",
+        "subs": []
+      },
+      {
+        "text": "Préparer une table de passage entre les données de rentabilité reportées et les données de rentabilité Pro forma sur l'ensemble de la période d'analyse",
+        "subs": []
+      },
+      {
+        "text": "Isoler et neutraliser les coûts non-récurrents liés à l'exécution des évolutions structurelles (coûts de séparation, coûts d'intégration, honoraires de transaction, restructuration, etc.)",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "SMC"
+    ],
+    "types_mission": [
+      "buy-side",
+      "sell-side"
+    ]
+  },
+  {
+    "id": "2ccbf669",
+    "bloc": "Quality of earnings",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "position": 7,
+    "objectif_titre": "Impacts Pro forma (sortie de groupe)",
+    "objectif_finalite": "Apprécier la profitabilité récurrente en configuration standalone post-transaction",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Comprendre la structure actuelle du groupe et cartographier les flux économiques entre la cible et le reste du périmètre (refacturations, mises à disposition de ressources, mutualisations de fonctions support, garanties et financements intragroupes, etc.)",
+        "subs": []
+      },
+      {
+        "text": "Identifier les refacturations et prestations groupe qui disparaîtront post-transaction, et en apprécier l'impact sur la structure de coûts",
+        "subs": []
+      },
+      {
+        "text": "Apprécier les coûts « standalone » à intégrer pour refléter la conduite autonome de l'activité post-transaction, au regard notamment :",
+        "subs": [
+          "des fonctions support (finance, RH, juridique, comptabilité, contrôle de gestion) à internaliser ou externaliser",
+          "des systèmes d'information (ERP, outils métier) à déployer ou reconstituer",
+          "des locaux, équipements et infrastructures partagés avec le groupe",
+          "des contrats fournisseurs négociés au niveau groupe (assurances, télécoms, énergie, transport, etc.)",
+          "des services de trésorerie et financements auparavant portés au niveau groupe"
+        ],
+        "numbering": "(1)"
+      },
+      {
+        "text": "S'instruire de l'existence éventuelle d'accords de services de transition (TSA) prévus dans le cadre de la transaction, et en évaluer la couverture, la durée et le coût",
+        "subs": []
+      },
+      {
+        "text": "Isoler et neutraliser les coûts non-récurrents liés à la séparation (coûts de séparation, coûts d'intégration post-transaction, honoraires de conseils, migration de systèmes, etc.)",
+        "subs": []
+      },
+      {
+        "text": "Construire un bridge entre l'EBITDA reporté et l'EBITDA « standalone » Pro forma en distinguant chaque nature d'ajustement",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "SMC"
+    ],
+    "types_mission": [
+      "buy-side",
+      "sell-side"
+    ]
+  },
+  {
+    "id": "5ec638c5",
+    "bloc": "Quality of net cash flows",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "position": 1,
+    "objectif_titre": "Financement du cycle d'exploitation",
+    "objectif_finalite": "Comprendre et expliquer la capacité de la cible à convertir ses résultats en flux de trésorerie au regard du cycle de financement standard de ses opérations et de sa stratégie d'investissement",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Construire et présenter les cash flows historiques en distinguant notamment :",
+        "subs": [
+          "l'impact de la variation du besoin en fonds de roulement",
+          "l'impact des investissements engagés et décaissés sur la période",
+          "les flux de paiement de l'impôt sur les bénéfices",
+          "les flux liés aux versements de dividendes",
+          "les flux liés à la politique de financement de {{cible}}",
+          "les autres flux non opérationnels matériels"
+        ],
+        "numbering": "(1)"
+      },
+      {
+        "text": "Mesurer le niveau de Free cash flows avant et après paiement de l'impôt et commenter l'évolution du taux de conversion de l'EBITDA en Free cash flows",
+        "subs": []
+      },
+      {
+        "text": "Sous condition d'obtention de l'information, construire les cash-flows en vision long terme (5 ans ou 10 ans) afin de la comparer avec la génération de trésorerie récente",
+        "subs": []
+      },
+      {
+        "text": "Analyser et décrire les éléments constitutifs du besoin en fonds de roulement :",
+        "subs": [
+          "Décrire la composition du BFR d'exploitation, y compris les postes suggérant une évaluation à l'arrêté des comptes (dont factures à établir, produits constatés d'avance, factures non parvenues)",
+          "Comprendre la méthode de valorisation et dépréciation des stocks, au regard notamment de leur niveau de rotation",
+          "Analyser les balances âgées clients et fournisseurs ainsi que l'évolution des délais de paiement clients et/ou fournisseurs",
+          "Comprendre les impacts du recours à des mécanismes de financement des créances (factoring, etc)",
+          "Décrire la composition du BFR hors exploitation (e.g. dettes fiscales & sociales, autres créances et dettes courantes)"
+        ],
+        "numbering": "(1)"
+      },
+      {
+        "text": "Analyser et commenter les variations de BFR historiques, en s'intéressant aux leviers de variation en termes de délais (e.g. délais de règlements clients et fournisseurs, rotation des stocks)",
+        "subs": []
+      },
+      {
+        "text": "Obtenir les positions mensuelles/trimestrielles de BFR ou, en l'absence de données intra-annuelles, reconstituer le BFR et son évolution mensuelle par l'analyse des positions mensuelles de trésorerie",
+        "subs": []
+      },
+      {
+        "text": "Analyser les positions de BFR mensuel et quantifier les niveaux minimum, moyen et maximum, afin de déterminer un BFR de référence pour le calcul de la dette financière nette",
+        "subs": []
+      },
+      {
+        "text": "Analyser et ajuster les éléments exceptionnels et non-récurrents qui pourraient avoir biaisé la lecture des positions de BFR, en considérant d'une part les éléments exceptionnels du compte de résultat identifiés en tant qu'ajustements de l'EBITDA et d'autre part tout autre élément non-récurrent ayant pu impacter le BFR et/ou faisant l'objet d'une reclassification en dette financière nette",
+        "subs": []
+      },
+      {
+        "text": "Présenter et commenter le plan d'investissements historiques et proposer une classification entre (1) investissements de maintenance / remplacement et (2) investissements de développement",
+        "subs": []
+      },
+      {
+        "text": "Comparer le plan d'investissements historiques aux dépréciations et amortissements constatés sur la période et expliquer les écarts significatifs",
+        "subs": []
+      },
+      {
+        "text": "Comparer le plan d'investissement historique à celui budgété et comprendre les écarts significatifs",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "SMC"
+    ],
+    "types_mission": [
+      "buy-side",
+      "sell-side"
+    ]
+  },
+  {
+    "id": "1c011e9b",
+    "bloc": "Quality of net cash flows",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "position": 2,
+    "objectif_titre": "Besoin en fonds de roulement",
+    "objectif_finalite": "Analyser l'impact du besoin en fonds de roulement sur le cycle de financement de l'exploitation",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Présenter la décomposition du besoin en fonds de roulement par nature (stocks, encours, créances clients, dettes fournisseurs, créances et dettes sociales, créances et dettes fiscales, charges et produits constatés d'avance)",
+        "subs": []
+      },
+      {
+        "text": "Décrire la méthode utilisée pour la valorisation et la dépréciation des stocks et encours",
+        "subs": []
+      },
+      {
+        "text": "Obtenir les listings de stocks détaillés par référence aux dates de clôtures récentes en vue de :",
+        "subs": [
+          "Présenter et comprendre l'évolution des valorisations unitaires retenues et d'expliquer les principales variations",
+          "Identifier les références présentant une faible rotation sur la période",
+          "Construire des bridges permettant d'isoler les leviers d'évolution de la valeur des stocks : effet volume, effet valorisation, rotation du portefeuille de références"
+        ],
+        "numbering": "(1)"
+      },
+      {
+        "text": "Obtenir ou construire les balances âgées clients et fournisseurs en vue d'identifier les encours présentant une forte antériorité",
+        "subs": []
+      },
+      {
+        "text": "Analyser les postes de BFR suggérant une évaluation à l'arrêté des comptes (e.g. factures à établir, produits constatés d'avance, factures non parvenues)",
+        "subs": []
+      },
+      {
+        "text": "Comprendre les impacts du recours à des mécanismes de financement des créances (e.g. factoring, cessions dailly)",
+        "subs": []
+      },
+      {
+        "text": "Obtenir les positions mensuelles/trimestrielles de BFR ou, en l'absence de données intra-annuelles, reconstituer le BFR et son évolution mensuelle par l'analyse des positions mensuelles de trésorerie",
+        "subs": []
+      },
+      {
+        "text": "Analyser les positions de BFR mensuel et quantifier les niveaux minimum, moyen et maximum, afin de déterminer un BFR de référence pour le calcul de la dette financière nette",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "SMC"
+    ],
+    "types_mission": [
+      "buy-side",
+      "sell-side"
+    ]
+  },
+  {
+    "id": "6c748343",
+    "bloc": "Quality of net cash flows",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "position": 3,
+    "objectif_titre": "Investissements et actifs industriels",
+    "objectif_finalite": "Comprendre et expliquer la politique d'investissement {{de_l_entite}} et son impact sur le cycle de financement de l'exploitation",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Présenter l'actif immobilisé {{de_l_entite}} afin d'en comprendre sa décomposition et de mesurer l'importance de son outil industriel",
+        "subs": []
+      },
+      {
+        "text": "Mesurer les taux d'amortissement par catégorie d'actifs et discuter avec la Direction des niveaux de vétusté des principaux actifs industriels",
+        "subs": []
+      },
+      {
+        "text": "Présenter et commenter le plan d'investissements historiques et proposer une classification entre (1) investissements de maintenance / remplacement et (2) investissements de développement",
+        "subs": []
+      },
+      {
+        "text": "Comparer le plan d'investissements historiques aux dépréciations et amortissements constatés sur la période et expliquer les écarts significatifs",
+        "subs": []
+      },
+      {
+        "text": "Comparer le plan d'investissement historique à celui budgété et comprendre les écarts significatifs",
+        "subs": []
+      },
+      {
+        "text": "Analyser les dépenses d'investissements prévisionnels sur la base des indications de la Direction et apprécier le niveau d'engagement sur les principaux investissements envisagés",
+        "subs": []
+      },
+      {
+        "text": "Comprendre si {{l_entite}} est éligible à des subventions d'investissement pour assurer le financement de tout ou partie des investissements engagés ou à venir",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "SMC"
+    ],
+    "types_mission": [
+      "buy-side",
+      "sell-side"
+    ]
   },
   {
     "id": "77f8e9c1",
