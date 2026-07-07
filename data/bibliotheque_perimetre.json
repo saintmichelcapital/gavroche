@@ -749,690 +749,6 @@
     ]
   },
   {
-    "id": "77f8e9c1",
-    "bloc": "Quality of net cash flows",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "3) Les stocks ne sont pas surévalués dans les completion accounts.",
-    "objectif_finalite": "",
-    "objectif_contexte": "",
-    "diligences": [
-      {
-        "text": "Comparer les montants des stocks à ceux au xx/xx/20xx / à la clôture de l’exercice précédent. Comprendre les variations significatives.",
-        "subs": []
-      },
-      {
-        "text": "Analyser les rapprochements entre les comptes et les listings détaillés des stocks et comprendre les éléments en rapprochement.",
-        "subs": []
-      },
-      {
-        "text": "Confirmer avec le management que les procédures d’inventaire physique sont identiques à celles utilisées pour les Management Accounts au xx/xx/20xx.",
-        "subs": []
-      },
-      {
-        "text": "Vérifier que les calculs de provisions pour dépréciation des stocks ont été réalisés conformément aux méthodes historiques et sont appropriés.",
-        "subs": []
-      },
-      {
-        "text": "Prendre connaissance des procédures de cut-off stocks et fournisseurs au yy/yy/20xx et confirmer avec le management qu’elles ont été appliquées de façon constante par rapport au xx/xx/ 20xx.",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Completion accounts"
-    ],
-    "types_mission": [
-      "completion"
-    ]
-  },
-  {
-    "id": "e4918b41",
-    "bloc": "Quality of net cash flows",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "4) Les dettes fournisseurs ne sont pas sous-évaluées dans les completion accounts.",
-    "objectif_finalite": "",
-    "objectif_contexte": "",
-    "diligences": [
-      {
-        "text": "Réaliser une revue analytique des dettes fournisseurs afin d’identifier d’éventuelles anomalies. Cette revue comprendra une analyse de l’antériorité des dettes fournisseurs et des délais de paiement, en référence au xx/xx/20xx.",
-        "subs": []
-      },
-      {
-        "text": "Analyser les rapprochements entre les completion accounts et la balance auxiliaire fournisseurs et comprendre la nature des éléments en rapprochement.",
-        "subs": []
-      },
-      {
-        "text": "Réaliser des tests sur les factures reçues post completion et s’assurer que les factures supérieures à €Xk relatives à des achats pré-completion sont correctement provisionnées.",
-        "subs": []
-      },
-      {
-        "text": "Si applicable, analyser les détails des comptes fournisseurs afin d’identifier d’éventuels sous-provisionnement. Pour les acomptes versés supérieurs à €Xk, vérifier si les montants sont correctement provisionnés ou s’ils sont relatifs à des achats post-completion.",
-        "subs": []
-      },
-      {
-        "text": "Analyser le solde des fournisseurs débiteurs à la date des completion accounts afin d’identifier les montants anciens ou significatifs et vérifier qu’ils sont correctement évalués et recouvrables.",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Completion accounts"
-    ],
-    "types_mission": [
-      "completion"
-    ]
-  },
-  {
-    "id": "0c29450c",
-    "bloc": "Quality of net cash flows",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Analyse de sensibilité",
-    "objectif_finalite": "",
-    "objectif_contexte": "Quels sont les principaux risques pouvant affecter le budget/ prévisions de la Société ? Quelles en sont les conséquences sur la transaction ?",
-    "diligences": [
-      {
-        "text": "Identifier et analyser les hypothèses principales fondant les budget/prévisions au cours de la période prévisionnelle et les comparer aux performances passées",
-        "subs": []
-      },
-      {
-        "text": "Identifier et débattre avec le management des risques potentiels de retournement du marché et des hypothèses principales fondant les prévisions",
-        "subs": []
-      },
-      {
-        "text": "Identifier et quantifier la sensibilité du chiffre d’affaires prévisionnel et du résultat aux variations dans les hypothèses principales et aux business drivers internes/externes, tels que fournis par le management",
-        "subs": []
-      },
-      {
-        "text": "Commenter dans quelle mesure les hypothèses sont sous-tendues par les actions prévues ?",
-        "subs": []
-      },
-      {
-        "text": "[Lire le rapport de VDD afin d’évaluer les hypothèses retenues pour identifier les risques de surperformance ou sous-performance par rapport aux Prévisions]",
-        "subs": []
-      },
-      {
-        "text": "Identifier et revoir les principales hypothèses construisant les Prévisions et les comparer aux tendances de performance historiques",
-        "subs": []
-      },
-      {
-        "text": "Analyser l’information financière disponible et discuter avec le management des risques pouvant altérer les principales hypothèses",
-        "subs": []
-      },
-      {
-        "text": "Débattre de la nature des risques afin de déterminer quel levier de sensibilité actionner afin d’illustrer l’impact sur les résultats/cash flows futurs",
-        "subs": []
-      },
-      {
-        "text": "Faire la synthèse des sensibilités obtenues",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Business Plan",
-      "Refinancing",
-      "VDD"
-    ],
-    "types_mission": [
-      "buy-side",
-      "refinancing",
-      "sell-side"
-    ]
-  },
-  {
-    "id": "bacd7be4",
-    "bloc": "Quality of net cash flows",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Analyses de sensibilité",
-    "objectif_finalite": "Comprendre les principaux risques portant sur les prévisions et analyser les conséquences sur la transaction sur la base des analyses de sensibilités",
-    "objectif_contexte": "Les prévisions peuvent ne pas être une base d’évaluation réaliste, ou bien vous voulez comprendre la sensibilité des prévisions face à certaines variables. Les prévisions peuvent être impactées par : Hypothèses retenues non cohérentes avec l’historique et les résultats/tendances actuelles Hypothèses (par ex. taille du marché, part de marché, marges, volumes/prix, structure des coûts, capex/capacité de production) qui ne semblent pas raisonnables en comparaison avec les faits Evénements survenus après l’élaboration des prévisions altérant les hypothèses NB: Travaux à discuter avec les intervenants de la Due diligence commerciale, notamment hypothèses de CA (prix/volume) et marges",
-    "diligences": [
-      {
-        "text": "Lire le rapport de VDD afin d’évaluer la manière dont les risques de surperformance ou sous-performance par rapport aux Prévisions ont été appréhendés",
-        "subs": []
-      },
-      {
-        "text": "Identifier les principales hypothèses soutenant les prévisions et les comparer aux tendances de performance historiques",
-        "subs": []
-      },
-      {
-        "text": "Analyser l’information financière disponible et discuter avec le management des opportunités et risques pouvant altérer les principales hypothèses",
-        "subs": []
-      },
-      {
-        "text": "Débattre de la nature des opportunités et risques et les quantifier (si applicable) afin d’illustrer l’impact sur les résultats/cash flows futurs",
-        "subs": []
-      },
-      {
-        "text": "Faire la synthèse des sensibilités identifiées et les chiffrer (si applicable)",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Pre-acquisition"
-    ],
-    "types_mission": [
-      "buy-side"
-    ]
-  },
-  {
-    "id": "da45d024",
-    "bloc": "Quality of net cash flows",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "BFR",
-    "objectif_finalite": "",
-    "objectif_contexte": "Quels sont les besoins en fonds de roulement de l’entreprise ? Quelles sont les principales variations saisonnières ?",
-    "diligences": [
-      {
-        "text": "Analyser et commenter les variations de BFR ainsi que les KPI, en insistant sur les leviers de ces variations (par ex. DSO, DPO, DOI)",
-        "subs": []
-      },
-      {
-        "text": "Identifier les éléments non récurrents qui ont impacté les balances, à la fois les éléments non récurrents du compte de résultat identifiés en tant qu’ajustements de l’EBITDA et tout élément exceptionnel qui aurait impacté le BFR (par ex. avances inhabituelles d’un client, « window dressing » de fin d’année)",
-        "subs": []
-      },
-      {
-        "text": "Identifier toute variation de BFR intra-mensuelle impliquant toute exigence de financement supplémentaire",
-        "subs": []
-      },
-      {
-        "text": "Analyser les futurs besoins de fonds de roulements calculés par le management et les comparer avec :",
-        "subs": [
-          "Les tendances historiques et les saisonnalités identifiées",
-          "Les plans d’amélioration du management"
-        ]
-      },
-      {
-        "text": "Réaliser une revue analytique des créances clients afin de déceler d’éventuelles anomalies. Cette revue comprendra une analyse de l’antériorité des créances et des délais de règlement par rapport à ceux de l’exercice xx/xx/ 20xx.",
-        "subs": [
-          "Analyser la réconciliation entre la balance clients et la balance générale et toute autre réconciliation pertinente. Comprendre les éléments en rapprochement.",
-          "Analyser la balance clients afin d’identifier d’éventuelles créances douteuses supérieures à €xxk résultant des analyses menées ci-dessus. Pour les créances jugées à risque, discuter avec le management local les retards de paiement et obtenir la situation de ces comptes à date.",
-          "Revoir le calcul de la provision pour créances douteuses, notamment la permanence des méthodes de calcul par rapport à l’exercice xx/xx/20xx.",
-          "Vérifier si des avoirs relatifs à la période pré-closing ont été émis post-closing et si les provisions afférentes ont été constituées dans les completion accounts.",
-          "Comprendre les procédures de cut-off ventes mises en place au yy/yy/ 20xx et confirmer avec le management la permanence des méthodes par rapport au xx/xx/20xx."
-        ]
-      }
-    ],
-    "sources": [
-      "Completion accounts",
-      "Refinancing",
-      "VDD"
-    ],
-    "types_mission": [
-      "completion",
-      "refinancing",
-      "sell-side"
-    ]
-  },
-  {
-    "id": "127b1580",
-    "bloc": "Quality of net cash flows",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Besoin en fonds de roulement",
-    "objectif_finalite": "Identifier les tendances, les montants et les délais en termes de BFR afin d’évaluer [les besoins et tendances des cash flows opérationnels]",
-    "objectif_contexte": "La position du BFR de l’entreprise telle que présentée peut ne pas refléter les tendances futures et peut être biaisée par : Saisonnalité de l’activité BFR différent selon catégorie de produits Filiale n’ayant pas géré par le passé ses propres cash flows Actions menées par le management d’optimisation du BFR Changements structurels : acquisitions / cessions Pics et creux intra-mensuels causés par les cycles d’activité Pratiques de fin d’année (ou de trimestre) de gestion du BFR afin de satisfaire les covenants (clauses de sauvegarde) et autres obligations",
-    "diligences": [
-      {
-        "text": "Analyser et commenter les variations de  BFR historiques ainsi que les KPI, en s’intéressant aux leviers de variation en termes de délais (ex. délais de règlement fournisseurs, clients, rotation des stocks)",
-        "subs": []
-      },
-      {
-        "text": "Analyser et ajuster les éléments exceptionnels qui pourraient avoir biaisé les positions de BFR dans le passé en considérant d’une part les éléments exceptionnels du compte de résultat identifiés en tant qu’ajustements de l’EBITDA et d’autre part tout autre élément exceptionnel ayant pu impacter le BFR (par ex. paiements anticipés de clients, « lissage » des comptes en fin d’année)",
-        "subs": []
-      },
-      {
-        "text": "Etablir si les variations de BFR intra mensuelles reflètent une nécessité supplémentaire de financement",
-        "subs": []
-      },
-      {
-        "text": "Observer les prévisions de BFR et les objectifs fixés par le management et comparer avec :",
-        "subs": [
-          "Les tendances historiques et les saisonnalités identifiées",
-          "Les plans d’actions prévus par le management",
-          "Les niveaux de BFR des entreprises du même secteur",
-          "Tout élément externe en rapport avec l’activité/cycles prévisionnels"
-        ]
-      },
-      {
-        "text": "Analyser et commenter les variations de  BFR historiques ainsi que les KPI, notamment les leviers des variations (ex. délais de règlement fournisseurs, clients, stocks)",
-        "subs": []
-      },
-      {
-        "text": "Analyser et ajuster les éléments exceptionnels et non-récurrents qui pourraient avoir biaisé les positions de BFR dans le passé en considérant d’une part les éléments exceptionnels du compte de résultat identifiés en tant qu’ajustements de l’EBITDA et d’autre part tout autre élément non-récurrent ayant pu impacter le BFR (par ex. paiements anticipés de clients, « lissage » des comptes en fin d’année)",
-        "subs": []
-      },
-      {
-        "text": "Analyser les prévisions de BFR préparées par le management et les comparer avec :",
-        "subs": [
-          "Les tendances historiques et la saisonnalité identifiées",
-          "Les plans d’actions prévus par le management",
-          "Les niveaux de BFR des entreprises du même secteur",
-          "Toute source externe en rapport avec l’activité/cycles prévisionnels"
-        ]
-      }
-    ],
-    "sources": [
-      "Business Plan",
-      "Pre-acquisition"
-    ],
-    "types_mission": [
-      "buy-side"
-    ]
-  },
-  {
-    "id": "1a53e6f2",
-    "bloc": "Quality of net cash flows",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Besoin,  en fonds de Roulement (BFR)",
-    "objectif_finalite": "",
-    "objectif_contexte": "",
-    "diligences": [
-      {
-        "text": "Présenter l’évolution du BFR et de ses KPI. Indiquer les explications du management sur les principaux mouvements des drivers clés du BFR (délai de règlement clients, fournisseurs, taux de rotation des stocks…)",
-        "subs": []
-      },
-      {
-        "text": "Détailler le BFR par nature",
-        "subs": []
-      },
-      {
-        "text": "Liste les éléments non récurrents (tels qu’identifiés par le management) ayant impacté l’évolution du BFR sur la période (incluant les éléments déjà identifiés au niveau de l’EBITDA ajusté ainsi que les éléments spécifiques au BFR)",
-        "subs": []
-      },
-      {
-        "text": "Présenter sur certaine période spécifique un BFR ajusté (si possible) ; quantifier le niveau minimum et maximum et le niveau moyen du BFR",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "SID"
-    ],
-    "types_mission": [
-      "sell-side"
-    ]
-  },
-  {
-    "id": "d0f126c4",
-    "bloc": "Quality of net cash flows",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Exposition (faible, modérée, ou forte) relative à :",
-    "objectif_finalite": "",
-    "objectif_contexte": "Mauvaise application des conditions de paiement négociées Réduction des délais de règlements suite à une perte de confiance des fournisseurs après une mauvaise notation des établissements de crédit Contrôle des crédits en cours auprès des fournisseurs principaux Respect des délais de règlements (45 jours fin de mois/60 jours max.) et/ou respect des accords de branche dérogatoires Paiements en doublon faute de couverture des dettes impayées Paiements effectués en avance liés à des erreurs de date",
-    "diligences": [
-      {
-        "text": "Réaliser une analyse critique grâce à des tests de cheminement sur le processus de gestion des achats (procédures internes, validation des limites d’achat)",
-        "subs": []
-      },
-      {
-        "text": "Organisation des cycles de paiement et application adaptée de la politique d’achats en place dans le processus de gestion des fournisseurs",
-        "subs": []
-      },
-      {
-        "text": "Réaliser une revue analytique et des tests de cheminement du processus de facturation des achats (respect des montants d’achats autorisés, contrôles sur les bons de réception et validation, processus de provisionnement des factures non parvenues (FNP) et réconciliations avec les factures) et notamment le respect des conditions de paiement, la ponctualité du cycle de paiement, les moyens de paiement, le cut-off des paiements des dettes fournisseurs en fin d’exercice, l’interaction entre les cycles et les modalités d’application des réductions",
-        "subs": []
-      },
-      {
-        "text": "Tester l’efficacité des contrôles relatifs au cycle de paiement grâce à :",
-        "subs": [
-          "Une revue analytique de l’antériorité des dettes",
-          "Une revue analytique des impayés",
-          "Une analyse du processus de réclamation"
-        ]
-      },
-      {
-        "text": "Réaliser une analyse critique à travers des tests de cheminement sur le processus de gestion des stocks :",
-        "subs": [
-          "Processus de commandes des stocks",
-          "Processus de prévisions des ventes",
-          "Réception / Expédition des stocks",
-          "Inventaire (réalisé en continu, ou périodiquement mais complet)",
-          "Processus de provisionnement (méthode et évaluation)",
-          "Niveau de service client",
-          "Qualité de livraison",
-          "Processus de reformation des stocks (méthode et algorithme)"
-        ]
-      },
-      {
-        "text": "Analyser l’efficacité des contrôles relatifs au cycle de gestion des stocks :",
-        "subs": []
-      },
-      {
-        "text": "Revue analytique de l’antériorité",
-        "subs": []
-      },
-      {
-        "text": "Couverture des stocks",
-        "subs": []
-      },
-      {
-        "text": "Degré d’obsolescence des stocks et explications",
-        "subs": []
-      },
-      {
-        "text": "Processus de mise au rebut",
-        "subs": []
-      },
-      {
-        "text": "Niveau et explication des écarts entre comptabilité et inventaire physique",
-        "subs": []
-      },
-      {
-        "text": "Niveau des ruptures de stock",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Restructuring"
-    ],
-    "types_mission": [
-      "restructuring"
-    ]
-  },
-  {
-    "id": "6e0a8e99",
-    "bloc": "Quality of net cash flows",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Exposition (faible, modérée, ou forte) à :",
-    "objectif_finalite": "",
-    "objectif_contexte": "Respect et suivi de la politique interne, des manuels, procédures et processus internes Processus de facturation (timing, qualité, exhaustivité) Taux de recouvrement des créances Périodes de paiements de créances anormales Périodes de clôture : remises et rabais (procédure de cut-off) Limites imposées aux nouveaux clients et à ceux existants",
-    "diligences": [
-      {
-        "text": "Réaliser une analyse critique grâce à des tests de cheminement sur la politique de gestion des créances clients (clarté de la documentation, application adaptée ou non dans le processus de validation et de gestion client,",
-        "subs": []
-      },
-      {
-        "text": "Réaliser une revue analytique et des tests de cheminement sur le processus de facturation (fréquence, nombre et valeur des avoirs)",
-        "subs": []
-      },
-      {
-        "text": "Analyser l’efficacité des contrôles relatifs à la collecte des impayés grâce à une revue analytique de la balance âgée, des tests substantifs sur les mesures des relances clients et des justifications des impayés",
-        "subs": []
-      },
-      {
-        "text": "Analyse du processus de réclamations, de gestion des litiges et de passage en pertes réalisées par le passé.",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Restructuring"
-    ],
-    "types_mission": [
-      "restructuring"
-    ]
-  },
-  {
-    "id": "dc36f2da",
-    "bloc": "Quality of net cash flows",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Free cash flow",
-    "objectif_finalite": "",
-    "objectif_contexte": "Quels sont les principaux leviers de gestion des free cash flows et comment les résultats se convertissent-ils en cash?",
-    "diligences": [
-      {
-        "text": "Analyser année par année les free cash flows historiques et prendre en compte des ajustements réalisés sur l’EBITDA",
-        "subs": []
-      },
-      {
-        "text": "Identifier et commenter les leviers principaux et les tendances d’évolution des free cash flows",
-        "subs": []
-      },
-      {
-        "text": "Commenter le taux de conversion du cash de l’entreprise c’est-à-dire sa capacité à transformer l’EBITDA en cash et commenter toute restriction/limitation concernant ce sujet",
-        "subs": []
-      },
-      {
-        "text": "Identifier et commenter les cash flows non opérationnels significatifs",
-        "subs": []
-      },
-      {
-        "text": "Commenter les saisonnalités des cash flows, incluant les saisonnalités intra mensuelles, les pics et creux de saisonnalité",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Refinancing",
-      "VDD"
-    ],
-    "types_mission": [
-      "refinancing",
-      "sell-side"
-    ]
-  },
-  {
-    "id": "643b5a66",
-    "bloc": "Quality of net cash flows",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Free cash flows",
-    "objectif_finalite": "",
-    "objectif_contexte": "",
-    "diligences": [
-      {
-        "text": "Présentation des Free Cash Flows annuels incluant le taux de conversion de l’EBITDA en cash (cash conversion rate)",
-        "subs": []
-      },
-      {
-        "text": "Synthétiser les flux cash non opérationnels tels qu’identifiés par le management",
-        "subs": []
-      },
-      {
-        "text": "Présenter la saisonnalité des cash flows incluant les pics et creux intra-mensuels",
-        "subs": []
-      },
-      {
-        "text": "Obtenir les commentaires du management sur les éléments détaillés ci-dessus.",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "SID"
-    ],
-    "types_mission": [
-      "sell-side"
-    ]
-  },
-  {
-    "id": "214f6e13",
-    "bloc": "Quality of net cash flows",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Identification des principales sensibilités issues des hypothèses d’exploitation, de BFR, d’investissements et de saisonnalité du business plan",
-    "objectif_finalite": "",
-    "objectif_contexte": "",
-    "diligences": [
-      {
-        "text": "Présenter une estimation de l’impact des sensibilités au regard des hypothèses de :",
-        "subs": [
-          "EBITDA",
-          "Besoin en fonds de roulement",
-          "Investissements",
-          "Taux de change"
-        ]
-      }
-    ],
-    "sources": [
-      "Restructuring"
-    ],
-    "types_mission": [
-      "restructuring"
-    ]
-  },
-  {
-    "id": "f257de01",
-    "bloc": "Quality of net cash flows",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Investissements (capex)",
-    "objectif_finalite": "Comprendre la répartition des investissements (capex) historiques et futurs en investissements de maintenance / de remplacement et de développement – y compris les engagements de capex prévisionnels fermes ou discrétionnaires",
-    "objectif_contexte": "Comprendre quel rendement les investissements de développement (ou de rationalisation) ont généré ou généreront. » Les investissements de maintenance / remplacement historiques peuvent inclure des éléments susceptibles de biaiser les tendances annuelles et, s’ils ne sont pas ajustés, pourraient mener à des conclusions erronées et impactant les prévisions de free cash flows de l’entreprise. Les biais peuvent concerner : La définition et la classification des investissements de maintenance et de remplacement vs. investissements de développement Cycle de maintenance / remplacement Charges exceptionnelles et non récurrentes Charges d’investissement vs. dépréciation Capex KPIs vs. normes du secteur Niveaux de Capex vs. budget Capex “réglementaires” – par ex. Santé et Sécurité, Environnement, etc. Les plans d’investissements sont-ils en ligne avec les plans de production / rationalisation ?",
-    "diligences": [
-      {
-        "text": "Analyser le plan d’investissements historiques, y compris les investissements réalisés à date, et comparer avec les budget/prévisions pour l’année en cours",
-        "subs": []
-      },
-      {
-        "text": "Commenter la classification entre investissements de maintenance / remplacement et investissements de développement. Commenter les tendances principales, y compris tout élément exceptionnel ou non récurrent identifié",
-        "subs": []
-      },
-      {
-        "text": "Analyser les estimations des investissements (par ex. payback, ROI) et évaluer la précision de ces calculs avec les données historiques",
-        "subs": []
-      },
-      {
-        "text": "Commenter le niveau d’investissements réalisés ou prévus par rapport aux prévisions de production /rationalisation",
-        "subs": []
-      },
-      {
-        "text": "Observer les prévisions d’investissements et les comparer aux :",
-        "subs": [
-          "Tendances historiques",
-          "Plans prévus pour l’entreprise",
-          "Contraintes de production",
-          "Dépréciations"
-        ]
-      },
-      {
-        "text": "Synthétiser les tendances passées d’investissements par division et par type de projet, inclure le montant des dépenses d’investissements à la date des travaux EY et le comparer au budget prévu pour l’année en cours",
-        "subs": []
-      },
-      {
-        "text": "Décrire le cycle d’investissement type de l’entreprise et commenter les processus de validation en place",
-        "subs": []
-      },
-      {
-        "text": "Commenter la classification des investissements : maintenance/remplacement, développement",
-        "subs": []
-      },
-      {
-        "text": "Comparer les dépenses d’investissements actuelles à celles budgétées et comprendre les écarts significatifs",
-        "subs": []
-      },
-      {
-        "text": "Analyser les estimations (payback, ROI) pour les projets significatifs, et commenter par rapport au budget",
-        "subs": []
-      },
-      {
-        "text": "Commenter l’ancienneté des actifs corporels et évaluer si un renouvellement est nécessaire",
-        "subs": []
-      },
-      {
-        "text": "Expliquer si le niveau des dépenses d’investissement historiques réalisées/prévues est en ligne avec les prévisions",
-        "subs": []
-      },
-      {
-        "text": "Analyser les dépenses d’investissements prévisionnels entre les éléments « committed and discretionary », y compris les impacts sur le résultat espérés",
-        "subs": []
-      },
-      {
-        "text": "Analyser le plan d’investissement historique par rapport aux dépréciations",
-        "subs": []
-      },
-      {
-        "text": "Analyse projected capex between committed and discretionary elements, including estimates of resulting benefits to earnings",
-        "subs": []
-      },
-      {
-        "text": "Analyse historic capital investment program as a percentage of depreciation",
-        "subs": []
-      },
-      {
-        "text": "Présenter les tendances historiques et prévisionnelles d’investissement par division, nature, type de projet et les comparer année par année ainsi qu’au budget",
-        "subs": []
-      },
-      {
-        "text": "Sur la base d’un classement fourni par le management, présenter les investissements de maintenance vs les investissements de développement",
-        "subs": []
-      },
-      {
-        "text": "Comparer les investissements à date au budget de l’année en cours et obtenir les explications du management pour toute variation significative",
-        "subs": []
-      },
-      {
-        "text": "Analyser le rendement des investissements (par ex. payback, ROI) et évaluer la précision de ces calculs avec les données historiques",
-        "subs": []
-      },
-      {
-        "text": "Etablir si le niveau d’investissements réalisés ou prévus est en ligne avec les prévisions de production /rationalisation",
-        "subs": []
-      },
-      {
-        "text": "Analyser les prévisions d’investissements et les comparer aux :",
-        "subs": [
-          "Tendances historiques",
-          "Plans prévus pour l’activité",
-          "Contraintes de production",
-          "Dépréciations"
-        ]
-      },
-      {
-        "text": "Analyser les investissements réalisés à date, et comparer avec les budget/prévisions pour l’année en cours",
-        "subs": []
-      },
-      {
-        "text": "Commenter la classification entre investissements et dépenses d’entretien/maintenance",
-        "subs": []
-      },
-      {
-        "text": "Commenter tout élément exceptionnel ou non récurrent identifié",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Business Plan",
-      "Completion accounts",
-      "Pre-acquisition",
-      "Refinancing",
-      "SID",
-      "VDD"
-    ],
-    "types_mission": [
-      "buy-side",
-      "completion",
-      "refinancing",
-      "sell-side"
-    ]
-  },
-  {
-    "id": "27bc370f",
-    "bloc": "Quality of net cash flows",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Quelles sont les principales données relatives au besoin en fonds de roulement, à la dette nette et au tableau de flux de trésorerie et quels ratios en découlent ?",
-    "objectif_finalite": "",
-    "objectif_contexte": "",
-    "diligences": [
-      {
-        "text": "Analyse de l’évolution mensuelle du besoin en fonds de roulement et de la dette nette du Groupe ;",
-        "subs": []
-      },
-      {
-        "text": "Analyse des délais d’encaissement et de décaissement historiques (y compris l’impact sur l’évolution du besoin en fonds de roulement) ;",
-        "subs": []
-      },
-      {
-        "text": "Analyse de la saisonnalité mensuelle du cash-flow du Groupe ainsi que les pics intra-mensuels de trésorerie ;",
-        "subs": []
-      },
-      {
-        "text": "Identification et analyse des sources de génération de trésorerie dans le Groupe (famille de produits, business unit, filiales…) et des éventuelles restrictions pouvant peser sur la trésorerie du Groupe (trésorerie indisponible…).",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Restructuring"
-    ],
-    "types_mission": [
-      "restructuring"
-    ]
-  },
-  {
     "id": "10e56fbe",
     "bloc": "Quality of net debt (/cash)",
     "categorie_type": "standard",
@@ -2140,6 +1456,80 @@
     ]
   },
   {
+    "id": "77f8e9c1",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "3) Les stocks ne sont pas surévalués dans les completion accounts.",
+    "objectif_finalite": "",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Comparer les montants des stocks à ceux au xx/xx/20xx / à la clôture de l’exercice précédent. Comprendre les variations significatives.",
+        "subs": []
+      },
+      {
+        "text": "Analyser les rapprochements entre les comptes et les listings détaillés des stocks et comprendre les éléments en rapprochement.",
+        "subs": []
+      },
+      {
+        "text": "Confirmer avec le management que les procédures d’inventaire physique sont identiques à celles utilisées pour les Management Accounts au xx/xx/20xx.",
+        "subs": []
+      },
+      {
+        "text": "Vérifier que les calculs de provisions pour dépréciation des stocks ont été réalisés conformément aux méthodes historiques et sont appropriés.",
+        "subs": []
+      },
+      {
+        "text": "Prendre connaissance des procédures de cut-off stocks et fournisseurs au yy/yy/20xx et confirmer avec le management qu’elles ont été appliquées de façon constante par rapport au xx/xx/ 20xx.",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Completion accounts"
+    ],
+    "types_mission": [
+      "completion"
+    ]
+  },
+  {
+    "id": "e4918b41",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "4) Les dettes fournisseurs ne sont pas sous-évaluées dans les completion accounts.",
+    "objectif_finalite": "",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Réaliser une revue analytique des dettes fournisseurs afin d’identifier d’éventuelles anomalies. Cette revue comprendra une analyse de l’antériorité des dettes fournisseurs et des délais de paiement, en référence au xx/xx/20xx.",
+        "subs": []
+      },
+      {
+        "text": "Analyser les rapprochements entre les completion accounts et la balance auxiliaire fournisseurs et comprendre la nature des éléments en rapprochement.",
+        "subs": []
+      },
+      {
+        "text": "Réaliser des tests sur les factures reçues post completion et s’assurer que les factures supérieures à €Xk relatives à des achats pré-completion sont correctement provisionnées.",
+        "subs": []
+      },
+      {
+        "text": "Si applicable, analyser les détails des comptes fournisseurs afin d’identifier d’éventuels sous-provisionnement. Pour les acomptes versés supérieurs à €Xk, vérifier si les montants sont correctement provisionnés ou s’ils sont relatifs à des achats post-completion.",
+        "subs": []
+      },
+      {
+        "text": "Analyser le solde des fournisseurs débiteurs à la date des completion accounts afin d’identifier les montants anciens ou significatifs et vérifier qu’ils sont correctement évalués et recouvrables.",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Completion accounts"
+    ],
+    "types_mission": [
+      "completion"
+    ]
+  },
+  {
     "id": "d3e10179",
     "bloc": "Autres",
     "categorie_type": "standard",
@@ -2203,6 +1593,239 @@
     ],
     "types_mission": [
       "completion"
+    ]
+  },
+  {
+    "id": "0c29450c",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Analyse de sensibilité",
+    "objectif_finalite": "",
+    "objectif_contexte": "Quels sont les principaux risques pouvant affecter le budget/ prévisions de la Société ? Quelles en sont les conséquences sur la transaction ?",
+    "diligences": [
+      {
+        "text": "Identifier et analyser les hypothèses principales fondant les budget/prévisions au cours de la période prévisionnelle et les comparer aux performances passées",
+        "subs": []
+      },
+      {
+        "text": "Identifier et débattre avec le management des risques potentiels de retournement du marché et des hypothèses principales fondant les prévisions",
+        "subs": []
+      },
+      {
+        "text": "Identifier et quantifier la sensibilité du chiffre d’affaires prévisionnel et du résultat aux variations dans les hypothèses principales et aux business drivers internes/externes, tels que fournis par le management",
+        "subs": []
+      },
+      {
+        "text": "Commenter dans quelle mesure les hypothèses sont sous-tendues par les actions prévues ?",
+        "subs": []
+      },
+      {
+        "text": "[Lire le rapport de VDD afin d’évaluer les hypothèses retenues pour identifier les risques de surperformance ou sous-performance par rapport aux Prévisions]",
+        "subs": []
+      },
+      {
+        "text": "Identifier et revoir les principales hypothèses construisant les Prévisions et les comparer aux tendances de performance historiques",
+        "subs": []
+      },
+      {
+        "text": "Analyser l’information financière disponible et discuter avec le management des risques pouvant altérer les principales hypothèses",
+        "subs": []
+      },
+      {
+        "text": "Débattre de la nature des risques afin de déterminer quel levier de sensibilité actionner afin d’illustrer l’impact sur les résultats/cash flows futurs",
+        "subs": []
+      },
+      {
+        "text": "Faire la synthèse des sensibilités obtenues",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Business Plan",
+      "Refinancing",
+      "VDD"
+    ],
+    "types_mission": [
+      "buy-side",
+      "refinancing",
+      "sell-side"
+    ]
+  },
+  {
+    "id": "bacd7be4",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Analyses de sensibilité",
+    "objectif_finalite": "Comprendre les principaux risques portant sur les prévisions et analyser les conséquences sur la transaction sur la base des analyses de sensibilités",
+    "objectif_contexte": "Les prévisions peuvent ne pas être une base d’évaluation réaliste, ou bien vous voulez comprendre la sensibilité des prévisions face à certaines variables. Les prévisions peuvent être impactées par : Hypothèses retenues non cohérentes avec l’historique et les résultats/tendances actuelles Hypothèses (par ex. taille du marché, part de marché, marges, volumes/prix, structure des coûts, capex/capacité de production) qui ne semblent pas raisonnables en comparaison avec les faits Evénements survenus après l’élaboration des prévisions altérant les hypothèses NB: Travaux à discuter avec les intervenants de la Due diligence commerciale, notamment hypothèses de CA (prix/volume) et marges",
+    "diligences": [
+      {
+        "text": "Lire le rapport de VDD afin d’évaluer la manière dont les risques de surperformance ou sous-performance par rapport aux Prévisions ont été appréhendés",
+        "subs": []
+      },
+      {
+        "text": "Identifier les principales hypothèses soutenant les prévisions et les comparer aux tendances de performance historiques",
+        "subs": []
+      },
+      {
+        "text": "Analyser l’information financière disponible et discuter avec le management des opportunités et risques pouvant altérer les principales hypothèses",
+        "subs": []
+      },
+      {
+        "text": "Débattre de la nature des opportunités et risques et les quantifier (si applicable) afin d’illustrer l’impact sur les résultats/cash flows futurs",
+        "subs": []
+      },
+      {
+        "text": "Faire la synthèse des sensibilités identifiées et les chiffrer (si applicable)",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Pre-acquisition"
+    ],
+    "types_mission": [
+      "buy-side"
+    ]
+  },
+  {
+    "id": "da45d024",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "BFR",
+    "objectif_finalite": "",
+    "objectif_contexte": "Quels sont les besoins en fonds de roulement de l’entreprise ? Quelles sont les principales variations saisonnières ?",
+    "diligences": [
+      {
+        "text": "Analyser et commenter les variations de BFR ainsi que les KPI, en insistant sur les leviers de ces variations (par ex. DSO, DPO, DOI)",
+        "subs": []
+      },
+      {
+        "text": "Identifier les éléments non récurrents qui ont impacté les balances, à la fois les éléments non récurrents du compte de résultat identifiés en tant qu’ajustements de l’EBITDA et tout élément exceptionnel qui aurait impacté le BFR (par ex. avances inhabituelles d’un client, « window dressing » de fin d’année)",
+        "subs": []
+      },
+      {
+        "text": "Identifier toute variation de BFR intra-mensuelle impliquant toute exigence de financement supplémentaire",
+        "subs": []
+      },
+      {
+        "text": "Analyser les futurs besoins de fonds de roulements calculés par le management et les comparer avec :",
+        "subs": [
+          "Les tendances historiques et les saisonnalités identifiées",
+          "Les plans d’amélioration du management"
+        ]
+      },
+      {
+        "text": "Réaliser une revue analytique des créances clients afin de déceler d’éventuelles anomalies. Cette revue comprendra une analyse de l’antériorité des créances et des délais de règlement par rapport à ceux de l’exercice xx/xx/ 20xx.",
+        "subs": [
+          "Analyser la réconciliation entre la balance clients et la balance générale et toute autre réconciliation pertinente. Comprendre les éléments en rapprochement.",
+          "Analyser la balance clients afin d’identifier d’éventuelles créances douteuses supérieures à €xxk résultant des analyses menées ci-dessus. Pour les créances jugées à risque, discuter avec le management local les retards de paiement et obtenir la situation de ces comptes à date.",
+          "Revoir le calcul de la provision pour créances douteuses, notamment la permanence des méthodes de calcul par rapport à l’exercice xx/xx/20xx.",
+          "Vérifier si des avoirs relatifs à la période pré-closing ont été émis post-closing et si les provisions afférentes ont été constituées dans les completion accounts.",
+          "Comprendre les procédures de cut-off ventes mises en place au yy/yy/ 20xx et confirmer avec le management la permanence des méthodes par rapport au xx/xx/20xx."
+        ]
+      }
+    ],
+    "sources": [
+      "Completion accounts",
+      "Refinancing",
+      "VDD"
+    ],
+    "types_mission": [
+      "completion",
+      "refinancing",
+      "sell-side"
+    ]
+  },
+  {
+    "id": "127b1580",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Besoin en fonds de roulement",
+    "objectif_finalite": "Identifier les tendances, les montants et les délais en termes de BFR afin d’évaluer [les besoins et tendances des cash flows opérationnels]",
+    "objectif_contexte": "La position du BFR de l’entreprise telle que présentée peut ne pas refléter les tendances futures et peut être biaisée par : Saisonnalité de l’activité BFR différent selon catégorie de produits Filiale n’ayant pas géré par le passé ses propres cash flows Actions menées par le management d’optimisation du BFR Changements structurels : acquisitions / cessions Pics et creux intra-mensuels causés par les cycles d’activité Pratiques de fin d’année (ou de trimestre) de gestion du BFR afin de satisfaire les covenants (clauses de sauvegarde) et autres obligations",
+    "diligences": [
+      {
+        "text": "Analyser et commenter les variations de  BFR historiques ainsi que les KPI, en s’intéressant aux leviers de variation en termes de délais (ex. délais de règlement fournisseurs, clients, rotation des stocks)",
+        "subs": []
+      },
+      {
+        "text": "Analyser et ajuster les éléments exceptionnels qui pourraient avoir biaisé les positions de BFR dans le passé en considérant d’une part les éléments exceptionnels du compte de résultat identifiés en tant qu’ajustements de l’EBITDA et d’autre part tout autre élément exceptionnel ayant pu impacter le BFR (par ex. paiements anticipés de clients, « lissage » des comptes en fin d’année)",
+        "subs": []
+      },
+      {
+        "text": "Etablir si les variations de BFR intra mensuelles reflètent une nécessité supplémentaire de financement",
+        "subs": []
+      },
+      {
+        "text": "Observer les prévisions de BFR et les objectifs fixés par le management et comparer avec :",
+        "subs": [
+          "Les tendances historiques et les saisonnalités identifiées",
+          "Les plans d’actions prévus par le management",
+          "Les niveaux de BFR des entreprises du même secteur",
+          "Tout élément externe en rapport avec l’activité/cycles prévisionnels"
+        ]
+      },
+      {
+        "text": "Analyser et commenter les variations de  BFR historiques ainsi que les KPI, notamment les leviers des variations (ex. délais de règlement fournisseurs, clients, stocks)",
+        "subs": []
+      },
+      {
+        "text": "Analyser et ajuster les éléments exceptionnels et non-récurrents qui pourraient avoir biaisé les positions de BFR dans le passé en considérant d’une part les éléments exceptionnels du compte de résultat identifiés en tant qu’ajustements de l’EBITDA et d’autre part tout autre élément non-récurrent ayant pu impacter le BFR (par ex. paiements anticipés de clients, « lissage » des comptes en fin d’année)",
+        "subs": []
+      },
+      {
+        "text": "Analyser les prévisions de BFR préparées par le management et les comparer avec :",
+        "subs": [
+          "Les tendances historiques et la saisonnalité identifiées",
+          "Les plans d’actions prévus par le management",
+          "Les niveaux de BFR des entreprises du même secteur",
+          "Toute source externe en rapport avec l’activité/cycles prévisionnels"
+        ]
+      }
+    ],
+    "sources": [
+      "Business Plan",
+      "Pre-acquisition"
+    ],
+    "types_mission": [
+      "buy-side"
+    ]
+  },
+  {
+    "id": "1a53e6f2",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Besoin,  en fonds de Roulement (BFR)",
+    "objectif_finalite": "",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Présenter l’évolution du BFR et de ses KPI. Indiquer les explications du management sur les principaux mouvements des drivers clés du BFR (délai de règlement clients, fournisseurs, taux de rotation des stocks…)",
+        "subs": []
+      },
+      {
+        "text": "Détailler le BFR par nature",
+        "subs": []
+      },
+      {
+        "text": "Liste les éléments non récurrents (tels qu’identifiés par le management) ayant impacté l’évolution du BFR sur la période (incluant les éléments déjà identifiés au niveau de l’EBITDA ajusté ainsi que les éléments spécifiques au BFR)",
+        "subs": []
+      },
+      {
+        "text": "Présenter sur certaine période spécifique un BFR ajusté (si possible) ; quantifier le niveau minimum et maximum et le niveau moyen du BFR",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "SID"
+    ],
+    "types_mission": [
+      "sell-side"
     ]
   },
   {
@@ -2395,6 +2018,350 @@
     ]
   },
   {
+    "id": "d0f126c4",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Exposition (faible, modérée, ou forte) relative à :",
+    "objectif_finalite": "",
+    "objectif_contexte": "Mauvaise application des conditions de paiement négociées Réduction des délais de règlements suite à une perte de confiance des fournisseurs après une mauvaise notation des établissements de crédit Contrôle des crédits en cours auprès des fournisseurs principaux Respect des délais de règlements (45 jours fin de mois/60 jours max.) et/ou respect des accords de branche dérogatoires Paiements en doublon faute de couverture des dettes impayées Paiements effectués en avance liés à des erreurs de date",
+    "diligences": [
+      {
+        "text": "Réaliser une analyse critique grâce à des tests de cheminement sur le processus de gestion des achats (procédures internes, validation des limites d’achat)",
+        "subs": []
+      },
+      {
+        "text": "Organisation des cycles de paiement et application adaptée de la politique d’achats en place dans le processus de gestion des fournisseurs",
+        "subs": []
+      },
+      {
+        "text": "Réaliser une revue analytique et des tests de cheminement du processus de facturation des achats (respect des montants d’achats autorisés, contrôles sur les bons de réception et validation, processus de provisionnement des factures non parvenues (FNP) et réconciliations avec les factures) et notamment le respect des conditions de paiement, la ponctualité du cycle de paiement, les moyens de paiement, le cut-off des paiements des dettes fournisseurs en fin d’exercice, l’interaction entre les cycles et les modalités d’application des réductions",
+        "subs": []
+      },
+      {
+        "text": "Tester l’efficacité des contrôles relatifs au cycle de paiement grâce à :",
+        "subs": [
+          "Une revue analytique de l’antériorité des dettes",
+          "Une revue analytique des impayés",
+          "Une analyse du processus de réclamation"
+        ]
+      },
+      {
+        "text": "Réaliser une analyse critique à travers des tests de cheminement sur le processus de gestion des stocks :",
+        "subs": [
+          "Processus de commandes des stocks",
+          "Processus de prévisions des ventes",
+          "Réception / Expédition des stocks",
+          "Inventaire (réalisé en continu, ou périodiquement mais complet)",
+          "Processus de provisionnement (méthode et évaluation)",
+          "Niveau de service client",
+          "Qualité de livraison",
+          "Processus de reformation des stocks (méthode et algorithme)"
+        ]
+      },
+      {
+        "text": "Analyser l’efficacité des contrôles relatifs au cycle de gestion des stocks :",
+        "subs": []
+      },
+      {
+        "text": "Revue analytique de l’antériorité",
+        "subs": []
+      },
+      {
+        "text": "Couverture des stocks",
+        "subs": []
+      },
+      {
+        "text": "Degré d’obsolescence des stocks et explications",
+        "subs": []
+      },
+      {
+        "text": "Processus de mise au rebut",
+        "subs": []
+      },
+      {
+        "text": "Niveau et explication des écarts entre comptabilité et inventaire physique",
+        "subs": []
+      },
+      {
+        "text": "Niveau des ruptures de stock",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Restructuring"
+    ],
+    "types_mission": [
+      "restructuring"
+    ]
+  },
+  {
+    "id": "6e0a8e99",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Exposition (faible, modérée, ou forte) à :",
+    "objectif_finalite": "",
+    "objectif_contexte": "Respect et suivi de la politique interne, des manuels, procédures et processus internes Processus de facturation (timing, qualité, exhaustivité) Taux de recouvrement des créances Périodes de paiements de créances anormales Périodes de clôture : remises et rabais (procédure de cut-off) Limites imposées aux nouveaux clients et à ceux existants",
+    "diligences": [
+      {
+        "text": "Réaliser une analyse critique grâce à des tests de cheminement sur la politique de gestion des créances clients (clarté de la documentation, application adaptée ou non dans le processus de validation et de gestion client,",
+        "subs": []
+      },
+      {
+        "text": "Réaliser une revue analytique et des tests de cheminement sur le processus de facturation (fréquence, nombre et valeur des avoirs)",
+        "subs": []
+      },
+      {
+        "text": "Analyser l’efficacité des contrôles relatifs à la collecte des impayés grâce à une revue analytique de la balance âgée, des tests substantifs sur les mesures des relances clients et des justifications des impayés",
+        "subs": []
+      },
+      {
+        "text": "Analyse du processus de réclamations, de gestion des litiges et de passage en pertes réalisées par le passé.",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Restructuring"
+    ],
+    "types_mission": [
+      "restructuring"
+    ]
+  },
+  {
+    "id": "dc36f2da",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Free cash flow",
+    "objectif_finalite": "",
+    "objectif_contexte": "Quels sont les principaux leviers de gestion des free cash flows et comment les résultats se convertissent-ils en cash?",
+    "diligences": [
+      {
+        "text": "Analyser année par année les free cash flows historiques et prendre en compte des ajustements réalisés sur l’EBITDA",
+        "subs": []
+      },
+      {
+        "text": "Identifier et commenter les leviers principaux et les tendances d’évolution des free cash flows",
+        "subs": []
+      },
+      {
+        "text": "Commenter le taux de conversion du cash de l’entreprise c’est-à-dire sa capacité à transformer l’EBITDA en cash et commenter toute restriction/limitation concernant ce sujet",
+        "subs": []
+      },
+      {
+        "text": "Identifier et commenter les cash flows non opérationnels significatifs",
+        "subs": []
+      },
+      {
+        "text": "Commenter les saisonnalités des cash flows, incluant les saisonnalités intra mensuelles, les pics et creux de saisonnalité",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Refinancing",
+      "VDD"
+    ],
+    "types_mission": [
+      "refinancing",
+      "sell-side"
+    ]
+  },
+  {
+    "id": "643b5a66",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Free cash flows",
+    "objectif_finalite": "",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Présentation des Free Cash Flows annuels incluant le taux de conversion de l’EBITDA en cash (cash conversion rate)",
+        "subs": []
+      },
+      {
+        "text": "Synthétiser les flux cash non opérationnels tels qu’identifiés par le management",
+        "subs": []
+      },
+      {
+        "text": "Présenter la saisonnalité des cash flows incluant les pics et creux intra-mensuels",
+        "subs": []
+      },
+      {
+        "text": "Obtenir les commentaires du management sur les éléments détaillés ci-dessus.",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "SID"
+    ],
+    "types_mission": [
+      "sell-side"
+    ]
+  },
+  {
+    "id": "214f6e13",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Identification des principales sensibilités issues des hypothèses d’exploitation, de BFR, d’investissements et de saisonnalité du business plan",
+    "objectif_finalite": "",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Présenter une estimation de l’impact des sensibilités au regard des hypothèses de :",
+        "subs": [
+          "EBITDA",
+          "Besoin en fonds de roulement",
+          "Investissements",
+          "Taux de change"
+        ]
+      }
+    ],
+    "sources": [
+      "Restructuring"
+    ],
+    "types_mission": [
+      "restructuring"
+    ]
+  },
+  {
+    "id": "f257de01",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Investissements (capex)",
+    "objectif_finalite": "Comprendre la répartition des investissements (capex) historiques et futurs en investissements de maintenance / de remplacement et de développement – y compris les engagements de capex prévisionnels fermes ou discrétionnaires",
+    "objectif_contexte": "Comprendre quel rendement les investissements de développement (ou de rationalisation) ont généré ou généreront. » Les investissements de maintenance / remplacement historiques peuvent inclure des éléments susceptibles de biaiser les tendances annuelles et, s’ils ne sont pas ajustés, pourraient mener à des conclusions erronées et impactant les prévisions de free cash flows de l’entreprise. Les biais peuvent concerner : La définition et la classification des investissements de maintenance et de remplacement vs. investissements de développement Cycle de maintenance / remplacement Charges exceptionnelles et non récurrentes Charges d’investissement vs. dépréciation Capex KPIs vs. normes du secteur Niveaux de Capex vs. budget Capex “réglementaires” – par ex. Santé et Sécurité, Environnement, etc. Les plans d’investissements sont-ils en ligne avec les plans de production / rationalisation ?",
+    "diligences": [
+      {
+        "text": "Analyser le plan d’investissements historiques, y compris les investissements réalisés à date, et comparer avec les budget/prévisions pour l’année en cours",
+        "subs": []
+      },
+      {
+        "text": "Commenter la classification entre investissements de maintenance / remplacement et investissements de développement. Commenter les tendances principales, y compris tout élément exceptionnel ou non récurrent identifié",
+        "subs": []
+      },
+      {
+        "text": "Analyser les estimations des investissements (par ex. payback, ROI) et évaluer la précision de ces calculs avec les données historiques",
+        "subs": []
+      },
+      {
+        "text": "Commenter le niveau d’investissements réalisés ou prévus par rapport aux prévisions de production /rationalisation",
+        "subs": []
+      },
+      {
+        "text": "Observer les prévisions d’investissements et les comparer aux :",
+        "subs": [
+          "Tendances historiques",
+          "Plans prévus pour l’entreprise",
+          "Contraintes de production",
+          "Dépréciations"
+        ]
+      },
+      {
+        "text": "Synthétiser les tendances passées d’investissements par division et par type de projet, inclure le montant des dépenses d’investissements à la date des travaux EY et le comparer au budget prévu pour l’année en cours",
+        "subs": []
+      },
+      {
+        "text": "Décrire le cycle d’investissement type de l’entreprise et commenter les processus de validation en place",
+        "subs": []
+      },
+      {
+        "text": "Commenter la classification des investissements : maintenance/remplacement, développement",
+        "subs": []
+      },
+      {
+        "text": "Comparer les dépenses d’investissements actuelles à celles budgétées et comprendre les écarts significatifs",
+        "subs": []
+      },
+      {
+        "text": "Analyser les estimations (payback, ROI) pour les projets significatifs, et commenter par rapport au budget",
+        "subs": []
+      },
+      {
+        "text": "Commenter l’ancienneté des actifs corporels et évaluer si un renouvellement est nécessaire",
+        "subs": []
+      },
+      {
+        "text": "Expliquer si le niveau des dépenses d’investissement historiques réalisées/prévues est en ligne avec les prévisions",
+        "subs": []
+      },
+      {
+        "text": "Analyser les dépenses d’investissements prévisionnels entre les éléments « committed and discretionary », y compris les impacts sur le résultat espérés",
+        "subs": []
+      },
+      {
+        "text": "Analyser le plan d’investissement historique par rapport aux dépréciations",
+        "subs": []
+      },
+      {
+        "text": "Analyse projected capex between committed and discretionary elements, including estimates of resulting benefits to earnings",
+        "subs": []
+      },
+      {
+        "text": "Analyse historic capital investment program as a percentage of depreciation",
+        "subs": []
+      },
+      {
+        "text": "Présenter les tendances historiques et prévisionnelles d’investissement par division, nature, type de projet et les comparer année par année ainsi qu’au budget",
+        "subs": []
+      },
+      {
+        "text": "Sur la base d’un classement fourni par le management, présenter les investissements de maintenance vs les investissements de développement",
+        "subs": []
+      },
+      {
+        "text": "Comparer les investissements à date au budget de l’année en cours et obtenir les explications du management pour toute variation significative",
+        "subs": []
+      },
+      {
+        "text": "Analyser le rendement des investissements (par ex. payback, ROI) et évaluer la précision de ces calculs avec les données historiques",
+        "subs": []
+      },
+      {
+        "text": "Etablir si le niveau d’investissements réalisés ou prévus est en ligne avec les prévisions de production /rationalisation",
+        "subs": []
+      },
+      {
+        "text": "Analyser les prévisions d’investissements et les comparer aux :",
+        "subs": [
+          "Tendances historiques",
+          "Plans prévus pour l’activité",
+          "Contraintes de production",
+          "Dépréciations"
+        ]
+      },
+      {
+        "text": "Analyser les investissements réalisés à date, et comparer avec les budget/prévisions pour l’année en cours",
+        "subs": []
+      },
+      {
+        "text": "Commenter la classification entre investissements et dépenses d’entretien/maintenance",
+        "subs": []
+      },
+      {
+        "text": "Commenter tout élément exceptionnel ou non récurrent identifié",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Business Plan",
+      "Completion accounts",
+      "Pre-acquisition",
+      "Refinancing",
+      "SID",
+      "VDD"
+    ],
+    "types_mission": [
+      "buy-side",
+      "completion",
+      "refinancing",
+      "sell-side"
+    ]
+  },
+  {
     "id": "39562777",
     "bloc": "Autres",
     "categorie_type": "standard",
@@ -2578,6 +2545,39 @@
       },
       {
         "text": "Analyse de la saisonnalité mensuelle (ventes, achats, coûts fixes…).",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Restructuring"
+    ],
+    "types_mission": [
+      "restructuring"
+    ]
+  },
+  {
+    "id": "27bc370f",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Quelles sont les principales données relatives au besoin en fonds de roulement, à la dette nette et au tableau de flux de trésorerie et quels ratios en découlent ?",
+    "objectif_finalite": "",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Analyse de l’évolution mensuelle du besoin en fonds de roulement et de la dette nette du Groupe ;",
+        "subs": []
+      },
+      {
+        "text": "Analyse des délais d’encaissement et de décaissement historiques (y compris l’impact sur l’évolution du besoin en fonds de roulement) ;",
+        "subs": []
+      },
+      {
+        "text": "Analyse de la saisonnalité mensuelle du cash-flow du Groupe ainsi que les pics intra-mensuels de trésorerie ;",
+        "subs": []
+      },
+      {
+        "text": "Identification et analyse des sources de génération de trésorerie dans le Groupe (famille de produits, business unit, filiales…) et des éventuelles restrictions pouvant peser sur la trésorerie du Groupe (trésorerie indisponible…).",
         "subs": []
       }
     ],
