@@ -749,443 +749,178 @@
     ]
   },
   {
-    "id": "10e56fbe",
+    "id": "07b71896",
     "bloc": "Quality of net debt (/cash)",
     "categorie_type": "standard",
     "tag": "standard",
-    "objectif_titre": "BFR cible",
-    "objectif_finalite": "",
-    "objectif_contexte": "Quel pourrait être le niveau de BFR cible à la date de transaction ?",
-    "diligences": [
-      {
-        "text": "Evaluer les composantes du BFR et tout actif/passif qui aurait été inclus/exclu de la définition du BFR faite par le management",
-        "subs": []
-      },
-      {
-        "text": "Etablir si le processus de clôture mensuel et annuel des comptes diffère, et évaluer l’impact au niveau du calcul du BFR cible",
-        "subs": []
-      },
-      {
-        "text": "Expliquer si les variations de BFR intra-mensuelles impliquent des révisions de cible de BFR",
-        "subs": []
-      },
-      {
-        "text": "Préparer une analyse de BFR ajusté et quantifier les niveaux minimum, modéré et maximum afin d’atteindre le BFR cible à date de transaction",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Refinancing",
-      "VDD"
-    ],
-    "types_mission": [
-      "refinancing",
-      "sell-side"
-    ]
-  },
-  {
-    "id": "b4cf83e3",
-    "bloc": "Quality of net debt (/cash)",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Besoins en fonds de roulement (nets)",
-    "objectif_finalite": "",
-    "objectif_contexte": "« Etablir le BFR cible au closing pour les besoins de la Transaction (structuring, documents contractuels, etc.) Les positions de BFR historiques peuvent ne pas refléter les opérations en cours et les accords négociés par l’entreprise et pourraient contenir des éléments non récurrents ou non cash. Cela pourrait nécessiter des ajustements afin de constituer une base adéquate de détermination du BFR cible au moment de la conclusion de la transaction.  Par exemple : Provisions des intérêts et coûts de financement Dettes envers les fournisseurs d’immobilisations ” Eléments non récurrents / exceptionnels Eléments non courants (par ex. frais de consultants) Eléments non cash dans les comptes clients/fournisseurs Dépôts de garantie Retenues de garantie à payer/recevoir Bonus Pratiques de fin d’année (ou de trimestre) de gestion du BFR afin de satisfaire les covenants / normes externes Acquisitions / cessions Pics et creux intra mensuels [Autres]",
-    "diligences": [
-      {
-        "text": "Revoir le rapport de VDD et l’information mise à disposition en dataroom afin de pouvoir évaluer les hypothèses justifiant les ajustements réalisés au niveau du BFR moyen présenté dans le rapport de VDD",
-        "subs": []
-      },
-      {
-        "text": "Analyser l’information financière disponible et débattre avec le management des éléments exceptionnels des états financiers, changements de pratiques comptables, et/ou variations de BFR significatives.",
-        "subs": []
-      },
-      {
-        "text": "Analyser et décrire les éléments composant le BFR",
-        "subs": []
-      },
-      {
-        "text": "Identifier les surévaluations et sous-évaluations possibles",
-        "subs": []
-      },
-      {
-        "text": "Evaluer les provisions faites pour les stocks et créances clients et juger de leur pertinence",
-        "subs": []
-      },
-      {
-        "text": "Analyser la balance âgée client / fournisseur",
-        "subs": []
-      },
-      {
-        "text": "Etablir si les provisions effectuées pour les éléments significatifs l’ont été aux arrêtés intérimaires et en fin d’année (retraites, bonus, participation des salariés, congés payés, avoirs, etc.)",
-        "subs": []
-      },
-      {
-        "text": "Analyser les variations intra mensuelles de BFR et conclure sur une nécessité ou non de revoir le BFR cible.",
-        "subs": []
-      },
-      {
-        "text": "Analyser les BFR ajustés et quantifier les niveaux minimum, moyen et maximum afin de vous assister dans la détermination du BFR cible",
-        "subs": []
-      },
-      {
-        "text": "Décrire et analyser les éléments composant le BFR, notamment au travers de l’analyse des principaux KPI (délais de règlement fournisseurs, clients, rotation des stocks)",
-        "subs": []
-      },
-      {
-        "text": "Débattre avec le management des variations de BFR significatives.",
-        "subs": []
-      },
-      {
-        "text": "Analyser et ajuster les éléments exceptionnels qui pourraient biaiser les positions de BFR en considérant d’une part les éléments exceptionnels du compte de résultat identifiés en tant qu’ajustements de l’EBITDA et d’autre part tout autre élément exceptionnel ayant pu impacter le BFR (par ex. paiements anticipés de clients, « lissage » des comptes)",
-        "subs": []
-      },
-      {
-        "text": "Etablir si les provisions habituellement effectuées en fin d’année (retraites, bonus, participation des salariés, congés payés, avoirs, etc.) ont bien été constituées dans le cadre des Completion Accounts",
-        "subs": []
-      },
-      {
-        "text": "Procéder à des sondages sur [à compléter en fonction des demandes spécifiques du client / risques identifiés. Des exemples de travaux sont présentés ci-après]",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Completion accounts",
-      "Pre-acquisition"
-    ],
-    "types_mission": [
-      "buy-side",
-      "completion"
-    ]
-  },
-  {
-    "id": "ab5643fe",
-    "bloc": "Quality of net debt (/cash)",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Bilan",
-    "objectif_finalite": "Comprendre la nature des postes du bilan et les éventuels domaines significatifs requérant un jugement lors de l’arrêté des comptes",
-    "objectif_contexte": "Le bilan présenté peut inclure des actifs nets surévalués ou des passifs sous évalués (par ex. éléments hors bilan) qui pourraient avoir un impact sur l’évaluation de la Transaction. La valeur comptable des actifs corporels et incorporels ne correspond pas à leur « juste valeur ». Il peut être nécessaire de procéder à un « Purchase Price Allocation » (Allocation de prix d’achat) [Se rapprocher de l’équipe VBM] Les provisions pour risques et charges et éléments hors bilan peuvent contenir des éléments assimilables à de la dette financière",
-    "diligences": [
-      {
-        "text": "Etudier le bilan établi à la dernière date disponible et comparer aux derniers comptes audités",
-        "subs": []
-      },
-      {
-        "text": "Analyser les principaux postes du bilan. Sur la base d’entretiens avec le management et de la réalisation des autres procédures prévues dans le périmètre des travaux, identifier les actifs potentiellement surévalués ou les passifs potentiellement sous évalués",
-        "subs": []
-      },
-      {
-        "text": "Commenter les domaines significatifs requérant un jugement lors de l’arrêté des comptes",
-        "subs": []
-      },
-      {
-        "text": "Fournir des détails sur tout engagement hors bilan identifié",
-        "subs": []
-      },
-      {
-        "text": "Débattre des sensibilités relatives aux postes du bilan afin de mieux illustrer l’impact de ces sensibilités sur les cash flows futurs et bilans prévisionnels",
-        "subs": []
-      },
-      {
-        "text": "Analyser l’actif net issu du dernier bilan disponible en suivant cette classification :",
-        "subs": [
-          "Actifs corporels / incorporels",
-          "BFR (net)",
-          "Dette nette et passifs assimilables à la dette",
-          "Impôts",
-          "Provisions (y compris celles pour retraites)",
-          "Autres actifs et passifs",
-          "[Option pour clients ch.2 et cibles ch. 2 uniquement: Préparer l’allocation du prix d’acquisition provisoire :"
-        ]
-      },
-      {
-        "text": "Identifier les actifs incorporels ;",
-        "subs": []
-      },
-      {
-        "text": "Fournir une première estimation de la juste valeur des actifs corporels et incorporels ;",
-        "subs": []
-      },
-      {
-        "text": "Simuler l’impact potentiel sur le résultat par action [se rapprocher de l’équipe VBM]]",
-        "subs": []
-      },
-      {
-        "text": "Présenter le bilan sur la période 20XX-20XX, commenter les principales variations par nature, telles qu’expliquées par le management",
-        "subs": []
-      },
-      {
-        "text": "Synthétiser les actifs détenus (leasing, actifs détenus en propre, actifs vacants, etc.)",
-        "subs": []
-      },
-      {
-        "text": "Présenter la politique du management en ce qui concerne le niveau de stock et les différents types de provisions (clients, stocks…)",
-        "subs": []
-      },
-      {
-        "text": "Détailler les évolutions de provisions pour risques et charges",
-        "subs": []
-      },
-      {
-        "text": "Présenter la nature des risques et engagements tels que détaillés par le management",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Pre-acquisition",
-      "SID"
-    ],
-    "types_mission": [
-      "buy-side",
-      "sell-side"
-    ]
-  },
-  {
-    "id": "a43f6f88",
-    "bloc": "Quality of net debt (/cash)",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Bilan consolidé",
-    "objectif_finalite": "",
-    "objectif_contexte": "Quelle est la position à l’actif et au passif de l’entreprise ? Quels sont les principaux points de discussion ?",
-    "diligences": [
-      {
-        "text": "Analyse des postes principaux du bilan, par éléments opérationnels et non opérationnels, et commenter les variations significatives entre les fins d’exercice",
-        "subs": []
-      },
-      {
-        "text": "Commenter la valeur de tout actif incorporel",
-        "subs": []
-      },
-      {
-        "text": "Commenter les problématiques d’impairment potentielles",
-        "subs": []
-      },
-      {
-        "text": "Analyser le modèle économique du portefeuille immobilier (type de contrat de location, date d’expiration du bail, propriétés vacantes, etc.)",
-        "subs": []
-      },
-      {
-        "text": "Analyser le niveau de stocks et des provisions",
-        "subs": []
-      },
-      {
-        "text": "Analyser l’ancienneté des dettes fournisseurs, créances clients, et des stocks ainsi que les tendances historiques",
-        "subs": []
-      },
-      {
-        "text": "Observer si des provisions pour des éléments significatifs ont été réalisées pendant les périodes d’intérim et en fin d’année (par ex. retraites, bonus, congés payés, etc.)",
-        "subs": []
-      },
-      {
-        "text": "Fournir un niveau de détail sur les provisions et leurs mouvements",
-        "subs": []
-      },
-      {
-        "text": "Identifier et commenter les postes de l’actif soumis à un jugement, une subjectivité ou appréciation",
-        "subs": []
-      },
-      {
-        "text": "Fournir des détails sur toute obligation ou engagement matériels figurant dans le bilan ou hors bilan",
-        "subs": []
-      },
-      {
-        "text": "Analyser le bilan établi à la dernière date disponible et comparer aux derniers comptes audités",
-        "subs": []
-      },
-      {
-        "text": "Analyser les principaux postes du bilan. Identifier les actifs potentiellement surévalués ou les passifs potentiellement sous évalués",
-        "subs": []
-      },
-      {
-        "text": "Commenter les postes nécessitant un degré d’estimation significatif",
-        "subs": []
-      },
-      {
-        "text": "Expliquer les engagements hors bilan identifiés",
-        "subs": []
-      },
-      {
-        "text": "Commenter les sensibilités des postes du bilan et montrer l’impact de ces sensibilités sur les cash flows futurs",
-        "subs": []
-      },
-      {
-        "text": "Analyser les postes du bilan à la dernière date disponible selon la classification suivante :",
-        "subs": [
-          "Actifs corporels / incorporels",
-          "BFR (net)",
-          "Dette nette et passifs assimilables à la dette",
-          "Impôts",
-          "Provisions (y compris celles pour retraites)",
-          "Autres actifs et passifs"
-        ]
-      },
-      {
-        "text": "Provide details of any identified material contingencies and/or commitments, both on and off balance sheet",
-        "subs": []
-      },
-      {
-        "text": "Etudier le bilan des Completion Accounts et le comparer aux derniers comptes audités et au bilan à la même date au cours de l’exercice précédent",
-        "subs": []
-      },
-      {
-        "text": "Commenter les points subjectifs",
-        "subs": []
-      },
-      {
-        "text": "Fournir des détails sur tout nouvel engagement hors bilan identifié depuis la dernière clôture annuelle",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Business Plan",
-      "Completion accounts",
-      "Refinancing",
-      "VDD"
-    ],
-    "types_mission": [
-      "buy-side",
-      "completion",
-      "refinancing",
-      "sell-side"
-    ]
-  },
-  {
-    "id": "52aade09",
-    "bloc": "Quality of net debt (/cash)",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Comprendre la structure actuelle du bilan du Groupe et les impacts prévus au titre du business plan :",
-    "objectif_finalite": "",
-    "objectif_contexte": "Trésorerie et dette nette Service de la dette Niveaux prévisionnels des covenants comparés aux niveaux contractuels",
-    "diligences": [
-      {
-        "text": "Analyse des composants de la dette nette et sa répartition par pays / filiale en date du JJ/MM/AA",
-        "subs": []
-      },
-      {
-        "text": "Analyse des positions prévisionnelles de dette nette prise en compte dans le business plan",
-        "subs": []
-      },
-      {
-        "text": "Analyse des ratios de covenant prévisionnels et comparatif avec les niveaux contractuels (mise en avant des éventuelles prévisions de rupture covenant ou marge de manœuvre disponible)",
-        "subs": []
-      }
-    ],
-    "sources": [
-      "Restructuring"
-    ],
-    "types_mission": [
-      "restructuring"
-    ]
-  },
-  {
-    "id": "2ced0a7a",
-    "bloc": "Quality of net debt (/cash)",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Dette nette",
-    "objectif_finalite": "",
-    "objectif_contexte": "Quel est le niveau de dette de l’entreprise ?",
-    "diligences": [
-      {
-        "text": "Analyser les emprunts et les instruments financiers matériels (montants, date de maturité, taux d’intérêt, coûts de rupture, covenants, échéancier)",
-        "subs": []
-      },
-      {
-        "text": "Analyser les engagements de crédit-bail",
-        "subs": []
-      },
-      {
-        "text": "Identifier et examiner tout élément ayant nature de dette",
-        "subs": []
-      },
-      {
-        "text": "Identifier les seuils de matérialité de trésorerie bloquée",
-        "subs": []
-      },
-      {
-        "text": "Présenter la dette nette telle que définie par le management en détaillant :",
-        "subs": [
-          "Les intérêts financiers",
-          "Les autres éléments pouvant être considérés comme de la dette"
-        ]
-      }
-    ],
-    "sources": [
-      "Refinancing",
-      "SID",
-      "VDD"
-    ],
-    "types_mission": [
-      "refinancing",
-      "sell-side"
-    ]
-  },
-  {
-    "id": "33fa30c0",
-    "bloc": "Quality of net debt (/cash)",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Dette nette et éléments hors bilan",
-    "objectif_finalite": "",
-    "objectif_contexte": "« Etablir le niveau de dette nette de l’entreprise et le niveau de dette nette attendu à la date d’acquisition proposée La définition de la dette nette pourrait être incorrecte, des éléments ayant nature de dette pourraient être retraités dans le cadre de l’évaluation ». Des ajustements pourraient porter sur : Coûts de transaction non amortis Dettes intercos Dettes d’exploitation Intérêts courus, charges à payer Contrats de location financement Eléments assimilables à de la dette (ex. : dettes envers les fournisseurs d’immobilisations, accords de factoring, restructuration/provisions pour licenciement et engagements de retraite) et autres risques significatifs pouvant entraîner une sortie  de cash Engagements liés à des avances de cash (par ex. revenus différés, dépôts ou avances clients) Charges constatées d’avance ou à payer significatives (ex. : coûts de séparation ou cession) Exigences de cash post acquisition Garanties à donner dans le cadre du SPA / indemnités à négocier Engagement de retraites, plans d’options sur actions, etc. Dette fiscale récente ou non JV/ participations liées (notamment si des garanties ont été données) Tout autre élément provisionné ou hors bilan qui pourrait se traduire par une sortie de cash «Trésorerie bloquée »: Financement minimum exigé dans certaines entreprises / pays Exigences obligataires / bancaires spécifiques à un pays Avances, retenues Coûts liés à la séparation Coûts contractuels de résiliation",
-    "diligences": [
-      {
-        "text": "Lire le rapport de VDD et l’information en dataroom afin d’évaluer les hypothèses de calcul de la dette nette et tout ajustement réalisé dans le rapport de VDD",
-        "subs": []
-      },
-      {
-        "text": "Analyser la dette nette en tenant compte :",
-        "subs": [
-          "Intérêts portant sur dette financière",
-          "Tout élément ayant nature de dette (ex. : dettes envers les fournisseurs d’immobilisations)",
-          "Tout élément inclus dans le BFR qui devrait être considéré comme de la dette nette (par ex. dettes d’impôt ou dettes envers les fournisseurs d’immobilisations présentant un niveau anormalement élevé)"
-        ]
-      },
-      {
-        "text": "Analyser la dette nette en tenant compte de :",
-        "subs": [
-          "Tout élément ayant nature de dette",
-          "Tout élément inclus dans le BFR qui devrait être considéré comme de la dette nette (par ex. dettes d’impôt ou dettes envers les fournisseurs d’immobilisations présentant un niveau anormalement élevé)",
-          "[Analyser les rapprochements bancaires]"
-        ]
-      }
-    ],
-    "sources": [
-      "Completion accounts",
-      "Pre-acquisition"
-    ],
-    "types_mission": [
-      "buy-side",
-      "completion"
-    ]
-  },
-  {
-    "id": "fe253956",
-    "bloc": "Quality of net debt (/cash)",
-    "categorie_type": "standard",
-    "tag": "standard",
-    "objectif_titre": "Quel est le niveau de dette attendu à la date de la transaction ?",
-    "objectif_finalite": "",
+    "position": 1,
+    "objectif_titre": "Actif net",
+    "objectif_finalite": "Comprendre la composition de l'actif net et l'étendue des engagements hors-bilan {{de_l_entite}}",
     "objectif_contexte": "",
     "diligences": [
       {
-        "text": "Lister les éléments à prendre en compte dans l’estimation de la dette nette :",
+        "text": "Présenter l'actif net {{de_l_entite}} en suivant la classification suivante :",
         "subs": [
-          "Intérêts des emprunts financiers ainsi que tout autre élément ayant nature de dette par ex. dettes fournisseurs d’immos",
-          "Eléments inclus dans le BFR pouvant être considérés comme de la dette (par ex. un niveau anormalement élevé de dette d’impôt)",
-          "Intérêts des emprunts financiers ainsi que tout autre élément ayant nature de dette par ex. créances de capex"
-        ]
+          "Actif immobilisé, en distinguant (a) les éventuels actifs immobiliers, (b) la valeur de l'outil industriel, (c) la flotte de véhicules, (d) les actifs stratégiques immatériels et (e) les éventuels actifs financiers",
+          "Besoin en fonds de roulement, en distinguant notamment (a) les stocks et encours, (b) les créances clients et dettes fournisseurs, (c) les créances et dettes fiscales et sociales et (d) les postes suggérant une évaluation à l'arrêté des comptes",
+          "Trésorerie (/Dette) nette, en distinguant (a) les avoirs bancaires, (b) les éventuels emprunts bancaires et engagements vis-à-vis des partenaires financiers (y compris les engagements au titre des mécanismes de mobilisation du poste client) et (c) les dettes vis-à-vis des associés (comptes courant d'associés)",
+          "Autres actifs et passifs, incluant l'ensemble des éléments bilanciels non directement rattachés aux catégories précédentes (provisions pour risques, créances et dettes d'IS, autres)"
+        ],
+        "numbering": "(1)"
+      },
+      {
+        "text": "Mesurer les taux d'amortissement par catégorie d'actifs et discuter avec la Direction des niveaux de vétusté des principaux actifs industriels",
+        "subs": []
+      },
+      {
+        "text": "Décrire la méthode utilisée pour la valorisation et la dépréciation des stocks et encours – Obtenir les listings de stocks détaillés par référence aux dates de clôtures récentes en vue de :",
+        "subs": [
+          "Présenter et comprendre l'évolution des valorisations unitaires retenues et d'expliquer les principales variations",
+          "Identifier les références présentant une faible rotation sur la période",
+          "Construire des bridges permettant d'isoler les leviers d'évolution de la valeur des stocks : effet volume, effet valorisation, rotation du portefeuille de références"
+        ],
+        "numbering": "(1)"
+      },
+      {
+        "text": "Présenter les balances âgées clients et fournisseurs en vue d'identifier les éventuels retards de paiement – Montrer l'évolution mensuelle des délais de paiement clients et fournisseurs afin d'observer d'éventuels changements dans les conditions de règlement",
+        "subs": []
+      },
+      {
+        "text": "S'assurer de la correcte évaluation des postes clés estimés à la clôture et ayant un impact direct sur la lecture de la rentabilité et la robustesse de l'actif net (e.g. produits constatés d'avance, factures à établir, encours de production, factures non parvenues)",
+        "subs": []
+      },
+      {
+        "text": "Comprendre si les actifs financiers (e.g. disponibilités, comptes à termes, valeurs mobilières de placement) sont mobilisables sans délai ni restriction",
+        "subs": []
+      },
+      {
+        "text": "Ventiler les provisions pour risques et charges par litige et comprendre leur évaluation au regard des réclamations formulées et de l'appréciation des risques réels sous-jacents",
+        "subs": []
+      },
+      {
+        "text": "Apprécier les frottements fiscaux futurs pouvant émaner de l'apurement de postes bilanciels clés (reprise de provisions pour risques, amortissements dérogatoires, réévaluation d'actifs)",
+        "subs": []
+      },
+      {
+        "text": "Obtenir la liste des engagements hors-bilan {{de_l_entite}} et commenter leur impact sur les termes de l'opération envisagée",
+        "subs": []
       }
     ],
     "sources": [
-      "Refinancing",
-      "VDD"
+      "SMC"
     ],
     "types_mission": [
-      "refinancing",
+      "buy-side",
+      "sell-side"
+    ]
+  },
+  {
+    "id": "fb14c563",
+    "bloc": "Quality of net debt (/cash)",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "position": 2,
+    "objectif_titre": "Trésorerie nette ajustée",
+    "objectif_finalite": "Définir et quantifier le niveau de trésorerie nette économique aux bornes du périmètre d'acquisition",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Présenter et détailler les composantes de la trésorerie nette {{de_l_entite}} à la dernière clôture ainsi qu'à la dernière date disponible",
+        "subs": []
+      },
+      {
+        "text": "Identifier les éventuels actifs et passifs devant être considérés comme des éléments de trésorerie du fait de leur nature ou leur montant",
+        "subs": []
+      },
+      {
+        "text": "Porter une attention particulière aux éléments suivants :",
+        "subs": [
+          "Dettes vis-à-vis des parties liées (loyers impayés, management fees à payer, etc.)",
+          "Dettes vis-à-vis des fournisseurs d'immobilisations",
+          "Rémunération à verser (salaires décaissés début m+1, participation et intéressement à décaisser, primes et commissions à payer, etc.)",
+          "Créances, dettes ou avances ne s'inscrivant pas dans le cadre des opérations courantes",
+          "Engagements hors bilan et indemnités de fin de carrière",
+          "Recours à des mécanismes de mobilisation du poste client"
+        ],
+        "numbering": "(1)"
+      },
+      {
+        "text": "Comprendre si les actifs financiers (e.g. disponibilités, comptes à termes, valeurs mobilières de placement) sont mobilisables sans délai ni restriction",
+        "subs": []
+      },
+      {
+        "text": "Analyser les contrats de financement en vue de valider les montants, dates de maturité, coûts de rupture et échéancier",
+        "subs": []
+      },
+      {
+        "text": "Présenter les engagements {{de_l_entite}} au titre des conventions de crédit-bail et/ou de location-financement",
+        "subs": []
+      },
+      {
+        "text": "Corriger le niveau de trésorerie nette au regard de la position de BFR par rapport au niveau de référence déterminé",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "SMC"
+    ],
+    "types_mission": [
+      "buy-side",
+      "sell-side"
+    ]
+  },
+  {
+    "id": "0434eb6b",
+    "bloc": "Quality of net debt (/cash)",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "position": 3,
+    "objectif_titre": "Endettement net ajusté",
+    "objectif_finalite": "Définir et quantifier le niveau d'endettement net économique aux bornes du périmètre d'acquisition",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Présenter et détailler les composantes de l'endettement net {{de_l_entite}} à la dernière clôture ainsi qu'à la dernière date disponible",
+        "subs": []
+      },
+      {
+        "text": "Identifier les éventuels actifs et passifs devant être considérés comme des éléments de trésorerie / dette du fait de leur nature ou leur montant",
+        "subs": []
+      },
+      {
+        "text": "Porter une attention particulière aux éléments suivants :",
+        "subs": [
+          "Dettes vis-à-vis des parties liées (loyers impayés, management fees à payer, etc.)",
+          "Dettes vis-à-vis des fournisseurs d'immobilisations",
+          "Rémunération à verser (salaires décaissés début m+1, participation et intéressement à décaisser, primes et commissions à payer, etc.)",
+          "Créances, dettes ou avances ne s'inscrivant pas dans le cadre des opérations courantes",
+          "Engagements hors bilan et indemnités de fin de carrière",
+          "Recours à des mécanismes de mobilisation du poste client"
+        ],
+        "numbering": "(1)"
+      },
+      {
+        "text": "Comprendre si les actifs financiers (e.g. disponibilités, comptes à termes, valeurs mobilières de placement) sont mobilisables sans délai ni restriction",
+        "subs": []
+      },
+      {
+        "text": "Analyser les contrats de financement en vue de valider les montants, dates de maturité, coûts de rupture et échéancier",
+        "subs": []
+      },
+      {
+        "text": "Présenter les engagements {{de_l_entite}} au titre des conventions de crédit-bail et/ou de location-financement",
+        "subs": []
+      },
+      {
+        "text": "Corriger le niveau d'endettement net au regard de la position de BFR par rapport au niveau de référence déterminé",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "SMC"
+    ],
+    "types_mission": [
+      "buy-side",
       "sell-side"
     ]
   },
@@ -1740,6 +1475,41 @@
     ]
   },
   {
+    "id": "10e56fbe",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "BFR cible",
+    "objectif_finalite": "",
+    "objectif_contexte": "Quel pourrait être le niveau de BFR cible à la date de transaction ?",
+    "diligences": [
+      {
+        "text": "Evaluer les composantes du BFR et tout actif/passif qui aurait été inclus/exclu de la définition du BFR faite par le management",
+        "subs": []
+      },
+      {
+        "text": "Etablir si le processus de clôture mensuel et annuel des comptes diffère, et évaluer l’impact au niveau du calcul du BFR cible",
+        "subs": []
+      },
+      {
+        "text": "Expliquer si les variations de BFR intra-mensuelles impliquent des révisions de cible de BFR",
+        "subs": []
+      },
+      {
+        "text": "Préparer une analyse de BFR ajusté et quantifier les niveaux minimum, modéré et maximum afin d’atteindre le BFR cible à date de transaction",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Refinancing",
+      "VDD"
+    ],
+    "types_mission": [
+      "refinancing",
+      "sell-side"
+    ]
+  },
+  {
     "id": "127b1580",
     "bloc": "Autres",
     "categorie_type": "standard",
@@ -1825,6 +1595,274 @@
       "SID"
     ],
     "types_mission": [
+      "sell-side"
+    ]
+  },
+  {
+    "id": "b4cf83e3",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Besoins en fonds de roulement (nets)",
+    "objectif_finalite": "",
+    "objectif_contexte": "« Etablir le BFR cible au closing pour les besoins de la Transaction (structuring, documents contractuels, etc.) Les positions de BFR historiques peuvent ne pas refléter les opérations en cours et les accords négociés par l’entreprise et pourraient contenir des éléments non récurrents ou non cash. Cela pourrait nécessiter des ajustements afin de constituer une base adéquate de détermination du BFR cible au moment de la conclusion de la transaction.  Par exemple : Provisions des intérêts et coûts de financement Dettes envers les fournisseurs d’immobilisations ” Eléments non récurrents / exceptionnels Eléments non courants (par ex. frais de consultants) Eléments non cash dans les comptes clients/fournisseurs Dépôts de garantie Retenues de garantie à payer/recevoir Bonus Pratiques de fin d’année (ou de trimestre) de gestion du BFR afin de satisfaire les covenants / normes externes Acquisitions / cessions Pics et creux intra mensuels [Autres]",
+    "diligences": [
+      {
+        "text": "Revoir le rapport de VDD et l’information mise à disposition en dataroom afin de pouvoir évaluer les hypothèses justifiant les ajustements réalisés au niveau du BFR moyen présenté dans le rapport de VDD",
+        "subs": []
+      },
+      {
+        "text": "Analyser l’information financière disponible et débattre avec le management des éléments exceptionnels des états financiers, changements de pratiques comptables, et/ou variations de BFR significatives.",
+        "subs": []
+      },
+      {
+        "text": "Analyser et décrire les éléments composant le BFR",
+        "subs": []
+      },
+      {
+        "text": "Identifier les surévaluations et sous-évaluations possibles",
+        "subs": []
+      },
+      {
+        "text": "Evaluer les provisions faites pour les stocks et créances clients et juger de leur pertinence",
+        "subs": []
+      },
+      {
+        "text": "Analyser la balance âgée client / fournisseur",
+        "subs": []
+      },
+      {
+        "text": "Etablir si les provisions effectuées pour les éléments significatifs l’ont été aux arrêtés intérimaires et en fin d’année (retraites, bonus, participation des salariés, congés payés, avoirs, etc.)",
+        "subs": []
+      },
+      {
+        "text": "Analyser les variations intra mensuelles de BFR et conclure sur une nécessité ou non de revoir le BFR cible.",
+        "subs": []
+      },
+      {
+        "text": "Analyser les BFR ajustés et quantifier les niveaux minimum, moyen et maximum afin de vous assister dans la détermination du BFR cible",
+        "subs": []
+      },
+      {
+        "text": "Décrire et analyser les éléments composant le BFR, notamment au travers de l’analyse des principaux KPI (délais de règlement fournisseurs, clients, rotation des stocks)",
+        "subs": []
+      },
+      {
+        "text": "Débattre avec le management des variations de BFR significatives.",
+        "subs": []
+      },
+      {
+        "text": "Analyser et ajuster les éléments exceptionnels qui pourraient biaiser les positions de BFR en considérant d’une part les éléments exceptionnels du compte de résultat identifiés en tant qu’ajustements de l’EBITDA et d’autre part tout autre élément exceptionnel ayant pu impacter le BFR (par ex. paiements anticipés de clients, « lissage » des comptes)",
+        "subs": []
+      },
+      {
+        "text": "Etablir si les provisions habituellement effectuées en fin d’année (retraites, bonus, participation des salariés, congés payés, avoirs, etc.) ont bien été constituées dans le cadre des Completion Accounts",
+        "subs": []
+      },
+      {
+        "text": "Procéder à des sondages sur [à compléter en fonction des demandes spécifiques du client / risques identifiés. Des exemples de travaux sont présentés ci-après]",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Completion accounts",
+      "Pre-acquisition"
+    ],
+    "types_mission": [
+      "buy-side",
+      "completion"
+    ]
+  },
+  {
+    "id": "ab5643fe",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Bilan",
+    "objectif_finalite": "Comprendre la nature des postes du bilan et les éventuels domaines significatifs requérant un jugement lors de l’arrêté des comptes",
+    "objectif_contexte": "Le bilan présenté peut inclure des actifs nets surévalués ou des passifs sous évalués (par ex. éléments hors bilan) qui pourraient avoir un impact sur l’évaluation de la Transaction. La valeur comptable des actifs corporels et incorporels ne correspond pas à leur « juste valeur ». Il peut être nécessaire de procéder à un « Purchase Price Allocation » (Allocation de prix d’achat) [Se rapprocher de l’équipe VBM] Les provisions pour risques et charges et éléments hors bilan peuvent contenir des éléments assimilables à de la dette financière",
+    "diligences": [
+      {
+        "text": "Etudier le bilan établi à la dernière date disponible et comparer aux derniers comptes audités",
+        "subs": []
+      },
+      {
+        "text": "Analyser les principaux postes du bilan. Sur la base d’entretiens avec le management et de la réalisation des autres procédures prévues dans le périmètre des travaux, identifier les actifs potentiellement surévalués ou les passifs potentiellement sous évalués",
+        "subs": []
+      },
+      {
+        "text": "Commenter les domaines significatifs requérant un jugement lors de l’arrêté des comptes",
+        "subs": []
+      },
+      {
+        "text": "Fournir des détails sur tout engagement hors bilan identifié",
+        "subs": []
+      },
+      {
+        "text": "Débattre des sensibilités relatives aux postes du bilan afin de mieux illustrer l’impact de ces sensibilités sur les cash flows futurs et bilans prévisionnels",
+        "subs": []
+      },
+      {
+        "text": "Analyser l’actif net issu du dernier bilan disponible en suivant cette classification :",
+        "subs": [
+          "Actifs corporels / incorporels",
+          "BFR (net)",
+          "Dette nette et passifs assimilables à la dette",
+          "Impôts",
+          "Provisions (y compris celles pour retraites)",
+          "Autres actifs et passifs",
+          "[Option pour clients ch.2 et cibles ch. 2 uniquement: Préparer l’allocation du prix d’acquisition provisoire :"
+        ]
+      },
+      {
+        "text": "Identifier les actifs incorporels ;",
+        "subs": []
+      },
+      {
+        "text": "Fournir une première estimation de la juste valeur des actifs corporels et incorporels ;",
+        "subs": []
+      },
+      {
+        "text": "Simuler l’impact potentiel sur le résultat par action [se rapprocher de l’équipe VBM]]",
+        "subs": []
+      },
+      {
+        "text": "Présenter le bilan sur la période 20XX-20XX, commenter les principales variations par nature, telles qu’expliquées par le management",
+        "subs": []
+      },
+      {
+        "text": "Synthétiser les actifs détenus (leasing, actifs détenus en propre, actifs vacants, etc.)",
+        "subs": []
+      },
+      {
+        "text": "Présenter la politique du management en ce qui concerne le niveau de stock et les différents types de provisions (clients, stocks…)",
+        "subs": []
+      },
+      {
+        "text": "Détailler les évolutions de provisions pour risques et charges",
+        "subs": []
+      },
+      {
+        "text": "Présenter la nature des risques et engagements tels que détaillés par le management",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Pre-acquisition",
+      "SID"
+    ],
+    "types_mission": [
+      "buy-side",
+      "sell-side"
+    ]
+  },
+  {
+    "id": "a43f6f88",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Bilan consolidé",
+    "objectif_finalite": "",
+    "objectif_contexte": "Quelle est la position à l’actif et au passif de l’entreprise ? Quels sont les principaux points de discussion ?",
+    "diligences": [
+      {
+        "text": "Analyse des postes principaux du bilan, par éléments opérationnels et non opérationnels, et commenter les variations significatives entre les fins d’exercice",
+        "subs": []
+      },
+      {
+        "text": "Commenter la valeur de tout actif incorporel",
+        "subs": []
+      },
+      {
+        "text": "Commenter les problématiques d’impairment potentielles",
+        "subs": []
+      },
+      {
+        "text": "Analyser le modèle économique du portefeuille immobilier (type de contrat de location, date d’expiration du bail, propriétés vacantes, etc.)",
+        "subs": []
+      },
+      {
+        "text": "Analyser le niveau de stocks et des provisions",
+        "subs": []
+      },
+      {
+        "text": "Analyser l’ancienneté des dettes fournisseurs, créances clients, et des stocks ainsi que les tendances historiques",
+        "subs": []
+      },
+      {
+        "text": "Observer si des provisions pour des éléments significatifs ont été réalisées pendant les périodes d’intérim et en fin d’année (par ex. retraites, bonus, congés payés, etc.)",
+        "subs": []
+      },
+      {
+        "text": "Fournir un niveau de détail sur les provisions et leurs mouvements",
+        "subs": []
+      },
+      {
+        "text": "Identifier et commenter les postes de l’actif soumis à un jugement, une subjectivité ou appréciation",
+        "subs": []
+      },
+      {
+        "text": "Fournir des détails sur toute obligation ou engagement matériels figurant dans le bilan ou hors bilan",
+        "subs": []
+      },
+      {
+        "text": "Analyser le bilan établi à la dernière date disponible et comparer aux derniers comptes audités",
+        "subs": []
+      },
+      {
+        "text": "Analyser les principaux postes du bilan. Identifier les actifs potentiellement surévalués ou les passifs potentiellement sous évalués",
+        "subs": []
+      },
+      {
+        "text": "Commenter les postes nécessitant un degré d’estimation significatif",
+        "subs": []
+      },
+      {
+        "text": "Expliquer les engagements hors bilan identifiés",
+        "subs": []
+      },
+      {
+        "text": "Commenter les sensibilités des postes du bilan et montrer l’impact de ces sensibilités sur les cash flows futurs",
+        "subs": []
+      },
+      {
+        "text": "Analyser les postes du bilan à la dernière date disponible selon la classification suivante :",
+        "subs": [
+          "Actifs corporels / incorporels",
+          "BFR (net)",
+          "Dette nette et passifs assimilables à la dette",
+          "Impôts",
+          "Provisions (y compris celles pour retraites)",
+          "Autres actifs et passifs"
+        ]
+      },
+      {
+        "text": "Provide details of any identified material contingencies and/or commitments, both on and off balance sheet",
+        "subs": []
+      },
+      {
+        "text": "Etudier le bilan des Completion Accounts et le comparer aux derniers comptes audités et au bilan à la même date au cours de l’exercice précédent",
+        "subs": []
+      },
+      {
+        "text": "Commenter les points subjectifs",
+        "subs": []
+      },
+      {
+        "text": "Fournir des détails sur tout nouvel engagement hors bilan identifié depuis la dernière clôture annuelle",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Business Plan",
+      "Completion accounts",
+      "Refinancing",
+      "VDD"
+    ],
+    "types_mission": [
+      "buy-side",
+      "completion",
+      "refinancing",
       "sell-side"
     ]
   },
@@ -1924,6 +1962,35 @@
     ]
   },
   {
+    "id": "52aade09",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Comprendre la structure actuelle du bilan du Groupe et les impacts prévus au titre du business plan :",
+    "objectif_finalite": "",
+    "objectif_contexte": "Trésorerie et dette nette Service de la dette Niveaux prévisionnels des covenants comparés aux niveaux contractuels",
+    "diligences": [
+      {
+        "text": "Analyse des composants de la dette nette et sa répartition par pays / filiale en date du JJ/MM/AA",
+        "subs": []
+      },
+      {
+        "text": "Analyse des positions prévisionnelles de dette nette prise en compte dans le business plan",
+        "subs": []
+      },
+      {
+        "text": "Analyse des ratios de covenant prévisionnels et comparatif avec les niveaux contractuels (mise en avant des éventuelles prévisions de rupture covenant ou marge de manœuvre disponible)",
+        "subs": []
+      }
+    ],
+    "sources": [
+      "Restructuring"
+    ],
+    "types_mission": [
+      "restructuring"
+    ]
+  },
+  {
     "id": "1d47f9cd",
     "bloc": "Autres",
     "categorie_type": "standard",
@@ -1962,6 +2029,88 @@
     ],
     "types_mission": [
       "restructuring"
+    ]
+  },
+  {
+    "id": "2ced0a7a",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Dette nette",
+    "objectif_finalite": "",
+    "objectif_contexte": "Quel est le niveau de dette de l’entreprise ?",
+    "diligences": [
+      {
+        "text": "Analyser les emprunts et les instruments financiers matériels (montants, date de maturité, taux d’intérêt, coûts de rupture, covenants, échéancier)",
+        "subs": []
+      },
+      {
+        "text": "Analyser les engagements de crédit-bail",
+        "subs": []
+      },
+      {
+        "text": "Identifier et examiner tout élément ayant nature de dette",
+        "subs": []
+      },
+      {
+        "text": "Identifier les seuils de matérialité de trésorerie bloquée",
+        "subs": []
+      },
+      {
+        "text": "Présenter la dette nette telle que définie par le management en détaillant :",
+        "subs": [
+          "Les intérêts financiers",
+          "Les autres éléments pouvant être considérés comme de la dette"
+        ]
+      }
+    ],
+    "sources": [
+      "Refinancing",
+      "SID",
+      "VDD"
+    ],
+    "types_mission": [
+      "refinancing",
+      "sell-side"
+    ]
+  },
+  {
+    "id": "33fa30c0",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Dette nette et éléments hors bilan",
+    "objectif_finalite": "",
+    "objectif_contexte": "« Etablir le niveau de dette nette de l’entreprise et le niveau de dette nette attendu à la date d’acquisition proposée La définition de la dette nette pourrait être incorrecte, des éléments ayant nature de dette pourraient être retraités dans le cadre de l’évaluation ». Des ajustements pourraient porter sur : Coûts de transaction non amortis Dettes intercos Dettes d’exploitation Intérêts courus, charges à payer Contrats de location financement Eléments assimilables à de la dette (ex. : dettes envers les fournisseurs d’immobilisations, accords de factoring, restructuration/provisions pour licenciement et engagements de retraite) et autres risques significatifs pouvant entraîner une sortie  de cash Engagements liés à des avances de cash (par ex. revenus différés, dépôts ou avances clients) Charges constatées d’avance ou à payer significatives (ex. : coûts de séparation ou cession) Exigences de cash post acquisition Garanties à donner dans le cadre du SPA / indemnités à négocier Engagement de retraites, plans d’options sur actions, etc. Dette fiscale récente ou non JV/ participations liées (notamment si des garanties ont été données) Tout autre élément provisionné ou hors bilan qui pourrait se traduire par une sortie de cash «Trésorerie bloquée »: Financement minimum exigé dans certaines entreprises / pays Exigences obligataires / bancaires spécifiques à un pays Avances, retenues Coûts liés à la séparation Coûts contractuels de résiliation",
+    "diligences": [
+      {
+        "text": "Lire le rapport de VDD et l’information en dataroom afin d’évaluer les hypothèses de calcul de la dette nette et tout ajustement réalisé dans le rapport de VDD",
+        "subs": []
+      },
+      {
+        "text": "Analyser la dette nette en tenant compte :",
+        "subs": [
+          "Intérêts portant sur dette financière",
+          "Tout élément ayant nature de dette (ex. : dettes envers les fournisseurs d’immobilisations)",
+          "Tout élément inclus dans le BFR qui devrait être considéré comme de la dette nette (par ex. dettes d’impôt ou dettes envers les fournisseurs d’immobilisations présentant un niveau anormalement élevé)"
+        ]
+      },
+      {
+        "text": "Analyser la dette nette en tenant compte de :",
+        "subs": [
+          "Tout élément ayant nature de dette",
+          "Tout élément inclus dans le BFR qui devrait être considéré comme de la dette nette (par ex. dettes d’impôt ou dettes envers les fournisseurs d’immobilisations présentant un niveau anormalement élevé)",
+          "[Analyser les rapprochements bancaires]"
+        ]
+      }
+    ],
+    "sources": [
+      "Completion accounts",
+      "Pre-acquisition"
+    ],
+    "types_mission": [
+      "buy-side",
+      "completion"
     ]
   },
   {
@@ -2520,6 +2669,33 @@
     ],
     "types_mission": [
       "restructuring"
+    ]
+  },
+  {
+    "id": "fe253956",
+    "bloc": "Autres",
+    "categorie_type": "standard",
+    "tag": "standard",
+    "objectif_titre": "Quel est le niveau de dette attendu à la date de la transaction ?",
+    "objectif_finalite": "",
+    "objectif_contexte": "",
+    "diligences": [
+      {
+        "text": "Lister les éléments à prendre en compte dans l’estimation de la dette nette :",
+        "subs": [
+          "Intérêts des emprunts financiers ainsi que tout autre élément ayant nature de dette par ex. dettes fournisseurs d’immos",
+          "Eléments inclus dans le BFR pouvant être considérés comme de la dette (par ex. un niveau anormalement élevé de dette d’impôt)",
+          "Intérêts des emprunts financiers ainsi que tout autre élément ayant nature de dette par ex. créances de capex"
+        ]
+      }
+    ],
+    "sources": [
+      "Refinancing",
+      "VDD"
+    ],
+    "types_mission": [
+      "refinancing",
+      "sell-side"
     ]
   },
   {
