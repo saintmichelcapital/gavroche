@@ -582,12 +582,12 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .sc.perim .pr{background:#FFFFFF;padding:4% 5% 3.5% 2.5%;display:flex;flex-direction:column;position:relative;overflow:hidden;}
 
 /* Nav sommaire (colonne gauche) */
-.sc.perim .pl-nav{display:flex;flex-direction:column;gap:0.55em;}
-.sc.perim .pl-nav-item{font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#B8B8B8;line-height:1.35;padding-left:1em;position:relative;letter-spacing:0;}
+.sc.perim .pl-nav{display:flex;flex-direction:column;gap:0.55em;width:100%;}
+.sc.perim .pl-nav-item{display:block;width:100%;font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#B8B8B8;line-height:1.35;padding-left:1em;position:relative;letter-spacing:0;box-sizing:border-box;}
 .sc.perim .pl-nav-item.active{color:#1A1A1A;font-weight:400;}
 .sc.perim .pl-nav-item.active::before{content:'';position:absolute;left:0;top:0.05em;bottom:0.05em;width:1.5px;background:#1A1A1A;}
-.sc.perim .pl-nav-sub{font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#1A1A1A;line-height:1.35;padding-left:2.5em;}
-.sc.perim .pl-nav-more{font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#B8B8B8;padding-left:2.5em;letter-spacing:0.15em;}
+.sc.perim .pl-nav-sub{display:block;width:100%;font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#1A1A1A;line-height:1.35;padding-left:2.5em;box-sizing:border-box;}
+.sc.perim .pl-nav-more{display:block;width:100%;font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#B8B8B8;padding-left:2.5em;letter-spacing:0.15em;box-sizing:border-box;}
 
 /* Séparateur horizontal fin sous la nav */
 .sc.perim .pl-sep{height:0.5pt;background:#B8B8B8;margin:1.5em 0 1.7em 0;}
@@ -605,11 +605,11 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .sc.perim .pr-header-line{width:16%;height:3px;background:#1A1A1A;margin-top:0.6em;margin-bottom:1.8em;}
 
 /* Liste des diligences — bullets § (rendu carré via CSS pour éviter Wingdings web) */
-.sc.perim .pr-dils{list-style:none;padding:0;margin:0;flex:1;overflow:hidden;}
-.sc.perim .pr-dil{position:relative;padding-left:1.4em;font-family:'Segoe UI',sans-serif;font-size:0.56em;color:#1A1A1A;text-align:justify;line-height:1.6;margin-bottom:0.6em;outline:none;}
+.sc.perim .pr-dils{display:block;list-style:none;padding:0;margin:0;flex:1;overflow:hidden;width:100%;}
+.sc.perim .pr-dil{display:block;width:100%;position:relative;padding-left:1.4em;font-family:'Segoe UI',sans-serif;font-size:0.56em;color:#1A1A1A;text-align:justify;line-height:1.6;margin-bottom:0.6em;outline:none;box-sizing:border-box;}
 .sc.perim .pr-dil::before{content:'';position:absolute;left:0;top:0.55em;width:0.5em;height:0.5em;background:#1A1A1A;}
-.sc.perim .pr-subs{list-style:none;padding:0;margin:0.3em 0 0.5em 0.8em;}
-.sc.perim .pr-sub{position:relative;padding-left:1.6em;font-family:'Segoe UI',sans-serif;font-size:0.53em;color:#1A1A1A;text-align:justify;line-height:1.55;margin-bottom:0.35em;outline:none;}
+.sc.perim .pr-subs{display:block;list-style:none;padding:0;margin:0.3em 0 0.5em 0.8em;width:100%;box-sizing:border-box;}
+.sc.perim .pr-sub{display:block;width:100%;position:relative;padding-left:1.6em;font-family:'Segoe UI',sans-serif;font-size:0.53em;color:#1A1A1A;text-align:justify;line-height:1.55;margin-bottom:0.35em;outline:none;box-sizing:border-box;}
 .sc.perim .pr-sub::before{content:'ꟷ';position:absolute;left:0;top:0;color:#1A1A1A;font-weight:400;font-family:'Segoe UI',sans-serif;}
 
 /* Footer : trait fin + "Page X sur [x]" */
