@@ -435,6 +435,401 @@ function smcCalHelpers() {
   return { isBiz, nextBiz, fmtDuree, fmtPeriod, phasePeriods, phaseIndex, mois };
 }
 
+// ═══════════════════════════════════════════════════════
+// EXPORT PPTX PROPALE COMPLÈTE (trame v3 Gavroche)
+// Génère l'intégralité du deck : Cover / Lettre+Sommaire /
+// Séparateur Contexte / Séparateur Périmètre / Slides Périmètre /
+// Séparateur Conditions / Calendrier / Honoraires / Backcover
+// Le corps du contexte est laissé pour un futur module (IA).
+// ═══════════════════════════════════════════════════════
+app.post('/api/export-propale-pptx', requireAuth, async (req, res) => {
+  try {
+    const PptxGenJS = require('pptxgenjs');
+    const { cibleNom, sections, objectifs, honoraires, calendrier, parties } = req.body || {};
+
+    const pptx = new PptxGenJS();
+    pptx.defineLayout({ name: 'A4L', width: 11.69, height: 8.27 });
+    pptx.layout = 'A4L';
+    pptx.title = (cibleNom || 'Propale') + ' — Proposition de services';
+    pptx.company = 'Saint-Michel Capital';
+
+    const NOIR = '1A1A1A';
+    const BEIGE = 'FAF8F4';
+    const GRIS_MOYEN = '888888';
+    const GRIS_CLAIR = 'B8B8B8';
+    const BLANC = 'FFFFFF';
+    const FONT = 'Segoe UI';
+    const W = 11.69, H = 8.27;
+
+    const sectionsList = Array.isArray(sections) && sections.length ? sections : [
+      "Contexte de l'opération", "Périmètre des travaux", "Conditions d'intervention"
+    ];
+
+    // ─── 1. Cover ───
+    (function addCover(){
+      const s = pptx.addSlide();
+      s.background = { color: BLANC };
+      // Photo placeholder = rectangle gradient dark green
+      s.addShape('rect', { x: 0, y: 0, w: W, h: H*0.88, fill: { color: '2C4747' }, line: { type: 'none' } });
+      s.addText('[ PHOTO À INSÉRER ]', { x: 0, y: H*0.42, w: W, h: 0.4, fontFace: FONT, fontSize: 10, color: 'FFFFFF66', align: 'center', valign: 'middle' });
+      // Footer
+      s.addText('Rapport de due diligence financière', { x: 0.55, y: H*0.90, w: W*0.6, h: 0.4, fontFace: FONT, fontSize: 11, color: GRIS_CLAIR, valign: 'middle' });
+      s.addText('S-M.C', { x: W-1.4, y: H*0.90, w: 0.9, h: 0.4, fontFace: FONT, fontSize: 22, bold: true, color: NOIR, align: 'right', valign: 'middle' });
+    })();
+
+    // ─── 2. Lettre + Sommaire ───
+    (function addLettre(){
+      const s = pptx.addSlide();
+      s.background = { color: BLANC };
+      // Colonne beige à droite (48%)
+      s.addShape('rect', { x: W*0.52, y: 0, w: W*0.48, h: H, fill: { color: BEIGE }, line: { type: 'none' } });
+      // Lettre à gauche
+      const lettreParas = [
+        { text: "L'équipe Saint-Michel Capital vous remercie de l'avoir sollicitée en vue de vous soumettre cette proposition d'accompagnement.", options: { paraSpaceAfter: 10 } },
+        { text: "Nous recevons favorablement cette sollicitation et serions ravis de vous accompagner pour la réalisation d'une due diligence financière d'acquisition.", options: { paraSpaceAfter: 10 } },
+        { text: "Ce document décrit successivement (1) notre compréhension du contexte, (2) les diligences que nous recommandons d'effectuer sur notre champ d'intervention ainsi que (3) nos conditions d'intervention.", options: { paraSpaceAfter: 10 } },
+        { text: "Nous sommes bien sûr disponibles pour échanger ou préciser tout élément de notre proposition.", options: { paraSpaceAfter: 10 } },
+        { text: "Respectueusement,", options: { paraSpaceAfter: 10 } },
+        { text: "L'équipe Saint-Michel Capital", options: { color: NOIR } }
+      ];
+      s.addText(lettreParas, { x: 0.6, y: 1.6, w: W*0.5-1, h: H-3, fontFace: FONT, fontSize: 10, color: GRIS_MOYEN, valign: 'top', lineSpacingMultiple: 1.6 });
+      // Sommaire à droite
+      s.addText('Sommaire', { x: W*0.55, y: 1.2, w: 4, h: 0.6, fontFace: FONT, fontSize: 26, bold: true, color: NOIR, valign: 'top' });
+      const somY = 2.4;
+      sectionsList.forEach(function(sec, i){
+        const y = somY + i * 0.7;
+        s.addText(sec, { x: W*0.55, y: y, w: 3.2, h: 0.4, fontFace: FONT, fontSize: 11, bold: true, color: NOIR, valign: 'top' });
+        s.addText('.'.repeat(50), { x: W*0.55, y: y+0.05, w: 4.3, h: 0.35, fontFace: FONT, fontSize: 10, color: GRIS_CLAIR, align: 'right', valign: 'top', charSpacing: 2 });
+        // Numéro de page en encadré jaune fluo
+        s.addShape('rect', { x: W-0.85, y: y, w: 0.4, h: 0.28, fill: { color: 'FFF9B0' }, line: { type: 'none' } });
+        s.addText('[x]', { x: W-0.85, y: y, w: 0.4, h: 0.28, fontFace: FONT, fontSize: 10, bold: true, color: NOIR, align: 'center', valign: 'middle' });
+      });
+    })();
+
+    // ─── 3. Séparateurs de section ───
+    function addSep(label){
+      const s = pptx.addSlide();
+      s.background = { color: BLANC };
+      s.addShape('rect', { x: W*0.52, y: 0, w: W*0.48, h: H, fill: { color: BEIGE }, line: { type: 'none' } });
+      s.addText(label, { x: 0.6, y: H-2.2, w: W*0.5-1, h: 1.8, fontFace: FONT, fontSize: 34, bold: true, color: NOIR, valign: 'bottom', lineSpacingMultiple: 1.15 });
+    }
+
+    // ─── 4. Slides Périmètre (extrait de la logique déjà écrite) ───
+    function addPerimSlides(){
+      if (!Array.isArray(objectifs) || !objectifs.length) return;
+      const BEIGE_W = 3.99, NAV_X = 0.60, NAV_W = 3.15, NAV_Y = 0.37;
+      const OBJ_TITLE_Y = 1.91, OBJ_LINE_Y = 2.21;
+      const OBJ_FINALITE_X = 0.83, OBJ_FINALITE_Y = 2.31;
+      const OBJ_FINALITE_W = 2.91, OBJ_FINALITE_H = 3.68;
+      const HEADER_X = 4.28, HEADER_Y = 0.37;
+      const HEADER_W = 6.71, HEADER_H = 0.73;
+      const HEADER_LINE_Y = 1.25, HEADER_LINE_W = 0.98;
+      const HEADER_LINE_PT = 4.25;
+      const DILS_X = 4.28, DILS_Y = 2.28, DILS_W = 6.71, DILS_H = 5.30;
+      const FOOTER_LINE_Y = 7.69, FOOTER_LINE_W = 6.71;
+      const FOOTER_PAGE_X = 9.64, FOOTER_PAGE_Y = 7.87, FOOTER_PAGE_W = 1.34;
+      const total = objectifs.length;
+      objectifs.forEach((obj, idx) => {
+        const s = pptx.addSlide();
+        s.background = { color: BLANC };
+        const titre = String(obj.titre || '').trim() || ('Objectif ' + (idx + 1));
+        const finalite = String(obj.finalite || '').trim();
+        const dils = Array.isArray(obj.diligences) ? obj.diligences : [];
+        s.addShape('rect', { x: 0, y: 0, w: BEIGE_W, h: H, fill: { color: BEIGE }, line: { type: 'none' } });
+        // Nav
+        const navBlocks = [];
+        sectionsList.forEach(sec => {
+          const isActive = (sec === 'Périmètre des travaux');
+          navBlocks.push({ text: sec, options: { fontFace: FONT, fontSize: 9, color: isActive ? NOIR : GRIS_CLAIR, bold: isActive, paraSpaceAfter: 3, indentLevel: 0, bullet: false } });
+          if (isActive) navBlocks.push({ text: titre, options: { fontFace: FONT, fontSize: 8, color: NOIR, paraSpaceAfter: 3, indentLevel: 2, bullet: false } });
+        });
+        navBlocks.push({ text: '…', options: { fontFace: FONT, fontSize: 8, color: GRIS_CLAIR, indentLevel: 2, bullet: false } });
+        s.addText(navBlocks, { x: NAV_X, y: NAV_Y, w: NAV_W, h: 1.5, fontFace: FONT, fontSize: 9, color: NOIR, valign: 'top', margin: 0, lineSpacingMultiple: 1.3 });
+        const activeIdx = sectionsList.indexOf('Périmètre des travaux');
+        if (activeIdx >= 0) s.addShape('rect', { x: NAV_X-0.05, y: NAV_Y+0.05+activeIdx*0.28, w: 0.02, h: 0.20, fill: { color: NOIR }, line: { type: 'none' } });
+        s.addShape('line', { x: NAV_X, y: OBJ_TITLE_Y-0.30, w: NAV_W, h: 0, line: { color: GRIS_CLAIR, width: 0.5 } });
+        s.addText(titre, { x: NAV_X, y: OBJ_TITLE_Y, w: NAV_W, h: 0.35, fontFace: FONT, fontSize: 10, bold: true, color: NOIR, valign: 'top', margin: 0, lineSpacingMultiple: 1.2 });
+        s.addShape('line', { x: NAV_X, y: OBJ_LINE_Y+0.08, w: NAV_W, h: 0, line: { color: GRIS_CLAIR, width: 0.5 } });
+        if (finalite) s.addText('« ' + finalite + ' »', { x: OBJ_FINALITE_X, y: OBJ_FINALITE_Y, w: OBJ_FINALITE_W, h: OBJ_FINALITE_H, fontFace: FONT, fontSize: 10, italic: true, color: GRIS_MOYEN, valign: 'top', margin: 0, lineSpacingMultiple: 1.6 });
+        s.addText([ { text: 'Périmètre des travaux (' + (idx+1) + '/' + total + ')', options: { bold: true, color: NOIR } }, { text: ' | Diligences liées à l\'objectif « ' + titre + ' »', options: { bold: false, color: NOIR } } ], { x: HEADER_X, y: HEADER_Y, w: HEADER_W, h: HEADER_H, fontFace: FONT, fontSize: 12, color: NOIR, valign: 'top', margin: 0, lineSpacingMultiple: 1.4 });
+        s.addShape('line', { x: HEADER_X, y: HEADER_LINE_Y, w: HEADER_LINE_W, h: 0, line: { color: NOIR, width: HEADER_LINE_PT } });
+        const dilBlocks = [];
+        dils.forEach(d => {
+          const dText = String(d.text || d || '').trim();
+          if (!dText) return;
+          dilBlocks.push({ text: dText, options: { bullet: { code: '25AA' }, paraSpaceAfter: 6, indentLevel: 0 } });
+          (d.subs||[]).forEach(sub => {
+            const sText = String(sub||'').trim();
+            if (!sText) return;
+            dilBlocks.push({ text: sText, options: { bullet: { code: 'A7F7' }, paraSpaceAfter: 3, indentLevel: 1 } });
+          });
+        });
+        s.addText(dilBlocks, { x: DILS_X, y: DILS_Y, w: DILS_W, h: DILS_H, fontFace: FONT, fontSize: 10, color: NOIR, align: 'justify', valign: 'top', margin: 0, lineSpacingMultiple: 1.6 });
+        s.addShape('line', { x: DILS_X, y: FOOTER_LINE_Y, w: FOOTER_LINE_W, h: 0, line: { color: NOIR, width: 0.75 } });
+        s.addText('Page [x] sur [x]', { x: FOOTER_PAGE_X, y: FOOTER_PAGE_Y, w: FOOTER_PAGE_W, h: 0.20, fontFace: FONT, fontSize: 7, color: NOIR, align: 'right', valign: 'top', margin: 0 });
+      });
+    }
+
+    // ─── Assemblage du deck ───
+    if (parties && parties.p1) addSep("Contexte de l'opération");
+    if (parties && parties.p3) {
+      addSep("Périmètre des travaux");
+      addPerimSlides();
+    }
+    if (parties && parties.p4) addSep("Conditions d'intervention");
+
+    // ─── Backcover ───
+    (function addBackcover(){
+      const s = pptx.addSlide();
+      s.background = { color: BLANC };
+      s.addShape('rect', { x: 0, y: 0, w: W, h: H*0.84, fill: { color: '2C4747' }, line: { type: 'none' } });
+      s.addText('[ PHOTO À INSÉRER ]', { x: 0, y: H*0.40, w: W, h: 0.4, fontFace: FONT, fontSize: 10, color: 'FFFFFF66', align: 'center', valign: 'middle' });
+      s.addText('S-M.C', { x: 0.55, y: H*0.86, w: 3, h: 0.35, fontFace: FONT, fontSize: 11, bold: true, color: NOIR, valign: 'top' });
+      s.addText('6 place Saint-Michel, 75006 Paris', { x: 0.55, y: H*0.90, w: 4, h: 0.30, fontFace: FONT, fontSize: 10, color: NOIR, valign: 'top' });
+      s.addText('Saint-Michel Capital – R.C.S. Paris 991 989 088', { x: 0.55, y: H*0.94, w: 5, h: 0.30, fontFace: FONT, fontSize: 10, color: NOIR, valign: 'top' });
+      s.addText('S-M.C', { x: W-1.4, y: H*0.90, w: 0.9, h: 0.4, fontFace: FONT, fontSize: 22, bold: true, color: NOIR, align: 'right', valign: 'middle' });
+    })();
+
+    const buffer = await pptx.write('nodebuffer');
+    const safe = String(cibleNom || 'Propale').replace(/[^A-Za-z0-9_-]/g, '_');
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.presentationml.presentation');
+    res.setHeader('Content-Disposition', 'attachment; filename="' + safe + '_Propale.pptx"');
+    res.send(buffer);
+  } catch (err) {
+    console.error('Export propale PPTX erreur :', err);
+    res.status(500).json({ success: false, error: 'Erreur génération PPTX : ' + err.message });
+  }
+});
+
+// ═══════════════════════════════════════════════════════
+// EXPORT PPTX PÉRIMÈTRE DES TRAVAUX
+// Reproduit fidèlement le layout "Scope of work" de la trame v3 :
+// - Rectangle beige gauche 101.3 x 210 mm (34% de largeur)
+// - Nav sommaire dans la colonne beige avec item actif trait vertical
+// - Titre objectif + trait souligné + finalité italique décrochée
+// - Header droite en gras "Périmètre des travaux (X/Y) | sous-titre"
+// - Trait noir court 4.25pt sous le header
+// - Diligences justifiées avec bullets carrés + sub-bullets tiret
+// - Footer trait fin + "Page X sur Y"
+// ═══════════════════════════════════════════════════════
+app.post('/api/export-perimetre-pptx', requireAuth, async (req, res) => {
+  try {
+    const PptxGenJS = require('pptxgenjs');
+    const { objectifs, cibleNom, sections, pageStart } = req.body;
+    if (!Array.isArray(objectifs) || objectifs.length === 0) {
+      return res.status(400).json({ success: false, error: 'Aucun objectif fourni.' });
+    }
+
+    const pptx = new PptxGenJS();
+    pptx.defineLayout({ name: 'A4L', width: 11.69, height: 8.27 });
+    pptx.layout = 'A4L';
+    pptx.title = (cibleNom || 'Propale') + ' — Périmètre des travaux';
+    pptx.company = 'Saint-Michel Capital';
+
+    const NOIR = '1A1A1A';
+    const BEIGE = 'FAF8F4';
+    const GRIS_MOYEN = '888888';
+    const GRIS_CLAIR = 'B8B8B8';
+    const BLANC = 'FFFFFF';
+    const FONT = 'Segoe UI';
+
+    // Positions exactes issues du XML du layout15 (en pouces)
+    const W = 11.69, H = 8.27;
+    const BEIGE_W = 3.99;
+    const NAV_X = 0.60;
+    const NAV_W = 3.15;
+    const NAV_Y = 0.37;
+    const OBJ_TITLE_Y = 1.91;
+    const OBJ_LINE_Y = 2.21;
+    const OBJ_FINALITE_X = 0.83;
+    const OBJ_FINALITE_Y = 2.31;
+    const OBJ_FINALITE_W = 2.91;
+    const OBJ_FINALITE_H = 3.68;
+    const HEADER_X = 4.28;
+    const HEADER_Y = 0.37;
+    const HEADER_W = 6.71;
+    const HEADER_H = 0.73;
+    const HEADER_LINE_Y = 1.25;
+    const HEADER_LINE_W = 0.98;
+    const HEADER_LINE_PT = 4.25;
+    const DILS_X = 4.28;
+    const DILS_Y = 2.28;
+    const DILS_W = 6.71;
+    const DILS_H = 5.30;
+    const FOOTER_LINE_Y = 7.69;
+    const FOOTER_LINE_W = 6.71;
+    const FOOTER_PAGE_X = 9.64;
+    const FOOTER_PAGE_Y = 7.87;
+    const FOOTER_PAGE_W = 1.34;
+
+    const total = objectifs.length;
+    const startPage = parseInt(pageStart) || 1;
+
+    // Sections navbar
+    const sectionsList = Array.isArray(sections) && sections.length ? sections : [
+      "Contexte de l'opération", "Périmètre des travaux", "Conditions d'intervention"
+    ];
+
+    objectifs.forEach((obj, idx) => {
+      const slide = pptx.addSlide();
+      slide.background = { color: BLANC };
+      const titre = String(obj.titre || '').trim() || ('Objectif ' + (idx + 1));
+      const finalite = String(obj.finalite || '').trim();
+      const dils = Array.isArray(obj.diligences) ? obj.diligences : [];
+
+      // ═══ Colonne beige ═══
+      slide.addShape('rect', {
+        x: 0, y: 0, w: BEIGE_W, h: H,
+        fill: { color: BEIGE }, line: { type: 'none' }
+      });
+
+      // Nav sommaire
+      const navBlocks = [];
+      sectionsList.forEach(s => {
+        const isActive = (s === 'Périmètre des travaux');
+        navBlocks.push({
+          text: s,
+          options: {
+            fontFace: FONT, fontSize: 9,
+            color: isActive ? NOIR : GRIS_CLAIR,
+            bold: isActive,
+            paraSpaceAfter: 3,
+            indentLevel: 0,
+            bullet: false
+          }
+        });
+        if (isActive) {
+          navBlocks.push({
+            text: titre,
+            options: {
+              fontFace: FONT, fontSize: 8,
+              color: NOIR,
+              paraSpaceAfter: 3,
+              indentLevel: 2,
+              bullet: false
+            }
+          });
+        }
+      });
+      navBlocks.push({
+        text: '…',
+        options: { fontFace: FONT, fontSize: 8, color: GRIS_CLAIR, indentLevel: 2, bullet: false }
+      });
+      slide.addText(navBlocks, {
+        x: NAV_X, y: NAV_Y, w: NAV_W, h: 1.5,
+        fontFace: FONT, fontSize: 9, color: NOIR,
+        valign: 'top', margin: 0, lineSpacingMultiple: 1.3
+      });
+
+      // Trait vertical noir marqueur d'actif (à côté de "Périmètre des travaux")
+      const activeIdx = sectionsList.indexOf('Périmètre des travaux');
+      if (activeIdx >= 0) {
+        const activeLineY = NAV_Y + 0.05 + activeIdx * 0.28;
+        slide.addShape('rect', {
+          x: NAV_X - 0.05, y: activeLineY, w: 0.02, h: 0.20,
+          fill: { color: NOIR }, line: { type: 'none' }
+        });
+      }
+
+      // Séparateur horizontal fin sous la nav
+      slide.addShape('line', {
+        x: NAV_X, y: OBJ_TITLE_Y - 0.30, w: NAV_W, h: 0,
+        line: { color: GRIS_CLAIR, width: 0.5 }
+      });
+
+      // Titre objectif
+      slide.addText(titre, {
+        x: NAV_X, y: OBJ_TITLE_Y, w: NAV_W, h: 0.35,
+        fontFace: FONT, fontSize: 10, bold: true, color: NOIR,
+        valign: 'top', margin: 0, lineSpacingMultiple: 1.2
+      });
+
+      // Trait souligné sous le titre
+      slide.addShape('line', {
+        x: NAV_X, y: OBJ_LINE_Y + 0.08, w: NAV_W, h: 0,
+        line: { color: GRIS_CLAIR, width: 0.5 }
+      });
+
+      // Finalité en italique
+      if (finalite) {
+        slide.addText('« ' + finalite + ' »', {
+          x: OBJ_FINALITE_X, y: OBJ_FINALITE_Y, w: OBJ_FINALITE_W, h: OBJ_FINALITE_H,
+          fontFace: FONT, fontSize: 10, italic: true, color: GRIS_MOYEN,
+          valign: 'top', margin: 0, lineSpacingMultiple: 1.6
+        });
+      }
+
+      // ═══ Colonne droite : Header ═══
+      slide.addText([
+        { text: 'Périmètre des travaux (' + (startPage + idx) + '/' + total + ')', options: { bold: true, color: NOIR } },
+        { text: ' | Diligences liées à l\'objectif « ' + titre + ' »', options: { bold: false, color: NOIR } }
+      ], {
+        x: HEADER_X, y: HEADER_Y, w: HEADER_W, h: HEADER_H,
+        fontFace: FONT, fontSize: 12, color: NOIR,
+        valign: 'top', margin: 0, lineSpacingMultiple: 1.4
+      });
+
+      // Trait noir court épais sous le header
+      slide.addShape('line', {
+        x: HEADER_X, y: HEADER_LINE_Y, w: HEADER_LINE_W, h: 0,
+        line: { color: NOIR, width: HEADER_LINE_PT }
+      });
+
+      // ═══ Diligences ═══
+      const dilBlocks = [];
+      dils.forEach(d => {
+        const dText = String(d.text || d || '').trim();
+        if (!dText) return;
+        dilBlocks.push({
+          text: dText,
+          options: {
+            bullet: { code: '25AA' },   // ▪ BLACK SMALL SQUARE
+            paraSpaceAfter: 6,
+            indentLevel: 0
+          }
+        });
+        (d.subs || []).forEach(s => {
+          const sText = String(s || '').trim();
+          if (!sText) return;
+          dilBlocks.push({
+            text: sText,
+            options: {
+              bullet: { code: 'A7F7' },  // ꟷ tiret ondulé de la trame
+              paraSpaceAfter: 3,
+              indentLevel: 1
+            }
+          });
+        });
+      });
+      slide.addText(dilBlocks, {
+        x: DILS_X, y: DILS_Y, w: DILS_W, h: DILS_H,
+        fontFace: FONT, fontSize: 10, color: NOIR,
+        align: 'justify', valign: 'top', margin: 0, lineSpacingMultiple: 1.6
+      });
+
+      // ═══ Footer ═══
+      slide.addShape('line', {
+        x: DILS_X, y: FOOTER_LINE_Y, w: FOOTER_LINE_W, h: 0,
+        line: { color: NOIR, width: 0.75 }
+      });
+      slide.addText('Page ' + (startPage + idx) + ' sur [x]', {
+        x: FOOTER_PAGE_X, y: FOOTER_PAGE_Y, w: FOOTER_PAGE_W, h: 0.20,
+        fontFace: FONT, fontSize: 7, color: NOIR,
+        align: 'right', valign: 'top', margin: 0
+      });
+    });
+
+    const buffer = await pptx.write('nodebuffer');
+    const safe = String(cibleNom || 'Propale').replace(/[^A-Za-z0-9_-]/g, '_');
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.presentationml.presentation');
+    res.setHeader('Content-Disposition', 'attachment; filename="' + safe + '_Perimetre.pptx"');
+    res.send(buffer);
+  } catch (err) {
+    console.error('Export périmètre PPTX erreur :', err);
+    res.status(500).json({ success: false, error: 'Erreur génération PPTX : ' + err.message });
+  }
+});
+
 app.post('/api/export-calendrier-pptx', requireAuth, async (req, res) => {
   try {
     const PptxGenJS = require('pptxgenjs');

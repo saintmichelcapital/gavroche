@@ -571,6 +571,102 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .section-head-titre{font-family:var(--font-titre);font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--noir);margin-bottom:6px;}
 .section-head-desc{font-size:13px;color:var(--gris-clair);line-height:1.6;}
 
+/* ═══════════════════════════════════════════
+   SLIDE PÉRIMÈTRE DES TRAVAUX (layout "Scope of work" de la trame v3)
+   Reproduction fidèle du slideLayout15 : colonne beige gauche + colonne
+   diligences droite justifiée, bullets § (Wingdings) et sub ꟷ (Segoe UI),
+   interligne 160%, Segoe UI partout, A4 paysage.
+═══════════════════════════════════════════ */
+.sc.perim{background:#FFFFFF;display:grid;grid-template-columns:34.1% 65.9%;font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;color:#1A1A1A;overflow:hidden;}
+.sc.perim .pl{background:#FAF8F4;padding:4% 5% 3.5% 5%;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+.sc.perim .pr{background:#FFFFFF;padding:4% 5% 3.5% 2.5%;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+
+/* Nav sommaire (colonne gauche) */
+.sc.perim .pl-nav{display:flex;flex-direction:column;gap:0.55em;}
+.sc.perim .pl-nav-item{font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#B8B8B8;line-height:1.35;padding-left:1em;position:relative;letter-spacing:0;}
+.sc.perim .pl-nav-item.active{color:#1A1A1A;font-weight:400;}
+.sc.perim .pl-nav-item.active::before{content:'';position:absolute;left:0;top:0.05em;bottom:0.05em;width:1.5px;background:#1A1A1A;}
+.sc.perim .pl-nav-sub{font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#1A1A1A;line-height:1.35;padding-left:2.5em;}
+.sc.perim .pl-nav-more{font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#B8B8B8;padding-left:2.5em;letter-spacing:0.15em;}
+
+/* Séparateur horizontal fin sous la nav */
+.sc.perim .pl-sep{height:0.5pt;background:#B8B8B8;margin:1.5em 0 1.7em 0;}
+
+/* Titre objectif dans la colonne beige */
+.sc.perim .pl-obj-titre{font-family:'Segoe UI',sans-serif;font-size:0.65em;font-weight:700;color:#1A1A1A;line-height:1.3;margin-bottom:0.35em;outline:none;}
+.sc.perim .pl-obj-line{width:100%;height:0.5pt;background:#B8B8B8;margin-bottom:1.1em;}
+
+/* Finalité en italique, légèrement décrochée à droite */
+.sc.perim .pl-obj-finalite{font-family:'Segoe UI',sans-serif;font-size:0.55em;font-style:italic;color:#888888;line-height:1.6;padding-left:1em;outline:none;}
+
+/* Colonne droite : header avec trait noir épais */
+.sc.perim .pr-header{font-family:'Segoe UI',sans-serif;font-size:0.72em;color:#1A1A1A;line-height:1.4;outline:none;}
+.sc.perim .pr-header strong{font-weight:700;}
+.sc.perim .pr-header-line{width:16%;height:3px;background:#1A1A1A;margin-top:0.6em;margin-bottom:1.8em;}
+
+/* Liste des diligences — bullets § (rendu carré via CSS pour éviter Wingdings web) */
+.sc.perim .pr-dils{list-style:none;padding:0;margin:0;flex:1;overflow:hidden;}
+.sc.perim .pr-dil{position:relative;padding-left:1.4em;font-family:'Segoe UI',sans-serif;font-size:0.56em;color:#1A1A1A;text-align:justify;line-height:1.6;margin-bottom:0.6em;outline:none;}
+.sc.perim .pr-dil::before{content:'';position:absolute;left:0;top:0.55em;width:0.5em;height:0.5em;background:#1A1A1A;}
+.sc.perim .pr-subs{list-style:none;padding:0;margin:0.3em 0 0.5em 0.8em;}
+.sc.perim .pr-sub{position:relative;padding-left:1.6em;font-family:'Segoe UI',sans-serif;font-size:0.53em;color:#1A1A1A;text-align:justify;line-height:1.55;margin-bottom:0.35em;outline:none;}
+.sc.perim .pr-sub::before{content:'ꟷ';position:absolute;left:0;top:0;color:#1A1A1A;font-weight:400;font-family:'Segoe UI',sans-serif;}
+
+/* Footer : trait fin + "Page X sur [x]" */
+.sc.perim .pr-footer{margin-top:auto;padding-top:0.8em;flex-shrink:0;}
+.sc.perim .pr-footer-line{width:100%;height:0.75pt;background:#1A1A1A;margin-bottom:0.4em;}
+.sc.perim .pr-footer-page{font-family:'Segoe UI',sans-serif;font-size:0.42em;color:#1A1A1A;text-align:right;letter-spacing:0;}
+
+/* ═══════════════════════════════════════════
+   COVER TRAME V3 (layout20 "Cover")
+   Photo pleine largeur en haut + footer blanc avec titre et S-M.C
+═══════════════════════════════════════════ */
+.sc.cov-v3{background:#FFFFFF;display:flex;flex-direction:column;overflow:hidden;font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;padding:0;}
+.sc.cov-v3 .cov-photo{flex:1;background:linear-gradient(135deg,#2C4747 0%,#1A2F2F 40%,#3D5555 100%);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.35);font-size:0.5em;letter-spacing:0.15em;text-transform:uppercase;position:relative;overflow:hidden;}
+.sc.cov-v3 .cov-photo::after{content:'PHOTO À INSÉRER';}
+.sc.cov-v3 .cov-footer{background:#FFFFFF;padding:2.5% 4%;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;height:12%;}
+.sc.cov-v3 .cov-title{font-family:'Segoe UI',sans-serif;font-size:0.62em;color:#B8B8B8;letter-spacing:0.01em;outline:none;}
+.sc.cov-v3 .cov-brand{font-family:'Segoe UI',sans-serif;font-size:1.4em;font-weight:700;color:#1A1A1A;letter-spacing:-0.02em;}
+
+/* ═══════════════════════════════════════════
+   BACKCOVER TRAME V3 (variante de cover)
+   Photo en haut + coordonnées SMC en bas-gauche + S-M.C en bas-droite
+═══════════════════════════════════════════ */
+.sc.backcov-v3{background:#FFFFFF;display:flex;flex-direction:column;overflow:hidden;font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;padding:0;}
+.sc.backcov-v3 .cov-photo{flex:1;background:linear-gradient(135deg,#2C4747 0%,#1A2F2F 40%,#3D5555 100%);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.35);font-size:0.5em;letter-spacing:0.15em;text-transform:uppercase;position:relative;overflow:hidden;}
+.sc.backcov-v3 .cov-photo::after{content:'PHOTO À INSÉRER';}
+.sc.backcov-v3 .cov-footer{background:#FFFFFF;padding:2.5% 4%;display:flex;justify-content:space-between;align-items:flex-end;flex-shrink:0;height:16%;}
+.sc.backcov-v3 .cov-coord{display:flex;flex-direction:column;gap:0.4em;}
+.sc.backcov-v3 .cov-coord-l{font-family:'Segoe UI',sans-serif;font-size:0.55em;color:#1A1A1A;font-weight:600;letter-spacing:0.03em;}
+.sc.backcov-v3 .cov-coord-a{font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#1A1A1A;letter-spacing:0;}
+.sc.backcov-v3 .cov-coord-r{font-family:'Segoe UI',sans-serif;font-size:0.5em;color:#1A1A1A;letter-spacing:0;margin-top:0.6em;}
+.sc.backcov-v3 .cov-brand{font-family:'Segoe UI',sans-serif;font-size:1.4em;font-weight:700;color:#1A1A1A;letter-spacing:-0.02em;}
+
+/* ═══════════════════════════════════════════
+   LETTRE + SOMMAIRE TRAME V3 (layout18 Blank utilisé pour slide 2)
+   Colonne gauche : lettre d'intro. Colonne droite (beige) : sommaire
+═══════════════════════════════════════════ */
+.sc.som-v3{background:#FFFFFF;display:grid;grid-template-columns:52% 48%;overflow:hidden;font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;color:#1A1A1A;}
+.sc.som-v3 .som-lettre{background:#FFFFFF;padding:6% 5% 4% 6%;display:flex;flex-direction:column;gap:1.2em;font-size:0.58em;color:#888888;line-height:1.7;overflow:hidden;}
+.sc.som-v3 .som-lettre p{margin:0;}
+.sc.som-v3 .som-lettre p.sign{margin-top:1.2em;color:#1A1A1A;}
+.sc.som-v3 .som-right{background:#FAF8F4;padding:6% 6% 4% 5%;display:flex;flex-direction:column;overflow:hidden;}
+.sc.som-v3 .som-titre{font-family:'Segoe UI',sans-serif;font-size:1.4em;font-weight:700;color:#1A1A1A;margin-bottom:1.8em;letter-spacing:-0.01em;}
+.sc.som-v3 .som-list{display:flex;flex-direction:column;gap:0.9em;}
+.sc.som-v3 .som-item{display:flex;align-items:baseline;font-family:'Segoe UI',sans-serif;font-size:0.6em;color:#1A1A1A;font-weight:700;letter-spacing:0;line-height:1.4;}
+.sc.som-v3 .som-item-t{flex:1;padding-right:0.5em;}
+.sc.som-v3 .som-item-d{flex:0 0 auto;color:#B8B8B8;letter-spacing:0.3em;overflow:hidden;font-weight:400;margin:0 0.5em;}
+.sc.som-v3 .som-item-n{background:#FFF9B0;padding:1px 6px;font-size:0.85em;font-weight:600;color:#1A1A1A;letter-spacing:0;flex-shrink:0;}
+
+/* ═══════════════════════════════════════════
+   SÉPARATEUR DE SECTION TRAME V3 (layout21 "Section Bach.")
+   Colonne gauche blanche avec titre en gras noir en bas-gauche + colonne droite beige
+═══════════════════════════════════════════ */
+.sc.sep-v3{background:#FFFFFF;display:grid;grid-template-columns:52% 48%;overflow:hidden;font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;}
+.sc.sep-v3 .sep-l{background:#FFFFFF;padding:6% 5% 8% 6%;display:flex;flex-direction:column;justify-content:flex-end;}
+.sc.sep-v3 .sep-t{font-family:'Segoe UI',sans-serif;font-size:1.9em;font-weight:700;color:#1A1A1A;letter-spacing:-0.01em;line-height:1.15;outline:none;}
+.sc.sep-v3 .sep-r{background:#FAF8F4;}
+
 /* ═══ Module Perimetre des diligences ═══ */
 .perim-wrap{padding:32px 48px 80px 48px;max-width:1100px;margin:0 auto;}
 .perim-filters{display:flex;gap:8px;margin-bottom:24px;align-items:center;flex-wrap:wrap;}
@@ -874,7 +970,7 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
     </div>
   </div>
   <div class="pl">
-    <div class="ssb"><div class="ssbt">Structure</div><div id="snav"></div><div class="ssba"><button class="bexp" onclick="smcExportPPTX()">↓ Exporter en PPTX</button><button class="bexp" style="margin-top:6px;background:var(--gris-surface);color:var(--noir);border:1px solid var(--gris-tres-clair);" onclick="sauvegarderPropale();ap('proposition');">← Enregistrer et revenir</button></div></div>
+    <div class="ssb"><div class="ssbt">Structure</div><div id="snav"></div><div class="ssba"><button class="bexp" onclick="smcExportPropaleComplete()">↓ Exporter la propale complète</button><button class="bexp" style="margin-top:6px;" onclick="smcExportPPTX()">↓ Exporter la slide active</button><button class="bexp" style="margin-top:6px;background:var(--gris-surface);color:var(--noir);border:1px solid var(--gris-tres-clair);" onclick="sauvegarderPropale();ap('proposition');">← Enregistrer et revenir</button></div></div>
     <div class="sm"><div class="sv" id="sv" style="position:relative;"><div class="geno" id="geno"><div class="gens"></div><div class="gent">Generation en cours</div><div class="genl" id="genl">Initialisation…</div></div></div><div class="sctrl"><button class="cbtn" onclick="gS(Math.max(0,(window.sA||0)-1))">← Precedent</button><button class="cbtn" id="slide-ctr">— / —</button><button class="cbtn" onclick="gS(Math.min((window.sD||[]).length-1,(window.sA||0)+1))">Suivant →</button></div></div>
     <div class="rpanel" id="rpanel">
       <div class="cp"><div class="cp-h"><div class="cp-t">Assistant</div><div class="cp-s">Demandez une modification…</div></div><div class="cp-m" id="cp-m"><div class="cpb cpb-a">La propale est en cours de generation.</div></div><div class="cpld" id="cpld" style="display:none;"><div></div><div></div><div></div></div><div class="cp-iw"><textarea class="cp-i" id="cp-i" rows="3" placeholder="Ex : Reformule le contexte…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send();}"></textarea><button class="cp-send" onclick="send()">Envoyer</button></div></div>
@@ -1767,6 +1863,68 @@ let dF={};window.sD=[];window.sA=0;window.cH=[];
 function logG(m){const el=document.getElementById('genl');if(el)el.textContent=m;}
 function mkSep(num,titre){return '<div class="sc sep"><div class="sep-n">Partie '+num+'</div><div class="sep-t" contenteditable="true">'+titre+'</div><div class="covlog" style="color:rgba(255,255,255,0.2);">Gavroche</div></div>';}
 
+// ═══════════════════════════════════════════════════
+// Construit le HTML d'une slide Périmètre (layout "Scope of work" de la trame v3)
+// obj = { titre, finalite, diligences: [{text, subs}] }
+// idx (1-based) sur totalPerim, sections = tableau des sections actives
+// ═══════════════════════════════════════════════════
+function smcPerimBuildSlideHtml(obj, idx, totalPerim, sections){
+  const titre = smcEsc(obj.titre || '');
+  const finalite = smcEsc(obj.finalite || '');
+  const dils = obj.diligences || [];
+  // Sous-titre du header : "Diligences liées à l'objectif « ... »"
+  const sousTitre = 'Diligences liées à l\'objectif « ' + titre + ' »';
+  // Nav sommaire
+  const navHtml = sections.map(s => {
+    const isActive = (s === 'Périmètre des travaux');
+    let html = '<div class="pl-nav-item' + (isActive ? ' active' : '') + '">' + smcEsc(s) + '</div>';
+    if (isActive) html += '<div class="pl-nav-sub">' + titre + '</div>';
+    return html;
+  }).join('');
+  // Diligences html — le texte est déjà interpolé au moment du collect
+  const dilsHtml = dils.map(d => {
+    const dText = smcEsc(d.text || (typeof d === 'string' ? d : ''));
+    const subsArr = d.subs || [];
+    const subs = subsArr.map(s => '<li class="pr-sub" contenteditable="true">' + smcEsc(s) + '</li>').join('');
+    return '<li class="pr-dil"><span contenteditable="true">' + dText + '</span>' + (subs ? '<ul class="pr-subs">' + subs + '</ul>' : '') + '</li>';
+  }).join('');
+  return '<div class="sc perim">' +
+    '<div class="pl">' +
+      '<div class="pl-nav">' + navHtml + '<div class="pl-nav-more">…</div></div>' +
+      '<div class="pl-sep"></div>' +
+      '<div class="pl-obj-titre" contenteditable="true">' + titre + '</div>' +
+      '<div class="pl-obj-line"></div>' +
+      '<div class="pl-obj-finalite" contenteditable="true">' + (finalite ? '« ' + finalite + ' »' : '') + '</div>' +
+    '</div>' +
+    '<div class="pr">' +
+      '<div class="pr-header"><strong contenteditable="true">Périmètre des travaux (' + idx + '/' + totalPerim + ')</strong> | <span contenteditable="true">' + smcEsc(sousTitre) + '</span></div>' +
+      '<div class="pr-header-line"></div>' +
+      '<ul class="pr-dils">' + dilsHtml + '</ul>' +
+      '<div class="pr-footer">' +
+        '<div class="pr-footer-line"></div>' +
+        '<div class="pr-footer-page">Page [x] sur [x]</div>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+// Aplatit dF.perimetre en une liste ordonnée d'objectifs selon SMC_PERIM_ORDER
+function smcPerimFlatten(perimetreData){
+  if (!perimetreData || !perimetreData.blocs) return [];
+  const orderBlocs = (window.SMC_PERIM_ORDER || []).map(o => o.label);
+  const all = [];
+  orderBlocs.forEach(bloc => {
+    (perimetreData.blocs[bloc] || []).forEach(o => all.push(Object.assign({ bloc }, o)));
+  });
+  // Blocs custom (non listés dans ORDER)
+  Object.keys(perimetreData.blocs).forEach(bloc => {
+    if (!orderBlocs.includes(bloc)) {
+      (perimetreData.blocs[bloc] || []).forEach(o => all.push(Object.assign({ bloc }, o)));
+    }
+  });
+  return all;
+}
+
 async function genPropale(reouvrir){
   // Si on rouvre une propale existante, dF est deja charge - sinon on relit le formulaire
   if (!reouvrir) dF=colData();
@@ -1808,10 +1966,60 @@ async function genPropale(reouvrir){
   ];
   function addS(rubIdx,id,label,html){const s={id:id,label:label,html:html};slides.push(s);struct[rubIdx].slides.push(s);}
 
-  addS(0,"cover","Couverture",'<div class="sc cov"><div><div class="covlog">Gavroche</div><div style="font-family:var(--font-titre);font-size:0.55em;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:1%;">Due Diligence Financiere - Transaction Services</div></div><div><div class="covey" contenteditable="true">'+d.typeMission+' - '+d.typeDD+'</div><div class="covt" contenteditable="true">Proposition d\'accompagnement</div><div class="covc" contenteditable="true">'+d.entite.nom+'</div></div><div class="covb"><div class="covd" contenteditable="true">'+today+'</div><div class="covcf">Document confidentiel</div></div></div>');
+  // ═══ Cover trame v3 ═══
+  addS(0, "cover", "Couverture",
+    '<div class="sc cov-v3">' +
+      '<div class="cov-photo"></div>' +
+      '<div class="cov-footer">' +
+        '<div class="cov-title" contenteditable="true">Rapport de due diligence financière</div>' +
+        '<div class="cov-brand">S-M.C</div>' +
+      '</div>' +
+    '</div>');
 
-  const pA=[d.parties.p1&&"Contexte de l'operation",d.parties.p2&&"Notre approche",d.parties.p3&&"Perimetre des travaux",d.parties.p4&&"Conditions d'intervention",d.parties.p5&&"References"].filter(Boolean);
-  addS(0,"intro","Introduction",'<div class="sc intr"><div class="std-b">Gavroche</div><div class="intrtx" contenteditable="true">L\'equipe Gavroche vous remercie de l\'avoir sollicitee. Nous recevons favorablement cette sollicitation et serions ravis de vous accompagner dans la realisation de cette '+d.typeMission+' portant sur '+d.entite.nom+'.</div><div class="somm">'+pA.map(function(p,i){return '<div class="sommi"><span class="sommn">'+(i+1)+'</span><span class="sommt" contenteditable="true">'+p+'</span></div>';}).join("")+'</div></div>');
+  // ═══ Lettre + Sommaire trame v3 ═══
+  // Sections actives selon les parties cochées (sans "Notre approche" et "References" qui ne sont plus dans la trame v3)
+  const somSections = [
+    d.parties.p1 && "Contexte de l'opération",
+    "Périmètre des travaux",
+    d.parties.p4 && "Conditions d'intervention"
+  ].filter(Boolean);
+  const lettreEntite = d.entite && d.entite.nom ? d.entite.nom : 'la Cible';
+  addS(0, "intro", "Lettre + Sommaire",
+    '<div class="sc som-v3">' +
+      '<div class="som-lettre" contenteditable="true">' +
+        '<p>L\'équipe Saint-Michel Capital vous remercie de l\'avoir sollicitée en vue de vous soumettre cette proposition d\'accompagnement.</p>' +
+        '<p>Nous recevons favorablement cette sollicitation et serions ravis de vous accompagner pour la réalisation d\'une due diligence financière d\'acquisition.</p>' +
+        '<p>Ce document décrit successivement (1) notre compréhension du contexte, (2) les diligences que nous recommandons d\'effectuer sur notre champ d\'intervention ainsi que (3) nos conditions d\'intervention.</p>' +
+        '<p>Nous sommes bien sûr disponibles pour échanger ou préciser tout élément de notre proposition.</p>' +
+        '<p>Respectueusement,</p>' +
+        '<p class="sign">L\'équipe Saint-Michel Capital</p>' +
+      '</div>' +
+      '<div class="som-right">' +
+        '<div class="som-titre">Sommaire</div>' +
+        '<div class="som-list">' +
+          somSections.map(function(s){
+            return '<div class="som-item">' +
+              '<span class="som-item-t" contenteditable="true">' + s + '</span>' +
+              '<span class="som-item-d">................................................................................</span>' +
+              '<span class="som-item-n">[x]</span>' +
+            '</div>';
+          }).join('') +
+        '</div>' +
+      '</div>' +
+    '</div>');
+
+  // Séparateurs de section trame v3 (une par section active)
+  function makeSep(id, label, rubIdx){
+    addS(rubIdx, id, label,
+      '<div class="sc sep-v3">' +
+        '<div class="sep-l"><div class="sep-t" contenteditable="true">' + label + '</div></div>' +
+        '<div class="sep-r"></div>' +
+      '</div>');
+  }
+  if (d.parties.p1) makeSep("sep-ctx", "Contexte de l'opération", 1);
+  if (d.parties.p3) makeSep("sep-per", "Périmètre des travaux", 3);
+  if (d.parties.p4) makeSep("sep-cond", "Conditions d'intervention", 4);
+
 
   if(d.parties.p1){
     const org=cx.organigramme||{};
@@ -1835,8 +2043,36 @@ async function genPropale(reouvrir){
   // juste avant la slide Honoraires, pour coller au pattern Retinax.
 
   if(d.parties.p3){
-    const exL=d.exercices.map(function(e){return e.lib;}).join(", ")||"N, N-1, N-2";
-    addS(3,"per-ana","Analyses",'<div class="sc std"><div class="std-h"><div class="std-b">Perimetre des travaux</div><div class="std-t" contenteditable="true">Analyses financieres prevues</div></div><div class="std-body"><div style="display:flex;flex-direction:column;gap:0;">'+[{n:"01",t:"Qualite de l\'information financiere",desc:"Construction des etats financiers sur "+exL+". Analyse des regles comptables."},{n:"02",t:"Normalisation de l\'EBITDA",desc:"Identification des elements non recurrents. Determination de la capacite beneficiaire recurrente."},{n:"03",t:"Besoin en fonds de roulement",desc:"Analyse du cycle d\'exploitation, determination du BFR normatif."},{n:"04",t:"Analyse des flux de tresorerie",desc:"Taux de conversion EBITDA en cash. Investissements et structure de financement."}].map(function(a){return '<div style="display:flex;gap:3%;padding:2.5% 0;border-bottom:1px solid var(--gris-tres-clair);align-items:flex-start;"><div style="font-family:var(--font-serif);font-size:1.4em;font-weight:300;color:var(--gris-tres-clair);min-width:7%;line-height:1;">'+a.n+'</div><div><div style="font-family:var(--font-titre);font-size:0.6em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--noir);margin-bottom:1%;" contenteditable="true">'+a.t+'</div><div style="font-size:0.62em;color:var(--gris-moyen);line-height:1.5;" contenteditable="true">'+a.desc+'</div></div></div>';}).join("")+'</div></div></div>');
+    // Génère une slide par objectif sélectionné dans le module Périmètre des diligences (étape 3)
+    const perimData = dF.perimetre || (typeof smcPerimCollect === 'function' ? smcPerimCollect() : { blocs: {}, totalObjectifs: 0 });
+    const allObjs = smcPerimFlatten(perimData);
+    const sectionsActives = [
+      d.parties.p1 && "Contexte de l'opération",
+      "Périmètre des travaux",
+      d.parties.p4 && "Conditions d'intervention"
+    ].filter(Boolean);
+    if (allObjs.length === 0) {
+      // Aucun objectif sélectionné : placeholder unique invitant l'utilisateur à revenir à l'étape 3
+      addS(3, "per-empty", "Périmètre à composer",
+        '<div class="sc perim"><div class="pl"><div class="pl-nav">' +
+          sectionsActives.map(s => '<div class="pl-nav-item' + (s==="Périmètre des travaux"?' active':'') + '">'+smcEsc(s)+'</div>').join('') +
+          '<div class="pl-nav-more">…</div></div><div class="pl-sep"></div>' +
+          '<div class="pl-obj-titre">Périmètre à composer</div><div class="pl-obj-line"></div>' +
+          '<div class="pl-obj-finalite">« Revenez à l\'étape 3 pour composer votre périmètre de diligences »</div>' +
+        '</div><div class="pr">' +
+          '<div class="pr-header"><strong>Périmètre des travaux</strong> | Aucun objectif sélectionné</div>' +
+          '<div class="pr-header-line"></div>' +
+          '<ul class="pr-dils"><li class="pr-dil"><span>Aucune diligence à afficher — sélectionnez au moins un objectif à l\'étape 3.</span></li></ul>' +
+          '<div class="pr-footer"><div class="pr-footer-line"></div><div class="pr-footer-page">Page [x] sur [x]</div></div>' +
+        '</div></div>'
+      );
+    } else {
+      allObjs.forEach((obj, i) => {
+        const idNoAccent = (obj.titre||'obj').toLowerCase().replace(/[^a-z0-9]+/g,'-').substring(0,40);
+        addS(3, "per-" + i + "-" + idNoAccent, obj.titre || ("Objectif "+(i+1)),
+          smcPerimBuildSlideHtml(obj, i+1, allObjs.length, sectionsActives));
+      });
+    }
   }
 
   if(d.parties.p4){
@@ -1913,7 +2149,19 @@ async function genPropale(reouvrir){
     addS(5,"ref-mis","Missions recentes",'<div class="sc std"><div class="std-h"><div class="std-b">References</div><div class="std-t" contenteditable="true">Quelques missions recentes</div></div><div class="std-body"><div class="rl">'+["2024","2024","2023","2023","2022"].map(function(a){return '<div class="ri"><div class="ra" contenteditable="true">'+a+'</div><div class="rco"><div class="rs" contenteditable="true">A completer - secteur et type de mission</div><div class="rty" contenteditable="true">Due diligence financiere</div></div></div>';}).join("")+'</div></div></div>');
   }
 
-  addS(6,"footer-pg","Page finale",'<div class="sc ftpg"><div class="ftcab" contenteditable="true">Gavroche</div></div>');
+  // ═══ Backcover trame v3 ═══
+  addS(6, "footer-pg", "Page finale",
+    '<div class="sc backcov-v3">' +
+      '<div class="cov-photo"></div>' +
+      '<div class="cov-footer">' +
+        '<div class="cov-coord">' +
+          '<div class="cov-coord-l">S-M.C</div>' +
+          '<div class="cov-coord-a" contenteditable="true">6 place Saint-Michel, 75006 Paris</div>' +
+          '<div class="cov-coord-r" contenteditable="true">Saint-Michel Capital – R.C.S. Paris 991 989 088</div>' +
+        '</div>' +
+        '<div class="cov-brand">S-M.C</div>' +
+      '</div>' +
+    '</div>');
 
   window.sD=slides;window.sA=0;window.cH=[];
   // PILOTE SMC — recale les numéros de page des slides SMC selon leur position réelle
@@ -2619,7 +2867,84 @@ async function smcExportPPTX(){
   if(!slide) return alert('Aucune slide active.');
   if(slide.id==='cond-hon') return smcExportHonoraires();
   if(slide.id==='cond-cal') return smcExportCalendrier();
-  alert("L'export PPTX natif n'est disponible que pour les slides Honoraires et Calendrier pour le moment.");
+  if(/^per-/.test(slide.id||'')) return smcExportPerimetre();
+  alert("L'export PPTX natif est disponible pour les slides Périmètre, Calendrier et Honoraires.");
+}
+
+async function smcExportPropaleComplete(){
+  try {
+    const btn = document.querySelectorAll('.bexp')[0];
+    const oldTxt = btn ? btn.textContent : '';
+    if (btn) { btn.textContent = 'Génération en cours…'; btn.disabled = true; }
+    // Collecte des objectifs sélectionnés
+    const perimData = (dF && dF.perimetre) || (typeof smcPerimCollect === 'function' ? smcPerimCollect() : { blocs: {} });
+    const objectifs = (typeof smcPerimFlatten === 'function') ? smcPerimFlatten(perimData) : [];
+    const sectionsActives = [
+      dF && dF.parties && dF.parties.p1 && "Contexte de l'opération",
+      "Périmètre des travaux",
+      dF && dF.parties && dF.parties.p4 && "Conditions d'intervention"
+    ].filter(Boolean);
+    const cibleNom = (dF && dF.entite && dF.entite.nom) || 'Propale';
+    const resp = await fetch('/api/export-propale-pptx', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + (sessionStorage.getItem('gavroche_token') || '') },
+      body: JSON.stringify({
+        cibleNom: cibleNom,
+        sections: sectionsActives,
+        objectifs: objectifs,
+        honoraires: window.smcHon || null,
+        calendrier: window.smcCal || null,
+        parties: (dF && dF.parties) || {}
+      })
+    });
+    if (!resp.ok) { const t = await resp.text(); throw new Error('HTTP ' + resp.status + ' — ' + t.slice(0, 200)); }
+    const blob = await resp.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = cibleNom + '_Propale.pptx';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+    if (btn) { btn.textContent = oldTxt; btn.disabled = false; }
+  } catch (e) {
+    alert('Export propale échoué : ' + e.message);
+    const btn = document.querySelectorAll('.bexp')[0];
+    if (btn) { btn.textContent = '↓ Exporter la propale complète'; btn.disabled = false; }
+  }
+}
+
+async function smcExportPerimetre(){
+  try{
+    const btn=document.querySelector('.bexp');const oldTxt=btn?btn.textContent:'';
+    if(btn){btn.textContent='Génération en cours…';btn.disabled=true;}
+    // Collecte des objectifs sélectionnés (aplati selon SMC_PERIM_ORDER)
+    const perimData = (dF && dF.perimetre) || (typeof smcPerimCollect==='function' ? smcPerimCollect() : {blocs:{}});
+    const allObjs = (typeof smcPerimFlatten==='function') ? smcPerimFlatten(perimData) : [];
+    if (!allObjs.length){
+      alert('Aucun objectif sélectionné. Retourne à l\'étape 3 pour composer le périmètre.');
+      if(btn){btn.textContent=oldTxt;btn.disabled=false;}
+      return;
+    }
+    const sectionsActives = [
+      dF && dF.parties && dF.parties.p1 && "Contexte de l'opération",
+      "Périmètre des travaux",
+      dF && dF.parties && dF.parties.p4 && "Conditions d'intervention"
+    ].filter(Boolean);
+    const cibleNom = (dF && dF.entite && dF.entite.nom) || 'Propale';
+    const resp=await fetch('/api/export-perimetre-pptx',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+(sessionStorage.getItem('gavroche_token')||'')},
+      body:JSON.stringify({objectifs: allObjs, cibleNom: cibleNom, sections: sectionsActives, pageStart: 1})
+    });
+    if(!resp.ok){ const txt=await resp.text(); throw new Error('HTTP '+resp.status+' — '+txt.slice(0,200)); }
+    const blob=await resp.blob();
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download=cibleNom+'_Perimetre.pptx';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+    if(btn){btn.textContent=oldTxt;btn.disabled=false;}
+  } catch(e){
+    alert('Export PPTX échoué : '+e.message);
+    const btn=document.querySelector('.bexp');if(btn){btn.textContent='↓ Exporter en PPTX';btn.disabled=false;}
+  }
 }
 async function smcExportHonoraires(){
   try{
