@@ -955,15 +955,38 @@ body{background:var(--gris-surface);color:var(--noir);font-family:Arial,'Helveti
   <div class="admin-header"><div class="admin-titre">Paramètres <em>clés</em></div><div class="admin-sous-titre">Les champs marqués * sont obligatoires.</div></div>
   <div class="fw">
     <div class="fs" style="display:none;"><button class="to on" id="btn-std">Standard DD</button><button class="to" id="btn-fla">Flash DD</button></div>
-    <div class="fs"><div class="fs-t"><span class="fs-n">01</span>Parties à inclure *</div><div class="pg">
+
+    <!-- Choix de la trame PPTX -->
+    <div class="fs">
+      <div class="fs-t"><span class="fs-n">01</span>Trame graphique *</div>
+      <div class="ib">Détermine la police et la charte des slides générées. Choix indépendant du contenu.</div>
+      <div class="tg">
+        <button class="to on" id="btn-trame-arial" onclick="setTrame('arial')">Arial Nova Light</button>
+        <button class="to" id="btn-trame-segoe" onclick="setTrame('segoe')">Segoe UI</button>
+      </div>
+    </div>
+
+    <!-- Image cover -->
+    <div class="fs">
+      <div class="fs-t"><span class="fs-n">02</span>Image de couverture</div>
+      <div class="ib">Glisse-dépose une image qui sera utilisée en fond de la slide Cover et de la Backcover.</div>
+      <div class="upz" id="cover-drop" ondragover="dgo(event)" ondragleave="dgl()" ondrop="onCoverDrop(event)" onclick="document.getElementById('inp-cover').click()" style="cursor:pointer;">
+        <input type="file" id="inp-cover" accept="image/*" style="display:none;" onchange="onCoverPick(this.files)">
+        <div class="upt" id="cover-upt">Glisser une image ici</div>
+        <div class="ups" id="cover-ups">ou cliquer pour parcourir — JPG, PNG</div>
+      </div>
+      <div id="cover-preview" style="margin-top:12px;display:none;"><img id="cover-img-preview" style="max-width:100%;max-height:180px;border:1px solid var(--gris-tres-clair);"></div>
+    </div>
+
+    <div class="fs"><div class="fs-t"><span class="fs-n">03</span>Parties à inclure *</div><div class="pg">
       <label class="pi"><input type="checkbox" id="p1" checked><div class="pil"><strong>1 — Contexte de l'operation</strong>Perimetre, organigramme, business, metriques, marche, presse</div></label>
       <label class="pi"><input type="checkbox" id="p2" checked><div class="pil"><strong>2 — Notre approche</strong>Retroplanning, acces a l'information</div></label>
       <label class="pi"><input type="checkbox" id="p3" checked><div class="pil"><strong>3 — Perimetre des travaux</strong>Objectifs et procedures d'audit</div></label>
       <label class="pi"><input type="checkbox" id="p4" checked><div class="pil"><strong>4 — Conditions d'intervention</strong>Planning et honoraires</div></label>
       <label class="pi"><input type="checkbox" id="p5" checked><div class="pil"><strong>5 — References</strong>Missions passees pertinentes</div></label>
     </div></div>
-    <div class="fs"><div class="fs-t"><span class="fs-n">02</span>Historique analysé *</div><div class="exl" id="exl"><div class="exh"><div class="exhl">Exercice</div><div class="exhl">Date de cloture</div><div class="exhl">Libelle</div><div></div></div></div><button class="badd" onclick="addEx()">+ Ajouter un exercice</button></div>
-    <div class="fs"><div class="fs-t"><span class="fs-n">03</span>Planning d'intervention *</div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">04</span>Historique analysé *</div><div class="exl" id="exl"><div class="exh"><div class="exhl">Exercice</div><div class="exhl">Date de cloture</div><div class="exhl">Libelle</div><div></div></div></div><button class="badd" onclick="addEx()">+ Ajouter un exercice</button></div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">05</span>Planning d'intervention *</div>
       <div class="ib">Les dates de début des phases 2 et 3 se calculent automatiquement en jours ouvrés, mais restent modifiables.</div>
       <div class="plg">
         <div class="pli"><div class="pln">Phase 1</div><div class="plt">Preparation</div><div class="pld">Envoi IRL, kick-off, acces a l'information.</div><div class="fl" style="margin-bottom:6px;">Date de debut <span class="req">*</span></div><input class="fi" type="date" id="dp1" style="margin-bottom:12px;" oninput="majP()"><div class="fl" style="margin-bottom:6px;">Duree (jours ouvres)</div><input class="fi" type="number" id="dur1" min="1" max="60" placeholder="ex : 5" oninput="majP()"></div>
@@ -971,11 +994,11 @@ body{background:var(--gris-surface);color:var(--noir);font-family:Arial,'Helveti
         <div class="pli"><div class="pln">Phase 3</div><div class="plt">Finalisation</div><div class="pld">Remise rapport, relecture, validation.</div><div class="fl" style="margin-bottom:6px;">Date de début <span class="req" style="color:var(--gris-clair);font-weight:400;letter-spacing:0;">(pré-remplie, modifiable)</span></div><input class="fi" type="date" id="dp3" style="margin-bottom:12px;" oninput="onDateManual('dp3');majP()"><div class="fl" style="margin-bottom:6px;">Duree (jours ouvres)</div><input class="fi" type="number" id="dur3" min="1" max="60" placeholder="ex : 5" oninput="majP()"><div class="pnote" id="note3"></div></div>
       </div>
     </div>
-    <div class="fs"><div class="fs-t"><span class="fs-n">04</span>Honoraires *</div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">06</span>Honoraires *</div>
       <div class="hp"><div class="hpl">Prestation principale *</div><div class="fg" style="margin-bottom:0;"><div class="fl">Libelle</div><input class="fi" type="text" id="hon-lib" placeholder="ex : Due Diligence Financiere" style="margin-bottom:12px;"><div class="fl">Montant HT</div><div style="display:flex;"><div class="mpfx">€</div><input class="fi" type="number" id="hon-mt" placeholder="ex : 42 000" style="border-left:none;"></div></div></div>
       <div class="tirl" id="tirl"></div><button class="badd" onclick="addTir()">+ Ajouter un tiroir facultatif</button>
     </div>
-    <div class="fs"><div class="fs-t"><span class="fs-n">05</span>Commentaires <span style="font-weight:400;color:var(--gris-clair);font-size:8px;letter-spacing:0.14em;border:1px solid var(--gris-tres-clair);padding:2px 6px;">Facultatif</span></div><textarea class="fta" id="comm" placeholder="Contexte particulier, secteur si non identifie, fourchette de CA…"></textarea></div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">07</span>Commentaires <span style="font-weight:400;color:var(--gris-clair);font-size:8px;letter-spacing:0.14em;border:1px solid var(--gris-tres-clair);padding:2px 6px;">Facultatif</span></div><textarea class="fta" id="comm" placeholder="Contexte particulier, secteur si non identifie, fourchette de CA…"></textarea></div>
     <div class="fa"><button class="bret" onclick="ap('lead-sapiens-1')">← Etape precedente</button><button class="bsuiv" onclick="val2()">Etape suivante →</button></div>
   </div>
   <div class="af"><div class="aft">Gavroche</div></div>
@@ -1721,6 +1744,42 @@ function onPerimLibelleChange(){
   window.smcPerimLibelleCustom = inp ? (inp.value||'').trim() : '';
 }
 
+// Choix de la trame graphique (arial nova / segoe ui)
+window.trameChoice = 'arial';
+function setTrame(t){
+  window.trameChoice = (t==='segoe') ? 'segoe' : 'arial';
+  const bA=document.getElementById('btn-trame-arial'),bS=document.getElementById('btn-trame-segoe');
+  if(bA) bA.classList.toggle('on', t==='arial');
+  if(bS) bS.classList.toggle('on', t==='segoe');
+}
+
+// Upload image cover — stockée en base64 dans window.coverImageData
+window.coverImageData = null;
+function onCoverDrop(e){
+  e.preventDefault(); e.stopPropagation();
+  const drop=document.getElementById('cover-drop');
+  if(drop) drop.classList.remove('drag');
+  const files=(e.dataTransfer && e.dataTransfer.files) || [];
+  onCoverPick(files);
+}
+function onCoverPick(files){
+  if(!files || !files.length) return;
+  const f=files[0];
+  if(!f.type || !f.type.startsWith('image/')){ alert('Merci de déposer une image (JPG ou PNG).'); return; }
+  const reader=new FileReader();
+  reader.onload=(ev)=>{
+    const dataUrl=ev.target.result;
+    window.coverImageData=dataUrl;
+    // Preview
+    const img=document.getElementById('cover-img-preview');
+    const wrap=document.getElementById('cover-preview');
+    if(img && wrap){ img.src=dataUrl; wrap.style.display='block'; }
+    const upt=document.getElementById('cover-upt');
+    if(upt) upt.textContent='Image chargée — clique pour la remplacer';
+  };
+  reader.readAsDataURL(f);
+}
+
 // Planning jours ouvres
 function addJO(dateStr,j){const d=new Date(dateStr);let n=0;while(n<j){d.setDate(d.getDate()+1);const w=d.getDay();if(w!==0&&w!==6)n++;}return d;}
 function fmtISO(d){return d.toISOString().split('T')[0];}
@@ -2116,23 +2175,9 @@ async function genPropale(reouvrir){
   if (d.parties.p4) makeSep("sep-cond", "Conditions d'intervention", 4);
 
 
-  if(d.parties.p1){
-    const org=cx.organigramme||{};
-    const fils=(org.filiales||[]).filter(function(f){return f.nom;});
-    const horsP=(org.hors_perimetre||[]).filter(function(f){return f.nom;});
-    let orgH="";
-    if(org.holding&&org.holding.nom){orgH+='<div class="orniv"><div class="orb"><div class="orbn" contenteditable="true">'+org.holding.nom+'</div><div class="orbpct" contenteditable="true">'+(org.holding.pct_detention||"")+'</div><div class="orbl">Actionnaire</div></div></div><div class="orcon"></div>';}
-    orgH+='<div class="orniv"><div class="orb p"><div class="orbn" contenteditable="true">'+d.entite.nom+'</div><div class="orbpct" contenteditable="true">'+d.entite.siren+'</div><div class="orbl">Cible - perimetre</div></div></div>';
-    if(fils.length||horsP.length){orgH+='<div class="orcon"></div><div class="orniv" style="gap:2%;flex-wrap:wrap;">';fils.forEach(function(f){orgH+='<div class="orb p"><div class="orbn" contenteditable="true">'+f.nom+'</div><div class="orbpct" contenteditable="true">'+(f.pct_detention||"")+'</div><div class="orbl">Dans le perimetre</div></div>';});horsP.forEach(function(f){orgH+='<div class="orb h"><div class="orbn" contenteditable="true">'+f.nom+'</div><div class="orbpct" contenteditable="true">'+(f.pct_detention||"")+'</div><div class="orbl">Hors perimetre</div></div>';});orgH+='</div>';}
-    addS(1,"ctx-per","Perimetre",'<div class="sc std"><div class="std-h"><div class="std-b">Contexte</div><div class="std-t" contenteditable="true">Perimetre de l\'operation</div></div><div class="std-body"><div style="font-size:0.68em;color:var(--gris-moyen);line-height:1.75;" contenteditable="true">'+cx.contexte_operation+'</div><div class="org">'+orgH+'<div class="orleg"><div class="orlegi"><div class="orlegb p"></div>Perimetre</div><div class="orlegi"><div class="orlegb h"></div>Hors perimetre</div></div></div></div></div>');
-    addS(1,"ctx-biz","Business overview",'<div class="sc std"><div class="std-h"><div class="std-b">Contexte</div><div class="std-t" contenteditable="true">Presentation de l\'activite</div></div><div class="std-body"><div style="font-size:0.68em;color:var(--gris-moyen);line-height:1.75;margin-bottom:2%;" contenteditable="true">'+cx.activite_resume+'</div><div class="bgrid"><div class="bbloc"><div class="bbloct">Chaine de valeur</div><div class="bblocv" contenteditable="true">'+(cx.chaine_valeur||"A preciser")+'</div></div><div class="bbloc"><div class="bbloct">Principaux clients</div><div class="bblocv" contenteditable="true">'+(cx.clients_types||"A preciser")+'</div></div><div class="bbloc"><div class="bbloct">Principaux fournisseurs</div><div class="bblocv" contenteditable="true">'+(cx.fournisseurs_types||"A preciser")+'</div></div><div class="bbloc"><div class="bbloct">Axes d\'analyse</div><div class="bblocv" contenteditable="true">'+((cx.axes_analyse||[]).join(" - ")||"A preciser")+'</div></div></div></div></div>');
-    const mets=cx.metriques||[];
-    addS(1,"ctx-met","Metriques cles",'<div class="sc std"><div class="std-h"><div class="std-b">Contexte</div><div class="std-t" contenteditable="true">Ordres de grandeur</div></div><div class="std-body"><div class="mgrid">'+mets.map(function(m){return '<div class="mitem"><div class="mlabel">'+m.label+'</div><div class="mval" contenteditable="true">'+(m.valeur||"--")+'</div><div class="mnote" contenteditable="true">'+(m.source||"")+'</div></div>';}).join("")+'</div></div></div>');
-    const mrv=(cx.marche||[]).filter(function(m){return m.valeur&&m.label;});
-    if(mrv.length){addS(1,"ctx-mar","Marche",'<div class="sc std"><div class="std-h"><div class="std-b">Contexte</div><div class="std-t" contenteditable="true">Donnees de marche</div></div><div class="std-body"><div class="mrgrid">'+mrv.map(function(m){return '<div class="mritem"><div class="mrval" contenteditable="true">'+m.valeur+'</div><div class="mrlbl" contenteditable="true">'+m.label+'</div><div class="mrsrc" contenteditable="true">'+(m.source||"")+'</div></div>';}).join("")+'</div></div></div>');}
-    const pr=(cx.presse||[]).filter(function(p){return p.titre&&p.date;});
-    if(cx.has_presse&&pr.length){addS(1,"ctx-pr","Revue de presse",'<div class="sc std"><div class="std-h"><div class="std-b">Contexte</div><div class="std-t" contenteditable="true">Revue de presse recente</div></div><div class="std-body"><div class="prlist">'+pr.slice(0,4).map(function(p){return '<div class="pritem"><div class="prdate" contenteditable="true">'+p.date+'</div><div class="prtit" contenteditable="true">'+p.titre+'</div><div class="prsrc" contenteditable="true">'+(p.source||"")+'</div></div>';}).join("")+'</div></div></div>');}
-  }
+  // NB : les slides de contenu Contexte (organigramme, business overview, métriques, marché, revue de presse)
+  // sont retirées pour l'instant. Seul le séparateur "Contexte de l'opération" reste — la partie sera
+  // enrichie plus tard avec de l'IA.
 
   // NB : la slide calendrier a été déplacée de p2 (Notre approche) vers p4 (Conditions),
   // juste avant la slide Honoraires, pour coller au pattern Retinax.
