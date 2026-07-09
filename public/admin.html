@@ -954,28 +954,28 @@ body{background:var(--gris-surface);color:var(--noir);font-family:Arial,'Helveti
   <div class="stepper"><button class="stepper-item complete" onclick="ap('lead-sapiens-1')"><div class="stepper-num">✓</div><div class="stepper-label">Identification de la cible</div></button><button class="stepper-item actif"><div class="stepper-num">2</div><div class="stepper-label">Parametres cles</div></button><button class="stepper-item inactif"><div class="stepper-num">3</div><div class="stepper-label">Perimetre des diligences</div></button><button class="stepper-item inactif"><div class="stepper-num">4</div><div class="stepper-label">Presentation & edition</div></button></div>
   <div class="admin-header"><div class="admin-titre">Paramètres <em>clés</em></div><div class="admin-sous-titre">Les champs marqués * sont obligatoires.</div></div>
   <div class="fw">
-    <div class="fs"><div class="fs-t"><span class="fs-n">01</span>Type de DD *</div><div class="tg"><button class="to on" id="btn-std" onclick="stg('btn-std','btn-fla')">Standard DD</button><button class="to" id="btn-fla" onclick="stg('btn-fla','btn-std')">Flash DD</button></div></div>
-    <div class="fs"><div class="fs-t"><span class="fs-n">02</span>Parties à inclure *</div><div class="pg">
+    <div class="fs" style="display:none;"><button class="to on" id="btn-std">Standard DD</button><button class="to" id="btn-fla">Flash DD</button></div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">01</span>Parties à inclure *</div><div class="pg">
       <label class="pi"><input type="checkbox" id="p1" checked><div class="pil"><strong>1 — Contexte de l'operation</strong>Perimetre, organigramme, business, metriques, marche, presse</div></label>
       <label class="pi"><input type="checkbox" id="p2" checked><div class="pil"><strong>2 — Notre approche</strong>Retroplanning, acces a l'information</div></label>
       <label class="pi"><input type="checkbox" id="p3" checked><div class="pil"><strong>3 — Perimetre des travaux</strong>Objectifs et procedures d'audit</div></label>
       <label class="pi"><input type="checkbox" id="p4" checked><div class="pil"><strong>4 — Conditions d'intervention</strong>Planning et honoraires</div></label>
       <label class="pi"><input type="checkbox" id="p5" checked><div class="pil"><strong>5 — References</strong>Missions passees pertinentes</div></label>
     </div></div>
-    <div class="fs"><div class="fs-t"><span class="fs-n">04</span>Historique analyse *</div><div class="exl" id="exl"><div class="exh"><div class="exhl">Exercice</div><div class="exhl">Date de cloture</div><div class="exhl">Libelle</div><div></div></div></div><button class="badd" onclick="addEx()">+ Ajouter un exercice</button></div>
-    <div class="fs"><div class="fs-t"><span class="fs-n">05</span>Planning d'intervention *</div>
-      <div class="ib">Les dates de debut des phases 2 et 3 se calculent automatiquement en jours ouvres.</div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">02</span>Historique analysé *</div><div class="exl" id="exl"><div class="exh"><div class="exhl">Exercice</div><div class="exhl">Date de cloture</div><div class="exhl">Libelle</div><div></div></div></div><button class="badd" onclick="addEx()">+ Ajouter un exercice</button></div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">03</span>Planning d'intervention *</div>
+      <div class="ib">Les dates de début des phases 2 et 3 se calculent automatiquement en jours ouvrés, mais restent modifiables.</div>
       <div class="plg">
         <div class="pli"><div class="pln">Phase 1</div><div class="plt">Preparation</div><div class="pld">Envoi IRL, kick-off, acces a l'information.</div><div class="fl" style="margin-bottom:6px;">Date de debut <span class="req">*</span></div><input class="fi" type="date" id="dp1" style="margin-bottom:12px;" oninput="majP()"><div class="fl" style="margin-bottom:6px;">Duree (jours ouvres)</div><input class="fi" type="number" id="dur1" min="1" max="60" placeholder="ex : 5" oninput="majP()"></div>
         <div class="pli"><div class="pln">Phase 2</div><div class="plt">Execution</div><div class="pld">Travaux d'analyse, sessions Q&R.</div><div class="fl" style="margin-bottom:6px;">Date de début <span class="req" style="color:var(--gris-clair);font-weight:400;letter-spacing:0;">(pré-remplie, modifiable)</span></div><input class="fi" type="date" id="dp2" style="margin-bottom:12px;" oninput="onDateManual('dp2');majP()"><div class="fl" style="margin-bottom:6px;">Duree (jours ouvres)</div><input class="fi" type="number" id="dur2" min="1" max="60" placeholder="ex : 15" oninput="majP()"><div class="pnote" id="note2"></div></div>
         <div class="pli"><div class="pln">Phase 3</div><div class="plt">Finalisation</div><div class="pld">Remise rapport, relecture, validation.</div><div class="fl" style="margin-bottom:6px;">Date de début <span class="req" style="color:var(--gris-clair);font-weight:400;letter-spacing:0;">(pré-remplie, modifiable)</span></div><input class="fi" type="date" id="dp3" style="margin-bottom:12px;" oninput="onDateManual('dp3');majP()"><div class="fl" style="margin-bottom:6px;">Duree (jours ouvres)</div><input class="fi" type="number" id="dur3" min="1" max="60" placeholder="ex : 5" oninput="majP()"><div class="pnote" id="note3"></div></div>
       </div>
     </div>
-    <div class="fs"><div class="fs-t"><span class="fs-n">06</span>Honoraires *</div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">04</span>Honoraires *</div>
       <div class="hp"><div class="hpl">Prestation principale *</div><div class="fg" style="margin-bottom:0;"><div class="fl">Libelle</div><input class="fi" type="text" id="hon-lib" placeholder="ex : Due Diligence Financiere" style="margin-bottom:12px;"><div class="fl">Montant HT</div><div style="display:flex;"><div class="mpfx">€</div><input class="fi" type="number" id="hon-mt" placeholder="ex : 42 000" style="border-left:none;"></div></div></div>
       <div class="tirl" id="tirl"></div><button class="badd" onclick="addTir()">+ Ajouter un tiroir facultatif</button>
     </div>
-    <div class="fs"><div class="fs-t"><span class="fs-n">07</span>Commentaires <span style="font-weight:400;color:var(--gris-clair);font-size:8px;letter-spacing:0.14em;border:1px solid var(--gris-tres-clair);padding:2px 6px;">Facultatif</span></div><textarea class="fta" id="comm" placeholder="Contexte particulier, secteur si non identifie, fourchette de CA…"></textarea></div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">05</span>Commentaires <span style="font-weight:400;color:var(--gris-clair);font-size:8px;letter-spacing:0.14em;border:1px solid var(--gris-tres-clair);padding:2px 6px;">Facultatif</span></div><textarea class="fta" id="comm" placeholder="Contexte particulier, secteur si non identifie, fourchette de CA…"></textarea></div>
     <div class="fa"><button class="bret" onclick="ap('lead-sapiens-1')">← Etape precedente</button><button class="bsuiv" onclick="val2()">Etape suivante →</button></div>
   </div>
   <div class="af"><div class="aft">Gavroche</div></div>
