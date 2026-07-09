@@ -568,9 +568,14 @@ body *,button,input,textarea,select{letter-spacing:inherit;}
 .btn-action.primary:hover{background:var(--gris-moyen);}
 
 /* Layout 2 colonnes pour l'étape 1 : questions à gauche, entité à droite */
-.step1-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:16px;}
-.step1-left,.step1-right{display:flex;flex-direction:column;gap:24px;}
-@media(max-width:900px){.step1-grid{grid-template-columns:1fr;}}
+.step1-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;margin-bottom:16px;}
+.step1-left,.step1-right{display:flex;flex-direction:column;gap:32px;}
+/* L'étape 1 utilise toute la largeur — surcharge de .fw qui est plafonné à 860px */
+#page-lead-sapiens-1 .fw{max-width:none;padding:40px 64px 48px 64px;}
+/* Info-boxes plus discrètes sur l'étape 1 : texte simple gris, pas de fond */
+#page-lead-sapiens-1 .ib{background:transparent;border:none;padding:6px 0 0 0;font-size:12px;color:var(--gris-clair);line-height:1.5;margin-bottom:12px;}
+#page-lead-sapiens-1 .fs{margin-bottom:0;}
+@media(max-width:1100px){.step1-grid{grid-template-columns:1fr;gap:32px;}}
 
 /* Section titre dans workflow */
 .section-head{margin-bottom:28px;}
