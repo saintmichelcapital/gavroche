@@ -10,12 +10,13 @@
   --noir:#080808;--blanc:#f8f8f6;--gris-moyen:#383838;--gris-clair:#999;
   --gris-tres-clair:#e4e4e2;--gris-surface:#f0f0ee;--gris-fixe:#e8e8e6;
   --vert:#2d6a4f;--rouge:#8b1a1a;--bleu-info:#1a3a6b;--bleu-info-clair:#eef2fa;
-  --font-titre:'Segoe UI','Helvetica Neue',Arial,sans-serif;
-  --font-serif:'Segoe UI','Helvetica Neue',Arial,sans-serif;
-  --font-corps:'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  --font-titre:Arial,'Helvetica Neue',sans-serif;
+  --font-serif:Arial,'Helvetica Neue',sans-serif;
+  --font-corps:Arial,'Helvetica Neue',sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-corps);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh;}
+body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-corps);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh;letter-spacing:0.05em;}
+body *,button,input,textarea,select{letter-spacing:inherit;}
 .topbar{background:var(--noir);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:60px;position:fixed;top:0;left:0;right:0;z-index:200;}
 .topbar-logo{font-family:var(--font-titre);font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.8);cursor:pointer;background:none;border:none;}
 .topbar-right{display:flex;align-items:center;gap:32px;}
@@ -567,7 +568,7 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .btn-action.primary:hover{background:var(--gris-moyen);}
 
 /* Layout 2 colonnes pour l'étape 1 : questions à gauche, entité à droite */
-.step1-grid{display:grid;grid-template-columns:minmax(280px, 380px) 1fr;gap:36px;align-items:start;margin-bottom:16px;}
+.step1-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:16px;}
 .step1-left,.step1-right{display:flex;flex-direction:column;gap:24px;}
 @media(max-width:900px){.step1-grid{grid-template-columns:1fr;}}
 
@@ -874,16 +875,22 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
         <div class="fs">
           <div class="fs-t"><span class="fs-n">01</span>Type de mission *</div>
           <div class="tg">
-            <button class="to on" id="btn-bsdd" onclick="stg('btn-bsdd','btn-vdd')">Buy-side DD</button>
-            <button class="to" id="btn-vdd" onclick="stg('btn-vdd','btn-bsdd')">Vendor DD</button>
+            <button class="to on" id="btn-bsdd" onclick="setTM('bsdd')">Buy-side DD</button>
+            <button class="to" id="btn-vdd" onclick="setTM('vdd')">Vendor DD</button>
+            <button class="to" id="btn-autre" onclick="setTM('autre')">Autre</button>
           </div>
         </div>
         <div class="fs">
-          <div class="fs-t"><span class="fs-n">02</span>Type de structure *</div>
-          <div class="ib">Détermine le vocabulaire des propales (« la société » ou « le groupe »).</div>
+          <div class="fs-t"><span class="fs-n">02</span>Périmètre juridique *</div>
+          <div class="ib">Détermine le vocabulaire des propales. Le libellé est utilisé pour tous les placeholders des slides Périmètre.</div>
           <div class="tg">
             <button class="to on" id="btn-mono" onclick="setTS('mono')">Mono-entité</button>
             <button class="to" id="btn-multi" onclick="setTS('multi')">Multi-entité</button>
+          </div>
+          <div class="fg" style="margin-top:12px;">
+            <div class="fl">Libellé utilisé dans les propales</div>
+            <input class="fi" type="text" id="perim-libelle" value="la société" oninput="onPerimLibelleChange()" placeholder="Ex. la société / le groupe / le pôle industriel">
+            <div class="ib" style="margin-top:6px;">Modifiable si tu veux un libellé sur-mesure. Se remplit automatiquement selon Mono / Multi.</div>
           </div>
         </div>
         <div class="fs">
@@ -1684,7 +1691,30 @@ function stg(a,b){document.getElementById(a).classList.add('on');document.getEle
 
 // Mono/Multi
 let ts='mono';
-function setTS(t){ts=t;document.getElementById('btn-mono').classList.toggle('on',t==='mono');document.getElementById('btn-multi').classList.toggle('on',t==='multi');document.getElementById('bloc-mono').style.display=t==='mono'?'block':'none';document.getElementById('bloc-multi').style.display=t==='multi'?'block':'none';if(t==='multi'&&!document.getElementById('entl').children.length){addEnt();addEnt();}}
+function setTS(t){ts=t;document.getElementById('btn-mono').classList.toggle('on',t==='mono');document.getElementById('btn-multi').classList.toggle('on',t==='multi');document.getElementById('bloc-mono').style.display=t==='mono'?'block':'none';document.getElementById('bloc-multi').style.display=t==='multi'?'block':'none';if(t==='multi'&&!document.getElementById('entl').children.length){addEnt();addEnt();}
+  // Pré-remplit le libellé si l'utilisateur ne l'a pas customisé (ou l'a laissé sur une valeur par défaut)
+  const inp=document.getElementById('perim-libelle');
+  if(inp){
+    const v=(inp.value||'').trim();
+    if(v==='' || v==='la société' || v==='le groupe'){
+      inp.value = (t==='multi') ? 'le groupe' : 'la société';
+      onPerimLibelleChange();
+    }
+  }
+}
+// Type de mission (BSDD / VDD / Autre)
+window.tm='BSDD';
+function setTM(m){
+  window.tm=(m==='vdd')?'VDD':(m==='autre'?'AUTRE':'BSDD');
+  document.getElementById('btn-bsdd').classList.toggle('on',m==='bsdd');
+  document.getElementById('btn-vdd').classList.toggle('on',m==='vdd');
+  document.getElementById('btn-autre').classList.toggle('on',m==='autre');
+}
+// Libellé du périmètre juridique — mis à jour et propagé aux placeholders d'interpolation
+function onPerimLibelleChange(){
+  const inp=document.getElementById('perim-libelle');
+  window.smcPerimLibelleCustom = inp ? (inp.value||'').trim() : '';
+}
 
 // Planning jours ouvres
 function addJO(dateStr,j){const d=new Date(dateStr);let n=0;while(n<j){d.setDate(d.getDate()+1);const w=d.getDay();if(w!==0&&w!==6)n++;}return d;}
@@ -1815,7 +1845,14 @@ function dgl(){document.querySelector('.upz').classList.remove('dg');}
 function ddr(e){e.preventDefault();dgl();addFiles(e.dataTransfer.files);}
 
 // Validation etape 1
-function val1(){if(ts==='mono'&&!entSel){document.getElementById('err-mono').classList.add('v');return;}ap('lead-sapiens-2');}
+function val1(){
+  // On peut avancer même sans avoir sélectionné d'entité (usage brouillon / cible non encore identifiée)
+  const err = document.getElementById('err-mono');
+  if (err) err.classList.remove('v');
+  // On mémorise le libellé customisé pour l'interpolation
+  onPerimLibelleChange();
+  ap('lead-sapiens-2');
+}
 
 // Exercices
 let exc=0;
@@ -3448,11 +3485,29 @@ function smcGetInterpolationContext(){
   else if (years.length === 1) periode = FY_PREMIER;
   else periode = FY_PREMIER+'-'+FY_DERNIER;
 
+  // Libellé du périmètre juridique — utilise la valeur customisée si l'utilisateur en a saisi une, sinon défaut selon mono/multi
+  const perimInp = document.getElementById('perim-libelle');
+  const customLibelle = (window.smcPerimLibelleCustom || (perimInp ? (perimInp.value||'').trim() : '') || '').trim();
+  const defaultL = isMulti ? 'le groupe' : 'la société';
+  const l_entite = customLibelle || defaultL;
+  // "entite" = juste le substantif (ex: "société", "groupe", ou dernier mot du libellé custom)
+  const entiteRaw = l_entite.replace(/^(la|le|l'|les|un|une|des|du)\s+/i,'').trim() || (isMulti ? 'groupe' : 'société');
+  // "de_l_entite" gère la contraction "de + le → du"
+  let de_l_entite;
+  if (customLibelle) {
+    if (/^le\s+/i.test(customLibelle)) de_l_entite = 'du ' + customLibelle.replace(/^le\s+/i,'');
+    else if (/^les\s+/i.test(customLibelle)) de_l_entite = 'des ' + customLibelle.replace(/^les\s+/i,'');
+    else if (/^la\s+/i.test(customLibelle)) de_l_entite = 'de ' + customLibelle;
+    else if (/^l['']/i.test(customLibelle)) de_l_entite = 'de ' + customLibelle;
+    else de_l_entite = 'de ' + customLibelle;
+  } else {
+    de_l_entite = isMulti ? 'du groupe' : 'de la société';
+  }
   return {
     cible: cible,
-    entite: isMulti ? 'groupe' : 'société',
-    l_entite: isMulti ? 'le groupe' : 'la société',
-    de_l_entite: isMulti ? 'du groupe' : 'de la société',
+    entite: entiteRaw,
+    l_entite: l_entite,
+    de_l_entite: de_l_entite,
     FY_PREMIER: FY_PREMIER,
     FY_DERNIER: FY_DERNIER,
     periode: periode
