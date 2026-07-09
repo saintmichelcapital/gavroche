@@ -967,8 +967,8 @@ body{background:var(--gris-surface);color:var(--noir);font-family:Arial,'Helveti
       <div class="ib">Les dates de debut des phases 2 et 3 se calculent automatiquement en jours ouvres.</div>
       <div class="plg">
         <div class="pli"><div class="pln">Phase 1</div><div class="plt">Preparation</div><div class="pld">Envoi IRL, kick-off, acces a l'information.</div><div class="fl" style="margin-bottom:6px;">Date de debut <span class="req">*</span></div><input class="fi" type="date" id="dp1" style="margin-bottom:12px;" oninput="majP()"><div class="fl" style="margin-bottom:6px;">Duree (jours ouvres)</div><input class="fi" type="number" id="dur1" min="1" max="60" placeholder="ex : 5" oninput="majP()"></div>
-        <div class="pli"><div class="pln">Phase 2</div><div class="plt">Execution</div><div class="pld">Travaux d'analyse, sessions Q&R.</div><div class="fl" style="margin-bottom:6px;">Date de debut</div><input class="fi" type="date" id="dp2" style="margin-bottom:12px;background:var(--gris-surface);" readonly><div class="fl" style="margin-bottom:6px;">Duree (jours ouvres)</div><input class="fi" type="number" id="dur2" min="1" max="60" placeholder="ex : 15" oninput="majP()"><div class="pnote" id="note2"></div></div>
-        <div class="pli"><div class="pln">Phase 3</div><div class="plt">Finalisation</div><div class="pld">Remise rapport, relecture, validation.</div><div class="fl" style="margin-bottom:6px;">Date de debut</div><input class="fi" type="date" id="dp3" style="margin-bottom:12px;background:var(--gris-surface);" readonly><div class="fl" style="margin-bottom:6px;">Duree (jours ouvres)</div><input class="fi" type="number" id="dur3" min="1" max="60" placeholder="ex : 5" oninput="majP()"><div class="pnote" id="note3"></div></div>
+        <div class="pli"><div class="pln">Phase 2</div><div class="plt">Execution</div><div class="pld">Travaux d'analyse, sessions Q&R.</div><div class="fl" style="margin-bottom:6px;">Date de début <span class="req" style="color:var(--gris-clair);font-weight:400;letter-spacing:0;">(pré-remplie, modifiable)</span></div><input class="fi" type="date" id="dp2" style="margin-bottom:12px;" oninput="onDateManual('dp2');majP()"><div class="fl" style="margin-bottom:6px;">Duree (jours ouvres)</div><input class="fi" type="number" id="dur2" min="1" max="60" placeholder="ex : 15" oninput="majP()"><div class="pnote" id="note2"></div></div>
+        <div class="pli"><div class="pln">Phase 3</div><div class="plt">Finalisation</div><div class="pld">Remise rapport, relecture, validation.</div><div class="fl" style="margin-bottom:6px;">Date de début <span class="req" style="color:var(--gris-clair);font-weight:400;letter-spacing:0;">(pré-remplie, modifiable)</span></div><input class="fi" type="date" id="dp3" style="margin-bottom:12px;" oninput="onDateManual('dp3');majP()"><div class="fl" style="margin-bottom:6px;">Duree (jours ouvres)</div><input class="fi" type="number" id="dur3" min="1" max="60" placeholder="ex : 5" oninput="majP()"><div class="pnote" id="note3"></div></div>
       </div>
     </div>
     <div class="fs"><div class="fs-t"><span class="fs-n">06</span>Honoraires *</div>
@@ -1729,16 +1729,30 @@ function majP(){
   const d1=document.getElementById('dp1').value;
   const dur1=parseInt(document.getElementById('dur1').value)||0;
   const dur2=parseInt(document.getElementById('dur2').value)||0;
-  if(d1&&dur1){
+  const dp2El=document.getElementById('dp2');
+  const dp3El=document.getElementById('dp3');
+  // Recalcul dp2 uniquement si l'utilisateur ne l'a pas modifiée manuellement
+  if(d1&&dur1&&dp2El.dataset.manual!=='1'){
     const d2=addJO(d1,dur1);
-    document.getElementById('dp2').value=fmtISO(d2);
-    document.getElementById('note2').textContent='Debut calcule : '+fmtFR(d2);
-    if(dur2){
-      const d3=addJO(fmtISO(d2),dur2);
-      document.getElementById('dp3').value=fmtISO(d3);
-      document.getElementById('note3').textContent='Debut calcule : '+fmtFR(d3);
-    }
+    dp2El.value=fmtISO(d2);
+    document.getElementById('note2').textContent='Début calculé : '+fmtFR(d2);
   }
+  // dp3 est calculée depuis la valeur COURANTE de dp2 (auto ou manuelle)
+  const d2Cur=dp2El.value;
+  if(d2Cur&&dur2&&dp3El.dataset.manual!=='1'){
+    const d3=addJO(d2Cur,dur2);
+    dp3El.value=fmtISO(d3);
+    document.getElementById('note3').textContent='Début calculé : '+fmtFR(d3);
+  }
+}
+// Marque une date comme modifiée manuellement pour éviter que majP l'écrase
+function onDateManual(elId){
+  const el=document.getElementById(elId);
+  if(!el) return;
+  el.dataset.manual='1';
+  const n=elId.slice(-1);
+  const noteEl=document.getElementById('note'+n);
+  if(noteEl) noteEl.textContent='Date saisie manuellement';
 }
 
 // Autocomplete
