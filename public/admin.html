@@ -10,8 +10,8 @@
   --noir:#080808;--blanc:#f8f8f6;--gris-moyen:#383838;--gris-clair:#999;
   --gris-tres-clair:#e4e4e2;--gris-surface:#f0f0ee;--gris-fixe:#e8e8e6;
   --vert:#2d6a4f;--rouge:#8b1a1a;--bleu-info:#1a3a6b;--bleu-info-clair:#eef2fa;
-  --font-titre:'Helvetica Neue','Arial',sans-serif;
-  --font-serif:'Cormorant Garamond','Georgia',serif;
+  --font-titre:'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  --font-serif:'Segoe UI','Helvetica Neue',Arial,sans-serif;
   --font-corps:'Segoe UI','Helvetica Neue',Arial,sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -566,6 +566,11 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 .btn-action.primary{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
 .btn-action.primary:hover{background:var(--gris-moyen);}
 
+/* Layout 2 colonnes pour l'étape 1 : questions à gauche, entité à droite */
+.step1-grid{display:grid;grid-template-columns:minmax(280px, 380px) 1fr;gap:36px;align-items:start;margin-bottom:16px;}
+.step1-left,.step1-right{display:flex;flex-direction:column;gap:24px;}
+@media(max-width:900px){.step1-grid{grid-template-columns:1fr;}}
+
 /* Section titre dans workflow */
 .section-head{margin-bottom:28px;}
 .section-head-titre{font-family:var(--font-titre);font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--noir);margin-bottom:6px;}
@@ -862,37 +867,71 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
 <div class="page" id="page-lead-sapiens-1">
   <div class="breadcrumb"><button class="bc" onclick="ap('dashboard')">Accueil</button><span class="bc-sep">›</span><button class="bc" onclick="ap('proposition')">Proposition</button><span class="bc-sep">›</span><span class="bc actif">Lead sapiens</span></div>
   <div class="stepper"><button class="stepper-item actif"><div class="stepper-num">1</div><div class="stepper-label">Identification de la cible</div></button><button class="stepper-item inactif"><div class="stepper-num">2</div><div class="stepper-label">Parametres cles</div></button><button class="stepper-item inactif"><div class="stepper-num">3</div><div class="stepper-label">Perimetre des diligences</div></button><button class="stepper-item inactif"><div class="stepper-num">4</div><div class="stepper-label">Presentation & edition</div></button></div>
-  <div class="admin-header"><div class="admin-titre">Identification de <em>la cible</em></div><div class="admin-sous-titre">Les champs marques * sont obligatoires.</div></div>
+  <div class="admin-header"><div class="admin-titre">Identification de <em>la cible</em></div><div class="admin-sous-titre">Les champs marqués * sont obligatoires.</div></div>
   <div class="fw">
-    <div class="fs"><div class="fs-t"><span class="fs-n">01</span>Type de structure *</div><div class="tg"><button class="to on" id="btn-mono" onclick="setTS('mono')">Mono-entite</button><button class="to" id="btn-multi" onclick="setTS('multi')">Multi-entite</button></div></div>
-    <div class="fs" id="bloc-mono">
-      <div class="fs-t"><span class="fs-n">02</span>Recherche de l'entite *</div>
-      <div class="ib">Tapez le nom ou le Siren — les suggestions apparaissent en temps reel.</div>
-      <div class="fg"><div class="fl">Rechercher <span class="req">*</span></div>
-        <div class="sw"><input class="fi" type="text" id="search-mono" placeholder="Nom de l'entreprise ou Siren…" autocomplete="off" oninput="rech(this,'mono')" onkeydown="nav(event,'mono')"><div class="sp" id="sp-mono"></div><div class="sl" id="sl-mono"></div></div>
-        <div class="err" id="err-mono">Veuillez selectionner une entite dans les suggestions.</div>
+    <div class="step1-grid">
+      <div class="step1-left">
+        <div class="fs">
+          <div class="fs-t"><span class="fs-n">01</span>Type de mission *</div>
+          <div class="tg">
+            <button class="to on" id="btn-bsdd" onclick="stg('btn-bsdd','btn-vdd')">Buy-side DD</button>
+            <button class="to" id="btn-vdd" onclick="stg('btn-vdd','btn-bsdd')">Vendor DD</button>
+          </div>
+        </div>
+        <div class="fs">
+          <div class="fs-t"><span class="fs-n">02</span>Type de structure *</div>
+          <div class="ib">Détermine le vocabulaire des propales (« la société » ou « le groupe »).</div>
+          <div class="tg">
+            <button class="to on" id="btn-mono" onclick="setTS('mono')">Mono-entité</button>
+            <button class="to" id="btn-multi" onclick="setTS('multi')">Multi-entité</button>
+          </div>
+        </div>
+        <div class="fs">
+          <div class="fs-t"><span class="fs-n">03</span>Nom du projet *</div>
+          <div class="ib">Nom de code interne, indépendant du nom de la cible (ex. « Projet Gavroche »).</div>
+          <div class="fg">
+            <input class="fi" type="text" id="proj-nom" placeholder="Ex. Projet Gavroche" autocomplete="off">
+          </div>
+        </div>
       </div>
-      <div class="fe" id="fe-mono">
-        <div class="fe-h"><div class="fe-n" id="fe-n-mono">—</div><div class="fe-s" id="fe-s-mono">—</div></div>
-        <div class="fe-g">
-          <div class="fe-c"><div class="fe-cl">Siren</div><div class="fe-cv" id="fecv-siren">—</div></div>
-          <div class="fe-c"><div class="fe-cl">Forme juridique</div><div class="fe-cv" id="fecv-forme">—</div></div>
-          <div class="fe-c"><div class="fe-cl">Siege social</div><div class="fe-cv" id="fecv-siege">—</div></div>
-          <div class="fe-c"><div class="fe-cl">Activite (NAF)</div><div class="fe-cv" id="fecv-activite">—</div></div>
-          <div class="fe-c"><div class="fe-cl">Date de creation</div><div class="fe-cv" id="fecv-creation">—</div></div>
-          <div class="fe-c"><div class="fe-cl">Effectifs</div><div class="fe-cv" id="fecv-effectifs">—</div></div>
-          <div class="fe-d"><div class="fe-cl" style="margin-bottom:10px;">Dirigeants</div><div id="dirs-mono"></div></div>
-          <div class="fe-l"><div class="fe-ll">Liens</div><div class="llist" id="liens-mono"></div><button class="ladd" onclick="addLien('liens-mono','','Autre')">+ Ajouter un lien</button></div>
-          <div class="fe-comp"><div class="fe-compl">Complements manuels — nature de l'operation, actionnariat, filiales, organigramme</div><textarea id="comp-mono" placeholder="Ex : Acquisition totale par le fonds X. Holding detenue a 60% par M. Dupont…"></textarea></div>
+      <div class="step1-right">
+        <div class="fs" id="bloc-mono">
+          <div class="fs-t"><span class="fs-n">04</span>Recherche de l'entité *</div>
+          <div class="ib">Tapez le nom ou le SIREN — les suggestions apparaissent en temps réel.</div>
+          <div class="fg"><div class="fl">Rechercher <span class="req">*</span></div>
+            <div class="sw"><input class="fi" type="text" id="search-mono" placeholder="Nom de l'entreprise ou SIREN…" autocomplete="off" oninput="rech(this,'mono')" onkeydown="nav(event,'mono')"><div class="sp" id="sp-mono"></div><div class="sl" id="sl-mono"></div></div>
+            <div class="err" id="err-mono">Veuillez sélectionner une entité dans les suggestions.</div>
+          </div>
+          <div class="fe" id="fe-mono">
+            <div class="fe-h"><div class="fe-n" id="fe-n-mono">—</div><div class="fe-s" id="fe-s-mono">—</div></div>
+            <div class="fe-g">
+              <div class="fe-c"><div class="fe-cl">SIREN</div><div class="fe-cv" id="fecv-siren">—</div></div>
+              <div class="fe-c"><div class="fe-cl">Forme juridique</div><div class="fe-cv" id="fecv-forme">—</div></div>
+              <div class="fe-c"><div class="fe-cl">Siège social</div><div class="fe-cv" id="fecv-siege">—</div></div>
+              <div class="fe-c"><div class="fe-cl">Activité (NAF)</div><div class="fe-cv" id="fecv-activite">—</div></div>
+              <div class="fe-c"><div class="fe-cl">Date de création</div><div class="fe-cv" id="fecv-creation">—</div></div>
+              <div class="fe-c"><div class="fe-cl">Effectifs</div><div class="fe-cv" id="fecv-effectifs">—</div></div>
+              <div class="fe-d"><div class="fe-cl" style="margin-bottom:10px;">Dirigeants</div><div id="dirs-mono"></div></div>
+              <div class="fe-l"><div class="fe-ll">Liens</div><div class="llist" id="liens-mono"></div><button class="ladd" onclick="addLien('liens-mono','','Autre')">+ Ajouter un lien</button></div>
+              <div class="fe-comp"><div class="fe-compl">Compléments manuels — nature de l'opération, actionnariat, filiales, organigramme</div><textarea id="comp-mono" placeholder="Ex : Acquisition totale par le fonds X. Holding détenue à 60% par M. Dupont…"></textarea></div>
+            </div>
+          </div>
+        </div>
+        <div class="fs" id="bloc-multi" style="display:none;">
+          <div class="fs-t"><span class="fs-n">04</span>Entités *</div>
+          <div class="ib">Ajoutez chaque entité du périmètre.</div>
+          <div class="entl" id="entl"></div>
+          <button class="badd" onclick="addEnt()">+ Ajouter une entité</button>
+        </div>
+        <div class="fs">
+          <div class="fs-t"><span class="fs-n">05</span>Documents <span style="font-weight:400;color:var(--gris-clair);font-size:8px;letter-spacing:0.14em;border:1px solid var(--gris-tres-clair);padding:2px 6px;">Facultatif</span></div>
+          <div class="ib">Information Memorandum, teaser, comptes annuels, tout document utile.</div>
+          <div class="upz" ondragover="dgo(event)" ondragleave="dgl()" ondrop="ddr(event)"><input type="file" id="inp-files" multiple onchange="addFiles(this.files)"><div class="upt">Déposer les fichiers ici</div><div class="ups">ou cliquer pour parcourir — tous formats acceptés</div></div>
+          <div class="flist" id="flist"></div>
         </div>
       </div>
     </div>
-    <div class="fs" id="bloc-multi" style="display:none;"><div class="fs-t"><span class="fs-n">02</span>Entites *</div><div class="ib">Ajoutez chaque entite du perimetre.</div><div class="entl" id="entl"></div><button class="badd" onclick="addEnt()">+ Ajouter une entite</button></div>
-    <div class="fs"><div class="fs-t"><span class="fs-n">03</span>Documents <span style="font-weight:400;color:var(--gris-clair);font-size:8px;letter-spacing:0.14em;border:1px solid var(--gris-tres-clair);padding:2px 6px;">Facultatif</span></div>
-      <div class="upz" ondragover="dgo(event)" ondragleave="dgl()" ondrop="ddr(event)"><input type="file" id="inp-files" multiple onchange="addFiles(this.files)"><div class="upt">Deposer les fichiers ici</div><div class="ups">ou cliquer pour parcourir — tous formats acceptes</div></div>
-      <div class="flist" id="flist"></div>
-    </div>
-    <div class="fa"><button class="bret" onclick="ap('proposition')">← Retour</button><button class="bsuiv" onclick="val1()">Etape suivante →</button></div>
+    <div class="fa"><button class="bret" onclick="ap('proposition')">← Retour</button><button class="bsuiv" onclick="val1()">Étape suivante →</button></div>
   </div>
   <div class="af"><div class="aft">Gavroche</div></div>
 </div>
@@ -903,9 +942,8 @@ body{background:var(--gris-surface);color:var(--noir);font-family:var(--font-cor
   <div class="stepper"><button class="stepper-item complete" onclick="ap('lead-sapiens-1')"><div class="stepper-num">✓</div><div class="stepper-label">Identification de la cible</div></button><button class="stepper-item actif"><div class="stepper-num">2</div><div class="stepper-label">Parametres cles</div></button><button class="stepper-item inactif"><div class="stepper-num">3</div><div class="stepper-label">Perimetre des diligences</div></button><button class="stepper-item inactif"><div class="stepper-num">4</div><div class="stepper-label">Presentation & edition</div></button></div>
   <div class="admin-header"><div class="admin-titre">Parametres <em>cles</em></div><div class="admin-sous-titre">Les champs marques * sont obligatoires.</div></div>
   <div class="fw">
-    <div class="fs"><div class="fs-t"><span class="fs-n">01</span>Type de mission *</div><div class="tg"><button class="to on" id="btn-bsdd" onclick="stg('btn-bsdd','btn-vdd')">BSDD — Buy-Side</button><button class="to" id="btn-vdd" onclick="stg('btn-vdd','btn-bsdd')">VDD — Sell-Side</button></div></div>
-    <div class="fs"><div class="fs-t"><span class="fs-n">02</span>Type de DD *</div><div class="tg"><button class="to on" id="btn-std" onclick="stg('btn-std','btn-fla')">Standard DD</button><button class="to" id="btn-fla" onclick="stg('btn-fla','btn-std')">Flash DD</button></div></div>
-    <div class="fs"><div class="fs-t"><span class="fs-n">03</span>Parties a inclure *</div><div class="pg">
+    <div class="fs"><div class="fs-t"><span class="fs-n">01</span>Type de DD *</div><div class="tg"><button class="to on" id="btn-std" onclick="stg('btn-std','btn-fla')">Standard DD</button><button class="to" id="btn-fla" onclick="stg('btn-fla','btn-std')">Flash DD</button></div></div>
+    <div class="fs"><div class="fs-t"><span class="fs-n">02</span>Parties à inclure *</div><div class="pg">
       <label class="pi"><input type="checkbox" id="p1" checked><div class="pil"><strong>1 — Contexte de l'operation</strong>Perimetre, organigramme, business, metriques, marche, presse</div></label>
       <label class="pi"><input type="checkbox" id="p2" checked><div class="pil"><strong>2 — Notre approche</strong>Retroplanning, acces a l'information</div></label>
       <label class="pi"><input type="checkbox" id="p3" checked><div class="pil"><strong>3 — Perimetre des travaux</strong>Objectifs et procedures d'audit</div></label>
@@ -1837,6 +1875,7 @@ function colData(){
       dirigeants:(e.dirigeants||[]).slice(0,6).map(d=>({nom:([d.prenom,d.nom].filter(Boolean).join(' '))||d.denomination||'—',role:d.qualite||'—'})),
       complement:document.getElementById('comp-mono')?document.getElementById('comp-mono').value:'',liens},
     typeMission:document.getElementById('btn-bsdd').classList.contains('on')?'BSDD':'VDD',
+    projetNom:(document.getElementById('proj-nom')||{value:''}).value||'',
     typeDD:document.getElementById('btn-std').classList.contains('on')?'Standard DD':'Flash DD',
     parties:{p1:document.getElementById('p1').checked,p2:document.getElementById('p2').checked,p3:document.getElementById('p3').checked,p4:document.getElementById('p4').checked,p5:document.getElementById('p5').checked},
     honLib:document.getElementById('hon-lib').value||'Due Diligence Financiere',
