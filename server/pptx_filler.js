@@ -246,8 +246,13 @@ class PPTXDoc {
       const phRe = new RegExp(`<p:ph [^/]*idx="${idx}"[^/]*/>`);
       if (!phRe.test(spBlock)) return spBlock;
       // Trouvé le bon sp → remplacer son <p:txBody>
+      // Chaque item de paragraphs peut être une string OU un objet { text, level }
       const paras = paragraphs.map(p => {
-        return '<a:p><a:r><a:rPr lang="fr-FR" dirty="0"/><a:t>' + escXml(p) + '</a:t></a:r></a:p>';
+        const isObj = (p && typeof p === 'object');
+        const txt = isObj ? (p.text || '') : String(p);
+        const level = isObj && typeof p.level === 'number' ? p.level : 0;
+        const pPr = level > 0 ? '<a:pPr lvl="' + level + '"/>' : '';
+        return '<a:p>' + pPr + '<a:r><a:rPr lang="fr-FR" dirty="0"/><a:t>' + escXml(txt) + '</a:t></a:r></a:p>';
       }).join('');
       const newTxBody = '<p:txBody><a:bodyPr/><a:lstStyle/>' + paras + '</p:txBody>';
       return spBlock.replace(/<p:txBody>[\s\S]*?<\/p:txBody>/, newTxBody);
