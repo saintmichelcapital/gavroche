@@ -487,6 +487,88 @@ app.post('/api/export-propale-template-pptx', requireAuth, async (req, res) => {
 });
 
 // ═══════════════════════════════════════════════════════
+// PREVIEW PROPALE PDF
+// Génère le PPTX via la trame, le convertit en PDF via LibreOffice
+// headless, et renvoie le PDF pour affichage dans une <iframe>.
+// Zéro différentiel visuel entre preview et export PPTX.
+// ═══════════════════════════════════════════════════════
+app.post('/api/preview-propale-pdf', requireAuth, async (req, res) => {
+  const fs = require('fs');
+  const path = require('path');
+  const os = require('os');
+  const crypto = require('crypto');
+  const { execSync } = require('child_process');
+  const { generatePropale } = require('./pptx_generator');
+
+  let tmpDir = null;
+  try {
+    const {
+      trameChoice, coverImageBase64, titreCover,
+      cibleNom, projetNom,
+      parties, perimetre, calendrier, honoraires
+    } = req.body || {};
+
+    const tramePath = path.join(__dirname, '..', 'trames',
+      trameChoice === 'segoe' ? 'trame_segoe.pptx' : 'trame_arial.pptx');
+    if (!fs.existsSync(tramePath)) {
+      return res.status(500).json({ success: false, error: 'Trame introuvable : ' + tramePath });
+    }
+
+    const spec = {
+      trameChoice: trameChoice || 'arial',
+      coverImageBase64: coverImageBase64 || null,
+      titreCover: titreCover || (`Rapport de due diligence financière — ` + (cibleNom || '')).trim(),
+      cibleNom: cibleNom || '',
+      projetNom: projetNom || '',
+      parties: parties || { p1: true, p2: false, p3: true, p4: true, p5: false },
+      perimetre: Array.isArray(perimetre) ? perimetre : [],
+      calendrier: calendrier || {},
+      honoraires: honoraires || {}
+    };
+
+    // 1. Générer le PPTX (en mémoire)
+    const trameBuf = fs.readFileSync(tramePath);
+    const pptxBuf = await generatePropale(trameBuf, spec);
+
+    // 2. Écrire dans un dossier temporaire isolé
+    const id = crypto.randomBytes(8).toString('hex');
+    tmpDir = path.join(os.tmpdir(), 'propale-preview-' + id);
+    fs.mkdirSync(tmpDir, { recursive: true });
+    const pptxPath = path.join(tmpDir, 'propale.pptx');
+    const pdfPath  = path.join(tmpDir, 'propale.pdf');
+    fs.writeFileSync(pptxPath, pptxBuf);
+
+    // 3. Conversion PPTX → PDF via LibreOffice headless
+    // On force un profil temporaire pour éviter les concurrent-locks.
+    const userProfile = path.join(tmpDir, 'lo_profile');
+    execSync(
+      'libreoffice --headless ' +
+      '-env:UserInstallation=file://' + userProfile + ' ' +
+      '--convert-to pdf --outdir "' + tmpDir + '" "' + pptxPath + '"',
+      { stdio: 'pipe', timeout: 60000 }
+    );
+
+    if (!fs.existsSync(pdfPath)) {
+      return res.status(500).json({ success: false, error: 'PDF non produit par LibreOffice.' });
+    }
+
+    const pdfBuf = fs.readFileSync(pdfPath);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'inline; filename="preview.pdf"');
+    res.setHeader('Cache-Control', 'no-store');
+    res.send(pdfBuf);
+  } catch (err) {
+    console.error('Preview PDF erreur :', err.message, err.stack);
+    res.status(500).json({ success: false, error: err.message });
+  } finally {
+    // Nettoyage
+    if (tmpDir) {
+      try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch (_) {}
+    }
+  }
+});
+
+// ═══════════════════════════════════════════════════════
 // EXPORT PPTX PROPALE COMPLÈTE (trame v3 Gavroche)
 // Génère l'intégralité du deck : Cover / Lettre+Sommaire /
 // Séparateur Contexte / Séparateur Périmètre / Slides Périmètre /

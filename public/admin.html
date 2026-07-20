@@ -1044,7 +1044,19 @@ body{background:var(--gris-surface);color:var(--noir);font-family:Arial,'Helveti
   </div>
   <div class="pl">
     <div class="ssb"><div class="ssbt">Structure</div><div id="snav"></div><div class="ssba"><button class="bexp" onclick="smcExportPropaleTrame()">↓ Exporter la propale complète</button><button class="bexp" style="margin-top:6px;" onclick="smcExportPPTX()">↓ Exporter la slide active</button><button class="bexp" style="margin-top:6px;background:var(--gris-surface);color:var(--noir);border:1px solid var(--gris-tres-clair);" onclick="sauvegarderPropale();ap('proposition');">← Enregistrer et revenir</button></div></div>
-    <div class="sm"><div class="sv" id="sv" style="position:relative;"><div class="geno" id="geno"><div class="gens"></div><div class="gent">Generation en cours</div><div class="genl" id="genl">Initialisation…</div></div></div><div class="sctrl"><button class="cbtn" onclick="gS(Math.max(0,(window.sA||0)-1))">← Precedent</button><button class="cbtn" id="slide-ctr">— / —</button><button class="cbtn" onclick="gS(Math.min((window.sD||[]).length-1,(window.sA||0)+1))">Suivant →</button></div></div>
+    <div class="sm">
+      <div class="sv" id="sv" style="position:relative;">
+        <iframe id="preview-pdf" style="width:100%;height:100%;border:0;background:#fff;display:none;"></iframe>
+        <div class="geno" id="geno"><div class="gens"></div><div class="gent">Generation en cours</div><div class="genl" id="genl">Initialisation…</div></div>
+        <div id="preview-empty" style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#666;font-family:Arial,sans-serif;">
+          <div style="font-size:14px;margin-bottom:12px;">Aperçu de la propale</div>
+          <button class="cbtn" onclick="smcRefreshPreview()">↻ Générer l'aperçu</button>
+        </div>
+      </div>
+      <div class="sctrl">
+        <button class="cbtn" onclick="smcRefreshPreview()">↻ Rafraîchir l'aperçu</button>
+      </div>
+    </div>
     <div class="rpanel" id="rpanel">
       <div class="cp"><div class="cp-h"><div class="cp-t">Assistant</div><div class="cp-s">Demandez une modification…</div></div><div class="cp-m" id="cp-m"><div class="cpb cpb-a">La propale est en cours de generation.</div></div><div class="cpld" id="cpld" style="display:none;"><div></div><div></div><div></div></div><div class="cp-iw"><textarea class="cp-i" id="cp-i" rows="3" placeholder="Ex : Reformule le contexte…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send();}"></textarea><button class="cp-send" onclick="send()">Envoyer</button></div></div>
       <div class="smc-form" id="smc-form">
@@ -3049,6 +3061,64 @@ async function smcExportPropaleComplete(){
     alert('Export propale échoué : ' + e.message);
     const btn = document.querySelectorAll('.bexp')[0];
     if (btn) { btn.textContent = '↓ Exporter la propale complète'; btn.disabled = false; }
+  }
+}
+
+// Génère un PDF live de la propale via LibreOffice côté serveur,
+// et l'affiche dans l'iframe #preview-pdf. Zéro différentiel visuel
+// avec le PPTX exporté.
+async function smcRefreshPreview(){
+  const empty = document.getElementById('preview-empty');
+  const iframe = document.getElementById('preview-pdf');
+  const geno = document.getElementById('geno');
+  try{
+    if(empty) empty.style.display = 'none';
+    if(geno){ geno.style.display = 'flex'; document.getElementById('genl').textContent = 'Génération de l\'aperçu…'; }
+
+    // Collecte des données (identique à smcExportPropaleTrame)
+    const perimData = (dF && dF.perimetre) || (typeof smcPerimCollect === 'function' ? smcPerimCollect() : { blocs: {} });
+    const perimList = (typeof smcPerimFlatten === 'function') ? smcPerimFlatten(perimData) : [];
+    const perimetre = perimList.map(o => ({
+      titre: o.objectif_titre || o.titre || '',
+      finalite: o.objectif_finalite || o.finalite || '',
+      diligences: (o.diligences || []).map(d => (typeof d === 'string') ? ({ text: d, subs: [] }) : ({ text: d.text || d.libelle || '', subs: (d.subs || d.sub || []).slice() }))
+    }));
+
+    const cibleNom = (dF && dF.entite && dF.entite.nom) || '';
+    const projetNom = (dF && dF.projetNom) || cibleNom || 'Propale';
+    const parties = (dF && dF.parties) || { p1: true, p3: true, p4: true };
+    const trameChoice = window.trameChoice || 'arial';
+    const coverImageBase64 = window.coverImageData || null;
+    const titreCover = ('Rapport de due diligence financière — ' + (cibleNom || projetNom)).trim();
+
+    const body = {
+      trameChoice, coverImageBase64, titreCover,
+      cibleNom, projetNom, parties, perimetre,
+      calendrier: window.smcCal || null,
+      honoraires: window.smcHon || null
+    };
+
+    const resp = await fetch('/api/preview-propale-pdf', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + (sessionStorage.getItem('gavroche_token') || '') },
+      body: JSON.stringify(body)
+    });
+    if(!resp.ok){
+      const txt = await resp.text();
+      throw new Error('HTTP ' + resp.status + ' — ' + txt.slice(0, 300));
+    }
+    const blob = await resp.blob();
+    const url = URL.createObjectURL(blob);
+    // Libère l'ancienne URL pour éviter la fuite
+    if(iframe._prevUrl) URL.revokeObjectURL(iframe._prevUrl);
+    iframe._prevUrl = url;
+    iframe.src = url;
+    iframe.style.display = 'block';
+  } catch(e){
+    if(empty){ empty.style.display = 'flex'; }
+    alert('Aperçu impossible : ' + e.message);
+  } finally {
+    if(geno) geno.style.display = 'none';
   }
 }
 
