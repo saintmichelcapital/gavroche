@@ -3068,8 +3068,15 @@ async function smcExportPropaleComplete(){
 // et l'affiche dans l'iframe #preview-pdf. Zéro différentiel visuel
 // avec le PPTX exporté.
 async function smcRefreshPreview(){
-  const empty = document.getElementById('preview-empty');
+  // Recrée toujours un iframe frais dans #sv (l'ancien peut avoir été
+  // détruit par un rendu HTML des slides qui écrase le contenu de #sv)
+  const sv = document.getElementById('sv');
+  if(!sv){ alert('Zone d\'aperçu introuvable.'); return; }
+  sv.innerHTML =
+    '<iframe id="preview-pdf" style="width:100%;height:100%;border:0;background:#fff;display:none;"></iframe>' +
+    '<div class="geno" id="geno" style="display:flex;"><div class="gens"></div><div class="gent">Génération de l\'aperçu…</div><div class="genl" id="genl">Envoi de la demande…</div></div>';
   const iframe = document.getElementById('preview-pdf');
+  const empty = null;
   const geno = document.getElementById('geno');
   try{
     if(empty) empty.style.display = 'none';
