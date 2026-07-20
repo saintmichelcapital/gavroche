@@ -1,21 +1,22 @@
 FROM node:20-slim
 
-# LibreOffice headless + fonts (Liberation = Arial-compatible, ttf-mscorefonts = Arial officiel)
+# LibreOffice headless + polices open source (metric-compatibles avec Arial/Times/Courier)
+# NB : on n'installe PAS ttf-mscorefonts-installer (fragile car dépend d'un téléchargement
+# externe qui échoue régulièrement). Liberation Sans est metric-compatible avec Arial ;
+# le PPTX rendu par LibreOffice sera donc visuellement très proche du rendu PowerPoint,
+# et à l'ouverture réelle dans PowerPoint la vraie Arial sera utilisée.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       libreoffice-impress \
       libreoffice-core \
       libreoffice-common \
       fonts-liberation \
+      fonts-liberation2 \
       fonts-dejavu-core \
       fonts-noto-core \
       fontconfig \
       ca-certificates \
-      curl \
       && \
-    # Microsoft core fonts (Arial etc.) — accepte l'EULA
-    echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections && \
-    apt-get install -y --no-install-recommends ttf-mscorefonts-installer && \
     fc-cache -f -v && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
