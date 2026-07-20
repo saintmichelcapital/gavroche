@@ -445,27 +445,41 @@ function smcCalHelpers() {
 // ═══════════════════════════════════════════════════════
 app.post('/api/export-propale-template-pptx', requireAuth, async (req, res) => {
   try {
-    const JSZip = require('jszip');
     const path = require('path');
     const fs = require('fs');
-    const { trameChoice, sections, objectifs, budget, calendrier, cibleNom, projetNom, coverImage, parties, cibleLibelle } = req.body || {};
+    const { generatePropale } = require('./pptx_generator');
+
+    const {
+      trameChoice, coverImageBase64, titreCover,
+      cibleNom, projetNom,
+      parties, perimetre, calendrier, honoraires
+    } = req.body || {};
+
     const tramePath = path.join(__dirname, '..', 'trames',
       trameChoice === 'segoe' ? 'trame_segoe.pptx' : 'trame_arial.pptx');
     if (!fs.existsSync(tramePath)) {
       return res.status(500).json({ success: false, error: 'Trame introuvable : ' + tramePath });
     }
     const trameBuf = fs.readFileSync(tramePath);
-    const zip = await JSZip.loadAsync(trameBuf);
 
-    // ─── V1 : renvoie la trame telle quelle, sans remplissage.
-    // Les futures itérations (V2, V3) rempliront les zones de texte,
-    // dupliqueront les slides Scope of work et injecteront l'image cover.
-    // Le nom du fichier de sortie utilise le nom de projet ou le nom de cible.
-    const outName = String(projetNom || cibleNom || 'Propale').replace(/[^A-Za-z0-9_-]/g, '_') + '.pptx';
-    const buffer = await zip.generateAsync({ type: 'nodebuffer' });
+    const spec = {
+      trameChoice: trameChoice || 'arial',
+      coverImageBase64: coverImageBase64 || null,
+      titreCover: titreCover || (`Rapport de due diligence financière — ` + (cibleNom || '')).trim(),
+      cibleNom: cibleNom || '',
+      projetNom: projetNom || '',
+      parties: parties || { p1: true, p2: false, p3: true, p4: true, p5: false },
+      perimetre: Array.isArray(perimetre) ? perimetre : [],
+      calendrier: calendrier || {},
+      honoraires: honoraires || {}
+    };
+
+    const outBuf = await generatePropale(trameBuf, spec);
+
+    const outName = String(projetNom || cibleNom || 'Propale').replace(/[^A-Za-z0-9_\-]/g, '_') + '.pptx';
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.presentationml.presentation');
     res.setHeader('Content-Disposition', 'attachment; filename="' + outName + '"');
-    res.send(buffer);
+    res.send(outBuf);
   } catch (err) {
     console.error('Export propale template erreur :', err);
     res.status(500).json({ success: false, error: 'Erreur génération PPTX : ' + err.message });

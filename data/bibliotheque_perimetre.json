@@ -4,7 +4,7 @@
     "bloc": "Evaluation du rapport de Vendor Due Diligence",
     "categorie_type": "standard",
     "tag": "standard",
-    "objectif_titre": "Evaluation du rapport de vendor due diligence [le cas échéant]",
+    "objectif_titre": "Evaluation du rapport de vendor due diligence",
     "objectif_finalite": "Evaluer le périmètre des travaux (scope) et la qualité du rapport de VDD",
     "objectif_contexte": "Des problèmes relatifs à la préparation et/ou au contenu du rapport de VDD peuvent affecter la fiabilité des données. Notamment : Scope insuffisant, points majeurs exclus Limitations de l’accès à l’information, peu d’information fournie Manque d’explications sur les résultats obtenus ou conclusions [Problèmes spécifiques à la transaction identifiés]",
     "diligences": [

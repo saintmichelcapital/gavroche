@@ -1043,7 +1043,7 @@ body{background:var(--gris-surface);color:var(--noir);font-family:Arial,'Helveti
     </div>
   </div>
   <div class="pl">
-    <div class="ssb"><div class="ssbt">Structure</div><div id="snav"></div><div class="ssba"><button class="bexp" onclick="smcExportPropaleComplete()">↓ Exporter la propale complète</button><button class="bexp" style="margin-top:6px;" onclick="smcExportPPTX()">↓ Exporter la slide active</button><button class="bexp" style="margin-top:6px;background:var(--gris-surface);color:var(--noir);border:1px solid var(--gris-tres-clair);" onclick="sauvegarderPropale();ap('proposition');">← Enregistrer et revenir</button></div></div>
+    <div class="ssb"><div class="ssbt">Structure</div><div id="snav"></div><div class="ssba"><button class="bexp" onclick="smcExportPropaleTrame()">↓ Exporter la propale (via trame)</button><button class="bexp" style="margin-top:6px;" onclick="smcExportPropaleComplete()">↓ Exporter la propale complète (ancienne)</button><button class="bexp" style="margin-top:6px;" onclick="smcExportPPTX()">↓ Exporter la slide active</button><button class="bexp" style="margin-top:6px;background:var(--gris-surface);color:var(--noir);border:1px solid var(--gris-tres-clair);" onclick="sauvegarderPropale();ap('proposition');">← Enregistrer et revenir</button></div></div>
     <div class="sm"><div class="sv" id="sv" style="position:relative;"><div class="geno" id="geno"><div class="gens"></div><div class="gent">Generation en cours</div><div class="genl" id="genl">Initialisation…</div></div></div><div class="sctrl"><button class="cbtn" onclick="gS(Math.max(0,(window.sA||0)-1))">← Precedent</button><button class="cbtn" id="slide-ctr">— / —</button><button class="cbtn" onclick="gS(Math.min((window.sD||[]).length-1,(window.sA||0)+1))">Suivant →</button></div></div>
     <div class="rpanel" id="rpanel">
       <div class="cp"><div class="cp-h"><div class="cp-t">Assistant</div><div class="cp-s">Demandez une modification…</div></div><div class="cp-m" id="cp-m"><div class="cpb cpb-a">La propale est en cours de generation.</div></div><div class="cpld" id="cpld" style="display:none;"><div></div><div></div><div></div></div><div class="cp-iw"><textarea class="cp-i" id="cp-i" rows="3" placeholder="Ex : Reformule le contexte…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send();}"></textarea><button class="cp-send" onclick="send()">Envoyer</button></div></div>
@@ -3049,6 +3049,59 @@ async function smcExportPropaleComplete(){
     alert('Export propale échoué : ' + e.message);
     const btn = document.querySelectorAll('.bexp')[0];
     if (btn) { btn.textContent = '↓ Exporter la propale complète'; btn.disabled = false; }
+  }
+}
+
+async function smcExportPropaleTrame(){
+  const btns = document.querySelectorAll('.bexp');
+  const btn = btns && btns[0];
+  const oldTxt = btn ? btn.textContent : '';
+  try{
+    if(btn){ btn.textContent = 'Génération en cours…'; btn.disabled = true; }
+
+    // ─── Collecte des données ───
+    const perimData = (dF && dF.perimetre) || (typeof smcPerimCollect === 'function' ? smcPerimCollect() : { blocs: {} });
+    const perimList = (typeof smcPerimFlatten === 'function') ? smcPerimFlatten(perimData) : [];
+    // Adapte le format attendu par le serveur : {titre, finalite, diligences:[{text}, ...]}
+    const perimetre = perimList.map(o => ({
+      titre: o.objectif_titre || o.titre || '',
+      finalite: o.objectif_finalite || o.finalite || '',
+      diligences: (o.diligences || []).map(d => (typeof d === 'string') ? ({ text: d }) : ({ text: d.text || d.libelle || '' }))
+    }));
+
+    const cibleNom = (dF && dF.entite && dF.entite.nom) || '';
+    const projetNom = (dF && dF.projetNom) || cibleNom || 'Propale';
+    const parties = (dF && dF.parties) || { p1: true, p3: true, p4: true };
+    const trameChoice = window.trameChoice || 'arial';
+    const coverImageBase64 = window.coverImageData || null;
+    const titreCover = ('Rapport de due diligence financière — ' + (cibleNom || projetNom)).trim();
+
+    const body = {
+      trameChoice, coverImageBase64, titreCover,
+      cibleNom, projetNom,
+      parties,
+      perimetre,
+      calendrier: window.smcCal || null,
+      honoraires: window.smcHon || null
+    };
+
+    const resp = await fetch('/api/export-propale-template-pptx', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + (sessionStorage.getItem('gavroche_token') || '') },
+      body: JSON.stringify(body)
+    });
+    if(!resp.ok){ const t = await resp.text(); throw new Error('HTTP ' + resp.status + ' — ' + t.slice(0, 200)); }
+    const blob = await resp.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = (projetNom || cibleNom || 'Propale') + '_via_trame.pptx';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    if(btn){ btn.textContent = oldTxt || '↓ Exporter la propale (via trame)'; btn.disabled = false; }
+  } catch(e){
+    alert('Export propale (via trame) échoué : ' + e.message);
+    if(btn){ btn.textContent = '↓ Exporter la propale (via trame)'; btn.disabled = false; }
   }
 }
 
