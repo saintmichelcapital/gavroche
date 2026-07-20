@@ -1016,8 +1016,8 @@ body{background:var(--gris-surface);color:var(--noir);font-family:Arial,'Helveti
   <div class="admin-header"><div class="admin-titre">Perimetre des <em>diligences</em></div><div class="admin-sous-titre">Selectionnez les objectifs pertinents pour la mission, puis les diligences associees. Vous pouvez ajouter des objectifs ou des diligences sur-mesure.</div></div>
   <div class="perim-wrap">
     <div class="perim-filters">
-      <button class="perim-filter actif" data-perim-filter="tous" onclick="smcPerimSetFilter('tous')">Tous</button>
-      <button class="perim-filter" data-perim-filter="standard" onclick="smcPerimSetFilter('standard')">Standards</button>
+      <button class="perim-filter" data-perim-filter="tous" onclick="smcPerimSetFilter('tous')">Tous</button>
+      <button class="perim-filter actif" data-perim-filter="standard" onclick="smcPerimSetFilter('standard')">Standards</button>
       <button class="perim-filter" data-perim-filter="additionnel" onclick="smcPerimSetFilter('additionnel')">Additionnels</button>
       <input class="perim-search" type="text" id="perim-search" placeholder="Rechercher un objectif ou une diligence…" oninput="smcPerimRender()">
       <div class="perim-count" id="perim-count"><strong id="perim-count-sel">0</strong> objectif(s) &middot; <strong id="perim-count-dil">0</strong> diligence(s) selectionnes</div>
@@ -3649,7 +3649,7 @@ function smcPerimInterpolate(text){
 window.smcPerimData = null;         // bibliotheque chargee depuis /api/bibliotheque-perimetre
 window.smcPerimCustoms = [];        // objectifs ajoutes manuellement par l'utilisateur
 window.smcPerimSel = {};            // etat de selection par objId : {selected, dils:{i:true}, extraDils:[{text,selected}]}
-window.smcPerimFilter = 'tous';
+window.smcPerimFilter = 'standard';
 window.smcPerimOpen = { blocs: {}, objs: {} };
 
 async function smcPerimLoad(){
