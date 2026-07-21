@@ -128,18 +128,19 @@ async function createScopeOfWork(pptx, obj, page, total) {
     await pptx.fillPlaceholderByIdx(newNum, 14, [' ']);
   }
   await pptx.fillPlaceholderByIdx(newNum, 10, [`Diligences liées à l'objectif « ${titreClean} »`]);
-  // Diligences en bullets : chaque diligence niveau 0, chaque sub niveau 1
+  // Diligences en bullets : chaque diligence niveau 0 (bullet carré ▪),
+  // chaque sub niveau 1 (bullet tiret –)
   const dilBullets = [];
   (obj.diligences || []).forEach(d => {
     if (typeof d === 'string') {
-      if (d.trim()) dilBullets.push({ text: d, level: 0 });
+      if (d.trim()) dilBullets.push({ text: d, level: 0, bullet: '▪' });
       return;
     }
     const t = d.text || '';
-    if (t.trim()) dilBullets.push({ text: t, level: 0 });
+    if (t.trim()) dilBullets.push({ text: t, level: 0, bullet: '▪' });
     const subs = d.subs || d.sub || [];
     subs.forEach(s => {
-      if (s && String(s).trim()) dilBullets.push({ text: String(s), level: 1 });
+      if (s && String(s).trim()) dilBullets.push({ text: String(s), level: 1, bullet: '–' });
     });
   });
   await pptx.fillPlaceholderByIdx(newNum, 15, dilBullets.length ? dilBullets : [' ']);

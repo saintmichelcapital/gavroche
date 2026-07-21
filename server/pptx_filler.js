@@ -246,12 +246,33 @@ class PPTXDoc {
       const phRe = new RegExp(`<p:ph [^/]*idx="${idx}"[^/]*/>`);
       if (!phRe.test(spBlock)) return spBlock;
       // Trouvé le bon sp → remplacer son <p:txBody>
-      // Chaque item de paragraphs peut être une string OU un objet { text, level }
+      // Chaque item de paragraphs peut être :
+      //   - une string simple (level 0, pas de bullet)
+      //   - un objet { text, level, bullet }  (bullet peut être un char OU true)
       const paras = paragraphs.map(p => {
         const isObj = (p && typeof p === 'object');
         const txt = isObj ? (p.text || '') : String(p);
         const level = isObj && typeof p.level === 'number' ? p.level : 0;
-        const pPr = level > 0 ? '<a:pPr lvl="' + level + '"/>' : '';
+        const bullet = isObj ? p.bullet : null; // null = pas de bullet
+
+        // Indentation en EMU (914400 EMU = 1 inch)
+        //   niveau 0 : marL=180000 indent=-180000 (bullet + texte aligné à ~14pt)
+        //   niveau 1 : marL=380000 indent=-180000 (indenté sous le niveau 0)
+        const marL = (level === 0 ? 180000 : (180000 + level * 200000));
+        const indent = -180000;
+
+        // pPr : niveau + indentation + bullet (si demandé)
+        let pPr = '<a:pPr';
+        if (level > 0) pPr += ' lvl="' + level + '"';
+        if (bullet) pPr += ' marL="' + marL + '" indent="' + indent + '"';
+        pPr += '>';
+        if (bullet) {
+          const bChar = (typeof bullet === 'string' && bullet.length > 0) ? bullet : '▪'; // ▪ par défaut
+          pPr += '<a:buFont typeface="Arial" panose="020B0604020202020204" pitchFamily="34" charset="0"/>';
+          pPr += '<a:buChar char="' + escXml(bChar) + '"/>';
+        }
+        pPr += '</a:pPr>';
+
         return '<a:p>' + pPr + '<a:r><a:rPr lang="fr-FR" dirty="0"/><a:t>' + escXml(txt) + '</a:t></a:r></a:p>';
       }).join('');
       const newTxBody = '<p:txBody><a:bodyPr/><a:lstStyle/>' + paras + '</p:txBody>';
