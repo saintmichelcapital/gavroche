@@ -129,18 +129,19 @@ async function createScopeOfWork(pptx, obj, page, total) {
   }
   await pptx.fillPlaceholderByIdx(newNum, 10, [`Diligences liées à l'objectif « ${titreClean} »`]);
   // Diligences en bullets : chaque diligence niveau 0 (bullet carré ▪),
-  // chaque sub niveau 1 (bullet tiret –)
+  // chaque sub niveau 1 (bullet tiret –). Line spacing 1.4 partout.
+  const LS = 140; // 1.4
   const dilBullets = [];
   (obj.diligences || []).forEach(d => {
     if (typeof d === 'string') {
-      if (d.trim()) dilBullets.push({ text: d, level: 0, bullet: '▪' });
+      if (d.trim()) dilBullets.push({ text: d, level: 0, bullet: '▪', lineSpacing: LS });
       return;
     }
     const t = d.text || '';
-    if (t.trim()) dilBullets.push({ text: t, level: 0, bullet: '▪' });
+    if (t.trim()) dilBullets.push({ text: t, level: 0, bullet: '▪', lineSpacing: LS });
     const subs = d.subs || d.sub || [];
     subs.forEach(s => {
-      if (s && String(s).trim()) dilBullets.push({ text: String(s), level: 1, bullet: '–' });
+      if (s && String(s).trim()) dilBullets.push({ text: String(s), level: 1, bullet: '–', lineSpacing: LS });
     });
   });
   await pptx.fillPlaceholderByIdx(newNum, 15, dilBullets.length ? dilBullets : [' ']);

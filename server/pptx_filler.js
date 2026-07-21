@@ -248,26 +248,30 @@ class PPTXDoc {
       // Trouvé le bon sp → remplacer son <p:txBody>
       // Chaque item de paragraphs peut être :
       //   - une string simple (level 0, pas de bullet)
-      //   - un objet { text, level, bullet }  (bullet peut être un char OU true)
+      //   - un objet { text, level, bullet, lineSpacing }
+      //       bullet : char OU true
+      //       lineSpacing : 140 = 1.4 (valeur PowerPoint en pourcentage / 1000)
       const paras = paragraphs.map(p => {
         const isObj = (p && typeof p === 'object');
         const txt = isObj ? (p.text || '') : String(p);
         const level = isObj && typeof p.level === 'number' ? p.level : 0;
-        const bullet = isObj ? p.bullet : null; // null = pas de bullet
+        const bullet = isObj ? p.bullet : null;
+        const lineSpacing = isObj && p.lineSpacing ? p.lineSpacing : null;
 
-        // Indentation en EMU (914400 EMU = 1 inch)
-        //   niveau 0 : marL=180000 indent=-180000 (bullet + texte aligné à ~14pt)
-        //   niveau 1 : marL=380000 indent=-180000 (indenté sous le niveau 0)
+        // Indentation en EMU
         const marL = (level === 0 ? 180000 : (180000 + level * 200000));
         const indent = -180000;
 
-        // pPr : niveau + indentation + bullet (si demandé)
         let pPr = '<a:pPr';
         if (level > 0) pPr += ' lvl="' + level + '"';
         if (bullet) pPr += ' marL="' + marL + '" indent="' + indent + '"';
         pPr += '>';
+        // Line spacing personnalisé (100000 = 1.0, 140000 = 1.4)
+        if (lineSpacing) {
+          pPr += '<a:lnSpc><a:spcPct val="' + Math.round(lineSpacing * 1000) + '"/></a:lnSpc>';
+        }
         if (bullet) {
-          const bChar = (typeof bullet === 'string' && bullet.length > 0) ? bullet : '▪'; // ▪ par défaut
+          const bChar = (typeof bullet === 'string' && bullet.length > 0) ? bullet : '▪';
           pPr += '<a:buFont typeface="Arial" panose="020B0604020202020204" pitchFamily="34" charset="0"/>';
           pPr += '<a:buChar char="' + escXml(bChar) + '"/>';
         }
@@ -275,7 +279,9 @@ class PPTXDoc {
 
         return '<a:p>' + pPr + '<a:r><a:rPr lang="fr-FR" dirty="0"/><a:t>' + escXml(txt) + '</a:t></a:r></a:p>';
       }).join('');
-      const newTxBody = '<p:txBody><a:bodyPr/><a:lstStyle/>' + paras + '</p:txBody>';
+      // On ne met PAS <a:lstStyle/> vide : ça overriderait le lstStyle du layout.
+      // On garde <a:bodyPr/> minimal (hérite du layout aussi).
+      const newTxBody = '<p:txBody><a:bodyPr/>' + paras + '</p:txBody>';
       return spBlock.replace(/<p:txBody>[\s\S]*?<\/p:txBody>/, newTxBody);
     });
     this.writeSlide(slideNum, xml);
